@@ -16,7 +16,7 @@ fs.readdirSync(__dirname)
   });
 
 const {
-  User
+  Product,
 } = models;
 
 // Add model relationships here
