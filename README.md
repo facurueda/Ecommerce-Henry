@@ -13,7 +13,7 @@
 - Utilizar Metodologías Ágiles.
 - Trabajar en equipo.
 - Usar y practicar testing.
-- Deployar la aplicación y entender el procesod de Deployment.
+- Deployar la aplicación y entender el proceso de Deployment.
 
 ## Trabajo en Equipo
 
@@ -38,16 +38,32 @@ Vamos a usar **GIT** para gestionar el código y **Trello** para gestionar el pr
 
 ## Horarios y Fechas
 
-El proyecto dura cuatro semanas. Al final de cada semana se realiza una demo donde se muestra al PM el progreso de esa semana. La última semana tiene el `demo final` donde se muestra el proyecto a todo el cohorte.
+El proyecto dura cuatro semanas. El lunes siguiente al terminar el sprint se realiza una demo donde se muestra al TL el progreso de esa semana. La última semana tiene el `demo final` donde se muestra el proyecto a todo el cohorte.
 
 El horario de trabajo sigue siendo de 9AM a 18PM.
-Todos los días a las 10 AM habrá un STAND UP con el PM asignado para revisar las tareas del día, el progreso y si están bloqueados y necesitan ayuda.
+Todos los días a un horario a definir con su TL habrá un STAND UP para revisar las tareas del día, el progreso y si están bloqueados y/o necesitan ayuda.
 
 ## Comenzando
 
 Vamos iniciar creando un repo en Github llamado: `henry-eCommerce-{Cohorte}-{Grupo}`. Donde vamos a invitar a todos colaboradores del proyecto.
 
 Nosotros te vamos a dar un `boilerplate` con los modelos de Usuario y el flow de autenticación funcionando. Sobre este código vas a branchear para empezar a agregar tus propias features.
+
+## BoilerPlate
+
+El boilerplate cuenta con dos carpetas: `api` y `client`. En estas carpetas estará el código del back-end y el front-end respectivamente.
+
+En `api` vas a tener que crear un archivo llamado: `.env` que tenga la siguiente forma:
+
+```
+DB_USER=usuariodepostgres
+DB_PASSWORD=passwordDePostgres
+DB_HOST=localhost
+```
+
+Tenés que reemplazar usuariodepostgres y passwordDePostgres con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado por github, ya que contiene información sensible (las credenciales).
+
+El contenido de `client` fue creado usando: Create React App.
 
 ### Requerimientos
 

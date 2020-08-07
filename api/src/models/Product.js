@@ -1,14 +1,12 @@
-const Product = (sequelize, S) => {
+const { DataTypes } = require('sequelize');
+// Exportamos una funcion que define el modelo
+// Luego le injectamos la conexion a sequelize.
+module.exports = (sequelize) => {
   // defino el modelo
-  const P = sequelize.define('product', {
-    id: {
-      type: S.INTEGER,
+  sequelize.define('product', {
+    name: {
+      type: DataTypes.STRING,
       allowNull: false,
-      autoIncrement: true,
     },
   });
-  
-  return P;
 };
-
-module.exports = Product;
