@@ -61,7 +61,7 @@ DB_PASSWORD=passwordDePostgres
 DB_HOST=localhost
 ```
 
-Tenés que reemplazar usuariodepostgres y passwordDePostgres con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado por github, ya que contiene información sensible (las credenciales).
+Tenés que reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado por github, ya que contiene información sensible (las credenciales).
 
 El contenido de `client` fue creado usando: Create React App.
 
