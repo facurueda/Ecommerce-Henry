@@ -6,8 +6,7 @@ describe(' --- Categories model', () => {
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
     }));
-
-    
+   
     describe('El modelo', () => {
         it('tiene los atributos minimos', () => {
             expect(Categories.tableAttributes.name).to.be.an('object');

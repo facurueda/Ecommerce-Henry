@@ -2,6 +2,7 @@ const { Product, conn } = require('../../src/db.js');
 const { expect } = require('chai');
 
 describe(' --- Product model', () => {
+
   before(() => conn.authenticate()
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
@@ -18,7 +19,6 @@ describe(' --- Product model', () => {
           expect(Product.tableAttributes.image).to.be.an('object');
       });
 
-
     })
 
   describe('Validators', () => {
@@ -34,27 +34,7 @@ describe(' --- Product model', () => {
         Product.create({ name: 'Producto' });
       });
     });
-
-    // describe('El producto recibe todos las propiedades', () => {
-    //   it('No devuelve un error al crear un producto', () => {
-    //     Product.create({     
-    //       name : 'Panchitos',
-    //       description : 'Se come con mayo',
-    //       precio : 10,
-    //       stock: 5,
-    //       categorias: { aderezos: "mayonesa" },
-    //       image : {},
-    //     })
-    //       .then((res) => done (res))
-    //       // .catch((err) = > done);
-    //   });
-    //   it('should work when its a valid name', () => {
-    //     Product.create({ name: 'Producto' });
-    //   });
-    // });
-
-    
-
   });
+
 });
 
