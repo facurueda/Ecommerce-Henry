@@ -7,15 +7,18 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      // notNull: true,
       unique: true
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: true
+        // allowNull: true,
+        notNull: true
     },
     products: {
         type: DataTypes.JSON,
-        allowNull: false
+        // allowNull: false,
+        notNull: true
     }
   });
 };
