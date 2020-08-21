@@ -1,13 +1,11 @@
 import React from 'react';
-import './App.css';
-import StarRating from './StarRating';
-
+import Product from './components/product/products'
 
 
 function App() {
     return (
-    <div className= 'App'>
-      <StarRating/>
+    <div>
+      <Product/>
     </div>
     );
   }
