@@ -14,7 +14,7 @@ const StarRating = () => {
       const ratingValue = i + 1;
       
       
-         return <label>
+        return <label>
         <input type="radio" 
         name="rating"
         value={ratingValue} 
@@ -24,7 +24,8 @@ const StarRating = () => {
         onMouseEnter={ () => setHover(ratingValue)}
         onMouseLeave={()=> setHover(null)}/> 
         </label>
-    })};
+    })}
+    <p><strong>The riting is {rating}</strong></p>
     
     </div>
 };
