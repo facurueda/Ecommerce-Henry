@@ -17,6 +17,7 @@ describe(' --- Product model', () => {
           expect(Product.tableAttributes.stock).to.be.an('object');
           expect(Product.tableAttributes.categorias).to.be.an('object');
           expect(Product.tableAttributes.image).to.be.an('object');
+          expect(Product.tableAttributes.rating).to.be.an('object');
       });
 
     })

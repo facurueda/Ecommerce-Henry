@@ -17,6 +17,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       notNull: true,
     },
+    rating: {
+      type: DataTypes.INTEGER,
+      notNull: false
+    },
     stock: { 
       type: DataTypes.INTEGER,
       notNull: true,
