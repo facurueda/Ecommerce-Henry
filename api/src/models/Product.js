@@ -4,8 +4,14 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   
   sequelize.define('product', {
-    name: {
+    id: {
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      notNull: true,
+
+    },
+    name: {
+      
       type: DataTypes.STRING,
       notNull: true,
     },
@@ -30,7 +36,7 @@ module.exports = (sequelize) => {
       notNull: true,
     },
     image: {
-      type: DataTypes.JSON,
+      type: DataTypes.STRING,
       notNull: true,
     },
 
