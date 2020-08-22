@@ -8,13 +8,13 @@ import logo3 from './images/4.jpeg'
 
 function Products(props) {
 
-    const { title, description, price, amount } = props;
+    const { title, description, price, stock } = props;
+    
+    const setStock = 0
 
     return (
 
             <div style={{display:'flex', justifyContent:'center', marginTop:'15px'}}>
-
-
 
             <div class="card mb-3" style={{display:'flex', alignContent:'center', width: "1500px", height:'auto'}}>
         <div class="row no-gutters">
@@ -45,16 +45,13 @@ function Products(props) {
             </div>
             <div class="col-md-4">
             <div class="card-body">
-                <h5 class="card-title">Gold Donut's</h5>
-                <h4>$100</h4>
-
+                <h5 class="card-title">{title}</h5>
+                <h4>{price}</h4>
+                <h4>{stock}</h4>
                 <hr />
 
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et est ac libero rutrum molestie vitae rutrum ex. Nam ut ligula lectus. Sed facilisis aliquet tincidunt. Aenean ultrices rutrum est, a ullamcorper ligula commodo et. Donec iaculis urna quam, ac fermentum massa cursus sit amet. Morbi commodo auctor dictum. Vivamus faucibus, dui ut iaculis mattis, nulla sapien pellentesque urna, scelerisque iaculis turpis est non diam. Pellentesque nulla nulla, hendrerit in est eget, tristique tincidunt nunc. In a sodales nunc. Quisque vitae libero et odio volutpat pulvinar at sit amet felis.
-        
-                    Aliquam at tristique mauris, ac aliquet est. Sed ipsum ipsum, pulvinar vitae libero id, rutrum eleifend purus. Proin placerat vitae lacus hendrerit pharetra. Proin egestas neque eget auctor sodales. Quisque iaculis nec nibh efficitur molestie. Nulla eu tellus a lorem aliquam hendrerit sit amet at elit. Aliquam id nisi scelerisque, rhoncus mauris ultricies, vulputate erat. Duis elementum arcu fringilla purus pellentesque, at elementum nisi facilisis. Mauris venenatis pretium pulvinar. Aenean sagittis est tellus, ac interdum magna accumsan id. Quisque ornare ipsum hendrerit nibh sagittis lacinia.
-
+                    {description}
                 </p>
                 <hr />
 
@@ -66,7 +63,8 @@ function Products(props) {
                 
                 </div>
                 <div >
-                    <button type="button" class="btn btn-success" style={{height:'100px', borderRadius:'15px'}}>Anadir al Carrito</button>
+                    <button type="button" class="btn btn-success" style={{height:'100px', borderRadius:'15px'}}  onClick={setStock}>Anadir al Carrito</button>
+                    {/* Setea el stock */}
                 </div>
             </div>
             </div>

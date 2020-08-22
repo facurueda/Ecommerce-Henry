@@ -2,8 +2,6 @@ import React from 'react';
 import '../starRating/starRating.css';
 import StarRating from './starRating';
 
-
-
 function starRating() {
     return (
     <div className='App'>
