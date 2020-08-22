@@ -17,7 +17,7 @@ function Products(props) {
 
 
             <div class="card mb-3" style={{display:'flex', alignContent:'center', width: "1500px", height:'auto'}}>
-        <div class="row no-gutters">
+            <div class="row no-gutters">
             <div class="col-md-8">
             <img src={logo} class="card-img" alt="..."  style={{marginBottom:'5px'}}/>
             
@@ -42,9 +42,9 @@ function Products(props) {
                     <span class="sr-only">Next</span>
                 </a>
                 </div>
-            </div>
-            <div class="col-md-4">
-            <div class="card-body">
+                </div>
+                <div class="col-md-4">
+                <div class="card-body">
                 <h5 class="card-title">Gold Donut's</h5>
                 <h4>$100</h4>
 
@@ -68,8 +68,8 @@ function Products(props) {
                 <div >
                     <button type="button" class="btn btn-success" style={{height:'100px', borderRadius:'15px'}}>Anadir al Carrito</button>
                 </div>
-            </div>
-            </div>
+                </div>
+                </div>
         </div>
         </div>
         
