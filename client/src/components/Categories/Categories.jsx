@@ -9,14 +9,17 @@ import {
   Modal,
 } from "reactstrap";
 
+
+const categoryData = [
+  { id: new Date().getTime(), name: 'Remeras', description: 'Remeritas cortas y largas' },
+  { id: new Date().getTime() + 1, name: 'Pantalones', description: 'Pantalones largos y cortos' }
+]
+// Estado inicial que recibe de DB
+
+
 const Categories = () => {
 
-  // Estado inicial que recibe de DB
 
-  const categoryData = [
-    { id: new Date().getTime(), name: 'Remeras', description: 'Remeritas cortas y largas' },
-    { id: new Date().getTime() + 1, name: 'Pantalones', description: 'Pantalones largos y cortos' }
-  ]
 
   const initialFormState = { id: null, name: '', description: '' };
 
@@ -29,18 +32,14 @@ const Categories = () => {
   const [modalAdd, modalInsert] = useState(false)
   // Funcion para mostrar u ocultar el modal de agregar categoria
   const modalAddView = () => modalInsert(!modalAdd);
-  // const modalAddView = React.useCallback(() => modalInsert(!modalAdd));
   const modalAddViewFalse = () => modalInsert(false);
-  // const modalAddViewFalse = React.useCallback(() => modalInsert(false));
 
   // -----------------------
 
   const [modalEdit, modalInsertEdit] = useState(false)
   // Funcion para mostrar u ocultar el modal de agregar categoria
   const modalEditView = () => modalInsertEdit(!modalEdit);
-  // const modalEditView = React.useCallback(() => modalInsertEdit(!modalEdit));
   const modalEditViewFalse = () => modalInsertEdit(false);
-  // const modalEditViewFalse = React.useCallback(() => modalInsertEdit(false));
 
   // Funciones para Category Table
 
