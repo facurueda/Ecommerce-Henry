@@ -24,8 +24,9 @@ const Categories = () => {
 
   const [categories, setCategory] = useState(categoryData);
   const [currentCategory, setCurrentCategory] = useState(initialFormState)
-  const [modalAdd, modalInsert] = useState(false)
 
+  
+  const [modalAdd, modalInsert] = useState(false)
   // Funcion para mostrar u ocultar el modal de agregar categoria
   const modalAddView = () => modalInsert(!modalAdd);
   // const modalAddView = React.useCallback(() => modalInsert(!modalAdd));
@@ -35,7 +36,6 @@ const Categories = () => {
   // -----------------------
 
   const [modalEdit, modalInsertEdit] = useState(false)
-
   // Funcion para mostrar u ocultar el modal de agregar categoria
   const modalEditView = () => modalInsertEdit(!modalEdit);
   // const modalEditView = React.useCallback(() => modalInsertEdit(!modalEdit));
@@ -49,7 +49,6 @@ const Categories = () => {
 	}
 
 	const editCategory = category => {
-    // ------------  QUE SE HABRA EL MODAAAAAAAAAALLLLLLLLLLLLLLLLLLLL ------------------------
 		setCurrentCategory({ id: category.id, name: category.name, description: category.description })
   // PARA ABRIR EL MODAL DE EDIT
     modalEditView()

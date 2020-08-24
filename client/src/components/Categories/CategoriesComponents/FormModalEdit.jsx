@@ -54,7 +54,7 @@ const FormModalEdit = (props) => {
           color="primary"
           onClick={(event) => {
             event.preventDefault();
-            if (!category.name || !category.description) return window.alert('Faltan Datos')
+            if (!category.name || !category.description) return window.alert('Empty Inputs')
             if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
             updateCategory(category.id, category);
             modalEditViewFalse();

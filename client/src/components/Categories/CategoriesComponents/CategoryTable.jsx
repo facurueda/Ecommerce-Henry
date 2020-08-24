@@ -46,7 +46,7 @@ const CategoryTable = (props) => {
                                 // SI NO HAY DATOS EN PROPS.CATEGORIES DEVUELVE "NO HAY CATEGORIAS"
                     (
                         <tr>
-                        <td colSpan={3}>No Hay Categorias</td>
+                        <td>No Categories</td>
                         </tr>
                     )}
 

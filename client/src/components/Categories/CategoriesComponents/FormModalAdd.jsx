@@ -36,8 +36,8 @@ const FormModalAdd = (props) => {
                         className="form-control"
                         name="name"
                         type="text"
-                    onChange={handleChange}
-                    value={category.name}
+                        onChange={handleChange}
+                        value={category.name}
                     />
                 </FormGroup>
 
@@ -49,23 +49,21 @@ const FormModalAdd = (props) => {
                         className="form-control"
                         name="description"
                         type="text"
-                    onChange={handleChange}
-                    value={category.description}
+                        onChange={handleChange}
+                        value={category.description}
                     />
                 </FormGroup>
             </ModalBody>
             <ModalFooter>
                 <Button color='primary'
-
                     onClick={event => {
                         event.preventDefault()
-                        if (!category.name || !category.description) return window.alert('Faltan Datos')
+                        if (!category.name || !category.description) return window.alert('Empty Inputs')
                         if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
                         addCategory(category)
                         setCategory(initialFormState)
                         modalAddViewFalse()
                     }}
-
                 >
                 Submit </Button>
                 <Button color='danger' onClick={e => modalAddViewFalse()}>Exit</Button>
