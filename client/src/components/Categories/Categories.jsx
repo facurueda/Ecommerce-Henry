@@ -89,7 +89,7 @@ const Categories = () => {
           
           {/* ACA VA EL COMPONENTE FORMMODAL-ADD QUE SE ABRE AL DARLECLICK EN ADD CATEGORY */}
           {/* COMO PROPS SE LE ENVIA LA FUNCION addCategory */}
-        <FormModalAdd addCategory={addCategory} modalAddViewFalse={modalAddViewFalse}/>
+        <FormModalAdd addCategory={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories}/>
 
       </Modal>
 
@@ -97,7 +97,7 @@ const Categories = () => {
       <Modal isOpen={modalEdit}>
           
           {/* ACA VA EL COMPONENTE FORMMODAL-EDIT QUE SE ABRE AL DARLECLICK EN EDIT CATEGORY */}
-        <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory}/>
+        <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories}/>
 
       </Modal>
 

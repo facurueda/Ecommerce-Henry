@@ -9,7 +9,7 @@ import {
 
 const FormModalAdd = (props) => {
 
-    const {addCategory, modalAddViewFalse} = props;
+    const {addCategory, modalAddViewFalse, categories} = props;
 
 
     const initialFormState = { id: null, name: '', description: '' }
@@ -60,6 +60,7 @@ const FormModalAdd = (props) => {
                     onClick={event => {
                         event.preventDefault()
                         if (!category.name || !category.description) return window.alert('Faltan Datos')
+                        if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
                         addCategory(category)
                         setCategory(initialFormState)
                         modalAddViewFalse()

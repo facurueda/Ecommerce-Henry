@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 
 const FormModalEdit = (props) => {
-  const { currentCategory, modalEditViewFalse, updateCategory } = props;
+  const { currentCategory, modalEditViewFalse, updateCategory, categories } = props;
 
   const [category, setCategory] = useState(currentCategory);
 
@@ -55,6 +55,7 @@ const FormModalEdit = (props) => {
           onClick={(event) => {
             event.preventDefault();
             if (!category.name || !category.description) return window.alert('Faltan Datos')
+            if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
             updateCategory(category.id, category);
             modalEditViewFalse();
           }}
