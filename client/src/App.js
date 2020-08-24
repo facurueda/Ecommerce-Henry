@@ -1,12 +1,12 @@
 import React from 'react';
-import Product from './components/product/products'
+import Categories from './components/Categories/Categories'
 import './App.css'
 
 
 function App() {
     return (
     <div>
-      <Product/>
+      <Categories/>
     </div>
     );
   }
