@@ -13,15 +13,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       // notNull: true,
-      unique: true
     },
     description: {
         type: DataTypes.STRING,
         // allowNull: true,
-        notNull: true
-    },
-    products: {
-        type: DataTypes.JSON,
         notNull: true
     }
   });

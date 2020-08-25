@@ -1,6 +1,4 @@
-const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+const { DataTypes, INTEGER } = require('sequelize')
 module.exports = (sequelize) => {
   
   sequelize.define('product', {
@@ -30,15 +28,6 @@ module.exports = (sequelize) => {
     stock: { 
       type: DataTypes.INTEGER,
       notNull: true,
-     },
-    categories: {
-      type: DataTypes.JSON,
-      notNull: true,
-    },
-    image: {
-      type: DataTypes.JSON,
-      notNull: true,
-    },
-
+     }
   });
 };

@@ -1,12 +1,9 @@
 const server = require('express').Router();
-const { Product } = require('../db.js');
-const Categories = require('../models/Categories.js');
+const { Product, Categories, Inter_Cat_Prod } = require('../db.js');
 
-//http://localhost:3000/crear/producto/gato1/holamundo/123/3/1/1/1
-///:description/:precio/:rating/:stock/:idCategoria/:idImage
-//description,precio,rating,stock,idCategoria,idImage
-server.post('/crear/:id/:name/:description/:precio/:rating/:stock/:idCategoria/:idImage',(req,res,next) => {
-	const {id,name,description,precio,rating,stock,idCategoria,idImage} = req.params;
+
+server.post('/crear', (req, res, next) => {
+	const { id, name, description, precio, rating, stock } = req.body;
 	Product.create({
 		id,
 		name,
@@ -14,10 +11,8 @@ server.post('/crear/:id/:name/:description/:precio/:rating/:stock/:idCategoria/:
 		precio,
 		rating,
 		stock,
-		categories: JSON.stringify({ids:[idCategoria]}),
-		image: JSON.stringify({links: [idImage]})
-	}).then(res.send(req.params))
-	.catch(next);
+	}).then(res.send(req.body))
+		.catch(next);
 });
 
 server.get('/', (req, res, next) => {
@@ -38,29 +33,23 @@ DELETE /products/:idProducto/category/:idCategoria
 Elimina la categoria al producto.
 
 */
-server.post('/:idProducto/category/:idCategoria', (req,res,next) => {
-	Categories.findByPk(req.params.idCategoria)
-	.then(categorias => {
-		Product.findByPk(req.params.idProducto)
-		.then(producto => {
-			let prod = JSON.parse(producto.categories);
-			prod.ids.push(req.params.idCategoria)
-			Product.update({categories : prod},{where: {id: req.params.idProducto}}) 
-		}).catch(next)
-	})
+server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
+	Inter_Cat_Prod.create({
+		idCategorie: req.body.idCategorie,
+		idProduct: req.body.idProduct
+	}).then(res.send(req.body))
 })
 
 
-server.delete('/products/:idProducto/category/:idCategoria', (req,res,next) => {
-	Product.findByPk(req.params.idProducto)
-	.then(producto => {
-		let productito = JSON.parse(producto.categories)
-		res.send(productito);
-		productito = productito.filter((value) => {return value !== req.params.idCategoria})
-		Product.update({categories : productito}, {where: {id : req.params.idProducto}})		
-	})
-	.catch(next)
-	
+server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
+	Inter_Cat_Prod.destroy({
+		where: {
+			idProduct: req.body.idProduct,
+			idCategorie: req.body.idCategorie
+		}
+	}).then(res.send(req.body))
+		.catch(next)
+
 
 })
 
