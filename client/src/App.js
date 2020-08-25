@@ -1,15 +1,15 @@
 import React from 'react';
-import Categories from './components/Categories/Categories'
 import './App.css'
+import MenuCrud from './components/MenuCrud/MenuCrud';
 
 
 function App() {
     return (
     <div>
-      <Categories/>
+      <MenuCrud/>
     </div>
     );
   }
-  
+
   export default App;
-  
+
