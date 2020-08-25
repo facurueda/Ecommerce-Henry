@@ -10,22 +10,20 @@ const MenuCrud = () => {
   const menuData = [ 
     { 
       id: new Date().getTime(),
-      name: 'Clara',
-      description: 'Que hace?',
+      name: 'Papel',
+      description: 'de cocina',
       price: 111,
       stock: 23,
       images: ['http://www......']
     }, 
-    {
-      id: new Date().getTime(),
-      name: 'Facu',
-      description: 'No come?',
+    {      id: new Date().getTime() +1,
+      name: 'Manteca',
+      description: 'de maní',
       price: '132123',
       stock: '233',
       images: ['http://www....']
     }
   ]
-
   const initialState = { 
       id: new Date().getTime(),
       name: '',
@@ -36,8 +34,8 @@ const MenuCrud = () => {
   } 
 
   //Estados
-  const [menuState, setMenuState] = useState(menuData);
-  const [currentMenuState, setCurrentMenuState] = useState(initialState);
+  const [products, setProducts] = useState(menuData);
+  const [currentProducts, setCurrentProducts] = useState(initialState);
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
 
@@ -47,13 +45,14 @@ const MenuCrud = () => {
   const modalCloseAdd = () => setModalAdd(false);
   const modalCloseEdit = () => setModalEdit(false);  
   
-  const deleteProduct = id => {
-    setMenuState(
-      menuState.filter(product => product.id !== id)
+  const deleteProduct = (id) => {
+    setProducts(products.filter(product => (
+      (product.id !== id)
+      ))
     )
   }
   const editProduct = (product) => {
-    setCurrentMenuState({
+    setCurrentProducts({
         id: product.id,
         name: product.name,
         description: product.description,
@@ -65,10 +64,10 @@ const MenuCrud = () => {
   }
   const addProduct = (product) => {
     product.id = new Date().getTime();
-    setMenuState([...menuState, product]);
+    setProducts([...products, product]);
   }
   const updateProduct = (id, updateProduct) => {
-    setMenuState(menuState.map(product => (
+    setProducts(products.map(product => (
       (product.id === id ? updateProduct : product)
     )))
   }
@@ -81,28 +80,29 @@ const MenuCrud = () => {
         <br/>
         <br/>
         <ProductTable 
-        menuState = {menuState} 
+        products = {products} 
         deleteProduct = {deleteProduct} 
         editProduct = {editProduct} 
         />
       </Container>
       <Modal isOpen = {modalAdd}>
         <ModalAddProduct
-        menuState = {menuState}
+        products = {products}
         addProduct = {addProduct}
         modalCloseAdd = {modalCloseAdd}
         />
       </Modal>
       <Modal isOpen = {modalEdit}>
         <ModalEditProduct
-        menuState = {menuState}
-        currentMenuState = {currentMenuState}
+        products = {products}
+        currentProducts = {currentProducts}
         updateProduct = {updateProduct}
         modalCloseEdit = {modalCloseEdit}
         />
       </Modal>
     </div>
   )
+  
 }
 
 export default MenuCrud;

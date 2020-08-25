@@ -10,7 +10,7 @@ import ProductTable from "./ProductTable";
 
 const ModalAddProduct = (props) => {
     
-    const { menuState, addProduct, modalCloseAdd } = props
+    const { products, addProduct, modalCloseAdd } = props
     const initialState = { 
         id: new Date().getTime(),
         name: '',
@@ -92,7 +92,7 @@ const ModalAddProduct = (props) => {
                 onClick = {e => {
                     e.preventDefault();
                     if(!product.name || !product.description || !product.price || !product.stock) return window.alert('Empty input')
-                    if(menuState.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
+                    if(products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                     addProduct(product);
                     setProduct(initialState)
                     modalCloseAdd();
