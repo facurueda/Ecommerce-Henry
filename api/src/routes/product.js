@@ -37,7 +37,16 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategorie: req.body.idCategorie,
 		idProduct: req.body.idProduct
-	}).then(res.send(req.body))
+	}).then(res.send(req.body)).catch(next)
+})
+
+server.post('/category',(req,res,next) => {
+    const {name, description} = req.body;
+    Categories.create({
+        name,
+        description
+    }).then(res.send(req.body))
+    .catch(next);
 })
 
 
@@ -49,8 +58,6 @@ server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
 		}
 	}).then(res.send(req.body))
 		.catch(next)
-
-
 })
 
 
