@@ -16,7 +16,8 @@ const MenuCrud = () => {
       stock: 23,
       images: ['http://www......']
     }, 
-    {      id: new Date().getTime() +1,
+    {      
+      id: new Date().getTime() +1,
       name: 'Manteca',
       description: 'de maní',
       price: '132123',
