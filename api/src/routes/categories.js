@@ -4,15 +4,13 @@ const { Categories } = require('../db.js');
 const Product = require('../models/Product.js');
 
 
-server.post('/:id/:name/:description/:products',(req,res,next) => {
-    const {id,name, description, products} = req.params;
+server.post('/create', (req, res, next) => {
+    const { name, description } = req.body;
     Categories.create({
-        id,
-        name,
-        description,
-        products: JSON.stringify({ids:[products]})
-    }).then(res.send(req.params))
-    .catch(next);
+        name: req.body.name,
+        description: req.body.description
+    }).then(res.send(req.body))
+        .catch(next);
 })
 
 

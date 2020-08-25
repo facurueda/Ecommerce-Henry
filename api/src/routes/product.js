@@ -37,8 +37,8 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategorie: req.body.idCategorie,
 		idProduct: req.body.idProduct
-	}).then(res.send(req.body))
-})
+	}).then(res.send(req.body));
+});
 
 
 server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
@@ -48,10 +48,19 @@ server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
 			idCategorie: req.body.idCategorie
 		}
 	}).then(res.send(req.body))
-		.catch(next)
+		.catch(next);
 
 
-})
+});
+
+server.put('/category/:id', (req, res, next) => {
+	Categories.findOne({where: {id:req.params.id}}).then(category => {
+		category.update({...category,
+			name: req.body.name,
+			description: req.body.description
+		}).then(res.send(req.body))
+	}).catch(next);
+});
 
 
 
