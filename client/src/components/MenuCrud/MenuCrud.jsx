@@ -10,33 +10,38 @@ const MenuCrud = () => {
   const menuData = [ 
     { 
       id: new Date().getTime(),
-      name: 'Papel',
-      description: 'de cocina',
+      name: 'Clara',
+      description: 'Que hace?',
       price: 111,
       stock: 23,
       images: ['http://www......']
     }, 
-    {      
+    {
       id: new Date().getTime() +1,
-      name: 'Manteca',
-      description: 'de maní',
+      name: 'Facu',
+      description: 'No come?',
       price: '132123',
       stock: '233',
       images: ['http://www....']
     }
   ]
+
   const initialState = { 
       id: new Date().getTime(),
       name: '',
       description: '',
       price: '',
       stock: '',
-      images: []
+      images: ''
   } 
 
   //Estados
-  const [products, setProducts] = useState(menuData);
-  const [currentProducts, setCurrentProducts] = useState(initialState);
+  // const [menuState, setMenuState] = useState(menuData);
+  // const [currentMenuState, setCurrentMenuState] = useState(initialState);
+  
+  const [products, setProducts] = useState(menuData)
+  const [currentProducts, setCurrentProducts] = useState(initialState)
+
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
 
@@ -46,10 +51,9 @@ const MenuCrud = () => {
   const modalCloseAdd = () => setModalAdd(false);
   const modalCloseEdit = () => setModalEdit(false);  
   
-  const deleteProduct = (id) => {
-    setProducts(products.filter(product => (
-      (product.id !== id)
-      ))
+  const deleteProduct = id => {
+    setProducts(
+      products.filter(product => product.id !== id)
     )
   }
   const editProduct = (product) => {
@@ -88,14 +92,14 @@ const MenuCrud = () => {
       </Container>
       <Modal isOpen = {modalAdd}>
         <ModalAddProduct
-        products = {products}
+        products = {products} 
         addProduct = {addProduct}
         modalCloseAdd = {modalCloseAdd}
         />
       </Modal>
       <Modal isOpen = {modalEdit}>
         <ModalEditProduct
-        products = {products}
+        products = {products} 
         currentProducts = {currentProducts}
         updateProduct = {updateProduct}
         modalCloseEdit = {modalCloseEdit}
@@ -103,7 +107,6 @@ const MenuCrud = () => {
       </Modal>
     </div>
   )
-  
 }
 
 export default MenuCrud;

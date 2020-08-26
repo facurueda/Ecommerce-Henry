@@ -1,12 +1,13 @@
 import React, { useState } from "react"; 
+import { Editor } from "@tinymce/tinymce-react";
 import {   
     Button,
     ModalHeader,
     ModalBody,     
     FormGroup,     
     ModalFooter, 
+    ListGroup,
 } from "reactstrap";
-import ProductTable from "./ProductTable";
 
 const ModalAddProduct = (props) => {
     
@@ -19,15 +20,59 @@ const ModalAddProduct = (props) => {
         stock: '',
         images: []
     }; 
+
     const [product, setProduct] = useState(initialState);
 
-    const handleChange = (e) => {
+    const handleChange = e => {
         const { name, value } = e.target;
         setProduct({
             ...product,
+            description: content,
+            images : imagesUpload,
             [ name ] : value
         })
     }
+
+       // States
+       const [content, setContent] = useState('');
+
+       // Functions
+       const handleChangeDescription = (content, editor) => {
+           setContent(content)
+       }
+
+
+       // States Upload Image
+
+       const [loading, setLoading] = useState(false)
+       const [imagesUpload, setImagesUpload] = useState('')
+
+       // Funciones Upload Image
+
+       const uploadImage = async e => {
+           const files = e.target.files
+           const data = new FormData()
+           data.append('file',files[0])
+           data.append('upload_preset', 'ecommerceHenry')
+           setLoading(true)
+
+           const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
+           {
+               method: 'POST',
+               body: data
+           })
+
+           const file = await res.json()
+
+           
+           setImagesUpload(file.secure_url)
+        // setImagesUpload(true)
+           
+           setLoading(false)
+
+           console.log(imagesUpload)
+       }
+
 
     return (
         <div>
@@ -35,6 +80,31 @@ const ModalAddProduct = (props) => {
                 <div><h3>Add product</h3></div>
             </ModalHeader>
             <ModalBody>
+                <FormGroup style={{display:"flex", justifyContent:'center'}}>
+                    <ListGroup horizontal style={{alignItems:'center'}}>
+                    <input type='file' name='file' placeholder='Upload' onChange={uploadImage}/>
+                    {
+                        loading?(
+                            <h3>Loading...</h3>
+                        ) : (
+                            <img src={imagesUpload} alt='' style={{width:'150px'}}/>
+                        )
+                    }
+
+
+
+
+
+
+                    {/* <img src={imageDefault} alt="" style={{width:'150px'}}/>
+                    <img src={imageDefault} alt="" style={{width:'150px', margin:'5px'}}/>
+                    <img src={imageDefault} alt="" style={{width:'150px'}}/> */}
+                        {/* <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />  */}
+                        {/* <ListGroupItem>{imageDefault}</ListGroupItem> */}
+                        {/* <ListGroupItem>{imageDefault}</ListGroupItem> */}
+                    </ListGroup>
+                </FormGroup>
+            
                 <FormGroup>
                     <label>Product name: </label>
                     <input
@@ -47,35 +117,48 @@ const ModalAddProduct = (props) => {
                 </FormGroup>
                 <FormGroup>
                     <label>Description: </label>
-                    <input
+                    <form>
+                        <Editor
+                            apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
+                            value={content}
+                            init={{
+                                height: 250,
+                                menubar: false
+                            }}
+                            onEditorChange={handleChangeDescription}
+                        />
+                    </form>
+                    {/* <input
                         className = 'form-control'
                         name = 'description'
                         type = 'text'
                         onChange = {handleChange}
                         value = {product.description}
-                    />
+                    /> */}
                 </FormGroup>
-                <FormGroup>
-                    <label>Price: </label>
-                    <input
-                        className = 'form-control'
-                        name = 'price'
-                        type = 'number'
-                        onChange = {handleChange}
-                        value = {product.price}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <label>Stock: </label>
-                    <input
-                        className = 'form-control'
-                        name = 'stock'
-                        type = 'number'
-                        onChange = {handleChange}
-                        value = {product.stock}
-                    />
-                </FormGroup>
-                <FormGroup>
+                <ListGroup horizontal style={{alignItems:'center', justifyContent:'space-around'}}>
+                    <FormGroup>
+                        <label>Price: </label>
+                        <input
+                            className = 'form-control'
+                            name = 'price'
+                            type = 'number'
+                            onChange = {handleChange}
+                            value = {product.price}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <label>Stock: </label>
+                        <input
+                            className = 'form-control'
+                            name = 'stock'
+                            type = 'number'
+                            onChange = {handleChange}
+                            value = {product.stock}
+                        />
+                    </FormGroup>
+                </ListGroup>
+                {/* <FormGroup>
                     <label>Images: </label>
                     <input
                         className = 'form-control'
@@ -85,7 +168,7 @@ const ModalAddProduct = (props) => {
                         onChange = {handleChange}
                         value = {product.images}
                     />
-                </FormGroup>
+                </FormGroup> */}
             </ModalBody>
             <ModalFooter>
                 <Button color = 'success'
