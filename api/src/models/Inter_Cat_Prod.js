@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
             primaryKey: true,
             notNull: true
         },
-        idCategorie: {
+        idCategory: {
             type: DataTypes.INTEGER,
             notNull: true
         },
