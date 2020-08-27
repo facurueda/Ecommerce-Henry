@@ -1,7 +1,55 @@
 const server = require('express').Router();
+const Sequelize = require("sequelize");
 const { Product, Categories, Inter_Cat_Prod } = require('../db.js');
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////// GETS
+server.get('/', (req, res, next) => {
+	Product.findAll()
+		.then(products => { res.send(products); }).catch(next);
+});
+
+server.get('/', (req, res, next) => {
+	Product.findAll()
+		.then(products => {
+			res.send(products);
+		})
+		.catch(next);
+});
+
+server.get('/categoria/:nombreCat', (req, res, next) => {
+	Categories.findOne({
+		where: {
+			name: req.params.nombreCat
+		},
+		include: [{ model: Product, as: 'products' }]
+	}).then(category => {
+		res.send(category.products)
+	}).catch(next)
+})
+
+// GET /search?query={valor}
+// Retorna todos los productos que tengan {valor} en su nombre o descripcion.
+server.get('/search', (req, res, next) => {
+	Product.findAll({
+		where: {
+			[Sequelize.Op.or]: [{
+				name: {
+					[Sequelize.Op.like]: "%" + req.query.query + "%"
+				}
+			},
+			{
+				description: {
+					[Sequelize.Op.like]: "%" + req.query.query + "%"
+				}
+			}]
+		}
+	}).then(products => { res.send(products) })
+})
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////// POSTS
 server.post('/aaa', (req, res, next) => {
 	Product.create({
 		name: "Dragon",
@@ -47,11 +95,6 @@ server.post('/aaa', (req, res, next) => {
 	})
 })
 
-server.get('/', (req, res, next) => {
-	Product.findAll()
-		.then(products => { res.send(products); }).catch(next);
-});
-
 server.post('/crear', (req, res, next) => {
 	const { name, description, precio, rating, stock } = req.body;
 	Product.create({
@@ -64,35 +107,6 @@ server.post('/crear', (req, res, next) => {
 		.catch(next);
 });
 
-server.get('/', (req, res, next) => {
-	Product.findAll()
-		.then(products => {
-			res.send(products);
-		})
-		.catch(next);
-});
-
-server.get('/categoria/:nombreCat', (req, res, next) => {
-	Categories.findOne({
-		where: {
-			name: req.params.nombreCat
-		},
-		include: [{ model: Product, as: 'products' }]
-	}).then(category => {
-		res.send(category.products)
-	}).catch(next)
-})
-/*POST /products/:idProducto/category/:idCategoria
-	
-Agrega la categoria al producto.
-	
-	
-	
-DELETE /products/:idProducto/category/:idCategoria
-	
-Elimina la categoria al producto.
-	
-*/
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
@@ -110,11 +124,14 @@ server.post('/category', (req, res, next) => {
 })
 
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////// DELETE
 server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.destroy({
 		where: {
 			idProduct: req.body.idProduct,
-			idCategorie: req.body.idCategorie
+			idCategory: req.body.idCategory
 		}
 	}).then(res.send(req.body))
 		.catch(next)
@@ -122,13 +139,5 @@ server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
 
 
 
-
-
-//Product.findAll({
-/* 	where : {
-		categorias : req.params
-	}
-})
- */
 
 module.exports = server;
