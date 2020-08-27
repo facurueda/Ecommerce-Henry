@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table, Button } from 'reactstrap';
+import './ProductTable.css'
 
 const ProductTable = (props) => {
 
     const { products, editProduct, deleteProduct } = props;
-
 
     return (
         <Table>
@@ -15,6 +15,7 @@ const ProductTable = (props) => {
                     <th>Price</th>
                     <th>Stock</th>
                     <th>Images</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -25,9 +26,9 @@ const ProductTable = (props) => {
                             <td>{product.description}</td>
                             <td>{'$ '}{product.price}</td>
                             <td>{product.stock}</td>
-                            <td>{product.images}</td>
-                            <td style={{display:'flex', flexDirection:'row'}}>
-                                <Button color = 'primary' onClick = {e => editProduct(product)} style={{marginRight:'2px'}}>Edit</Button> {'  '}
+                            <td> <img src= {product.images}></img> </td>
+                            <td className= 'buttons'>
+                                <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}
                                 <Button color = 'danger' onClick = {e => deleteProduct(product.id)}>Delete</Button>
                             </td>
                         </tr>
