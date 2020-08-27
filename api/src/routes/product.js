@@ -4,17 +4,14 @@ const { Product, Categories, Inter_Cat_Prod } = require('../db.js');
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
+// (() => {
+// 	console.log("Funcion Autoinvocada")
+// })()
 server.get('/', (req, res, next) => {
 	Product.findAll()
-		.then(products => { res.send(products); }).catch(next);
-});
-
-server.get('/', (req, res, next) => {
-	Product.findAll()
-		.then(products => {
+		.then((products) => {
 			res.send(products);
-		})
-		.catch(next);
+		}).catch(next)
 });
 
 server.get('/categoria/:nombreCat', (req, res, next) => {
@@ -23,13 +20,14 @@ server.get('/categoria/:nombreCat', (req, res, next) => {
 			name: req.params.nombreCat
 		},
 		include: [{ model: Product, as: 'products' }]
-	}).then(category => {
+	}).then((category) => {
 		res.send(category.products)
 	}).catch(next)
 })
 
-// GET /search?query={valor}
+
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
+// http://localhost:3000/search?query=TerminoDeBusqueda/ 
 server.get('/search', (req, res, next) => {
 	Product.findAll({
 		where: {
@@ -44,7 +42,15 @@ server.get('/search', (req, res, next) => {
 				}
 			}]
 		}
-	}).then(products => { res.send(products) })
+	})
+		/*.then(() => {
+			Product.findOne({ where: { name: "Dragon" }, include: [{ model: Categories, as: 'categories' }] }).then(producto => {
+				console.log(producto.categories)
+			})
+		})*/
+		.then((products) => {
+			res.send(products)
+		}).catch(next)
 })
 
 
@@ -59,39 +65,28 @@ server.post('/aaa', (req, res, next) => {
 		stock: 10,
 	}).then(() => {
 		Categories.create({
-			name: "animales",
-			description: "Todo tipo de animales"
-		})
-	}).then(() => {
-		Categories.create({
-			name: "Objetos",
-			description: "Todo tipo de objetos"
+			name: "animales", description: "Todo tipo de animales"
 		}).then(() => {
 			Categories.create({
-				name: "Perros",
-				description: "la recontra descripcion"
-			})
-		})
-	}).then(() => {
-		Product.create({
-			name: "Perro",
-			description: "Hace afuera",
-			precio: 10,
-			rating: 5,
-			stock: 10,
-		})
-			.then(() => {
-				Inter_Cat_Prod.create({
-					idCategory: 2,
-					idProduct: 1
+				name: "Objetos", description: "Todo tipo de objetos"
+			}).then(() => {
+				Categories.create({
+					name: "Perros", description: "la recontra descripcion"
 				}).then(() => {
-					Inter_Cat_Prod.create({
-						idCategory: 2,
-						idProduct: 3
+					Product.create({
+						name: "Perro", description: "Hace afuera", precio: 10, rating: 5, stock: 10,
+					}).then(() => {
+						Inter_Cat_Prod.create({
+							idCategory: 2, idProduct: 1
+						}).then(() => {
+							Inter_Cat_Prod.create({
+								idCategory: 2, idProduct: 2
+							}).catch(next)
+						})
 					})
 				})
 			})
-			.catch(next)
+		})
 	})
 })
 
@@ -103,7 +98,9 @@ server.post('/crear', (req, res, next) => {
 		precio,
 		rating,
 		stock,
-	}).then(res.send(req.body))
+	}).then(() => {
+		res.send(req.body)
+	})
 		.catch(next);
 });
 
@@ -111,7 +108,7 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
 		idProduct: req.body.idProduct
-	}).then(res.send(req.body)).catch(next)
+	}).then(() => { res.send(req.body) }).catch(next)
 })
 
 server.post('/category', (req, res, next) => {
@@ -119,7 +116,7 @@ server.post('/category', (req, res, next) => {
 	Categories.create({
 		name,
 		description
-	}).then(res.send(req.body))
+	}).then(() => { res.send(req.body) })
 		.catch(next);
 })
 
@@ -133,7 +130,7 @@ server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
 			idProduct: req.body.idProduct,
 			idCategory: req.body.idCategory
 		}
-	}).then(res.send(req.body))
+	}).then(() => { res.send(req.body) })
 		.catch(next)
 })
 
