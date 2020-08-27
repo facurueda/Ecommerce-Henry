@@ -1,6 +1,5 @@
 const { DataTypes, INTEGER } = require('sequelize')
 module.exports = (sequelize) => {
-  
   sequelize.define('product', {
     idProduct: {
       type: DataTypes.INTEGER,
@@ -9,7 +8,6 @@ module.exports = (sequelize) => {
       notNull: true,
     },
     name: {
-      
       type: DataTypes.STRING,
       notNull: true,
     },
@@ -25,7 +23,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       notNull: false
     },
-    stock: { 
+    stock: {
       type: DataTypes.INTEGER,
       notNull: true,
      }

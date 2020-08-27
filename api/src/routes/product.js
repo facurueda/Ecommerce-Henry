@@ -1,12 +1,21 @@
 const server = require('express').Router();
 const Sequelize = require("sequelize");
-const { Product, Categories, Inter_Cat_Prod } = require('../db.js');
+const { Product, Categories, Inter_Cat_Prod, Image } = require('../db.js');
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
-// (() => {
-// 	console.log("Funcion Autoinvocada")
-// })()
+/*
+GET /products/:id
+Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
+*/
+server.get('/:id', (req, res, next) => {
+	Product.findOne({
+		where: { idProduct: req.body.idProduct },
+		include: [{ model: Categories, as: 'categories' }, { model: Image, as: 'images' }]
+	}).then((product) => {
+		res.send(product)
+	})
+})
 server.get('/', (req, res, next) => {
 	Product.findAll()
 		.then((products) => {
@@ -27,7 +36,7 @@ server.get('/categoria/:nombreCat', (req, res, next) => {
 
 
 // Retorna todos los productos que tengan {valor} en su nombre o descripcion.
-// http://localhost:3000/search?query=TerminoDeBusqueda/ 
+// http://localhost:3000/search?query=TerminoDeBusqueda/
 server.get('/search', (req, res, next) => {
 	Product.findAll({
 		where: {
@@ -81,7 +90,17 @@ server.post('/aaa', (req, res, next) => {
 						}).then(() => {
 							Inter_Cat_Prod.create({
 								idCategory: 2, idProduct: 2
-							}).catch(next)
+							}).then(() =>{
+								Image.create({
+									idProduct: 1,
+									link: 'http://dreamicus.com/data/dragon/dragon-05.jpg'
+								}).then(() => {
+									Image.create({
+										idProduct: 1,
+										link: 'https://i.ytimg.com/vi/9dcQxfY2NH4/maxresdefault.jpg'
+									}).catch(next)
+								})
+							})
 						})
 					})
 				})
