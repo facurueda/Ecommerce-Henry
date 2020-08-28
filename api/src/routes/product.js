@@ -4,6 +4,20 @@ const { Product, Categories, Inter_Cat_Prod, Image } = require('../db.js');
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
+server.get('/search', (req, res, next) => {
+	Product.findAll(
+			{
+			where: {
+				[Sequelize.Op.or]: [{ name: { [Sequelize.Op.like]: "%" + req.query.query + "%" } },
+				             { description: { [Sequelize.Op.like]: "%" + req.query.query + "%" } }]
+			}
+		})
+		.then((products) => {
+			res.send(products);
+		}).catch(next)
+});
+
+
 server.get('/:id', (req, res, next) => {
 	// GET /products/:id
 	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
@@ -16,18 +30,7 @@ server.get('/:id', (req, res, next) => {
 });
 
 
-server.get('/search', (req, res, next) => {
-	Product.findAll(
-			{
-			where: {
-				[Sequelize.Op.or]: [{ name: { [Sequelize.Op.like]: "%" + req.body.term + "%" } },
-				             { description: { [Sequelize.Op.like]: "%" + req.body.term + "%" } }]
-			}
-		})
-		.then((products) => {
-			res.send(products);
-		}).catch(next)
-});
+
 
 server.get('/', (req, res, next) => {
 	Product.findAll()
