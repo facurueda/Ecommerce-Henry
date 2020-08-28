@@ -17,7 +17,7 @@ const MenuCrud = () => {
       images: ['http://www......']
     }, 
     {
-      id: new Date().getTime(),
+      id: new Date().getTime() +1,
       name: 'Facu',
       description: 'No come?',
       price: '132123',
@@ -32,12 +32,16 @@ const MenuCrud = () => {
       description: '',
       price: '',
       stock: '',
-      images: []
+      images: ''
   } 
 
   //Estados
-  const [menuState, setMenuState] = useState(menuData);
-  const [currentMenuState, setCurrentMenuState] = useState(initialState);
+  // const [menuState, setMenuState] = useState(menuData);
+  // const [currentMenuState, setCurrentMenuState] = useState(initialState);
+  
+  const [products, setProducts] = useState(menuData)
+  const [currentProducts, setCurrentProducts] = useState(initialState)
+
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
 
@@ -48,12 +52,12 @@ const MenuCrud = () => {
   const modalCloseEdit = () => setModalEdit(false);  
   
   const deleteProduct = id => {
-    setMenuState(
-      menuState.filter(product => product.id !== id)
+    setProducts(
+      products.filter(product => product.id !== id)
     )
   }
   const editProduct = (product) => {
-    setCurrentMenuState({
+    setCurrentProducts({
         id: product.id,
         name: product.name,
         description: product.description,
@@ -65,10 +69,10 @@ const MenuCrud = () => {
   }
   const addProduct = (product) => {
     product.id = new Date().getTime();
-    setMenuState([...menuState, product]);
+    setProducts([...products, product]);
   }
   const updateProduct = (id, updateProduct) => {
-    setMenuState(menuState.map(product => (
+    setProducts(products.map(product => (
       (product.id === id ? updateProduct : product)
     )))
   }
@@ -81,22 +85,22 @@ const MenuCrud = () => {
         <br/>
         <br/>
         <ProductTable 
-        menuState = {menuState} 
+        products = {products} 
         deleteProduct = {deleteProduct} 
         editProduct = {editProduct} 
         />
       </Container>
       <Modal isOpen = {modalAdd}>
         <ModalAddProduct
-        menuState = {menuState}
+        products = {products} 
         addProduct = {addProduct}
         modalCloseAdd = {modalCloseAdd}
         />
       </Modal>
       <Modal isOpen = {modalEdit}>
         <ModalEditProduct
-        menuState = {menuState}
-        currentMenuState = {currentMenuState}
+        products = {products} 
+        currentProducts = {currentProducts}
         updateProduct = {updateProduct}
         modalCloseEdit = {modalCloseEdit}
         />

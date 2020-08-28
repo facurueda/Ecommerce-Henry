@@ -7,11 +7,10 @@ import {
     ModalFooter, 
 } from "reactstrap";
 
-
 const ModalEditProduct = (props) => {
 
-    const { menuState, currentMenuState, updateProduct, modalCloseEdit } = props;
-    const [product, setProduct] = useState(currentMenuState);
+    const { products, currentproducts, updateProduct, modalCloseEdit } = props;
+    const [product, setProduct] = useState(currentproducts);
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -85,12 +84,17 @@ const ModalEditProduct = (props) => {
                     onClick = {e => {
                         e.preventDefault();
                         if(!product.name || !product.description || !product.price || !product.stock) return window.alert('Empty input')
-                        if(menuState.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
+                        if(products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         updateProduct();
                         modalCloseEdit();
                     }}
-                >Submit</Button>
-                <Button color = 'danger' onClick = {e => modalCloseEdit()}>Exit</Button>
+                >Submit
+                </Button>
+                <Button 
+                    color = 'danger' 
+                    onClick = {e => modalCloseEdit()}
+                >Exit
+                </Button>
             </ModalFooter>
         </div>
     )

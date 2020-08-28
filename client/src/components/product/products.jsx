@@ -42,21 +42,12 @@ function Products(props) {
                     <span class="sr-only">Next</span>
                 </a>
                 </div>
-<<<<<<< HEAD
-                </div>
-                <div class="col-md-4">
-                <div class="card-body">
-                <h5 class="card-title">Gold Donut's</h5>
-                <h4>$100</h4>
-
-=======
             </div>
             <div class="col-md-4">
             <div class="card-body">
                 <h5 class="card-title">{title}</h5>
                 <h4>{price}</h4>
                 <h4>{stock}</h4>
->>>>>>> modificacionesFront
                 <hr />
 
                 <p class="card-text">

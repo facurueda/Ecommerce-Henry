@@ -1,0 +1,22 @@
+.productCard {
+    width:250px;
+    height: 500px;
+    border: 5px solid #DFA06E;
+}
+.cardImg {
+    margin: 3px;
+    width: 95%;
+    align-self: center;
+    margin-top: 5px
+}
+.productName {
+    display: flex;
+    justify-content: center
+}
+.description{
+    font-style:italic
+}
+.price {
+    font-weight: bold;
+    float: right
+}
