@@ -4,18 +4,31 @@ const { Product, Categories, Inter_Cat_Prod, Image } = require('../db.js');
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
-/*
-GET /products/:id
-Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
-*/
 server.get('/:id', (req, res, next) => {
+	// GET /products/:id
+	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
 	Product.findOne({
 		where: { idProduct: req.body.idProduct },
 		include: [{ model: Categories, as: 'categories' }, { model: Image, as: 'images' }]
 	}).then((product) => {
 		res.send(product)
-	})
-})
+	}).catch(next)
+});
+
+
+server.get('/search', (req, res, next) => {
+	Product.findAll(
+			{
+			where: {
+				[Sequelize.Op.or]: [{ name: { [Sequelize.Op.like]: "%" + req.body.term + "%" } },
+				             { description: { [Sequelize.Op.like]: "%" + req.body.term + "%" } }]
+			}
+		})
+		.then((products) => {
+			res.send(products);
+		}).catch(next)
+});
+
 server.get('/', (req, res, next) => {
 	Product.findAll()
 		.then((products) => {
@@ -23,44 +36,10 @@ server.get('/', (req, res, next) => {
 		}).catch(next)
 });
 
-server.get('/categoria/:nombreCat', (req, res, next) => {
-	Categories.findOne({
-		where: {
-			name: req.params.nombreCat
-		},
-		include: [{ model: Product, as: 'products' }]
-	}).then((category) => {
-		res.send(category.products)
-	}).catch(next)
-})
 
 
-// Retorna todos los productos que tengan {valor} en su nombre o descripcion.
-// http://localhost:3000/search?query=TerminoDeBusqueda/
-server.get('/search', (req, res, next) => {
-	Product.findAll({
-		where: {
-			[Sequelize.Op.or]: [{
-				name: {
-					[Sequelize.Op.like]: "%" + req.query.query + "%"
-				}
-			},
-			{
-				description: {
-					[Sequelize.Op.like]: "%" + req.query.query + "%"
-				}
-			}]
-		}
-	})
-		/*.then(() => {
-			Product.findOne({ where: { name: "Dragon" }, include: [{ model: Categories, as: 'categories' }] }).then(producto => {
-				console.log(producto.categories)
-			})
-		})*/
-		.then((products) => {
-			res.send(products)
-		}).catch(next)
-})
+
+
 
 
 
@@ -90,7 +69,7 @@ server.post('/aaa', (req, res, next) => {
 						}).then(() => {
 							Inter_Cat_Prod.create({
 								idCategory: 2, idProduct: 2
-							}).then(() =>{
+							}).then(() => {
 								Image.create({
 									idProduct: 1,
 									link: 'http://dreamicus.com/data/dragon/dragon-05.jpg'
@@ -98,6 +77,10 @@ server.post('/aaa', (req, res, next) => {
 									Image.create({
 										idProduct: 1,
 										link: 'https://i.ytimg.com/vi/9dcQxfY2NH4/maxresdefault.jpg'
+									}).then(() => {
+										res.send({
+											result: "Elementos creados."
+										})
 									}).catch(next)
 								})
 							})
@@ -109,7 +92,7 @@ server.post('/aaa', (req, res, next) => {
 	})
 })
 
-server.post('/crear', (req, res, next) => {
+server.post('/create', (req, res, next) => {
 	const { name, description, precio, rating, stock } = req.body;
 	Product.create({
 		name,
@@ -119,38 +102,73 @@ server.post('/crear', (req, res, next) => {
 		stock,
 	}).then(() => {
 		res.send(req.body)
-	})
-		.catch(next);
+	}).catch(next);
 });
 
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
 		idProduct: req.body.idProduct
-	}).then(() => { res.send(req.body) }).catch(next)
-})
-
-server.post('/category', (req, res, next) => {
-	const { name, description } = req.body;
-	Categories.create({
-		name,
-		description
-	}).then(() => { res.send(req.body) })
-		.catch(next);
+	}).then(() => {
+		 res.send(req.body)
+		}).catch(next)
 })
 
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
-server.delete('/:idProducto/category/:idCategoria', (req, res, next) => {
+server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
+	/////////////////////////// Elimina la categoria del producto:
 	Inter_Cat_Prod.destroy({
 		where: {
 			idProduct: req.body.idProduct,
 			idCategory: req.body.idCategory
 		}
-	}).then(() => { res.send(req.body) })
-		.catch(next)
+	}).then(() => {
+		res.send(req.body)
+	}).catch(next)
+})
+
+
+server.delete('/:idProducto', (req, res, next) => {
+	/////////////////////////// Elimina un producto:
+	Product.destroy({
+		where: {
+			idProduct: req.body.idProduct
+		}
+	}).then((product) => {
+		if (product) {
+			res.status(200).send()
+		}
+		else {
+			res.status(400).send()
+		}
+	}).catch(() => {
+		res.status(400)
+	})
+})
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////// PUT
+server.put('/:id', (req, res, next) => {
+	Product.findOne({
+		where: {
+			idProduct: req.body.idProduct
+		}
+	}).then(product => {
+		product.update({
+			...product,
+			name: req.body.name,
+			description: req.body.description
+		}).catch(() => {
+			res.status(400)
+		}).then(() => {
+			res.status(200).send(product)
+		})
+	}).catch(next);
 })
 
 
