@@ -6,10 +6,10 @@ const { Product, Categories, Inter_Cat_Prod, Image } = require('../db.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 server.get('/search', (req, res, next) => {
 	Product.findAll(
-			{
+		{
 			where: {
 				[Sequelize.Op.or]: [{ name: { [Sequelize.Op.like]: "%" + req.query.query + "%" } },
-				             { description: { [Sequelize.Op.like]: "%" + req.query.query + "%" } }]
+				{ description: { [Sequelize.Op.like]: "%" + req.query.query + "%" } }]
 			}
 		})
 		.then((products) => {
@@ -55,44 +55,44 @@ server.post('/aaa', (req, res, next) => {
 		rating: 5,
 		stock: 10,
 	}).then(() => {
-		Categories.create({
+		return Categories.create({
 			name: "animales", description: "Todo tipo de animales"
-		}).then(() => {
-			Categories.create({
-				name: "Objetos", description: "Todo tipo de objetos"
-			}).then(() => {
-				Categories.create({
-					name: "Perros", description: "la recontra descripcion"
-				}).then(() => {
-					Product.create({
-						name: "Perro", description: "Hace afuera", precio: 10, rating: 5, stock: 10,
-					}).then(() => {
-						Inter_Cat_Prod.create({
-							idCategory: 2, idProduct: 1
-						}).then(() => {
-							Inter_Cat_Prod.create({
-								idCategory: 2, idProduct: 2
-							}).then(() => {
-								Image.create({
-									idProduct: 1,
-									link: 'http://dreamicus.com/data/dragon/dragon-05.jpg'
-								}).then(() => {
-									Image.create({
-										idProduct: 1,
-										link: 'https://i.ytimg.com/vi/9dcQxfY2NH4/maxresdefault.jpg'
-									}).then(() => {
-										res.send({
-											result: "Elementos creados."
-										})
-									}).catch(next)
-								})
-							})
-						})
-					})
-				})
-			})
 		})
-	})
+	}).then(() => {
+		return Categories.create({
+			name: "Objetos", description: "Todo tipo de objetos"
+		})
+	}).then(() => {
+		return Categories.create({
+			name: "Perros", description: "la recontra descripcion"
+		})
+	}).then(() => {
+		return Product.create({
+			name: "Perro", description: "Hace afuera", precio: 10, rating: 5, stock: 10,
+		})
+	}).then(() => {
+		return Inter_Cat_Prod.create({
+			idCategory: 2, idProduct: 1
+		})
+	}).then(() => {
+		return Inter_Cat_Prod.create({
+			idCategory: 2, idProduct: 2
+		})
+	}).then(() => {
+		return Image.create({
+			idProduct: 1,
+			link: 'http://dreamicus.com/data/dragon/dragon-05.jpg'
+		})
+	}).then(() => {
+		return Image.create({
+			idProduct: 1,
+			link: 'https://i.ytimg.com/vi/9dcQxfY2NH4/maxresdefault.jpg'
+		})
+	}).then(() => {
+		return res.send({
+			result: "Elementos creados."
+		})
+	}).catch(next)
 })
 
 server.post('/create', (req, res, next) => {
@@ -113,8 +113,8 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 		idCategory: req.body.idCategory,
 		idProduct: req.body.idProduct
 	}).then(() => {
-		 res.send(req.body)
-		}).catch(next)
+		res.send(req.body)
+	}).catch(next)
 })
 
 
