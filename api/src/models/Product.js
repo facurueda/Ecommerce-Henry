@@ -9,23 +9,23 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
-      notNull: true,
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING,
-      notNull: true,
+      allowNull: false,
     },
     precio: {
       type: DataTypes.INTEGER,
-      notNull: true,
+      allowNull: false,
     },
     rating: {
       type: DataTypes.INTEGER,
-      notNull: false
+      allowNull: false
     },
     stock: {
       type: DataTypes.INTEGER,
-      notNull: true,
+      allowNull: false,
      }
   });
 };
