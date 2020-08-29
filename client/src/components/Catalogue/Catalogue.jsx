@@ -42,10 +42,7 @@ const Catalogue = (props) => {
                     return <Category className = 'categoryImage'
                     name = {category.name} productsFilter = {productsFilter} />
                 })} 
-                <Button style = { { 
-                    borderStyle:'none',
-                    width: '300px'
-                } } onClick = { e=> productsFilter('none')}>All Products</Button>
+                <Button onClick = { e=> productsFilter('none')}>All Products</Button>
             </div>
             <div className = 'products'> {allProducts.map(product => { 
             return <ProductCard className = 'productCard'
