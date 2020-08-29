@@ -11,7 +11,7 @@ import {
 
 const ModalAddProduct = (props) => {
 
-    const { products, addProduct, modalCloseAdd } = props
+    const { products, addProduct, modalCloseAdd, totalCat } = props
     const initialState = {
         id: new Date().getTime(),
         name: '',
@@ -34,7 +34,7 @@ const ModalAddProduct = (props) => {
         })
     }
 
-    const totalCat = [{ name: 'Buzos' }, { name: 'Remeras' }, { name: 'Pantalones' }]
+    // const totalCat = [{ name: 'Buzos' }, { name: 'Remeras' }, { name: 'Pantalones' }]
 
     const [category, setCategory] = useState('')
 
@@ -90,12 +90,12 @@ const ModalAddProduct = (props) => {
             <ModalBody>
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
                     <ListGroup horizontal style={{ alignItems: 'center' }}>
-                        <input type='file' name='file' placeholder='Upload' onChange={uploadImage} />
+                        <input type='file' name='file' placeholder='Upload' onChange={uploadImage} style={{color:'transparent'}}/>
                         {
                             loading ? (
-                                <h3>Loading...</h3>
+                                <h3 style={{ width: '150px', marginLeft:'-175px' }}>Loading...</h3>
                             ) : (
-                                    <img src={imagesUpload} alt='' style={{ width: '150px' }} />
+                                    <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft:'-175px' }} />
                                 )
                         }
                         {/* <img src={imageDefault} alt="" style={{width:'150px'}}/>
