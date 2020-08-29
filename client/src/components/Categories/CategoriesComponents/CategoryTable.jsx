@@ -5,12 +5,10 @@ import {
 } from "reactstrap";
 
 const CategoryTable = (props) => {
-
     // Destructuring props
     const {categories, editCategory, deleteCategory} = props;
 
     return (
-
             <Table>
                 <thead>
                     <tr>
@@ -49,13 +47,10 @@ const CategoryTable = (props) => {
                         <td>No Categories</td>
                         </tr>
                     )}
-
-
+                    
                 </tbody>
             </Table>
 
     )
-
 }
-
 export default CategoryTable;

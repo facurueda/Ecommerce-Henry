@@ -1,25 +1,26 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import {   
+import {
     Button,
     ModalHeader,
-    ModalBody,     
-    FormGroup,     
-    ModalFooter, 
+    ModalBody,
+    FormGroup,
+    ModalFooter,
     ListGroup,
 } from "reactstrap";
 
 const ModalAddProduct = (props) => {
-    
-    const { products, addProduct, modalCloseAdd } = props
-    const initialState = { 
+
+    const { products, addProduct, modalCloseAdd, totalCat } = props
+    const initialState = {
         id: new Date().getTime(),
         name: '',
         description: '',
         price: '',
         stock: '',
-        images: []
-    }; 
+        images: '',
+        categories: []
+    };
 
     const [product, setProduct] = useState(initialState);
 
@@ -28,50 +29,57 @@ const ModalAddProduct = (props) => {
         setProduct({
             ...product,
             description: content,
-            images : imagesUpload,
-            [ name ] : value
+            categories: category,
+            [name]: value
         })
     }
 
-       // States
-       const [content, setContent] = useState('');
+    // const totalCat = [{ name: 'Buzos' }, { name: 'Remeras' }, { name: 'Pantalones' }]
 
-       // Functions
-       const handleChangeDescription = (content, editor) => {
-           setContent(content)
-       }
+    const [category, setCategory] = useState('')
+
+    // States
+    const [content, setContent] = useState('');
+
+    // Functions
+    const handleChangeDescription = (content, editor) => {
+        setContent(content)
+    }
 
 
-       // States Upload Image
+    // States Upload Image
 
-       const [loading, setLoading] = useState(false)
-       const [imagesUpload, setImagesUpload] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [imagesUpload, setImagesUpload] = useState('')
 
-       // Funciones Upload Image
+    // Funciones Upload Image
 
-       const uploadImage = async e => {
-           const files = e.target.files
-           const data = new FormData()
-           data.append('file',files[0])
-           data.append('upload_preset', 'ecommerceHenry')
-           setLoading(true)
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'ecommerceHenry')
+        setLoading(true)
 
-           const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
-           {
-               method: 'POST',
-               body: data
-           })
+        const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
+            {
+                method: 'POST',
+                body: data
+            })
 
-           const file = await res.json()
+        const file = await res.json()
 
-           
-           setImagesUpload(file.secure_url)
+
+        // setImagesUpload(file.secure_url)
+        setProduct({...product, images: file.secure_url})
+        setImagesUpload(file.secure_url)
+
         // setImagesUpload(true)
-           
-           setLoading(false)
 
-           console.log(imagesUpload)
-       }
+        setLoading(false)
+
+        console.log(product)
+    }
 
 
     return (
@@ -80,23 +88,17 @@ const ModalAddProduct = (props) => {
                 <div><h3>Add product</h3></div>
             </ModalHeader>
             <ModalBody>
-                <FormGroup style={{display:"flex", justifyContent:'center'}}>
-                    <ListGroup horizontal style={{alignItems:'center'}}>
-                    <input type='file' name='file' placeholder='Upload' onChange={uploadImage}/>
-                    {
-                        loading?(
-                            <h3>Loading...</h3>
-                        ) : (
-                            <img src={imagesUpload} alt='' style={{width:'150px'}}/>
-                        )
-                    }
-
-
-
-
-
-
-                    {/* <img src={imageDefault} alt="" style={{width:'150px'}}/>
+                <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
+                    <ListGroup horizontal style={{ alignItems: 'center' }}>
+                        <input type='file' name='file' placeholder='Upload' onChange={uploadImage} style={{color:'transparent'}}/>
+                        {
+                            loading ? (
+                                <h3 style={{ width: '150px', marginLeft:'-175px' }}>Loading...</h3>
+                            ) : (
+                                    <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft:'-175px' }} />
+                                )
+                        }
+                        {/* <img src={imageDefault} alt="" style={{width:'150px'}}/>
                     <img src={imageDefault} alt="" style={{width:'150px', margin:'5px'}}/>
                     <img src={imageDefault} alt="" style={{width:'150px'}}/> */}
                         {/* <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />  */}
@@ -104,15 +106,15 @@ const ModalAddProduct = (props) => {
                         {/* <ListGroupItem>{imageDefault}</ListGroupItem> */}
                     </ListGroup>
                 </FormGroup>
-            
+
                 <FormGroup>
                     <label>Product name: </label>
                     <input
-                        className = 'form-control'
-                        name = 'name'
-                        type = 'text'
-                        onChange = {handleChange}
-                        value = {product.name}
+                        className='form-control'
+                        name='name'
+                        type='text'
+                        onChange={handleChange}
+                        value={product.name}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -136,26 +138,43 @@ const ModalAddProduct = (props) => {
                         value = {product.description}
                     /> */}
                 </FormGroup>
-                <ListGroup horizontal style={{alignItems:'center', justifyContent:'space-around'}}>
+                <ListGroup horizontal style={{ alignItems: 'center', justifyContent: 'space-around' }}>
                     <FormGroup>
                         <label>Price: </label>
                         <input
-                            className = 'form-control'
-                            name = 'price'
-                            type = 'number'
-                            onChange = {handleChange}
-                            value = {product.price}
+                            className='form-control'
+                            name='price'
+                            type='number'
+                            onChange={handleChange}
+                            value={product.price}
                         />
                     </FormGroup>
                     <FormGroup>
                         <label>Stock: </label>
                         <input
-                            className = 'form-control'
-                            name = 'stock'
-                            type = 'number'
-                            onChange = {handleChange}
-                            value = {product.stock}
+                            className='form-control'
+                            name='stock'
+                            type='number'
+                            onChange={handleChange}
+                            value={product.stock}
                         />
+                    </FormGroup>
+                    <FormGroup>
+                        <label>Categories: </label>
+                        {/* <input
+                            className = 'form-control'
+                            name = 'categories'
+                            type = 'text'
+                            onChange = {handleChange}
+                            value = {product.categories}
+                        /> */}
+                        <select multiple class="form-control"
+                            onChange={e => {
+                                setCategory(e.target.value)
+                            }}
+                        >
+                            {totalCat.map(c => (<option key={c.name}>{c.name}</option>))}
+                        </select>
                     </FormGroup>
                 </ListGroup>
                 {/* <FormGroup>
@@ -171,17 +190,17 @@ const ModalAddProduct = (props) => {
                 </FormGroup> */}
             </ModalBody>
             <ModalFooter>
-                <Button color = 'success'
-                onClick = {e => {
-                    e.preventDefault();
-                    if(!product.name || !product.description || !product.price || !product.stock) return window.alert('Empty input')
-                    if(products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
-                    addProduct(product);
-                    setProduct(initialState)
-                    modalCloseAdd();
-                }}
+                <Button color='success'
+                    onClick={e => {
+                        e.preventDefault();
+                        if (!product.name || !product.description || !product.price || !product.stock) return window.alert('Empty input')
+                        if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
+                        addProduct(product);
+                        setProduct(initialState)
+                        modalCloseAdd();
+                    }}
                 > Submit</Button>
-                <Button color = 'danger' onClick = {e => modalCloseAdd()}>Exit</Button>
+                <Button color='danger' onClick={e => modalCloseAdd()}>Exit</Button>
             </ModalFooter>
         </div>
     )

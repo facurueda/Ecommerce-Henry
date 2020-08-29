@@ -11,7 +11,6 @@ const FormModalAdd = (props) => {
 
     const {addCategory, modalAddViewFalse, categories} = props;
 
-
     const initialFormState = { id: null, name: '', description: '' }
     const [category, setCategory] = useState(initialFormState)
 

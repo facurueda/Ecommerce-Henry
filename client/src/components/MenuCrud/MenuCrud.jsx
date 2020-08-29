@@ -14,7 +14,8 @@ const MenuCrud = () => {
       description: 'Que hace?',
       price: 111,
       stock: 23,
-      images: ['http://www......']
+      images: ['http://www......'],
+      categories:'Bastones'
     }, 
     {
       id: new Date().getTime() +1,
@@ -22,7 +23,8 @@ const MenuCrud = () => {
       description: 'No come?',
       price: '132123',
       stock: '233',
-      images: ['http://www....']
+      images: ['http://www....'],
+      categories: [ 'Termo', 'Verde' ]
     }
   ]
 
@@ -32,8 +34,13 @@ const MenuCrud = () => {
       description: '',
       price: '',
       stock: '',
-      images: ''
+      images: '',
+      categories: []
   } 
+
+  // SE AGREGA CATEGORIAS
+
+  const totalCat = [{ name: 'Buzos' }, { name: 'Remeras' }, { name: 'Pantalones' }]
 
   //Estados
   // const [menuState, setMenuState] = useState(menuData);
@@ -63,7 +70,8 @@ const MenuCrud = () => {
         description: product.description,
         price: product.price,
         stock: product.stock,
-        images: product.images
+        images: product.images,
+        categories: product.categories
     });
     modalEditView();
   }
@@ -95,6 +103,7 @@ const MenuCrud = () => {
         products = {products} 
         addProduct = {addProduct}
         modalCloseAdd = {modalCloseAdd}
+        totalCat={totalCat}
         />
       </Modal>
       <Modal isOpen = {modalEdit}>
@@ -103,6 +112,7 @@ const MenuCrud = () => {
         currentProducts = {currentProducts}
         updateProduct = {updateProduct}
         modalCloseEdit = {modalCloseEdit}
+        totalCat={totalCat}
         />
       </Modal>
     </div>
