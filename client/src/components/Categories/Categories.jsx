@@ -28,7 +28,6 @@ const Categories = () => {
   const [categories, setCategory] = useState(categoryData);
   const [currentCategory, setCurrentCategory] = useState(initialFormState)
 
-  
   const [modalAdd, modalInsert] = useState(false)
   // Funcion para mostrar u ocultar el modal de agregar categoria
   const modalAddView = () => modalInsert(!modalAdd);

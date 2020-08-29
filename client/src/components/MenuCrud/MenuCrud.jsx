@@ -14,7 +14,8 @@ const MenuCrud = () => {
       description: 'Que hace?',
       price: 111,
       stock: 23,
-      images: ['http://www......']
+      images: ['http://www......'],
+      categories: [ 'Bastones', 'Mimbre' ]
     }, 
     {
       id: new Date().getTime() +1,
@@ -22,7 +23,8 @@ const MenuCrud = () => {
       description: 'No come?',
       price: '132123',
       stock: '233',
-      images: ['http://www....']
+      images: ['http://www....'],
+      categories: [ 'Termo', 'Verde' ]
     }
   ]
 
@@ -32,7 +34,8 @@ const MenuCrud = () => {
       description: '',
       price: '',
       stock: '',
-      images: ''
+      images: '',
+      categories: []
   } 
 
   //Estados
@@ -63,7 +66,7 @@ const MenuCrud = () => {
         description: product.description,
         price: product.price,
         stock: product.stock,
-        images: product.images
+        images: product.images,
     });
     modalEditView();
   }

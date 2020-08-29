@@ -18,7 +18,8 @@ const ModalAddProduct = (props) => {
         description: '',
         price: '',
         stock: '',
-        images: []
+        images: [],
+        categories: []
     }; 
 
     const [product, setProduct] = useState(initialState);
@@ -29,9 +30,14 @@ const ModalAddProduct = (props) => {
             ...product,
             description: content,
             images : imagesUpload,
+            categories : category,
             [ name ] : value
         })
     }
+
+    const totalCat = [ { name : 'Buzos' }, { name : 'Remeras' }, { name : 'Pantalones' } ]
+
+        const [ category, setCategory ] = useState('')
 
        // States
        const [content, setContent] = useState('');
@@ -90,12 +96,6 @@ const ModalAddProduct = (props) => {
                             <img src={imagesUpload} alt='' style={{width:'150px'}}/>
                         )
                     }
-
-
-
-
-
-
                     {/* <img src={imageDefault} alt="" style={{width:'150px'}}/>
                     <img src={imageDefault} alt="" style={{width:'150px', margin:'5px'}}/>
                     <img src={imageDefault} alt="" style={{width:'150px'}}/> */}
@@ -156,6 +156,23 @@ const ModalAddProduct = (props) => {
                             onChange = {handleChange}
                             value = {product.stock}
                         />
+                    </FormGroup>
+                    <FormGroup>
+                        <label>Categories: </label>
+                        {/* <input
+                            className = 'form-control'
+                            name = 'categories'
+                            type = 'text'
+                            onChange = {handleChange}
+                            value = {product.categories}
+                        /> */}
+                        <select multiple class="form-control"
+                                onChange = { e => {
+                                    setCategory(e.target.value)
+                                }}
+                                >
+                            { totalCat.map(c => ( <option key={c.name}>{c.name}</option> )) }
+                        </select>
                     </FormGroup>
                 </ListGroup>
                 {/* <FormGroup>

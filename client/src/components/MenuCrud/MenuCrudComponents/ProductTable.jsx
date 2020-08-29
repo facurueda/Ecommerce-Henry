@@ -15,6 +15,7 @@ const ProductTable = (props) => {
                     <th>Price</th>
                     <th>Stock</th>
                     <th>Images</th>
+                    <th>Categories</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@ const ProductTable = (props) => {
                             <td>{'$ '}{product.price}</td>
                             <td>{product.stock}</td>
                             <td> <img src= {product.images}></img> </td>
+                            <td> {product.categories} </td>
                             <td className= 'buttons'>
                                 <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}
                                 <Button color = 'danger' onClick = {e => deleteProduct(product.id)}>Delete</Button>
