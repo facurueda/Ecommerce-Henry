@@ -45,10 +45,10 @@ const Catalogue = (props) => {
                 <Button onClick = { e=> productsFilter('none')}>All Products</Button>
             </div>
             <div className = 'products'> {allProducts.map(product => { 
-            return <ProductCard className = 'productCard'
-            name = {product.name} 
-            description = {product.description} 
-            price = {product.price}
+                return <ProductCard className = 'productCard'
+                name = {product.name} 
+                description = {product.description} 
+                price = {product.price}
             // image = {product.image}
             />})}
             </div>

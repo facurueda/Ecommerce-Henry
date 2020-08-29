@@ -9,11 +9,20 @@
     border-style:'none';
     width: '300px'
 } */
+.div.productCard.card {
+    background-color: #F5F3BB;
+}
+
+.categoryImage {
+    width: 100%;
+    border-color: black;
+    width: inherit
+}
 
 
 .categories { 
-    flex-wrap: wrap;
     display: flex;
     border-style:'none';
-    width: 100%
+    width: 100%;
+    justify-content: center;
 }
