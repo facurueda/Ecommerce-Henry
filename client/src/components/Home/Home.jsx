@@ -3,9 +3,9 @@ import React from 'react'
 import './Home.css'
 const Home = () => {
     return (
-        <div className='Home'>
-            <div>
-                <h1 className='titulo'>La Cosería</h1>
+        <div className = 'Home'>
+            <div className = 'Container'>
+                <h1 className = 'titulo'>La Cosería</h1>
                 <SearchBar></SearchBar>
             </div>
         </div>

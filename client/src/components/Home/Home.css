@@ -5,11 +5,16 @@
     font-size: 200px;
 }
 .Home {
+    background-color: #86BA90;
     display: flex;
     margin: 0px;
     align-self: center;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    
+}
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

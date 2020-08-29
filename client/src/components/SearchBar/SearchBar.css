@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 body {
     margin: 0;
     padding: 0;
-    background: #7C3238;
+    background: #86BA90;
   }
 
   .search-box {
@@ -18,11 +20,12 @@ body {
     padding: 0 6px;
   }
   .search-box:hover > .search-btn{
-    background: white;
-    color: black;
+    background: #DFA06E; 
+    color: #2f3640;
+    text-decoration: none;
   }
   .search-btn {
-    color: #e84118;
+    color:#DFA06E;;
     float: right;
     width: 40px;
     height: 40px;
@@ -44,7 +47,8 @@ body {
     outline: none;
     float: left;
     padding: 0;
-    color: white;
+    color:  #F5F3BB; 
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: normal;
     transition: 0.4s;
