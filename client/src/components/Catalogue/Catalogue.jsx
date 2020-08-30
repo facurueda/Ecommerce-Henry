@@ -39,10 +39,10 @@ const Catalogue = (props) => {
         <div>
             <div className = 'categories'>
                 {categoryData.map(category => {
-                    return <Category className = 'categoryImage'
+                    return <Category class="btn-1"
                     name = {category.name} productsFilter = {productsFilter} />
                 })} 
-                <Button onClick = { e=> productsFilter('none')}>All Products</Button>
+                <button class="btn-1" onClick = { e=> productsFilter('none')}> Everything </button>
             </div>
             <div className = 'products'> {allProducts.map(product => { 
                 return <ProductCard className = 'productCard'

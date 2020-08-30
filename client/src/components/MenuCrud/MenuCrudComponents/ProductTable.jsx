@@ -8,8 +8,7 @@ const ProductTable = (props) => {
 
     return (
         <Table>
-            <thead>
-                <tr>
+            <thead> 
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
@@ -17,7 +16,6 @@ const ProductTable = (props) => {
                     <th>Images</th>
                     <th>Categories</th>
                     <th></th>
-                </tr>
             </thead>
             <tbody>
                 { products.length > 0 ? (
