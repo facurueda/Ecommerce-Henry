@@ -8,6 +8,7 @@ import {
     ModalFooter,
     ListGroup,
 } from "reactstrap";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const ModalAddProduct = (props) => {
 
@@ -71,7 +72,7 @@ const ModalAddProduct = (props) => {
 
 
         // setImagesUpload(file.secure_url)
-        setProduct({...product, images: file.secure_url})
+        setProduct({ ...product, images: file.secure_url })
         setImagesUpload(file.secure_url)
 
         // setImagesUpload(true)
@@ -80,6 +81,13 @@ const ModalAddProduct = (props) => {
 
         console.log(product)
     }
+
+    // States DropdownCategories
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+
 
 
     return (
@@ -90,20 +98,15 @@ const ModalAddProduct = (props) => {
             <ModalBody>
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
                     <ListGroup horizontal style={{ alignItems: 'center' }}>
-                        <input type='file' name='file' placeholder='Upload' onChange={uploadImage} style={{color:'transparent'}}/>
+                        <input type='file' name='file' placeholder='Upload' onChange={uploadImage} style={{ color: 'transparent' }} />
                         {
                             loading ? (
-                                <h3 style={{ width: '150px', marginLeft:'-175px' }}>Loading...</h3>
+                                <h3 style={{ width: '150px', marginLeft: '-175px' }}>Loading...</h3>
                             ) : (
-                                    <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft:'-175px' }} />
+                                    <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
                                 )
                         }
-                        {/* <img src={imageDefault} alt="" style={{width:'150px'}}/>
-                    <img src={imageDefault} alt="" style={{width:'150px', margin:'5px'}}/>
-                    <img src={imageDefault} alt="" style={{width:'150px'}}/> */}
-                        {/* <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />  */}
-                        {/* <ListGroupItem>{imageDefault}</ListGroupItem> */}
-                        {/* <ListGroupItem>{imageDefault}</ListGroupItem> */}
+
                     </ListGroup>
                 </FormGroup>
 
@@ -161,20 +164,26 @@ const ModalAddProduct = (props) => {
                     </FormGroup>
                     <FormGroup>
                         <label>Categories: </label>
-                        {/* <input
-                            className = 'form-control'
-                            name = 'categories'
-                            type = 'text'
-                            onChange = {handleChange}
-                            value = {product.categories}
-                        /> */}
-                        <select multiple class="form-control"
+
+                        <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {
+                                setCategory(e.target.value)
+                            }}>
+                            <DropdownToggle caret>
+                                Select Categorie
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                {totalCat.map(c => (<DropdownItem key={c.name}>{c.name}</DropdownItem>))}   
+                            </DropdownMenu>
+                        </Dropdown>
+
+                        
+                        {/* <select multiple class="form-control"
                             onChange={e => {
                                 setCategory(e.target.value)
                             }}
                         >
                             {totalCat.map(c => (<option key={c.name}>{c.name}</option>))}
-                        </select>
+                        </select> */}
                     </FormGroup>
                 </ListGroup>
                 {/* <FormGroup>
