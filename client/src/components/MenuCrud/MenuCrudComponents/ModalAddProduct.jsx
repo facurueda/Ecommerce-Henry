@@ -165,7 +165,7 @@ const ModalAddProduct = (props) => {
                     <FormGroup>
                         <label>Categories: </label>
 
-                        <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {
+                        {/* <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {
                                 setCategory(e.target.value)
                             }}>
                             <DropdownToggle caret>
@@ -174,16 +174,16 @@ const ModalAddProduct = (props) => {
                             <DropdownMenu>
                                 {totalCat.map(c => (<DropdownItem key={c.name}>{c.name}</DropdownItem>))}   
                             </DropdownMenu>
-                        </Dropdown>
+                        </Dropdown> */}
 
                         
-                        {/* <select multiple class="form-control"
+                        <select multiple class="form-control"
                             onChange={e => {
                                 setCategory(e.target.value)
                             }}
                         >
                             {totalCat.map(c => (<option key={c.name}>{c.name}</option>))}
-                        </select> */}
+                        </select>
                     </FormGroup>
                 </ListGroup>
                 {/* <FormGroup>

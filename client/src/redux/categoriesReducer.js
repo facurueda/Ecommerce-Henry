@@ -15,7 +15,8 @@ const categoriesReducer = (state = initialState, action) => {
         loading: true
       };
     case GET_CATEGORIES_SUCCESS:
-      return{
+      state.categories = action.payload
+      return {
         ...state,
         loading: false,
         categories: action.payload,

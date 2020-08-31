@@ -8,8 +8,9 @@ import {
   Container,
   Modal,
 } from "reactstrap";
-import { connect, } from 'react-redux'
+import { connect, useSelector, } from 'react-redux'
 import fetchCategories from "../../redux/categoriesActions";
+import { useEffect } from "react";
 
 const categoryData = [
   { id: new Date().getTime(), name: 'Remeras', description: 'Remeritas cortas y largas' },
@@ -21,10 +22,16 @@ const categoryData = [
 const Categories = (props) => {
 
 
-  const [categories, setCategories] = useState([])
-  console.log(props)
+  const [categories, setCategories] = useState(props.categories)
+
   const getCategories = [];
   const postCategories = []
+  useEffect(() => {
+    console.log(props.categories)
+    if(props.categories.length < 1){
+      props.fetchCategories()
+    }
+  })
 
   // const initialFormState = { id: null, name: '', description: '' };
   // Estados
@@ -60,8 +67,8 @@ const Categories = (props) => {
   // Funciones para el Modal ADD PARAAA AGREGAAARR
 
   const addCategory = category => {
-    // category.id = new Date().getTime()
-    // setCategory([...categories, category])
+    category.id = new Date().getTime()
+    setCategories([...categories, category])
     // props.postCategories(category)
   }
 
@@ -80,7 +87,7 @@ const Categories = (props) => {
         <Button color="success" onClick={e => modalAddView()}>Add Category</Button>
         <br />
         <br />
-        <CategoryTable categories={categories} deleteCategory={deleteCategory} editCategory={editCategory} />
+        <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />
 
         {/* ACA VA EL COMPONENTE CATEGORY TABLE */}
         {/* COMO PROPS SE LE ENVIA EL ESTADO -CATEGORIES-, FUNCION EDITAR Y FUNCION ELIMINAR */}
@@ -100,17 +107,14 @@ const Categories = (props) => {
         <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories} />
 
       </Modal>
-      <button onClick={() => {
-        props.fetchCategories()
-      }}>BOTON QUE HACE ESAS COSAS RARAS TEMPORALES</button>
-
     </div>
   )
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (state, own) => {
+  console.log('state', state)
   return {
-    categories: store.categories
+    categories: state.categoriesReducer.categories,
   }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -6,6 +6,7 @@ import { Button } from 'reactstrap'
 
 
 const Catalogue = (props) => {
+    console.log(props.categories)
 
     const products = [
          { name: 'Buzo GAP', description: 'red', price: 204, category: 'Galletitas' },

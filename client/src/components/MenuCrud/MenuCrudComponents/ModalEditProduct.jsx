@@ -210,11 +210,11 @@ const ModalEditProduct = (props) => {
                 >Exit
                 </Button>
                 
-                <Button 
+                {/* <Button 
                     color = 'danger' 
                     onClick = {e => console.log(currentProducts)}
                 >TEST
-                </Button>
+                </Button> */}
             </ModalFooter>
         </div>
     )
