@@ -13,10 +13,11 @@ function App() {
     <React.Fragment>
       {/* <Home/> */}
       <Router>
-        <Route path="Catalogue" component={Catalogue} />
-        <Route path='Categories' component={Categories} />
-        <Route path="MenuCrud" component={MenuCrud} />
-        <Route path="products/:id" component={Product}/>
+        <Route path="/" component={Home}/>
+        <Route path="/catalogue" component={Catalogue}/>
+        <Route path='/Categories' component={Categories}/>
+        <Route path="/MenuCrud" component={MenuCrud}/>
+        <Route path="/products/:id" component={Product}/>
       </Router>
     </React.Fragment>
   );

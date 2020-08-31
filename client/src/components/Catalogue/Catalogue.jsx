@@ -28,9 +28,6 @@ const Catalogue = (props) => {
             setAllProducts(products)
         }
     }
-
-
-    
     // const { products , categories } = props
 
     /* por props recibo un array de productos: products */
@@ -41,13 +38,13 @@ const Catalogue = (props) => {
                 {categoryData.map(category => {
                     return <Category className = 'categoryImage'
                     name = {category.name} productsFilter = {productsFilter} />
-                })} 
+                })}
                 <Button onClick = { e=> productsFilter('none')}>All Products</Button>
             </div>
-            <div className = 'products'> {allProducts.map(product => { 
+            <div className = 'products'> {allProducts.map(product => {
                 return <ProductCard className = 'productCard'
-                name = {product.name} 
-                description = {product.description} 
+                name = {product.name}
+                description = {product.description}
                 price = {product.price}
             // image = {product.image}
             />})}

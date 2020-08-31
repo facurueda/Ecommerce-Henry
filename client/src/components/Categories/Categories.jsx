@@ -8,7 +8,7 @@ import {
   Container,
   Modal,
 } from "reactstrap";
-import {  connect, useDispatch } from 'react-redux'
+import { connect, } from 'react-redux'
 import fetchCategories from "../../redux/categoriesActions";
 
 const categoryData = [
@@ -20,9 +20,8 @@ const categoryData = [
 
 const Categories = (props) => {
 
-  const dispatch = useDispatch();
 
-  const [categories, setCategory] = useState({ id: null, name: '', description: '' })
+  const [categories, setCategories] = useState([])
   console.log(props)
   const getCategories = [];
   const postCategories = []
@@ -49,7 +48,7 @@ const Categories = (props) => {
   // Funciones para Category Table
 
   const deleteCategory = id => {
-    setCategory(categories.filter(category => category.id !== id))
+    setCategories(categories.filter(category => category.id !== id))
   }
 
   const editCategory = category => {
@@ -69,7 +68,7 @@ const Categories = (props) => {
 
   // Update Category after edit
   const updateCategory = (id, updatedCategory) => {
-    setCategory(categories.map(category => (category.id === id ? updatedCategory : category)))
+    setCategories(categories.map(category => (category.id === id ? updatedCategory : category)))
   }
 
 
@@ -102,7 +101,7 @@ const Categories = (props) => {
 
       </Modal>
       <button onClick={() => {
-        dispatch(fetchCategories())
+        props.fetchCategories()
       }}>BOTON QUE HACE ESAS COSAS RARAS TEMPORALES</button>
 
     </div>
@@ -115,7 +114,11 @@ const mapStateToProps = (store) => {
   }
 }
 const mapDispatchToProps = (dispatch) => {
-  fetchCategories: dispatch(fetchCategories())
+  return {
+    fetchCategories: () => {
+      dispatch(fetchCategories())
+    }
+  }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
