@@ -15,6 +15,14 @@ server.get('/:nombreCat', (req, res, next) => {
     }).catch(next)
 })
 
+server.get('/', (req, res, next) => {
+	Product.findAll()
+		.then((category) => {
+			res.send(category);
+		}).catch(next)
+});
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
 server.post('/create', (req, res, next) => {
