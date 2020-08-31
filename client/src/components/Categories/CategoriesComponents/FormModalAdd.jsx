@@ -57,8 +57,8 @@ const FormModalAdd = (props) => {
                 <Button color='primary'
                     onClick={event => {
                         event.preventDefault()
-                        if (!category.name || !category.description) return window.alert('Empty Inputs')
-                        if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
+                        // if (!category.name || !category.description) return window.alert('Empty Inputs')
+                        // if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
                         addCategory(category)
                         setCategory(initialFormState)
                         modalAddViewFalse()

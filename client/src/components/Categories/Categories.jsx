@@ -8,8 +8,11 @@ import {
   Container,
   Modal,
 } from "reactstrap";
+import store from '../../redux/store'
+import { getCategories, getProducts } from "../../redux/actions";
+import { connect } from 'react-redux'
 
-
+const test = store.getState()
 const categoryData = [
   { id: new Date().getTime(), name: 'Remeras', description: 'Remeritas cortas y largas' },
   { id: new Date().getTime() + 1, name: 'Pantalones', description: 'Pantalones largos y cortos' }
@@ -17,16 +20,19 @@ const categoryData = [
 // Estado inicial que recibe de DB
 
 
-const Categories = () => {
+const Categories = (props) => {
 
+  const { categories } = props
 
+  const setCategory = mapDispatchToProps
 
-  const initialFormState = { id: null, name: '', description: '' };
+  // const initialFormState = { id: null, name: '', description: '' };
 
   // Estados
 
-  const [categories, setCategory] = useState(categoryData);
-  const [currentCategory, setCurrentCategory] = useState(initialFormState)
+  // const [categories, setCategory] = useState(props.categories);
+  // const [currentCategory, setCurrentCategory] = useState(initialFormState)
+  const [currentCategory, setCurrentCategory] = useState()
 
   const [modalAdd, modalInsert] = useState(false)
   // Funcion para mostrar u ocultar el modal de agregar categoria
@@ -97,13 +103,29 @@ const Categories = () => {
         <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories}/>
 
       </Modal>
-
-
-
-
+      
+      <button onClick={ () => console.log(props)}>PREGUNTALE A SOLANO CLARA</button>
 
     </div>
   )
 }
 
-export default Categories
+const mapStateToProps = state => {
+  return {
+      categories: state.categories,
+      products: state.products
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      getCategories: (data) => {
+          return dispatch(getCategories(data))
+      },
+      getProducts: (data) => {
+        return dispatch(getProducts(data))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
