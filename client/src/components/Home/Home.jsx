@@ -9,9 +9,18 @@ const Home = (props) => {
             <div className = 'Container'>
                 <h1 className = 'titulo'>La Cosería</h1>
                 <SearchBar></SearchBar>
-                <button className='ButtonsLocos' onClick={() => {
-                    props.fetchCategories()
-                }}><a href='/Categories'>Categories</a></button>
+                <div className='ButtonsLocos'> 
+                    <button className='but'>
+                        <a className='nounderline' href='/Categories'>Categories</a>
+                    </button>
+                    <button className='but'>
+                        <a className='nounderline' href='/Products'>Products</a>
+                    </button>
+                    <button className='but'>
+                        <a className='nounderline' href='/MenuCrud'>Edit Products</a>
+                    </button>
+                </div>
+                
             </div>
         </div>
     )

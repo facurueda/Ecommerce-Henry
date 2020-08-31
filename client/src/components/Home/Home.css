@@ -16,6 +16,23 @@
 .ButtonsLocos{
     display: flex;
     margin-top: 100px;
+    color: #dfa06e;
+    font: bold;
+}
+a.nounderline:link{
+    text-decoration: none
+}
+.but{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    background: #2f3640;
+    color:#DFA06E;
+    border-radius: 5%;
+    text-decoration: none;
+    border: 0;
+    justify-content: center;
+    align-items: center;
 }
 .Container {
     display: flex;
