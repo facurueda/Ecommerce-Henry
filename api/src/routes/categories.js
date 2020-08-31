@@ -15,6 +15,12 @@ server.get('/:nombreCat', (req, res, next) => {
     }).catch(next)
 })
 
+server.get('/', (req,res,next) => {
+    Categories.findAll().then(categories => {
+        res.send(categories)
+    }).catch(next)
+})
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
 server.post('/create', (req, res, next) => {

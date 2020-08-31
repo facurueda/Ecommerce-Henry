@@ -8,11 +8,9 @@ import {
   Container,
   Modal,
 } from "reactstrap";
-import store from '../../redux/store'
-import { getCategories, getProducts, postCategories } from "../../redux/actions";
-import { connect } from 'react-redux'
+import {  connect, useDispatch } from 'react-redux'
+import fetchCategories from "../../redux/categoriesActions";
 
-const test = store.getState()
 const categoryData = [
   { id: new Date().getTime(), name: 'Remeras', description: 'Remeritas cortas y largas' },
   { id: new Date().getTime() + 1, name: 'Pantalones', description: 'Pantalones largos y cortos' }
@@ -22,8 +20,12 @@ const categoryData = [
 
 const Categories = (props) => {
 
-  const [categories, setCategory] = useState(props.categories)
-  const getgetget = getCategories()
+  const dispatch = useDispatch();
+
+  const [categories, setCategory] = useState({ id: null, name: '', description: '' })
+  console.log(props)
+  const getCategories = [];
+  const postCategories = []
 
   // const initialFormState = { id: null, name: '', description: '' };
   // Estados
@@ -60,13 +62,12 @@ const Categories = (props) => {
 
   const addCategory = category => {
     // category.id = new Date().getTime()
-    setCategory([...categories, category])
-    props.postCategories(category)
+    // setCategory([...categories, category])
+    // props.postCategories(category)
   }
 
 
   // Update Category after edit
-
   const updateCategory = (id, updatedCategory) => {
     setCategory(categories.map(category => (category.id === id ? updatedCategory : category)))
   }
@@ -101,31 +102,20 @@ const Categories = (props) => {
 
       </Modal>
       <button onClick={() => {
-        console.log(props)
-        console.log('Agregada la categoria:', categories)
-      }}>PREGUNTALE A SOLANO CLARA</button>
+        dispatch(fetchCategories())
+      }}>BOTON QUE HACE ESAS COSAS RARAS TEMPORALES</button>
 
     </div>
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (store) => {
   return {
-    categories: state.categories,
-    products: state.products
+    categories: store.categories
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    postCategories: (categories) => {
-      return dispatch(postCategories(categories))
-    },
-    getCategories: (categories) => {
-      return (dispatch(getCategories(categories)))
-    }
-  }
+const mapDispatchToProps = (dispatch) => {
+  fetchCategories: dispatch(fetchCategories())
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps,mapDispatchToProps)(Categories);
