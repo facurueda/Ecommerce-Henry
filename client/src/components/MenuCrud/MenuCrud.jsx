@@ -6,29 +6,9 @@ import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 
 const MenuCrud = () => {
-  
-  const menuData = [ 
-    { 
-      id: new Date().getTime(),
-      name: 'Clara',
-      description: 'Que hace?',
-      price: 111,
-      stock: 23,
-      images: ['http://www......'],
-      categories:'Bastones'
-    }, 
-    {
-      id: new Date().getTime() +1,
-      name: 'Facu',
-      description: 'No come?',
-      price: '132123',
-      stock: '233',
-      images: ['http://www....'],
-      categories: [ 'Termo', 'Verde' ]
-    }
-  ]
+  const menuData = []
 
-  const initialState = { 
+  const initialState = {
       id: new Date().getTime(),
       name: '',
       description: '',
@@ -36,7 +16,7 @@ const MenuCrud = () => {
       stock: '',
       images: '',
       categories: []
-  } 
+  }
 
   // SE AGREGA CATEGORIAS
 
@@ -45,7 +25,6 @@ const MenuCrud = () => {
   //Estados
   // const [menuState, setMenuState] = useState(menuData);
   // const [currentMenuState, setCurrentMenuState] = useState(initialState);
-  
   const [products, setProducts] = useState(menuData)
   const [currentProducts, setCurrentProducts] = useState(initialState)
 
@@ -56,8 +35,7 @@ const MenuCrud = () => {
   const modalAddView = () => setModalAdd(!modalAdd);
   const modalEditView = () => setModalEdit(!modalEdit);
   const modalCloseAdd = () => setModalAdd(false);
-  const modalCloseEdit = () => setModalEdit(false);  
-  
+  const modalCloseEdit = () => setModalEdit(false);
   const deleteProduct = id => {
     setProducts(
       products.filter(product => product.id !== id)
@@ -92,15 +70,15 @@ const MenuCrud = () => {
         <Button color='success' onClick = {e => modalAddView()}>Add product</Button>
         <br/>
         <br/>
-        <ProductTable 
-        products = {products} 
-        deleteProduct = {deleteProduct} 
-        editProduct = {editProduct} 
+        <ProductTable
+        products = {products}
+        deleteProduct = {deleteProduct}
+        editProduct = {editProduct}
         />
       </Container>
       <Modal isOpen = {modalAdd}>
         <ModalAddProduct
-        products = {products} 
+        products = {products}
         addProduct = {addProduct}
         modalCloseAdd = {modalCloseAdd}
         totalCat={totalCat}

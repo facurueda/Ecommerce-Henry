@@ -16,6 +16,7 @@
 .ButtonsLocos{
     display: flex;
     margin-top: 100px;
+    border-radius: 30px;
     color: #dfa06e;
     font: bold;
 }
@@ -25,6 +26,7 @@ a.nounderline:link{
 .but{
     text-decoration: none;
     display: flex;
+    border-radius: 30px;
     justify-content: center;
     background: #2f3640;
     color:#DFA06E;
