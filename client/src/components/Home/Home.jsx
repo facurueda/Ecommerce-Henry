@@ -14,7 +14,7 @@ const Home = (props) => {
                         <a className='nounderline' href='/Categories'>Categories</a>
                     </button>
                     <button className='but'>
-                        <a className='nounderline' href='/Products'>Products</a>
+                        <a className='nounderline' href='/Catalogue'>Products</a>
                     </button>
                     <button className='but'>
                         <a className='nounderline' href='/MenuCrud'>Edit Products</a>
