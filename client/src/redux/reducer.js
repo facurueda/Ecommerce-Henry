@@ -3,23 +3,36 @@ import * as constans from "./constants";
 var initialState = {
   products: [],
   categories: [],
-  // relations: [],
-//   relationsCategories: [],
-//   productByID: {},
-//   filterProducts: [],
-//   users: [],
-//   user: [],
-//   cart: [],
-//   orders: [],
-//   reviews: [],
+  relations: [],
+  relationsCategories: [],
+  productByID: {},
+  filterProducts: [],
+  users: [],
+  user: [],
+  cart: [],
+  orders: [],
+  reviews: [],
 };
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     //PRODUCTS--------------------------------
-    case constans.GET_PRODUCTS:
+    case constans.GET_PRODUCTS: {
+      return {
+        ...state,
+        products: action.payload,
+      };
+    }
     case constans.POST_PRODUCT:
+      return {
+        ...state,
+        products: action.payload,
+      };
     case constans.PUT_PRODUCT:
+      return {
+        ...state,
+        products: action.payload,
+      };
     case constans.DELETE_PRODUCT:
       return {
         ...state,
@@ -32,8 +45,20 @@ export const rootReducer = (state = initialState, action) => {
       };
     //CATEGORIES-----------------------------
     case constans.GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
     case constans.POST_CATEGORY:
+      return {
+        ...state,
+        categories: action.payload,
+      };
     case constans.PUT_CATEGORY:
+      return {
+        ...state,
+        categories: action.payload,
+      };
     case constans.DELETE_CATEGORY:
       return {
         ...state,
@@ -41,8 +66,20 @@ export const rootReducer = (state = initialState, action) => {
       };
     //RELATIONS-------------------------------
     case constans.GET_RELATIONS:
+      return {
+        ...state,
+        relations: action.payload,
+      };
     case constans.POST_RELATIONS:
+      return {
+        ...state,
+        relations: action.payload,
+      };
     case constans.DELETE_RELATIONS:
+      return {
+        ...state,
+        relations: action.payload,
+      };
     case constans.GET_RELATIONS_BY_ID:
       return {
         ...state,

@@ -9,15 +9,13 @@ import {
 
 const FormModalAdd = (props) => {
 
-    const {addCategory, modalAddViewFalse, categories} = props;
+    const {postCategories, modalAddViewFalse, categories} = props;
 
-    const initialFormState = { id: null, name: '', description: '' }
-    const [category, setCategory] = useState(initialFormState)
+    const [category, setCategory] = useState(categories)
 
     const handleChange = event => {
         const { name, value } = event.target
-
-        setCategory({ ...category, [name]: value })
+            setCategory({ ...category, [name]: value })
     }
 
     return (
@@ -36,7 +34,7 @@ const FormModalAdd = (props) => {
                         name="name"
                         type="text"
                         onChange={handleChange}
-                        value={category.name}
+                        // value={category.name}
                     />
                 </FormGroup>
 
@@ -49,7 +47,7 @@ const FormModalAdd = (props) => {
                         name="description"
                         type="text"
                         onChange={handleChange}
-                        value={category.description}
+                        // value={category.description}
                     />
                 </FormGroup>
             </ModalBody>
@@ -57,10 +55,10 @@ const FormModalAdd = (props) => {
                 <Button color='primary'
                     onClick={event => {
                         event.preventDefault()
-                        // if (!category.name || !category.description) return window.alert('Empty Inputs')
-                        // if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
-                        addCategory(category)
-                        setCategory(initialFormState)
+                         if (!category.name || !category.description) return window.alert('Empty Inputs')
+                         if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
+                         postCategories(category)
+                        // setCategory(initialFormState)
                         modalAddViewFalse()
                     }}
                 >

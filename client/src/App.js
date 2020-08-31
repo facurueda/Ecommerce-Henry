@@ -11,14 +11,13 @@ import './App.css'
 function App() {
   return (
     <React.Fragment>
-      {/* <Home/> */}
+      <Home/>
       <Router>
-        {/* <Route path="/Catalogue" component={Catalogue} />
-        <Route path="/MenuCrud" component={MenuCrud} />
+        <Route path="Catalogue" component={Catalogue} />
+        <Route path='Categories' component={Categories} />
+        <Route path="MenuCrud" component={MenuCrud} />
         <Route path="products/:id" component={Product}/>
-        <Route path="Categories" component={Categories}/> */}
-        <Route path="/" component={Categories} />
-
+        <Categories/>
       </Router>
     </React.Fragment>
   );

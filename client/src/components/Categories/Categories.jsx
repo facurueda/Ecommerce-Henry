@@ -9,7 +9,7 @@ import {
   Modal,
 } from "reactstrap";
 import store from '../../redux/store'
-import { getCategories, getProducts } from "../../redux/actions";
+import { getCategories, getProducts, postCategories } from "../../redux/actions";
 import { connect } from 'react-redux'
 
 const test = store.getState()
@@ -22,12 +22,10 @@ const categoryData = [
 
 const Categories = (props) => {
 
-  const { categories } = props
-
-  const setCategory = mapDispatchToProps
+  const [categories, setCategory] = useState(props.categories)
+  const getgetget = getCategories()
 
   // const initialFormState = { id: null, name: '', description: '' };
-
   // Estados
 
   // const [categories, setCategory] = useState(props.categories);
@@ -49,28 +47,29 @@ const Categories = (props) => {
   // Funciones para Category Table
 
   const deleteCategory = id => {
-		setCategory(categories.filter(category => category.id !== id))
-	}
+    setCategory(categories.filter(category => category.id !== id))
+  }
 
-	const editCategory = category => {
-		setCurrentCategory({ id: category.id, name: category.name, description: category.description })
-  // PARA ABRIR EL MODAL DE EDIT
+  const editCategory = category => {
+    setCurrentCategory({ id: category.id, name: category.name, description: category.description })
+    // PARA ABRIR EL MODAL DE EDIT
     modalEditView()
   }
 
   // Funciones para el Modal ADD PARAAA AGREGAAARR
 
   const addCategory = category => {
-		category.id = new Date().getTime()
-		setCategory([ ...categories, category ])
-	}
+    // category.id = new Date().getTime()
+    setCategory([...categories, category])
+    props.postCategories(category)
+  }
 
 
   // Update Category after edit
 
   const updateCategory = (id, updatedCategory) => {
-		setCategory(categories.map(category => (category.id === id ? updatedCategory : category)))
-	}
+    setCategory(categories.map(category => (category.id === id ? updatedCategory : category)))
+  }
 
 
 
@@ -81,30 +80,30 @@ const Categories = (props) => {
         <Button color="success" onClick={e => modalAddView()}>Add Category</Button>
         <br />
         <br />
-          <CategoryTable categories={categories} deleteCategory={deleteCategory} editCategory={editCategory}/>
+        <CategoryTable categories={categories} deleteCategory={deleteCategory} editCategory={editCategory} />
 
-          {/* ACA VA EL COMPONENTE CATEGORY TABLE */}
-          {/* COMO PROPS SE LE ENVIA EL ESTADO -CATEGORIES-, FUNCION EDITAR Y FUNCION ELIMINAR */}
+        {/* ACA VA EL COMPONENTE CATEGORY TABLE */}
+        {/* COMO PROPS SE LE ENVIA EL ESTADO -CATEGORIES-, FUNCION EDITAR Y FUNCION ELIMINAR */}
       </Container>
 
 
       <Modal isOpen={modalAdd}>
-          
-          {/* ACA VA EL COMPONENTE FORMMODAL-ADD QUE SE ABRE AL DARLECLICK EN ADD CATEGORY */}
-          {/* COMO PROPS SE LE ENVIA LA FUNCION addCategory */}
-        <FormModalAdd addCategory={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories}/>
+        {/* ACA VA EL COMPONENTE FORMMODAL-ADD QUE SE ABRE AL DARLECLICK EN ADD CATEGORY */}
+        {/* COMO PROPS SE LE ENVIA LA FUNCION addCategory */}
+        <FormModalAdd postCategories={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories} />
 
       </Modal>
 
 
       <Modal isOpen={modalEdit}>
-          
-          {/* ACA VA EL COMPONENTE FORMMODAL-EDIT QUE SE ABRE AL DARLECLICK EN EDIT CATEGORY */}
-        <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories}/>
+        {/* ACA VA EL COMPONENTE FORMMODAL-EDIT QUE SE ABRE AL DARLECLICK EN EDIT CATEGORY */}
+        <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories} />
 
       </Modal>
-      
-      <button onClick={ () => console.log(props)}>PREGUNTALE A SOLANO CLARA</button>
+      <button onClick={() => {
+        console.log(props)
+        console.log('Agregada la categoria:', categories)
+      }}>PREGUNTALE A SOLANO CLARA</button>
 
     </div>
   )
@@ -112,20 +111,21 @@ const Categories = (props) => {
 
 const mapStateToProps = state => {
   return {
-      categories: state.categories,
-      products: state.products
+    categories: state.categories,
+    products: state.products
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-      getCategories: (data) => {
-          return dispatch(getCategories(data))
-      },
-      getProducts: (data) => {
-        return dispatch(getProducts(data))
+    postCategories: (categories) => {
+      return dispatch(postCategories(categories))
+    },
+    getCategories: (categories) => {
+      return (dispatch(getCategories(categories)))
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
