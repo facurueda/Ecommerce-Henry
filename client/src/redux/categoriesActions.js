@@ -1,4 +1,3 @@
-import "./constants";
 import axios from "axios";
 import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE, PUT_CATEGORY, POST_CATEGORY_ERROR, GET_PRODUCTS_BY_CATEGORY } from "./constants";
 
@@ -46,7 +45,7 @@ export const actionPostCategory = (category) => {
 }
 export const actionDeleteCategory = (category) => {
   return (dispatch) => {
-    axios.delete(url +'category/'+ category.idCategory).then(() => {
+    axios.delete(url + 'category/' + category.idCategory).then(() => {
       dispatch(actionGetCategories())
     }).catch(actionCategoriesFailure('Hubo un error al eliminar la categoria.'))
   }

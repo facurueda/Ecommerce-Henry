@@ -1,4 +1,3 @@
-import "./constants";
 import { POST_CATEGORY_ERROR, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE, PUT_CATEGORY, GET_PRODUCTS_BY_CATEGORY } from "./constants";
 
 var initialState = {

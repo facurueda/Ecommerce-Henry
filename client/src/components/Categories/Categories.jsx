@@ -39,7 +39,7 @@ const Categories = (props) => {
 
 
 
-  // Funciones para Category Table
+  // Funciones para Category Table:
   const deleteCategory = category => {
     props.actionDeleteCategory(category)
   }
@@ -52,9 +52,10 @@ const Categories = (props) => {
 
 
 
-  // Funciones para el Modal ADD PARAAA AGREGAAARR
-  const addCategory = (category) => {
-    props.actionPostCategory(category)
+  // Funciones para el Modal ADD:
+  const addCategory = async (category) => {
+    await props.actionPostCategory(category);
+    await window.location.reload(false)
   }
 
 
@@ -76,22 +77,16 @@ const Categories = (props) => {
         <br />
         <br />
         <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />
-
-        {/* ACA VA EL COMPONENTE CATEGORY TABLE */}
-        {/* COMO PROPS SE LE ENVIA EL ESTADO -CATEGORIES-, FUNCION EDITAR Y FUNCION ELIMINAR */}
       </Container>
 
 
       <Modal isOpen={modalAdd}>
-        {/* ACA VA EL COMPONENTE FORMMODAL-ADD QUE SE ABRE AL DARLECLICK EN ADD CATEGORY */}
-        {/* COMO PROPS SE LE ENVIA LA FUNCION addCategory */}
         <FormModalAdd addCategory={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories} />
 
       </Modal>
 
 
       <Modal isOpen={modalEdit}>
-        {/* ACA VA EL COMPONENTE FORMMODAL-EDIT QUE SE ABRE AL DARLECLICK EN EDIT CATEGORY */}
         <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories} />
 
       </Modal>

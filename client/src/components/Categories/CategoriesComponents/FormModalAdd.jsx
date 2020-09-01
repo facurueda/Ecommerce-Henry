@@ -16,6 +16,7 @@ const FormModalAdd = (props) => {
     const handleChange = event => {
         const { name, value } = event.target
         setCategory({ ...category, [name]: value })
+        console.log(category)
     }
 
     return (
