@@ -1,38 +1,65 @@
 import "./constants";
 import axios from "axios";
-import { GET_CATEGORIES, GET_PRODUCTS, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE } from "./constants";
+import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE, PUT_CATEGORY, POST_CATEGORY_ERROR, GET_PRODUCTS_BY_CATEGORY } from "./constants";
 
 const url = "http://localhost:3000/";
 
-
-
-export const fetchCategoriesRequest = () => {
-  return {
-    type: GET_CATEGORIES,
+/////////////////////////////////////////////////////////////////////// GET
+export const actionGetProductsByCategory = (name) => {
+  return (dispatch) => {
+    axios.get(url + 'category/' + name).then(res => {
+      dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res.data })
+    })
   }
 }
-export const fetchCategoriesSuccess = (categories) => {
+
+export const actionGetCategoriesSuccess = (categories) => {
   return {
     type: GET_CATEGORIES_SUCCESS,
     payload: categories
   }
 }
-export const fetchCategoriesFailure = (error) => {
+
+export const actionCategoriesFailure = (error) => {
   return {
     type: GET_CATEGORIES_FAILURE,
     payload: error
   }
 }
-
-const fetchCategories = () => {
+export const actionGetCategories = () => {
   return (dispatch) => {
-    // dispatch(fetchCategoriesRequest())
     axios.get('http://localhost:3000/category/').then(res => {
-      dispatch(fetchCategoriesSuccess(res.data))
+      dispatch(actionGetCategoriesSuccess(res.data))
     }).catch(error => {
-      dispatch(fetchCategoriesFailure('Hubo un error al buscar las categorias'))
+      dispatch(actionCategoriesFailure('Hubo un error al buscar las categorias'))
+    })
+  }
+}
+export const actionPostCategory = (category) => {
+  return (dispatch) => {
+    axios.post(url + 'category/create', category).then(() => {
+      actionGetCategories()
+    }).catch(error => {
+      dispatch({ type: POST_CATEGORY_ERROR })
+    })
+  }
+}
+export const actionDeleteCategory = (category) => {
+  return (dispatch) => {
+    axios.delete(url +'category/'+ category.idCategory).then(() => {
+      dispatch(actionGetCategories())
+    }).catch(actionCategoriesFailure('Hubo un error al eliminar la categoria.'))
+  }
+}
+export const actionUpdateCategory = (category) => {
+  return (dispatch) => {
+    axios.put(url + 'category/' + category.idCategory, category).then(() => {
+      dispatch({ type: PUT_CATEGORY })
+      dispatch(actionGetCategories())
     })
   }
 }
 
-export default fetchCategories;
+
+
+export default actionGetCategories;

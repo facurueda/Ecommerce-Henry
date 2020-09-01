@@ -9,13 +9,13 @@ import {
 
 const FormModalAdd = (props) => {
 
-    const {postCategories, modalAddViewFalse, categories} = props;
+    const { addCategory, modalAddViewFalse, categories } = props;
 
     const [category, setCategory] = useState(categories)
 
     const handleChange = event => {
         const { name, value } = event.target
-            setCategory({ ...category, [name]: value })
+        setCategory({ ...category, [name]: value })
     }
 
     return (
@@ -26,43 +26,26 @@ const FormModalAdd = (props) => {
 
             <ModalBody>
                 <FormGroup >
-                    <label>
-                        Category Name:
-                    </label>
-                    <input
-                        className="form-control"
-                        name="name"
-                        type="text"
-                        onChange={handleChange}
-                        // value={category.name}
-                    />
+                    <label> Category Name: </label>
+                    <input className="form-control" name="name" type="text" onChange={handleChange} />
                 </FormGroup>
 
                 <FormGroup>
-                    <label>
-                        Description:
-                        </label>
-                    <input
-                        className="form-control"
-                        name="description"
-                        type="text"
-                        onChange={handleChange}
-                        // value={category.description}
-                    />
+                    <label>Description:</label>
+                    <input className="form-control" name="description" type="text" onChange={handleChange} />
                 </FormGroup>
             </ModalBody>
             <ModalFooter>
                 <Button color='primary'
                     onClick={event => {
                         event.preventDefault()
-                         if (!category.name || !category.description) return window.alert('Empty Inputs')
-                         if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
-                         postCategories(category)
-                        // setCategory(initialFormState)
+                        if (!category.name || !category.description) return window.alert('Empty Inputs')
+                        if (categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
+                        addCategory(category)
                         modalAddViewFalse()
                     }}
                 >
-                Submit </Button>
+                    Submit </Button>
                 <Button color='danger' onClick={e => modalAddViewFalse()}>Exit</Button>
             </ModalFooter>
         </div>
