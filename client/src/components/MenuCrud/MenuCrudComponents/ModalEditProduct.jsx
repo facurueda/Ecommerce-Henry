@@ -1,25 +1,25 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import {
-    Button,   
-    ModalHeader,   
-    ModalBody,   
-    FormGroup,   
-    ModalFooter, 
+    Button,
+    ModalHeader,
+    ModalBody,
+    FormGroup,
+    ModalFooter,
     ListGroup
 } from "reactstrap";
 
 const ModalEditProduct = (props) => {
 
-    const { products, currentProducts, updateProduct, modalCloseEdit, totalCat } = props;
+    const { products, currentProducts, updateProduct, modalCloseEdit, categories } = props;
 
     const [product, setProduct] = useState(currentProducts);
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProduct({
             ...product,
-            [ name ] : value
+            [name]: value
         });
     }
 
@@ -48,7 +48,7 @@ const ModalEditProduct = (props) => {
 
 
         // setImagesUpload(file.secure_url)
-        setProduct({...product, images: file.secure_url})
+        setProduct({ ...product, images: file.secure_url })
 
         setImagesUpload(file.secure_url)
 
@@ -62,7 +62,7 @@ const ModalEditProduct = (props) => {
 
     // ESTADOS DESCRIPTION
 
-    const [ descriptionState, setDescriptionState ] = useState(product.description)
+    const [descriptionState, setDescriptionState] = useState(product.description)
 
 
     const descriptionChange = (value) => {
@@ -71,7 +71,7 @@ const ModalEditProduct = (props) => {
 
         setProduct({
             ...product,
-            description:value
+            description: value
         })
     }
 
@@ -102,18 +102,16 @@ const ModalEditProduct = (props) => {
 
             <ModalBody>
 
-            <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
+                <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
                     <ListGroup horizontal style={{ alignItems: 'center' }}>
-                        <input type='file' name='file' placeholder='Upload' style={{color:'transparent'}} onChange={uploadImage} />
+                        <input type='file' name='file' placeholder='Upload' style={{ color: 'transparent' }} onChange={uploadImage} />
                         {
-                            
-                                    <img src={product.images} alt='' style={{ width: '150px', marginLeft:'-175px' }} />
-                                
+                            <img src={product.images} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
                         }
                     </ListGroup>
                 </FormGroup>
 
-            <FormGroup>
+                <FormGroup>
                     <label>Product name: </label>
                     <input
                         className='form-control'
@@ -125,7 +123,7 @@ const ModalEditProduct = (props) => {
                 </FormGroup>
 
                 <FormGroup>
-                <label>Description: </label>
+                    <label>Description: </label>
                     <form>
                         <Editor
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
@@ -143,10 +141,10 @@ const ModalEditProduct = (props) => {
                         <label>Price: </label>
                         <input
                             className='form-control'
-                            name='price'
+                            name='precio'
                             type='number'
                             onChange={handleChange}
-                            value={product.price}
+                            value={product.precio}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -170,46 +168,35 @@ const ModalEditProduct = (props) => {
                         /> */}
                         <select multiple class="form-control"
 
-                        // ============== VEEEEEEEEEEEEERRRRRRRRRRR
+                            // ============== VEEEEEEEEEEEEERRRRRRRRRRR
                             onChange={e => {
                                 setCategory(e)
                             }}
                         >
-                            {totalCat.map(c => (<option key={c.name}> {c.name} </option>))}
+                            {categories.map(c => (<option key={c.name}> {c.name} </option>))}
                         </select>
                     </FormGroup>
                 </ListGroup>
-                {/* <FormGroup>
-                    <label>Images: </label>
-                    <input
-                        className = 'form-control'
-                        name = 'images'
-                        //cambiar type
-                        type = 'text'
-                        onChange = {handleChange}
-                        value = {product.images}
-                    />
-                </FormGroup> */}
             </ModalBody>
 
             <ModalFooter>
-                <Button 
-                    color = 'success'
-                    onClick = {e => {
+                <Button
+                    color='success'
+                    onClick={e => {
                         e.preventDefault();
-                        if(!product.name || !product.description || !product.price || !product.stock) return window.alert('Empty input')
-                        updateProduct(product.id, product);
+                        if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
+                        updateProduct(product);
                         console.log(product)
                         modalCloseEdit();
                     }}
                 >Submit
                 </Button>
-                <Button 
-                    color = 'danger' 
-                    onClick = {e => modalCloseEdit()}
+                <Button
+                    color='danger'
+                    onClick={e => modalCloseEdit()}
                 >Exit
                 </Button>
-                
+
                 {/* <Button 
                     color = 'danger' 
                     onClick = {e => console.log(currentProducts)}

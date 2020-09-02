@@ -4,63 +4,60 @@ import {   Button,   Container,   Modal, } from "reactstrap";
 import ProductTable from './MenuCrudComponents/ProductTable';
 import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
+import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
+import { actionGetCategories } from "../../redux/categoriesActions";
 
-const MenuCrud = () => {
+import { connect } from 'react-redux';
+import { useEffect } from 'react';
+
+
+const MenuCrud = (props) => {
   const menuData = []
-
-  const initialState = {
-      id: new Date().getTime(),
-      name: '',
-      description: '',
-      price: '',
-      stock: '',
-      images: '',
-      categories: []
+useEffect(() => {
+  if(props.products < 1){
+    props.actionGetProducts()
   }
+})
+useEffect(() => {
+  if(props.categories < 1) {
+    props.actionGetCategories()
+  }
+})
+
+const { products,categories } = props
+
 
   // SE AGREGA CATEGORIAS
-
-  const totalCat = [{ name: 'Buzos' }, { name: 'Remeras' }, { name: 'Pantalones' }]
 
   //Estados
   // const [menuState, setMenuState] = useState(menuData);
   // const [currentMenuState, setCurrentMenuState] = useState(initialState);
-  const [products, setProducts] = useState(menuData)
-  const [currentProducts, setCurrentProducts] = useState(initialState)
 
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({})
 
   //Funciones
   const modalAddView = () => setModalAdd(!modalAdd);
   const modalEditView = () => setModalEdit(!modalEdit);
   const modalCloseAdd = () => setModalAdd(false);
   const modalCloseEdit = () => setModalEdit(false);
-  const deleteProduct = id => {
-    setProducts(
-      products.filter(product => product.id !== id)
-    )
+  const deleteProduct = async (id) => {
+    await props.actionDeleteProduct(id)
+    await window.location.reload(false)
+  }
+  const addProduct = async(product) => {
+    await props.actionPostProduct(product)
+    await window.location.reload(false);
+    // product.idProduct = new Date().getTime();
+  }
+  const updateProduct = async (product) => {
+    await props.actionUpdateProduct(product)
+    await window.location.reload(false);
   }
   const editProduct = (product) => {
-    setCurrentProducts({
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        stock: product.stock,
-        images: product.images,
-        categories: product.categories
-    });
+    setCurrentProduct(product);
     modalEditView();
-  }
-  const addProduct = (product) => {
-    product.id = new Date().getTime();
-    setProducts([...products, product]);
-  }
-  const updateProduct = (id, updateProduct) => {
-    setProducts(products.map(product => (
-      (product.id === id ? updateProduct : product)
-    )))
   }
 
   return (
@@ -81,20 +78,46 @@ const MenuCrud = () => {
         products = {products}
         addProduct = {addProduct}
         modalCloseAdd = {modalCloseAdd}
-        totalCat={totalCat}
+        categories={categories}
         />
       </Modal>
       <Modal isOpen = {modalEdit}>
         <ModalEditProduct
-        products = {products} 
-        currentProducts = {currentProducts}
+        products = {products}
+        currentProducts = {currentProduct}
         updateProduct = {updateProduct}
         modalCloseEdit = {modalCloseEdit}
-        totalCat={totalCat}
+        categories={categories}
         />
       </Modal>
     </div>
   )
 }
 
-export default MenuCrud;
+const mapStateToProps = (state) => {
+  return {
+    products: state.productsReducer.products,
+    categories: state.categoriesReducer.categories,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actionGetProducts: () => {
+      dispatch(actionGetProducts())
+    },
+    actionDeleteProduct: (id) => {
+      dispatch(actionDeleteProduct(id))
+    },
+    actionGetCategories: () => {
+      dispatch(actionGetCategories())
+    },
+    actionPostProduct: (product) => {
+      dispatch(actionPostProduct(product))
+    },
+    actionUpdateProduct: (product) => {
+      dispatch(actionUpdateProduct(product))
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MenuCrud);
