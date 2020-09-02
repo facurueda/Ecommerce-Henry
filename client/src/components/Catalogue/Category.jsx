@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from 'reactstrap'
 import './Category.css'
 
 const Category = ( props ) => {
@@ -8,8 +7,9 @@ const Category = ( props ) => {
 
     return (
         <div>
-            <Button className = 'categoryImage' 
-            onClick = { e => productsFilter(name) } >{name}</Button>
+            <button class="btn-1" onClick = { e => productsFilter(name) }>
+                <span>{name}</span>
+            </button>
         </div>
     )
 }

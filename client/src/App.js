@@ -7,6 +7,7 @@ import Product from './components/product/products'
 import Categories from './components/Categories/Categories';
 
 import './App.css'
+import Order from './components/Order/order';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/Categories' component={Categories}/>
         <Route path="/MenuCrud" component={MenuCrud}/>
         <Route path="/products/:id" component={Product}/>
+        <Route path='/order' component={Order}/>
       </Router>
     </React.Fragment>
   );

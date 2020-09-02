@@ -4,13 +4,15 @@ import ProductCard from '../../ProductCard/ProductCard';
 
 
 const TotalByProduct = (props) => {
+    const {product } = props
+    console.log(props.product)
 
     return (
         <div>
-            <ProductCard />
+            <ProductCard name={product.name} description={product.description} price={product.precio} />
             <div>
-                <h5>{props.cantidades.filter} cantidad de X product</h5>
-                <h4>suma del precio de X product</h4>
+                <h5>Cantidad: {props.product.Inter_Prod_Order.quantity}</h5>
+                <h4>Monto: ${props.product.Inter_Prod_Order.price}</h4>
             </div>
         </div>
     )
