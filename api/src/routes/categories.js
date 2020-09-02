@@ -7,7 +7,7 @@ const { Categories, Product} = require('../db.js');
 server.get('/:nombreCat', (req, res, next) => {
     Categories.findOne({
         where: {
-            name: req.body.name
+            name: req.params.nombreCat
         },
         include: [{ model: Product, as: 'products' }]
     }).then((category) => {

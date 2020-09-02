@@ -31,11 +31,6 @@ const categoriesReducer = (state = initialState, action) => {
         categories: [...state.categories],
         error: ''
       }
-    case GET_PRODUCTS_BY_CATEGORY:
-      return {
-        ...state,
-        productsByCategory: action.payload
-      }
     case POST_CATEGORY_ERROR:
       return {
         ...state,

@@ -4,13 +4,6 @@ import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE, PUT_CATEGORY, POST_CATE
 const url = "http://localhost:3000/";
 
 /////////////////////////////////////////////////////////////////////// GET
-export const actionGetProductsByCategory = (name) => {
-  return (dispatch) => {
-    axios.get(url + 'category/' + name).then(res => {
-      dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload: res.data })
-    })
-  }
-}
 
 export const actionGetCategoriesSuccess = (categories) => {
   return {
