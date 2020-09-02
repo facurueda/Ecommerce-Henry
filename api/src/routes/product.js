@@ -165,7 +165,9 @@ server.put('/:id', (req, res, next) => {
 		product.update({
 			...product,
 			name: req.body.name,
-			description: req.body.description
+			description: req.body.description,
+			precio: req.body.precio,
+			stock: req.body.stock
 		}).catch(() => {
 			res.status(400)
 		}).then(() => {
