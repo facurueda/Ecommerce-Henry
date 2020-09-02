@@ -24,15 +24,14 @@ const ProductTable = (props) => {
                     products.map(product => (
                         <tr key = {product.id}>
                             <td>{product.name}</td>
-                            
                             <td > <div dangerouslySetInnerHTML={{ __html: product.description }} /></td>
-                            <td>{'$ '}{product.price}</td>
+                            <td>{'$ '}{product.precio}</td>
                             <td>{product.stock}</td>
                             <td> <img src= {product.images}></img> </td>
                             <td> {product.categories} </td>
                             <td className= 'buttons'>
                                 <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}
-                                <Button color = 'danger' onClick = {e => deleteProduct(product.id)}>Delete</Button>
+                                <Button color = 'danger' onClick = {e => deleteProduct(product.idProduct)}>Delete</Button>
                             </td>
                         </tr>
                     ))):(

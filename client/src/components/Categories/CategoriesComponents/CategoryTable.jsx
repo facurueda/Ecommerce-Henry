@@ -23,7 +23,7 @@ const CategoryTable = (props) => {
                     {categories.length > 0 ? (
 
                     categories.map(category => (
-                        <tr key={category.id}>
+                        <tr key={category.idCategory}>
                             <td>{category.name}</td>
                             <td>{category.description}</td>
                             <td>
@@ -33,21 +33,20 @@ const CategoryTable = (props) => {
                                     Edit
                                 </Button>{" "}
                                 <Button color="danger"
-                                   onClick={() => deleteCategory(category.id)}
+                                   onClick={() => deleteCategory(category)}
                                 >Delete</Button>
                             </td>
                         </tr>
                     ))
 
                     )
-                        : 
+                        :
                                 // SI NO HAY DATOS EN PROPS.CATEGORIES DEVUELVE "NO HAY CATEGORIAS"
                     (
                         <tr>
                         <td>No Categories</td>
                         </tr>
                     )}
-                    
                 </tbody>
             </Table>
 

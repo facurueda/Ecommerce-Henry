@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CategoryTable from './CategoriesComponents/CategoryTable'
 import FormModalAdd from './CategoriesComponents/FormModalAdd'
 import FormModalEdit from './CategoriesComponents/FormModalEdit'
@@ -8,63 +8,64 @@ import {
   Container,
   Modal,
 } from "reactstrap";
-
-
-const categoryData = [
-  { id: new Date().getTime(), name: 'Remeras', description: 'Remeritas cortas y largas' },
-  { id: new Date().getTime() + 1, name: 'Pantalones', description: 'Pantalones largos y cortos' }
-]
-// Estado inicial que recibe de DB
-
-
-const Categories = () => {
+import { connect } from 'react-redux'
+import { actionGetCategories, actionPostCategory, actionUpdateCategory, actionDeleteCategory } from "../../redux/categoriesActions";
 
 
 
-  const initialFormState = { id: null, name: '', description: '' };
+const Categories = (props) => {
 
-  // Estados
-
-  const [categories, setCategory] = useState(categoryData);
-  const [currentCategory, setCurrentCategory] = useState(initialFormState)
-
+  useEffect(() => {
+    if (props.categories.length < 1) {
+      props.actionGetCategories()
+    }
+  })
+  const [categories, setCategories] = useState(props.categories)
+  const [currentCategory, setCurrentCategory] = useState()
   const [modalAdd, modalInsert] = useState(false)
   // Funcion para mostrar u ocultar el modal de agregar categoria
   const modalAddView = () => modalInsert(!modalAdd);
   const modalAddViewFalse = () => modalInsert(false);
 
-  // -----------------------
-
   const [modalEdit, modalInsertEdit] = useState(false)
+
+
+
+
   // Funcion para mostrar u ocultar el modal de agregar categoria
   const modalEditView = () => modalInsertEdit(!modalEdit);
   const modalEditViewFalse = () => modalInsertEdit(false);
 
-  // Funciones para Category Table
 
-  const deleteCategory = id => {
-		setCategory(categories.filter(category => category.id !== id))
-	}
 
-	const editCategory = category => {
-		setCurrentCategory({ id: category.id, name: category.name, description: category.description })
-  // PARA ABRIR EL MODAL DE EDIT
+
+  // Funciones para Category Table:
+  const deleteCategory = category => {
+    props.actionDeleteCategory(category)
+  }
+
+  const editCategory = category => {
+    setCurrentCategory(category)
     modalEditView()
   }
 
-  // Funciones para el Modal ADD PARAAA AGREGAAARR
 
-  const addCategory = category => {
-		category.id = new Date().getTime()
-		setCategory([ ...categories, category ])
-	}
+
+
+  // Funciones para el Modal ADD:
+  const addCategory = async (category) => {
+    await props.actionPostCategory(category);
+    await window.location.reload(false)
+  }
+
+
 
 
   // Update Category after edit
+  const updateCategory = (updatedCategory) => {
+    props.actionUpdateCategory(updatedCategory)
+  }
 
-  const updateCategory = (id, updatedCategory) => {
-		setCategory(categories.map(category => (category.id === id ? updatedCategory : category)))
-	}
 
 
 
@@ -75,35 +76,39 @@ const Categories = () => {
         <Button color="success" onClick={e => modalAddView()}>Add Category</Button>
         <br />
         <br />
-          <CategoryTable categories={categories} deleteCategory={deleteCategory} editCategory={editCategory}/>
-
-          {/* ACA VA EL COMPONENTE CATEGORY TABLE */}
-          {/* COMO PROPS SE LE ENVIA EL ESTADO -CATEGORIES-, FUNCION EDITAR Y FUNCION ELIMINAR */}
+        <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />
       </Container>
-
-
       <Modal isOpen={modalAdd}>
-          
-          {/* ACA VA EL COMPONENTE FORMMODAL-ADD QUE SE ABRE AL DARLECLICK EN ADD CATEGORY */}
-          {/* COMO PROPS SE LE ENVIA LA FUNCION addCategory */}
-        <FormModalAdd addCategory={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories}/>
-
+        <FormModalAdd addCategory={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories} />
       </Modal>
-
-
       <Modal isOpen={modalEdit}>
-          
-          {/* ACA VA EL COMPONENTE FORMMODAL-EDIT QUE SE ABRE AL DARLECLICK EN EDIT CATEGORY */}
-        <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories}/>
+        <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories} />
 
       </Modal>
-
-
-
-
-
     </div>
   )
 }
 
-export default Categories
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categoriesReducer.categories,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actionGetCategories: () => {
+      dispatch(actionGetCategories())
+    },
+    actionPostCategory: (category) => {
+      dispatch(actionPostCategory(category))
+    },
+    actionUpdateCategory: (category) => {
+      dispatch(actionUpdateCategory(category))
+    },
+    actionDeleteCategory: (category) => {
+      dispatch(actionDeleteCategory(category))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
