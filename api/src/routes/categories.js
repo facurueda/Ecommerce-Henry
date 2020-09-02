@@ -8,6 +8,7 @@ server.get('/:nombreCat', (req, res, next) => {
     Categories.findOne({
         where: {
             name: req.params.nombreCat
+
         },
         include: [{ model: Product, as: 'products' }]
     }).then((category) => {
