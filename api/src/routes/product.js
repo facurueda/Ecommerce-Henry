@@ -139,6 +139,7 @@ server.delete('/:idProducto', (req, res, next) => {
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
+
 		}
 	}).then((product) => {
 		if (product) {
