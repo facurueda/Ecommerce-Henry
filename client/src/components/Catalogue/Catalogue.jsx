@@ -1,59 +1,71 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import './Catalogue.css'
 import Category from './Category'
 import { Button } from 'reactstrap'
+import { actionGetProducts,actionGetProductsByCategory } from '../../redux/productsActions'
+import { actionGetCategories } from '../../redux/categoriesActions'
+import { useEffect } from 'react'
+import { connect } from 'react-redux'
 
 
 const Catalogue = (props) => {
+    useEffect(() => {
+        if (props.categories.length < 1) {
+            props.actionGetCategories()
+        }
+    })
 
-    const products = [
-         { name: 'Buzo GAP', description: 'red', price: 204, category: 'Galletitas' },
-         { name: 'Buzo ADIDAS', description: 'blue', price: 20, category: 'Billeteras' },
-         { name: 'Buzo NIKE', description: 'pink', price: 2058 }
-     ]
-    const categoryData = [
-        { name: 'Pantalones' },
-        { name: 'Galletitas' },
-        { name: 'Billeteras' }
-    ]
 
-    const [ allProducts, setAllProducts ] = useState(products)
 
     const productsFilter = (e) => {
-        if(e !== 'none'){
-            setAllProducts(
-                products.filter(product => (product.category === e))
-        )} else {
-            setAllProducts(products)
+        if (e !== 'none') {
+            props.actionGetProductsByCategory(e)
+        }else {
+            props.actionGetProducts()
         }
     }
-
-
-    
-    // const { products , categories } = props
-
-    /* por props recibo un array de productos: products */
-
+    const { products, categories } = props
     return (
         <div>
-            <div className = 'categories'>
-                {categoryData.map(category => {
-                    return <Category class="btn-1"
-                    name = {category.name} productsFilter = {productsFilter} />
-                })} 
-                <button class="btn-1" onClick = { e=> productsFilter('none')}> Everything </button>
+            <div className='categories'>
+                {categories.map(category => {
+                    return <Category className='categoryImage'
+                        name={category.name} productsFilter={productsFilter} />
+            })}
+                <Button onClick={e => productsFilter('none')}>All Products</Button>
             </div>
-            <div className = 'products'> {allProducts.map(product => { 
-                return <ProductCard className = 'productCard'
-                name = {product.name} 
-                description = {product.description} 
-                price = {product.price}
-            // image = {product.image}
-            />})}
+            <div className='products'> {
+            props.products.map(product => {
+                if (product.stock > 0){
+                return <ProductCard className='productCard' name={product.name} description={product.description} price={product.precio}
+                // image = {product.image}
+                />}
+            })
+            }
             </div>
         </div>
     )
 }
 
-export default Catalogue;
+const mapStateToProps = (state) => {
+    return {
+        products: state.productsReducer.products,
+        categories: state.categoriesReducer.categories,
+        loading: state.productsReducer.loading,
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actionGetProducts: () => {
+            dispatch(actionGetProducts())
+        },
+        actionGetCategories: () => {
+            dispatch(actionGetCategories())
+        },
+        actionGetProductsByCategory: (categoryName) => {
+            dispatch(actionGetProductsByCategory(categoryName))
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Catalogue);

@@ -7,11 +7,17 @@ const { Categories, Product} = require('../db.js');
 server.get('/:nombreCat', (req, res, next) => {
     Categories.findOne({
         where: {
-            name: req.body.name
+            name: req.params.nombreCat
         },
         include: [{ model: Product, as: 'products' }]
     }).then((category) => {
         res.send(category.products)
+    }).catch(next)
+})
+
+server.get('/', (req,res,next) => {
+    Categories.findAll().then(categories => {
+        res.send(categories)
     }).catch(next)
 })
 
@@ -31,8 +37,9 @@ server.post('/create', (req, res, next) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
 server.delete('/:id', (req, res, next) => {
+    console.log(req.params)
     Categories.destroy({
-        where: { idCategory: req.body.idCategory }
+        where: { idCategory: req.params.id }
     }).then(() => {
         res.send({
             result: "Categoria eliminada"

@@ -12,15 +12,15 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 
 const ModalAddProduct = (props) => {
 
-    const { products, addProduct, modalCloseAdd, totalCat } = props
+    const { products, addProduct, modalCloseAdd, categories } = props
     const initialState = {
-        id: new Date().getTime(),
         name: '',
         description: '',
-        price: '',
+        precio: '',
         stock: '',
         images: '',
-        categories: []
+        categories: [],
+        rating: 1
     };
 
     const [product, setProduct] = useState(initialState);
@@ -117,7 +117,6 @@ const ModalAddProduct = (props) => {
                         name='name'
                         type='text'
                         onChange={handleChange}
-                        value={product.name}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -133,23 +132,15 @@ const ModalAddProduct = (props) => {
                             onEditorChange={handleChangeDescription}
                         />
                     </form>
-                    {/* <input
-                        className = 'form-control'
-                        name = 'description'
-                        type = 'text'
-                        onChange = {handleChange}
-                        value = {product.description}
-                    /> */}
                 </FormGroup>
                 <ListGroup horizontal style={{ alignItems: 'center', justifyContent: 'space-around' }}>
                     <FormGroup>
                         <label>Price: </label>
                         <input
                             className='form-control'
-                            name='price'
+                            name='precio'
                             type='number'
                             onChange={handleChange}
-                            value={product.price}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -165,7 +156,7 @@ const ModalAddProduct = (props) => {
                     <FormGroup>
                         <label>Categories: </label>
 
-                        <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {
+                        {/* <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {
                                 setCategory(e.target.value)
                             }}>
                             <DropdownToggle caret>
@@ -174,16 +165,16 @@ const ModalAddProduct = (props) => {
                             <DropdownMenu>
                                 {totalCat.map(c => (<DropdownItem key={c.name}>{c.name}</DropdownItem>))}   
                             </DropdownMenu>
-                        </Dropdown>
+                        </Dropdown> */}
 
                         
-                        {/* <select multiple class="form-control"
+                        <select multiple class="form-control"
                             onChange={e => {
                                 setCategory(e.target.value)
                             }}
                         >
-                            {totalCat.map(c => (<option key={c.name}>{c.name}</option>))}
-                        </select> */}
+                            {categories.map(c => (<option key={c.name}>{c.name}</option>))}
+                        </select>
                     </FormGroup>
                 </ListGroup>
                 {/* <FormGroup>
@@ -202,7 +193,7 @@ const ModalAddProduct = (props) => {
                 <Button color='success'
                     onClick={e => {
                         e.preventDefault();
-                        if (!product.name || !product.description || !product.price || !product.stock) return window.alert('Empty input')
+                        if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
                         if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         addProduct(product);
                         setProduct(initialState)

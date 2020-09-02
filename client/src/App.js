@@ -7,18 +7,19 @@ import Product from './components/product/products'
 import Categories from './components/Categories/Categories';
 
 import './App.css'
+import Order from './components/Order/order';
 
 function App() {
   return (
     <React.Fragment>
       {/* <Home/> */}
       <Router>
-        {/* <Route path="/Catalogue" component={Catalogue} />
-        <Route path="/MenuCrud" component={MenuCrud} />
-        <Route path="products/:id" component={Product}/>
-        <Route path="Categories" component={Categories}/> */}
-        <Route path="/" component={Categories} />
-
+        <Route path="/" component={Home}/>
+        <Route path="/catalogue" component={Catalogue}/>
+        <Route path='/Categories' component={Categories}/>
+        <Route path="/MenuCrud" component={MenuCrud}/>
+        <Route path="/products/:id" component={Product}/>
+        <Route path='/order' component={Order}/>
       </Router>
     </React.Fragment>
   );
