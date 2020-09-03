@@ -8,7 +8,6 @@ import {
     ModalFooter,
     ListGroup,
 } from "reactstrap";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const ModalAddProduct = (props) => {
 
@@ -84,9 +83,9 @@ const ModalAddProduct = (props) => {
 
     // States DropdownCategories
 
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    // const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const toggle = () => setDropdownOpen(prevState => !prevState);
+    // const toggle = () => setDropdownOpen(prevState => !prevState);
 
 
 

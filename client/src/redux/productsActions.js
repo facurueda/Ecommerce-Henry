@@ -1,6 +1,5 @@
 import axios from "axios";
 import { PRODUCT_PUT, PRODUCT_POST, DELETE_PRODUCT, GET_PRODUCTS, PRODUCTS_ERROR, PRODUCTS_LOADING, GET_PRODUCTS_BY_CATEGORY } from "./constants";
-import productsReducer from "./productsReducer";
 
 
 const url = "http://localhost:3000/";

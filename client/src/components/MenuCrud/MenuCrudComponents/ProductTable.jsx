@@ -25,7 +25,7 @@ const ProductTable = (props) => {
                             <td > <div dangerouslySetInnerHTML={{ __html: product.description }} /></td>
                             <td>{'$ '}{product.precio}</td>
                             <td>{product.stock}</td>
-                            <td> <img src= {product.images}></img> </td>
+                            <td> <img src= {product.images} alt="Product"></img> </td>
                             <td> {product.categories} </td>
                             <td className= 'buttons'>
                                 <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}

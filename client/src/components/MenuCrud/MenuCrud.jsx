@@ -12,7 +12,6 @@ import { useEffect } from 'react';
 
 
 const MenuCrud = (props) => {
-  const menuData = []
 useEffect(() => {
   if(props.products < 1){
     props.actionGetProducts()

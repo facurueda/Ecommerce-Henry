@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import './Catalogue.css'
 import Category from './Category'
@@ -25,7 +25,7 @@ const Catalogue = (props) => {
             props.actionGetProducts()
         }
     }
-    const { products, categories } = props
+    const { categories } = props
     return (
         <div>
             <div className='categories'>
