@@ -38,9 +38,13 @@ const Catalogue = (props) => {
             <div className='products'> {
             props.products.map(product => {
                 if (product.stock > 0){
-                return <ProductCard className='productCard' name={product.name} description={product.description} price={product.precio}
+                return <a href= '/products/:id'><ProductCard className='productCard' 
+                    name={product.name} 
+                    description={product.description} 
+                    price={product.precio}/>
+                    </a>
                 // image = {product.image}
-                />}
+                }
             })
             }
             </div>
