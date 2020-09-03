@@ -14,7 +14,6 @@ server.get('/:idUser/orders', (req,res,next) => {
     }).catch(next);
 })
 
-
 server.get('/', (req,res,next) => {
     User.findAll().then((users) => {
         res.send(users)
