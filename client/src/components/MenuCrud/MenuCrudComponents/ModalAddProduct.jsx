@@ -97,18 +97,27 @@ const ModalAddProduct = (props) => {
             </ModalHeader>
             <ModalBody>
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
+
                     <ListGroup horizontal className="inputContainer">
+
+                    <div class="drop-zone">
+                        <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                        <input type="file" name="myFile" class="drop-zone__input"/>
+                    </div>
+
+                   
+
                         
                         {/* <div class="myButton"><input type="image" name="" value=""/></div> */}
 
-                        <input className="inputImage" type='file' name='file' onChange={uploadImage}/>
+                        {/* <input className="inputImage" type='file' name='file' onChange={uploadImage}/>
                         {
                             loading ? (
                                 <h3 style={{ width: '150px', marginLeft: '-175px' }}>Loading...</h3>
                             ) : (
                                     <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
                                 )
-                        }
+                        } */}
 
                     </ListGroup>
                 </FormGroup>
