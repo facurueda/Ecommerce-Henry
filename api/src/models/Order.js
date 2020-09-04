@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
     },
     status: {
         type: DataTypes.ENUM,
-        values: ['carrito', 'created', 'processing', 'deleted', 'success']
+        values: ['CART', 'CREATED', 'INPROCESS', 'DELETED', 'SUCCESS']
     }
   });
 };

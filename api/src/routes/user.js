@@ -1,6 +1,5 @@
 const server = require('express').Router();
-const { User, Order } = require('../db.js');
-
+const { User, Order, Inter_Prod_Order} = require('../db.js');
 
 /////////////////////////////////////////////////////////////////GET
 
@@ -22,13 +21,7 @@ server.get('/', (req,res,next) => {
 
 //////////////////////////////////////////////////////////////////POST
 
-// server.post('/:idUser/cart', (req, res, next) => {
-//     Order.create({
-//         idUser: req.params.idUser 
-//     }).then(order => {
-//         res.send(order)
-//     }).catch(next);
-// })
+
 
 server.post('/', (req, res, next) => {
     const { name, email, password } = req.body
@@ -43,6 +36,7 @@ server.post('/', (req, res, next) => {
 
 ///////////////////////////////////////////////////////////////PUT
 
+
 server.put('/:idUser', (req, res, next) => {
     User.findOne({
         where: { 
@@ -56,6 +50,7 @@ server.put('/:idUser', (req, res, next) => {
     }).then(res.send(req.body))
     }).catch(next);
 });
+
 
 ///////////////////////////////////////////////////////////DELETE
 
