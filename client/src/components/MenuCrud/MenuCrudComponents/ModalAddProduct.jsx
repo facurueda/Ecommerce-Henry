@@ -8,7 +8,7 @@ import {
     ModalFooter,
     ListGroup,
 } from "reactstrap";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import './ModalAddProduct.css'
 
 const ModalAddProduct = (props) => {
 
@@ -84,28 +84,40 @@ const ModalAddProduct = (props) => {
 
     // States DropdownCategories
 
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    // const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const toggle = () => setDropdownOpen(prevState => !prevState);
+    // const toggle = () => setDropdownOpen(prevState => !prevState);
 
 
 
     return (
         <div>
             <ModalHeader>
-                <div><h3>Add product</h3></div>
+                <div className="addProductTitle">Add product</div>
             </ModalHeader>
             <ModalBody>
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
-                    <ListGroup horizontal style={{ alignItems: 'center' }}>
-                        <input type='file' name='file' placeholder='Upload' onChange={uploadImage} style={{ color: 'transparent' }} />
+
+                    <ListGroup horizontal className="inputContainer">
+
+                    <div class="drop-zone">
+                        <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                        <input type="file" name="myFile" class="drop-zone__input"/>
+                    </div>
+
+                   
+
+                        
+                        {/* <div class="myButton"><input type="image" name="" value=""/></div> */}
+
+                        {/* <input className="inputImage" type='file' name='file' onChange={uploadImage}/>
                         {
                             loading ? (
                                 <h3 style={{ width: '150px', marginLeft: '-175px' }}>Loading...</h3>
                             ) : (
                                     <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
                                 )
-                        }
+                        } */}
 
                     </ListGroup>
                 </FormGroup>
@@ -133,8 +145,8 @@ const ModalAddProduct = (props) => {
                         />
                     </form>
                 </FormGroup>
-                <ListGroup horizontal style={{ alignItems: 'center', justifyContent: 'space-around' }}>
-                    <FormGroup>
+                <ListGroup horizontal className="propertyContainer">
+                    <FormGroup className="priceContainer">
                         <label>Price: </label>
                         <input
                             className='form-control'
@@ -143,7 +155,7 @@ const ModalAddProduct = (props) => {
                             onChange={handleChange}
                         />
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="stockContainer">
                         <label>Stock: </label>
                         <input
                             className='form-control'
@@ -153,7 +165,7 @@ const ModalAddProduct = (props) => {
                             value={product.stock}
                         />
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="categoriesContainer">
                         <label>Categories: </label>
 
                         {/* <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {

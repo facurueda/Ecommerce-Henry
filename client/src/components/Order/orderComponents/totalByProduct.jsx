@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductCard from '../../ProductCard/ProductCard';
+import "./totalByProduct.css"
 
 
 
@@ -8,11 +9,11 @@ const TotalByProduct = (props) => {
     console.log(props.product)
 
     return (
-        <div>
-            <ProductCard name={product.name} description={product.description} price={product.precio} />
-            <div>
-                <h5>Cantidad: {props.product.Inter_Prod_Order.quantity}</h5>
-                <h4>Monto: ${props.product.Inter_Prod_Order.price}</h4>
+        <div className="ProductContainer">
+            <ProductCard name={product.name} description={product.description} price={product.precio} className="card"/>
+            <div className="textContent">
+                <span className="textQuantity">Cantidad: {props.product.Inter_Prod_Order.quantity}</span>
+                <span className="textAmount">Monto: ${props.product.Inter_Prod_Order.price}</span>
             </div>
         </div>
     )

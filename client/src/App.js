@@ -19,7 +19,7 @@ function App() {
         <Route path='/Categories' component={Categories}/>
         <Route path="/MenuCrud" component={MenuCrud}/>
         <Route path="/products/:id" component={Product}/>
-        <Route path='/order' component={Order}/>
+        <Route path='/order' component={Order}/>        
       </Router>
     </React.Fragment>
   );

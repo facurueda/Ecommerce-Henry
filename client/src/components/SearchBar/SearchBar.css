@@ -54,3 +54,7 @@ body {
     width: 0px;
   /*   width: 250px; */
   }
+  .search-box:focus-within > .search-text {
+    width: 240px;
+    padding: 0 6px;
+  }

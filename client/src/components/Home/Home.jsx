@@ -1,8 +1,6 @@
 import SearchBar from '../SearchBar/SearchBar'
 import React from 'react'
 import './Home.css'
-import { connect } from 'react-redux'
-import fetchCategories from "../../redux/categoriesActions";
 const Home = (props) => {
     return (
         <div className = 'Home'>

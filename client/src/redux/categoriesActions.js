@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE, PUT_CATEGORY, POST_CATEGORY_ERROR, GET_PRODUCTS_BY_CATEGORY } from "./constants";
+import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE, PUT_CATEGORY, POST_CATEGORY_ERROR } from "./constants";
 
 const url = "http://localhost:3000/";
 

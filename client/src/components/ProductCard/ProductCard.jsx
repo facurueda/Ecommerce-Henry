@@ -7,7 +7,7 @@ import {
 
 const ProductCard = (props) => {
 
-    const {image, name, price, description} = props;
+    const { name, price, description} = props;
 
     const cutDescription = (description) => {
         if (description.length > 80){

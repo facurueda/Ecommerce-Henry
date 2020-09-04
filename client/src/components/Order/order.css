@@ -1,0 +1,21 @@
+.footerContent{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+}
+.footerOrder{
+    margin: 20px;
+    /* display: flex; */
+    /* justify-content: flex-end; */
+}
+.textPrice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 35px;
+}
+#buttonEndOrden{
+    height: 100px;
+    width: 200px;
+}
