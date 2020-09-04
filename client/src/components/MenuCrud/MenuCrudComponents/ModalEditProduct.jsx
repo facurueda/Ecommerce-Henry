@@ -8,6 +8,7 @@ import {
     ModalFooter,
     ListGroup
 } from "reactstrap";
+import './ModalEditProduct.css'
 
 const ModalEditProduct = (props) => {
 

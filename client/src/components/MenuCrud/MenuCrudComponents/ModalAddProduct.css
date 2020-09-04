@@ -1,0 +1,47 @@
+.modal-header{
+    justify-content: center;
+    align-items: center;
+}
+.addProductTitle{
+    font-size: 35px;
+    text-align: center;
+}
+
+
+label{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.inputContainer{
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    /* background-color: grey; */
+    margin-bottom: 15px;
+}
+.inputImage{
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border: 4px dashed grey;
+    /* background-size: cover;  */
+} 
+
+.propertyContainer{
+    justify-content: space-around;
+    align-items: 'center',
+}
+.priceContainer{
+    flex-direction: column;
+    width: 100px;
+}
+.stockContainer{
+    flex-direction: column;
+    width: 100px;
+}
+.categoriesContainer{
+    flex-direction: column;
+    width: 100px;
+}

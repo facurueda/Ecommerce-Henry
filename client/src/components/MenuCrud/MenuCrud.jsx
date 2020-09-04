@@ -63,7 +63,13 @@ const { products,categories } = props
     <div>
       <Container>
         <br/>
-        <Button color='success' onClick = {e => modalAddView()}>Add product</Button>
+          <Button
+          style={{
+            float:'right',
+            height: "50px", width: "150px", borderRadius:"10px",
+            margin:"15px"
+          }}
+          color='success' onClick = {e => modalAddView()}>Add product</Button>
         <br/>
         <br/>
         <ProductTable
