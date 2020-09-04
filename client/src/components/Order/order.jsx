@@ -2,6 +2,7 @@ import React from 'react'
 import TotalByProduct from './orderComponents/totalByProduct';
 import { Button } from 'reactstrap';
 import { useState } from 'react';
+import { connect } from 'react-redux';
 
 
 
@@ -43,12 +44,12 @@ const Order = (props) => {
 
     return (
         <div>
-            {props.products.map(product => {
+            {props.order.products.map(product => {
                 return <TotalByProduct product={product}/>
             })}
             <br/>
             <div>
-                <span>Precio Total: $</span><span>{props.products.reduce((acum, product) => {
+                <span>Precio Total: $</span><span>{props.order.products.reduce((acum, product) => {
                     return acum + product.Inter_Prod_Order.price
                 }, 0)}</span>
                 <div><Button>Finalizar Orden</Button></div>
@@ -56,4 +57,18 @@ const Order = (props) => {
         </div>
     )
 }
-export default Order;
+
+const mapStateToProps = (state) => {
+    return {
+      order: state.orderReducer.order,
+      user: state.userReducer.user
+    }
+  }
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      actionGetOrder: (idOrder) => {
+        dispatch(actionGetOrder(idOrder))
+      }
+    }
+  }
+export default connect(mapStateToProps,mapDispatchToProps)(Order);

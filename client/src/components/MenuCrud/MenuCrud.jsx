@@ -27,12 +27,7 @@ useEffect(() => {
 const { products,categories } = props
 
 
-  // SE AGREGA CATEGORIAS
-
   //Estados
-  // const [menuState, setMenuState] = useState(menuData);
-  // const [currentMenuState, setCurrentMenuState] = useState(initialState);
-
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({})
@@ -49,7 +44,6 @@ const { products,categories } = props
   const addProduct = async(product) => {
     await props.actionPostProduct(product)
     await window.location.reload(false);
-    // product.idProduct = new Date().getTime();
   }
   const updateProduct = async (product) => {
     await props.actionUpdateProduct(product)
