@@ -7,6 +7,7 @@ import { actionGetProducts,actionGetProductsByCategory } from '../../redux/produ
 import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
+import NavBar from '../NavBar/navBar'
 
 
 const Catalogue = (props) => {
@@ -28,6 +29,7 @@ const Catalogue = (props) => {
     const { categories } = props
     return (
         <div>
+            <NavBar/>
             <div className='categories'>
                 {categories.map(category => {
                     return <Category className='categoryImage'

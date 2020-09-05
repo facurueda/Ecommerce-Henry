@@ -1,12 +1,8 @@
 import React from 'react'
 import TotalByProduct from './orderComponents/totalByProduct';
 import { Button } from 'reactstrap';
-<<<<<<< HEAD
-import { useState } from 'react';
-import { connect } from 'react-redux';
-=======
 import './order.css'
->>>>>>> 8342ed03cea1c2127ffc5c96533ed0d29630acf4
+import NavBar from '../NavBar/navBar';
 
 
 
@@ -66,19 +62,8 @@ const props = {
 const Order = () => {
 
     return (
-<<<<<<< HEAD
-        <div>
-            {props.order.products.map(product => {
-                return <TotalByProduct product={product}/>
-            })}
-            <br/>
-            <div>
-                <span>Precio Total: $</span><span>{props.order.products.reduce((acum, product) => {
-                    return acum + product.Inter_Prod_Order.price
-                }, 0)}</span>
-                <div><Button>Finalizar Orden</Button></div>
-=======
         <div className="orderContainer">
+            <NavBar/>
             {props.products.map(product => {
                 return <TotalByProduct product={product} className="target" key={product.idProduct}/>
             })}
@@ -90,24 +75,23 @@ const Order = () => {
                     }, 0)}</span>
                 </div>
                 <div><Button color="success" id="buttonEndOrden">Finalizar Orden</Button></div>
->>>>>>> 8342ed03cea1c2127ffc5c96533ed0d29630acf4
             </div>
-           
         </div>
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-      order: state.orderReducer.order,
-      user: state.userReducer.user
-    }
-  }
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      actionGetOrder: (idOrder) => {
-        dispatch(actionGetOrder(idOrder))
-      }
-    }
-  }
-export default connect(mapStateToProps,mapDispatchToProps)(Order);
+// const mapStateToProps = (state) => {
+//     return {
+//       order: state.orderReducer.order,
+//       user: state.userReducer.user
+//     }
+//   }
+//   const mapDispatchToProps = (dispatch) => {
+//     return {
+//       actionGetOrder: (idOrder) => {
+//         dispatch(actionGetOrder(idOrder))
+//       }
+//     }
+//   }
+// export default connect(mapStateToProps,mapDispatchToProps)(Order);
+export default Order;

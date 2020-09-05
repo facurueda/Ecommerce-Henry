@@ -9,6 +9,7 @@ import { actionGetCategories } from "../../redux/categoriesActions";
 
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import NavBar from '../NavBar/navBar';
 
 
 const MenuCrud = (props) => {
@@ -55,6 +56,7 @@ const { products,categories } = props
 
   return (
     <div>
+      {/* <NavBar/> */}
       <Container>
         <br/>
           <Button

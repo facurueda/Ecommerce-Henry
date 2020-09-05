@@ -5,6 +5,7 @@ import logo from './images/1.jpeg'
 import logo1 from './images/2.jpeg'
 import logo2 from './images/3.jpeg'
 import logo3 from './images/4.jpeg'
+import NavBar from '../NavBar/navBar';
 
 function Products(props) {
 
@@ -13,6 +14,7 @@ function Products(props) {
 
     return (
             <div className= 'prodCard'>
+                <NavBar/>
                 <div>
                     <img className = 'imageProd' src={logo} alt="..."/>
                 </div>
