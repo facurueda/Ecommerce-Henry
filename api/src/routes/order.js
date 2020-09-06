@@ -43,26 +43,16 @@ server.get('/', (req,res,next) => {
 /////////////////////////////////////////POST
 
 server.post('/:idOrder/cart', (req, res, next) => {
-
     const { idProduct, quantity, price } = req.body
-
-    Inter_Prod_Order.findOne({ 
+    Inter_Prod_Order.create({ 
         where: {
-            idProduct: req.body.idProduct, 
-            idOrder: req.body.idOrder
+            idOrder: req.body.idOrder,
+            idProduct : idProduct,
+            quantity: quantity,
+            price: price
         }
     }).then(order => {
-        order.update({
-            ...order,
-            quantity: req.body.quantity
-        }).catch(() => {
-            Inter_Prod_Order.create({
-               idProduct : idProduct,
-               idOrder: order.idOrder,
-               quantity: quantity,
-               price: price
-            })
-        })
+        res.send(order)
     })
 });
 
@@ -93,27 +83,33 @@ server.put('/:idOrder/cart', (req,res,next) => {
         }
     }).then(order => {order.update({
         ...order,
-        idProduct: idProduct,
         quantity: quantity
-    }).catch(() => {
-        res.status(400)
     }).then(() => {
-        res.status(200).send(order)
+        res.send(order)
     })
     }).catch(next);
 })
 
+server.put('/:idOrder', (req,res,next) => {
+    Order.findOne({
+        where: {
+            idOrder: req.params.idOrder
+        }
+    }).then(() => {
+        res.send(order)
+    }).catch(next)
+})
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////DELETE
 //ver
 // server.delete('/:idOrder/cart', (req,res,next) => {
-//     Inter_Prod_Order.findAll({
+//     Inter_Prod_Order.destroy({
 //         where: {
 //             idOrder: req.params.idOrder
 //         }
 //     }).then(order => {
-// 		if (order) {
-// 			res.status(200).send()
-// 		}
+// 		
 // 		else {
 // 			res.status(400).send()
 // 		}
