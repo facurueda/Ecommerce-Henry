@@ -42,10 +42,6 @@ server.get('/', (req, res, next) => {
 
 
 
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
 server.post('/aaa', (req, res, next) => {
 	Product.create({
@@ -169,10 +165,8 @@ server.put('/:id', (req, res, next) => {
 			description: req.body.description,
 			precio: req.body.precio,
 			stock: req.body.stock
-		}).catch(() => {
-			res.status(400)
 		}).then(() => {
-			res.status(200).send(product)
+			res.send(product)
 		})
 	}).catch(next);
 })
