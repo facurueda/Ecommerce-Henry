@@ -16,8 +16,8 @@ module.exports = (sequelize) => {
         allowNull: true
     },
     status: {
-        type: DataTypes.ENUM,
-        values: ['CART', 'CREATED', 'INPROCESS', 'DELETED', 'SUCCESS']
+        type: DataTypes.STRING,
+        defaultValue: 'CREADA'
     }
   });
 };
