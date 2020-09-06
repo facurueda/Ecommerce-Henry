@@ -9,20 +9,15 @@ import { actionGetCategories } from "../../redux/categoriesActions";
 
 import { connect, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import NavBar from '../NavBar/navBar';
 
 
 const MenuCrud = (props) => {
 useEffect(() => {
-  if(props.products < 1){
     props.actionGetProducts()
-  }
-})
+},[])
 useEffect(() => {
-  if(props.categories < 1) {
     props.actionGetCategories()
-  }
-})
+},[])
 
 // const { products,categories } = props
 
@@ -98,12 +93,6 @@ useEffect(() => {
   )
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     products: state.productsReducer.products,
-//     categories: state.categoriesReducer.categories,
-//   }
-// }
 const mapDispatchToProps = (dispatch) => {
   return {
     actionGetProducts: () => {
@@ -124,4 +113,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapDispatchToProps)(MenuCrud);
+export default connect(() => {},mapDispatchToProps)(MenuCrud);
