@@ -4,119 +4,113 @@ import {   Button,   Container,   Modal, } from "reactstrap";
 import ProductTable from './MenuCrudComponents/ProductTable';
 import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
+import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
+import { actionGetCategories } from "../../redux/categoriesActions";
 
-const MenuCrud = () => {
-  
-  const menuData = [ 
-    { 
-      id: new Date().getTime(),
-      name: 'Clara',
-      description: 'Que hace?',
-      price: 111,
-      stock: 23,
-      images: ['http://www......'],
-      categories:'Bastones'
-    }, 
-    {
-      id: new Date().getTime() +1,
-      name: 'Facu',
-      description: 'No come?',
-      price: '132123',
-      stock: '233',
-      images: ['http://www....'],
-      categories: [ 'Termo', 'Verde' ]
-    }
-  ]
+import { connect, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-  const initialState = { 
-      id: new Date().getTime(),
-      name: '',
-      description: '',
-      price: '',
-      stock: '',
-      images: '',
-      categories: []
-  } 
 
-  // SE AGREGA CATEGORIAS
+const MenuCrud = (props) => {
+useEffect(() => {
+    props.actionGetProducts()
+},[])
+useEffect(() => {
+    props.actionGetCategories()
+},[])
 
-  const totalCat = [{ name: 'Buzos' }, { name: 'Remeras' }, { name: 'Pantalones' }]
+// const { products,categories } = props
+
 
   //Estados
-  // const [menuState, setMenuState] = useState(menuData);
-  // const [currentMenuState, setCurrentMenuState] = useState(initialState);
-  
-  const [products, setProducts] = useState(menuData)
-  const [currentProducts, setCurrentProducts] = useState(initialState)
-
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({})
 
   //Funciones
   const modalAddView = () => setModalAdd(!modalAdd);
   const modalEditView = () => setModalEdit(!modalEdit);
   const modalCloseAdd = () => setModalAdd(false);
-  const modalCloseEdit = () => setModalEdit(false);  
-  
-  const deleteProduct = id => {
-    setProducts(
-      products.filter(product => product.id !== id)
-    )
+  const modalCloseEdit = () => setModalEdit(false);
+  const deleteProduct = async (id) => {
+    await props.actionDeleteProduct(id)
+    await window.location.reload(false)
+  }
+  const addProduct = async(product) => {
+    await props.actionPostProduct(product)
+    await window.location.reload(false);
+  }
+  const updateProduct = async (product) => {
+    await props.actionUpdateProduct(product)
+    await window.location.reload(false);
   }
   const editProduct = (product) => {
-    setCurrentProducts({
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        stock: product.stock,
-        images: product.images,
-        categories: product.categories
-    });
+    setCurrentProduct(product);
     modalEditView();
   }
-  const addProduct = (product) => {
-    product.id = new Date().getTime();
-    setProducts([...products, product]);
-  }
-  const updateProduct = (id, updateProduct) => {
-    setProducts(products.map(product => (
-      (product.id === id ? updateProduct : product)
-    )))
-  }
+
+  const products = useSelector(state => state.productsReducer.products)
+  const categories = useSelector(state => state.categoriesReducer.categories)
 
   return (
     <div>
+      {/* <NavBar/> */}
       <Container>
         <br/>
-        <Button color='success' onClick = {e => modalAddView()}>Add product</Button>
+          <Button
+          style={{
+            float:'right',
+            height: "50px", width: "150px", borderRadius:"10px",
+            margin:"15px"
+          }}
+          color='success' onClick = {e => modalAddView()}>Add product</Button>
         <br/>
         <br/>
-        <ProductTable 
-        products = {products} 
-        deleteProduct = {deleteProduct} 
-        editProduct = {editProduct} 
+        <ProductTable
+        products = {products}
+        deleteProduct = {deleteProduct}
+        editProduct = {editProduct}
         />
       </Container>
       <Modal isOpen = {modalAdd}>
         <ModalAddProduct
-        products = {products} 
+        products = {products}
         addProduct = {addProduct}
         modalCloseAdd = {modalCloseAdd}
-        totalCat={totalCat}
+        categories={categories}
         />
       </Modal>
       <Modal isOpen = {modalEdit}>
         <ModalEditProduct
-        products = {products} 
-        currentProducts = {currentProducts}
+        products = {products}
+        currentProducts = {currentProduct}
         updateProduct = {updateProduct}
         modalCloseEdit = {modalCloseEdit}
-        totalCat={totalCat}
+        categories={categories}
         />
       </Modal>
     </div>
   )
 }
 
-export default MenuCrud;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actionGetProducts: () => {
+      dispatch(actionGetProducts())
+    },
+    actionDeleteProduct: (id) => {
+      dispatch(actionDeleteProduct(id))
+    },
+    actionGetCategories: () => {
+      dispatch(actionGetCategories())
+    },
+    actionPostProduct: (product) => {
+      dispatch(actionPostProduct(product))
+    },
+    actionUpdateProduct: (product) => {
+      dispatch(actionUpdateProduct(product))
+    }
+  }
+}
+
+export default connect(() => {},mapDispatchToProps)(MenuCrud);

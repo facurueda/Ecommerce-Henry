@@ -42,10 +42,6 @@ server.get('/', (req, res, next) => {
 
 
 
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
 server.post('/aaa', (req, res, next) => {
 	Product.create({
@@ -76,7 +72,7 @@ server.post('/aaa', (req, res, next) => {
 		})
 	}).then(() => {
 		return Inter_Cat_Prod.create({
-			idCategory: 2, idProduct: 2
+			idCategory: 1, idProduct: 2
 		})
 	}).then(() => {
 		return Image.create({
@@ -138,7 +134,8 @@ server.delete('/:idProducto', (req, res, next) => {
 	/////////////////////////// Elimina un producto:
 	Product.destroy({
 		where: {
-			idProduct: req.body.idProduct
+			idProduct: req.params.idProducto
+
 		}
 	}).then((product) => {
 		if (product) {
@@ -165,11 +162,11 @@ server.put('/:id', (req, res, next) => {
 		product.update({
 			...product,
 			name: req.body.name,
-			description: req.body.description
-		}).catch(() => {
-			res.status(400)
+			description: req.body.description,
+			precio: req.body.precio,
+			stock: req.body.stock
 		}).then(() => {
-			res.status(200).send(product)
+			res.send(product)
 		})
 	}).catch(next);
 })
