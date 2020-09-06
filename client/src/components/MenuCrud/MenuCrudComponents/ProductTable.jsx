@@ -6,27 +6,27 @@ import logo2 from '../../product/images/2.jpeg'
 
 const ProductTable = (props) => {
 
-    const products = [{
-        id: 12,
-        images: logo1,
-        name: "Bicicleta",
-        description: "dskajhasdkjasd",
-        precio: 4500,
-        stock: 74,
-        categories: 'Bicicletas'
-    },
-    {
-        id: 2,
-        images: logo2,
-        name: "Bicicleta",
-        description: "dskajhasdkjasd",
-        precio: 4500,
-        stock: 74,
-        categories: 'Bicicletas'
-    }]
+    // const products = [{
+    //     id: 12,
+    //     images: logo1,
+    //     name: "Bicicleta",
+    //     description: "dskajhasdkjasd",
+    //     precio: 4500,
+    //     stock: 74,
+    //     categories: 'Bicicletas'
+    // },
+    // {
+    //     id: 2,
+    //     images: logo2,
+    //     name: "Bicicleta",
+    //     description: "dskajhasdkjasd",
+    //     precio: 4500,
+    //     stock: 74,
+    //     categories: 'Bicicletas'
+    // }]
 
-    // const { products, editProduct, deleteProduct } = props;
-    const {editProduct, deleteProduct } = props;
+    const { products, editProduct, deleteProduct } = props;
+    // const {editProduct, deleteProduct } = props;
 
     return (
         products.length > 0 ? (

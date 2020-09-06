@@ -7,7 +7,7 @@ import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
 
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import NavBar from '../NavBar/navBar';
 
@@ -24,7 +24,7 @@ useEffect(() => {
   }
 })
 
-const { products,categories } = props
+// const { products,categories } = props
 
 
   //Estados
@@ -53,6 +53,9 @@ const { products,categories } = props
     setCurrentProduct(product);
     modalEditView();
   }
+
+  const products = useSelector(state => state.productsReducer.products)
+  const categories = useSelector(state => state.categoriesReducer.categories)
 
   return (
     <div>
@@ -95,12 +98,12 @@ const { products,categories } = props
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.productsReducer.products,
-    categories: state.categoriesReducer.categories,
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     products: state.productsReducer.products,
+//     categories: state.categoriesReducer.categories,
+//   }
+// }
 const mapDispatchToProps = (dispatch) => {
   return {
     actionGetProducts: () => {
@@ -121,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(MenuCrud);
+export default connect(mapDispatchToProps)(MenuCrud);
