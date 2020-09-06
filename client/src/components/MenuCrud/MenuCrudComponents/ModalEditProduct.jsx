@@ -8,10 +8,11 @@ import {
     ModalFooter,
     ListGroup
 } from "reactstrap";
+import './ModalEditProduct.css'
 
 const ModalEditProduct = (props) => {
 
-    const { products, currentProducts, updateProduct, modalCloseEdit, categories } = props;
+    const {currentProducts, updateProduct, modalCloseEdit, categories } = props;
 
     const [product, setProduct] = useState(currentProducts);
 

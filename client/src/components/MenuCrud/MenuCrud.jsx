@@ -7,12 +7,12 @@ import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
 
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import NavBar from '../NavBar/navBar';
 
 
 const MenuCrud = (props) => {
-  const menuData = []
 useEffect(() => {
   if(props.products < 1){
     props.actionGetProducts()
@@ -24,15 +24,10 @@ useEffect(() => {
   }
 })
 
-const { products,categories } = props
+// const { products,categories } = props
 
-
-  // SE AGREGA CATEGORIAS
 
   //Estados
-  // const [menuState, setMenuState] = useState(menuData);
-  // const [currentMenuState, setCurrentMenuState] = useState(initialState);
-
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({})
@@ -49,7 +44,6 @@ const { products,categories } = props
   const addProduct = async(product) => {
     await props.actionPostProduct(product)
     await window.location.reload(false);
-    // product.idProduct = new Date().getTime();
   }
   const updateProduct = async (product) => {
     await props.actionUpdateProduct(product)
@@ -60,11 +54,21 @@ const { products,categories } = props
     modalEditView();
   }
 
+  const products = useSelector(state => state.productsReducer.products)
+  const categories = useSelector(state => state.categoriesReducer.categories)
+
   return (
     <div>
+      {/* <NavBar/> */}
       <Container>
         <br/>
-        <Button color='success' onClick = {e => modalAddView()}>Add product</Button>
+          <Button
+          style={{
+            float:'right',
+            height: "50px", width: "150px", borderRadius:"10px",
+            margin:"15px"
+          }}
+          color='success' onClick = {e => modalAddView()}>Add product</Button>
         <br/>
         <br/>
         <ProductTable
@@ -94,12 +98,12 @@ const { products,categories } = props
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.productsReducer.products,
-    categories: state.categoriesReducer.categories,
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     products: state.productsReducer.products,
+//     categories: state.categoriesReducer.categories,
+//   }
+// }
 const mapDispatchToProps = (dispatch) => {
   return {
     actionGetProducts: () => {
@@ -120,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(MenuCrud);
+export default connect(mapDispatchToProps)(MenuCrud);

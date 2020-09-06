@@ -1,0 +1,26 @@
+.ProductContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 5px;
+}
+
+.card{
+    width: 600px;
+    max-width: 750px;
+    height: auto;
+    align-items: center;
+}
+.textContent{
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.textQuantity{
+    font-size: 45px;
+}
+.textAmount{
+    font-size: 25px;
+}

@@ -1,3 +1,91 @@
+.tableContainer{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 1100px;
+    height: 150px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+/* ---------------- Image ---------------- */
+.imageContainer{
+    width: 15%;
+    height: 135px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.productImage{
+    display:block;
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+/* ---------------- Name ---------------- */
+.nameContainer{
+    width: 15%;
+    height: 135px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.productName{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* ---------------- Price ---------------- */
+.priceContainer{
+    width: 15%;
+    height: 135px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---------------- Stock ---------------- */
+.stockContainer{
+    width: 15%;
+    height: 135px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---------------- Categories ---------------- */
+.categoriesContainer{
+    width: 15%;
+    height: 135px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---------------- Buttons ---------------- */
+.buttonContainer{
+    width: 15%;
+    height: 135px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* .productBody{
+    background-color: #b4f7c1;
+    height: 125px;
+    padding: 100px;
+    border-bottom: 1px solid grey;
+}
+.separator{
+    width: 10px;
+    height: 10px;
+}
 td {
     height: 70px;
 }
@@ -9,4 +97,4 @@ tr,
 thead{
     border-top: 0px;
     vertical-align: middle;
-}
+} */
