@@ -13,7 +13,7 @@ const AdminOrdersTable = (props) => {
     }, [])
 
     const orders = useSelector(state => state.ordersReducer.orders)
-    // const {level} = useSelector(state => state.userReducer.level)
+    const level = useSelector(state => state.userReducer.level)
     return (
         <div>
             {orders.map(order => {
