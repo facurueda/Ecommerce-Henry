@@ -4,7 +4,6 @@ const { Order , Product, Inter_Prod_Order } = require('../db.js');
 
 ///////////////////////////////////////////GET
 
-
 server.get('/:idOrder', (req,res,next) => {
     Order.findOne({ 
         where: {
@@ -54,20 +53,20 @@ server.post('/aaa', (req, res, next) => {
         idOrder: 1,
 		idUser: 1,
         idProduct: 1,
-	// }).then(()=> {
-    //     return Inter_Prod_Order.create({
-    //         idProduct: 1,
-    //         idOrder: 1,
-    //         price: 2222.0,
-    //         quantity: 3
-    //     })
-    // }).then(()=> {
-    //     return Inter_Prod_Order.create({
-    //         idProduct: 2,
-    //         idOrder: 1,
-    //         price: 22.0,
-    //         quantity: 5
-    //     })
+	}).then(()=> {
+        return Inter_Prod_Order.create({
+            idProduct: 1,
+            idOrder: 1,
+            price: 2222.0,
+            quantity: 3
+        })
+    }).then(()=> {
+        return Inter_Prod_Order.create({
+            idProduct: 2,
+            idOrder: 1,
+            price: 22.0,
+            quantity: 5
+        })
     }).then((order) => {
         res.send(order)
     }).catch(next);
