@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from 'reactstrap';
+import './navBar.css'
 
 const NavBar = () => {
     return (
@@ -7,22 +8,22 @@ const NavBar = () => {
             <div class="fixed-top">
                 <div class="collapse" id="navbarToggleExternalContent" style={{ opacity: '0.8' }}>
                     <div class="bg-dark p-4">
+                        <div className='buttonsContainer'>
                         <form action="/">
-                            <Button>Home</Button>
+                            <Button className='buttonStyle'>Home</Button>
                         </form>
                         <form action="/catalogue">
-                            <Button>Catalogo</Button>
+                            <Button className='buttonStyle'>Catalogo</Button>
                         </form>
                         <form action="/order">
-                            <Button>Carrito</Button>
+                            <Button className='buttonStyle'>Carrito</Button>
                         </form>
-
-                        <span class="text-muted">Toggleable via the navbar brand.</span>
+                        </div>
                     </div>
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" >
+                        <span class="navbar-toggler-icon" ></span>
                     </button>
                 </nav>
             </div>

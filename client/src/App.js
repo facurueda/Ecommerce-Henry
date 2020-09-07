@@ -9,13 +9,13 @@ import Categories from './components/Categories/Categories';
 import './App.css'
 import Order from './components/Order/order';
 import NavBar from './components/NavBar/navBar';
+import adminOrdersTable from './components/adminOrdersTable/adminOrdersTable';
 
 function App() {
   return (
     <React.Fragment>
       <div>
         <NavBar />
-
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -24,6 +24,7 @@ function App() {
             <Route path="/menuCrud" component={MenuCrud} />
             <Route path="/products/:id" component={Product} />
             <Route path='/order' component={Order} />
+            <Route path='/adminOrdersTable' component={adminOrdersTable}/>
           </Switch>
         </Router>
 

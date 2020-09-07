@@ -13,3 +13,10 @@ export const PRODUCTS_LOADING = 'PRODUCTS_LOADING'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const PRODUCT_POST = 'PRODUCT_POST'
 export const PRODUCT_PUT = 'PRODUCT_PUT'
+
+
+
+export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
+
+export const GET_USER_BY_ID = 'GET_USER_BY_ID'
