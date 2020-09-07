@@ -4,7 +4,6 @@ const { Order , Product, Inter_Prod_Order } = require('../db.js');
 
 ///////////////////////////////////////////GET
 
-
 server.get('/:idOrder', (req,res,next) => {
     Order.findOne({
         where: {

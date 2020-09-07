@@ -40,6 +40,15 @@ server.get('/:idUser/cart', (req, res, next) => {
     }).catch(next);
 })
 
+server.get('/:idUser', (req, res, next) => {
+    User.findOne({
+        where: {
+            idUser: req.params.idUser
+        }
+    }).then((user) => {
+        res.send(user)
+    })
+})
 
 server.get('/', (req, res, next) => {
     User.findAll().then((users) => {
@@ -125,7 +134,6 @@ server.put('/:idUser/cart', (req, res, next) => {
         res.send(order)
     }).catch(next);
 })
-
 
 server.put('/:idUser', (req, res, next) => {
     User.findOne({
