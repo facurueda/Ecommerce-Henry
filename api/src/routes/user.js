@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { User, Order, Inter_Prod_Order } = require('../db.js');
+const { User, Order, Inter_Prod_Order, Product } = require('../db.js');
 const Sequelize = require("sequelize");
 
 /////////////////////////////////////////////////////////////////GET
@@ -72,7 +72,7 @@ server.post('/:idUser/cart', (req, res, next) => {
                 result: 'Producto sumado a los anteriores'
             }
         }
-        Inter_Prod_Order.create({
+        return Inter_Prod_Order.create({
             idOrder: order.idOrder,
             idProduct: req.body.idProduct,
             quantity: req.body.quantity,
@@ -84,13 +84,14 @@ server.post('/:idUser/cart', (req, res, next) => {
 })
 
 server.post('/', (req, res, next) => {
-    const { name, email, password } = req.body
+    const { name, email, password, level } = req.body
     User.create({
         name,
         email,
-        password
+        password,
+        level
     }).then((newUser) => {
-        Order.create({
+        return Order.create({
             idUser: newUser.idUser,
         })
     }).then(() => {
@@ -108,18 +109,19 @@ server.put('/:idUser/cart', (req, res, next) => {
             status: 'CARRITO'
         }
     }).then(order => {
-        return Inter_Prod_Order.findOne({
+        return (Inter_Prod_Order.findOne({
             where: {
                 idOrder: order.idOrder,
                 idProduct: idProduct
             }
-        })
-    }).then((relacion) => {
+        }),order)
+    }).then((relacion,order) => {
         relacion.update({
             ...relacion,
             quantity: quantity
         })
-    }).then(() => {
+        return order
+    }).then((order) => {
         res.send(order)
     }).catch(next);
 })
@@ -131,7 +133,7 @@ server.put('/:idUser', (req, res, next) => {
             idUser: req.body.idUser
         }
     }).then(user => {
-        user.update({
+        return user.update({
             ...user,
             name: req.body.name,
             email: req.body.email,
@@ -152,12 +154,12 @@ server.delete('/:idUser/cart', (req, res, next) => {
             status: 'CARRITO'
         }
     }).then(order => {
-       order.update({
+       return order.update({
            ...order,
            status: 'CANCELADA'
        })
     }).then(() => {
-        Order.create({
+        return Order.create({
             idUser: req.params.idUser
         })
     }).then(() => {
@@ -181,18 +183,29 @@ server.post('/aaa', (req, res, next) => {
     User.create({
         name: 'Michael',
         email: 'michael@live.com',
-        password: 'aosidj'
+        password: 'aosidj',
+        level: 'admin'
     }).then(() => {
         return User.create({
             name: 'Lili',
             email: 'lili@gmail.com',
-            password: 'jasjdjsjd'
+            password: 'jasjdjsjd',
+            level: "user"
+        }).then((newUser) => {
+            Order.create({
+                idUser: newUser.idUser,
+            })
         })
     }).then(() => {
         return User.create({
             name: 'Sophie',
             email: 'sophie@gmail.com',
-            password: 'jasjdjsjd'
+            password: 'jasjdjsjd',
+            level: 'user'
+        }).then((newUser) => {
+            Order.create({
+                idUser: newUser.idUser,
+            })
         })
     }).then(() => {
         res.send({ result: 'user creados' })

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import {   Button,   Container,   Modal, } from "reactstrap";
 import ProductTable from './MenuCrudComponents/ProductTable';
@@ -8,21 +8,15 @@ import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostPro
 import { actionGetCategories } from "../../redux/categoriesActions";
 
 import { connect, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import NavBar from '../NavBar/navBar';
 
 
 const MenuCrud = (props) => {
 useEffect(() => {
-  if(props.products < 1){
     props.actionGetProducts()
-  }
-})
+},[])
 useEffect(() => {
-  if(props.categories < 1) {
     props.actionGetCategories()
-  }
-})
+},[])
 
 // const { products,categories } = props
 
@@ -98,12 +92,6 @@ useEffect(() => {
   )
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     products: state.productsReducer.products,
-//     categories: state.categoriesReducer.categories,
-//   }
-// }
 const mapDispatchToProps = (dispatch) => {
   return {
     actionGetProducts: () => {
@@ -124,4 +112,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapDispatchToProps)(MenuCrud);
+export default connect(() => {},mapDispatchToProps)(MenuCrud);

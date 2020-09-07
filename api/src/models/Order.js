@@ -11,10 +11,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    idProduct: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
     status: {
         type: DataTypes.STRING,
         defaultValue: 'CREADA'

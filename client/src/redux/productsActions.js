@@ -25,10 +25,10 @@ export const actionLoadingProducts = () => {
         type: PRODUCTS_LOADING
     }
 }
-export const actionGetProducts = () => {
-    return (dispatch) => {
+export const actionGetProducts =  () => {
+    return async(dispatch) => {
         dispatch(actionLoadingProducts())
-        axios.get(url + 'products/').then(res => {
+        await axios.get(url + 'products/').then(res => {
             dispatch({ type: GET_PRODUCTS, payload: res.data })
         }).catch(error => {
             dispatch({ type: PRODUCTS_ERROR, payload: error })
