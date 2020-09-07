@@ -3,11 +3,8 @@ import CategoryTable from './CategoriesComponents/CategoryTable'
 import FormModalAdd from './CategoriesComponents/FormModalAdd'
 import FormModalEdit from './CategoriesComponents/FormModalEdit'
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Button,
-  Container,
-  Modal,
-} from "reactstrap";
+import { Button, Container, Modal, } from "reactstrap";
+import './Categories.css'
 import { connect } from 'react-redux'
 import { actionGetCategories, actionPostCategory, actionUpdateCategory, actionDeleteCategory } from "../../redux/categoriesActions";
 
@@ -16,10 +13,8 @@ import { actionGetCategories, actionPostCategory, actionUpdateCategory, actionDe
 const Categories = (props) => {
 
   useEffect(() => {
-    if (props.categories.length < 1) {
-      props.actionGetCategories()
-    }
-  })
+    props.actionGetCategories()
+  }, [])
   const [categories, setCategories] = useState(props.categories)
   const [currentCategory, setCurrentCategory] = useState()
   const [modalAdd, modalInsert] = useState(false)
@@ -70,7 +65,7 @@ const Categories = (props) => {
 
 
   return (
-    <div>
+    <div className='componentsContainer'>
       <Container>
         <br />
         <Button color="success" onClick={e => modalAddView()}>Add Category</Button>

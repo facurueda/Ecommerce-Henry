@@ -1,3 +1,8 @@
+.orderContainer{
+    display: flex;
+    margin-top: 100px;
+    flex-direction: column;
+}
 .footerContent{
     display: flex;
     flex-direction: row-reverse;

@@ -1,4 +1,4 @@
-import { GET_ORDER_BY_USER } from './constants'
+import { GET_ORDER_BY_ID } from './constants'
 
 var initialState = {
     loading: false,
@@ -7,7 +7,7 @@ var initialState = {
 
 const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_ORDER_BY_USER:
+        case GET_ORDER_BY_ID:
             return {
                 ...state,
                 order: action.payload

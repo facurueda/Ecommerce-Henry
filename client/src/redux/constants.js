@@ -16,4 +16,4 @@ export const PRODUCT_PUT = 'PRODUCT_PUT'
 
 
 
-export const GET_ORDER_BY_USER = 'GET_ORDER_BY_USER'
+export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'

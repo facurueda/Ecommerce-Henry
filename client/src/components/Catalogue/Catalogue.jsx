@@ -7,7 +7,6 @@ import { actionGetProducts, actionGetProductsByCategory } from '../../redux/prod
 import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import NavBar from '../NavBar/navBar'
 
 
 const Catalogue = (props) => {
