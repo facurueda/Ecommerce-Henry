@@ -17,7 +17,6 @@ server.get('/search', (req, res, next) => {
 		}).catch(next)
 });
 
-
 server.get('/:id', (req, res, next) => {
 	// GET /products/:id
 	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
@@ -28,8 +27,6 @@ server.get('/:id', (req, res, next) => {
 		res.send(product)
 	}).catch(next)
 });
-
-
 
 
 server.get('/', (req, res, next) => {
