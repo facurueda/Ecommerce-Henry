@@ -183,12 +183,14 @@ server.post('/aaa', (req, res, next) => {
     User.create({
         name: 'Michael',
         email: 'michael@live.com',
-        password: 'aosidj'
+        password: 'aosidj',
+        level: 'admin'
     }).then(() => {
         return User.create({
             name: 'Lili',
             email: 'lili@gmail.com',
-            password: 'jasjdjsjd'
+            password: 'jasjdjsjd',
+            level: "user"
         }).then((newUser) => {
             Order.create({
                 idUser: newUser.idUser,
@@ -198,14 +200,14 @@ server.post('/aaa', (req, res, next) => {
         return User.create({
             name: 'Sophie',
             email: 'sophie@gmail.com',
-            password: 'jasjdjsjd'
+            password: 'jasjdjsjd',
+            level: 'user'
         }).then((newUser) => {
             Order.create({
                 idUser: newUser.idUser,
             })
         })
     }).then(() => {
-
         res.send({ result: 'user creados' })
     }).catch(next)
 })

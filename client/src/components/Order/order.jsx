@@ -70,7 +70,7 @@ const Order = (props) => {
     if (Object.keys(props.order).length < 1) {
         return (
             <div className='orderContainer'>
-                <h4>No se encuentra orden.</h4>
+                <h3 style={{display: 'flex', justifyContent: 'center' }}><b>El carrito esta vacio</b></h3>
             </div>
         )
     } else {

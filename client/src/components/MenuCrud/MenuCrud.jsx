@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import {   Button,   Container,   Modal, } from "reactstrap";
 import ProductTable from './MenuCrudComponents/ProductTable';
@@ -8,7 +8,6 @@ import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostPro
 import { actionGetCategories } from "../../redux/categoriesActions";
 
 import { connect, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 
 
 const MenuCrud = (props) => {

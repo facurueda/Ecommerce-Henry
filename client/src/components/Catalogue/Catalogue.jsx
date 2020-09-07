@@ -28,7 +28,7 @@ const Catalogue = (props) => {
         return (
         <div>
             <div className='categories'>
-                <h3>No categories</h3>
+                <h3><b>products not found</b></h3>
             </div>
         </div>
         )

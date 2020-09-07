@@ -1,8 +1,9 @@
-import { GET_ORDER_BY_ID } from './constants'
+import { GET_ORDER_BY_ID, GET_ALL_ORDERS } from './constants'
 
 var initialState = {
     loading: false,
-    order: []
+    order: [],
+    orders: []
 };
 
 const ordersReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ const ordersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 order: action.payload
+            }
+        case GET_ALL_ORDERS:
+            return {
+                ...state,
+                orders: action.payload
             }
         default:
             return state;

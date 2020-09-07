@@ -17,3 +17,4 @@ export const PRODUCT_PUT = 'PRODUCT_PUT'
 
 
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
