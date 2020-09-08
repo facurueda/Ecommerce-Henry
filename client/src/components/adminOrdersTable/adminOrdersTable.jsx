@@ -14,6 +14,9 @@ const AdminOrdersTable = (props) => {
 
     const orders = useSelector(state => state.ordersReducer.orders)
     // const level = useSelector(state => state.usersReducer.level)
+    if (orders.length < 1){
+        return <div style={{display: "flex", justifyContent: "center"}}> <h3><b>No se encontraron ordenes disponibles.</b></h3></div>
+    }
     return (
         <div>
             {orders.map(order => {
