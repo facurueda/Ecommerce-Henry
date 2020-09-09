@@ -1,33 +1,104 @@
 import React from 'react'
-import { Button } from 'reactstrap';
+import Logo from './Images/Logo.png'
+import Cart from './Images/Cart.png'
 import './navBar.css'
+import SearchBar from '../SearchBar/SearchBar'
 
 const NavBar = () => {
     return (
-        <div className='Home' style={{ marginBottom: "30px" }}>
-            <div class="fixed-top">
-                <div class="collapse" id="navbarToggleExternalContent" style={{ opacity: '0.8' }}>
-                    <div class="bg-dark p-4">
+
+        <div >
+            {window.location.pathname === "/" ? (
+
+                // ---------------------------- When the user is in "/" ---------------------------- //
+
+                <div className='navContainer'>
+                    <div className='routerContainer'>
                         <div className='buttonsContainer'>
-                        <form action="/">
-                            <Button className='buttonStyle'>Home</Button>
-                        </form>
-                        <form action="/catalogue">
-                            <Button className='buttonStyle'>Catalogo</Button>
-                        </form>
-                        <form action="/order">
-                            <Button className='buttonStyle'>Carrito</Button>
-                        </form>
+                            <form action="/home">
+                                <button className='buttonHome'>Home</button>
+                            </form>
+                            <form action="/catalogue">
+                                <button className='buttonProducts'>Products</button>
+                            </form>
+
+                            {/* Si esta logeado se muestra el boton My Account */}
+
+                            <form action="/Account">
+                                <button className='buttonProducts'>My Account</button>
+                            </form>
+
+                        </div>
+
+                        {/* Si no esta logeado, se muestra para crear cuenta o logearse */}
+
+                        {/* <div className='registerContainer'>
+                                <div className='signup'>Crear Cuenta</div>
+                                <div className='login'>Iniciar Sesion</div>
+                            </div> */}
+
+
+                        {/* Carrito para cuanto esta logeado */}
+
+                        <div className='cartContainer'>
+                            <a href='/order'>
+                                <img className='buttonCart' src={Cart} alt='Cart' />
+                            </a>
+                            <div className='quantityProducts'>7</div>
                         </div>
                     </div>
                 </div>
-                <nav class="navbar navbar-dark bg-dark">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" >
-                        <span class="navbar-toggler-icon" ></span>
-                    </button>
-                </nav>
-            </div>
-        </div >
+
+            ) : (
+
+                    // ---------------------------- When the user is in on any page ---------------------------- //
+
+                    <div className='navContainer'>
+                        <div className='logoContainer'>
+                            <a href="/">
+                                <img className='imageLogo' src={Logo} alt='Logo' />
+                            </a>
+                        </div>
+                        <div className='routerContainer'>
+                            <div className='buttonsContainer'>
+                                <form action="/home">
+                                    <button className='buttonHome'>Home</button>
+                                </form>
+                                <form action="/catalogue">
+                                    <button className='buttonProducts'>Products</button>
+                                </form>
+
+                                {/* Si esta logeado se muestra el boton My Account */}
+
+                                <form action="/Account">
+                                    <button className='buttonProducts'>My Account</button>
+                                </form>
+                            </div>
+                            <div className='searchBar'>
+                                <SearchBar/>
+                            </div>
+
+                            {/* Si no esta logeado, se muestra para crear cuenta o logearse */}
+
+                            {/* <div className='registerContainer'>
+                                    <div className='signup'>Crear Cuenta</div>
+                                    <div className='login'>Iniciar Sesion</div>
+                                </div> */}
+
+
+                            {/* Carrito para cuanto esta logeado */}
+
+                            <div className='cartContainer'>
+                                <a href='/order'>
+                                    <img className='buttonCart' src={Cart} alt='Cart' />
+                                </a>
+                                <div className='quantityProducts'>7</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+        </div>
+
     )
 }
 export default NavBar;
