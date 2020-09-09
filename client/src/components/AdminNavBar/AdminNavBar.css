@@ -1,0 +1,13 @@
+.buttonStyle {
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    color: #DFA06E;
+    background-color: #2f3640;
+    font-weight: bold;
+}
+.admincontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
