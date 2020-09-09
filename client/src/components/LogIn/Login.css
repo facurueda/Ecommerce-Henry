@@ -1,0 +1,51 @@
+.loginContainer{
+    border: black 1px solid;
+    width: 500px;
+    height: 500px;
+    background-color: #f7f7f7;
+    border-radius: 15px;
+}
+
+
+#loginHeaderContainer{
+    display: flex;
+    justify-content: flex-start;
+}
+.addProductTitle{
+    float: left;
+    font-size: 20px;
+}
+
+
+#loginBodyContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.emailInput{
+    width: 60%;
+    margin-bottom: 10px;
+    background-color: lightgrey;
+}
+.passwordInput{
+    width: 60%;
+    background-color: lightgrey;
+    margin-bottom: 10px;
+}
+.buttonLogin{
+    padding:0;
+    height: 40px;
+    width: 60%;
+    background-color: lightgreen;
+    border-radius: 10px;
+}
+
+#loginFooterContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.createAccount{
+
+}

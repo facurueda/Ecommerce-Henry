@@ -10,6 +10,7 @@ import './App.css'
 import Order from './components/Order/order';
 import NavBar from './components/NavBar/navBar';
 import adminOrdersTable from './components/adminOrdersTable/adminOrdersTable';
+import Login from './components/LogIn/Login';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/products/:id" component={Product} />
             <Route path='/order' component={Order} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
+            <Route path='/login' component={Login}/>
           </Switch>
         </Router>
 
