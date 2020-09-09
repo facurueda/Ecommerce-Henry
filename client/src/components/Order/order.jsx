@@ -64,7 +64,7 @@ import { connect } from 'react-redux'
 const Order = (props) => {
 
     useEffect(() => {
-        props.actionGetOrder("1")
+        props.actionGetOrder(props.idOrder)
     }, [])
     console.log(props)
     if (Object.keys(props.order).length < 1) {
@@ -87,7 +87,7 @@ const Order = (props) => {
                             return acum + product.Inter_Prod_Order.price
                         }, 0)}</span>
                     </div>
-                    <div><Button color="success" id="buttonEndOrden">Finalizar Orden</Button></div>
+                    <div style={{display: props.origin }}><Button color="success" id="buttonEndOrden">Finalizar Orden</Button></div>
                 </div>
             </div>
         )

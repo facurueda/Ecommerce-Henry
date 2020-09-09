@@ -5,6 +5,7 @@ import MenuCrud from './components/MenuCrud/MenuCrud'
 import Home from './components/Home/Home'
 import Product from './components/product/products'
 import Categories from './components/Categories/Categories';
+import AdminNavBar from './components/AdminNavBar/AdminNavBar'
 
 import './App.css'
 import Order from './components/Order/order';
@@ -14,6 +15,7 @@ import Login from './components/LogIn/Login';
 
 function App() {
   return (
+    
     <React.Fragment>
       <div>
         <NavBar />
@@ -26,7 +28,7 @@ function App() {
             <Route path="/products/:id" component={Product} />
             <Route path='/order' component={Order} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
-            <Route path='/login' component={Login}/>
+            <Route exact path='/admin' component={AdminNavBar}/>
           </Switch>
         </Router>
 
