@@ -1,14 +1,114 @@
-.buttonsContainer {
-    display: flex;
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap%27');
+
+.navContainer{
+    display:flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    background-color: #def5d1;
 }
 
-.buttonStyle {
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    color: #DFA06E;
-    background-color: #2f3640;
-    font-weight: bold;
+/* ------------------- Logo Space ------------------- */
+
+.logoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+}
+.imageLogo{
+    height: 50px;
+    margin-left: 75px;
+}
+
+/* ------------------- Links Space ------------------- */
+
+.routerContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.buttonsContainer{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    margin-right: 50px;
+}
+.buttonHome{
+    padding:0;
+    margin: 30px;
+    font-weight: bolder;
+    font-family: 'Abril Fatface', cursive;
+}
+.buttonProducts{
+    padding:0;
+    margin: 30px;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.cartContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+
+}
+.buttonCart{
+    align-content: center;
+    height: 25px;
+    width: 25px;
+}
+.quantityProducts{
+    font-family: 'Abril Fatface', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #f56868 1px solid;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: #f56868;
+    margin-right: 50px;
+    margin-left: 30px;
+    color: white;
+    font-weight: bolder;
+
+}
+.searchBar{
+    margin-right: 50px;
+}
+
+
+/* ------------------- Register Space ------------------- */
+
+.registerContainer{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 150px;
+}
+.signup{
+    font-family: 'Abril Fatface', cursive;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.login{
+    font-family: 'Abril Fatface', cursive;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.login:hover{
+    /* text-decoration: underline; */
+    color: grey;
+}
+.signup:hover{
+    /* text-decoration: underline; */
+    color: grey;
 }
