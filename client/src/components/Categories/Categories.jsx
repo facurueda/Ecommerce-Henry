@@ -67,9 +67,7 @@ const Categories = (props) => {
   return (
     <div className='componentsContainer'>
       <Container>
-        <br />
         <Button color="success" onClick={e => modalAddView()}>Add Category</Button>
- 
         <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />
       </Container>
       <Modal isOpen={modalAdd}>
@@ -77,7 +75,6 @@ const Categories = (props) => {
       </Modal>
       <Modal isOpen={modalEdit}>
         <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories} />
-
       </Modal>
     </div>
   )
