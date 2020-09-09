@@ -12,6 +12,7 @@ import Order from './components/Order/order';
 import NavBar from './components/NavBar/navBar';
 import adminOrdersTable from './components/adminOrdersTable/adminOrdersTable';
 import Login from './components/LogIn/Login';
+import Register from './components/Register/Register';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
             <Route path="/menuCrud" component={MenuCrud} />
             <Route path="/products/:id" component={Product} />
             <Route path='/order' component={Order} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route exact path='/admin' component={AdminNavBar}/>
           </Switch>

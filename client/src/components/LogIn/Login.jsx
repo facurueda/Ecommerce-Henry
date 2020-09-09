@@ -20,7 +20,7 @@ const Login = (props) => {
             <button className='buttonLogin'>LOGIN</button>
         </ModalBody>
         <ModalFooter id='loginFooterContainer'>
-            <a><div className='createAccount'>Create Account</div></a>
+            <a><div className='createAccount'>Looking to <a>Create Account</a> ?</div></a>
         </ModalFooter>
 
 
