@@ -9,6 +9,7 @@ import {
     ListGroup,
 } from "reactstrap";
 import './ModalAddProduct.css'
+import SelectImage from '../../SelectImage/SelectImage'
 
 const ModalAddProduct = (props) => {
 
@@ -56,9 +57,10 @@ const ModalAddProduct = (props) => {
     // Funciones Upload Image
 
     const uploadImage = async e => {
-        const files = e.target.files
+        // const files = e.target.files
+        const files = e
         const data = new FormData()
-        data.append('file', files[0])
+        data.append('file', files)
         data.append('upload_preset', 'ecommerceHenry')
         setLoading(true)
 
@@ -89,6 +91,11 @@ const ModalAddProduct = (props) => {
     // const toggle = () => setDropdownOpen(prevState => !prevState);
 
 
+    const [fileNames, setFileNames] = useState([]);
+    const handleDrop = acceptedFiles =>
+        setFileNames(acceptedFiles.map(file => file.name));
+
+
 
     return (
         <div>
@@ -99,15 +106,13 @@ const ModalAddProduct = (props) => {
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
 
                     <ListGroup horizontal className="inputContainer">
-
-                    <div class="drop-zone">
-                        <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                        <input type="file" name="myFile" class="drop-zone__input"/>
-                    </div>
-
-                   
-
+                        <SelectImage uploadImage={uploadImage}/>
                         
+                        {/* <button onClick={console.log(e => console.log(getInputProps))}/> */}
+
+
+
+
                         {/* <div class="myButton"><input type="image" name="" value=""/></div> */}
 
                         {/* <input className="inputImage" type='file' name='file' onChange={uploadImage}/>
@@ -179,7 +184,7 @@ const ModalAddProduct = (props) => {
                             </DropdownMenu>
                         </Dropdown> */}
 
-                        
+
                         <select multiple class="form-control"
                             onChange={e => {
                                 setCategory(e.target.value)

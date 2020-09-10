@@ -52,6 +52,7 @@ const Categories = (props) => {
     await props.actionPostCategory(category);
     await window.location.reload(false)
   }
+  console.log(props.categories)
 
 
 
@@ -59,6 +60,7 @@ const Categories = (props) => {
   // Update Category after edit
   const updateCategory = (updatedCategory) => {
     props.actionUpdateCategory(updatedCategory)
+    
   }
 
 

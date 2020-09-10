@@ -6,6 +6,7 @@ import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
+import SelectImage from '../SelectImage/SelectImage'
 
 import { connect, useSelector } from 'react-redux';
 
