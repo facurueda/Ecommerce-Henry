@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from 'reactstrap';
 import './AdminNavBar.css'
-
 const AdminNavBar = (props) => {
     return (
         <div className='admincontainer'>

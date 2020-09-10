@@ -35,11 +35,8 @@ function App() {
             <Route exact path='/admin' component={AdminNavBar}/>
           </Switch>
         </Router>
-
       </div>
     </React.Fragment>
   );
 }
-
-
 export default App;
