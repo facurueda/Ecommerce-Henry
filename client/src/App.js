@@ -17,11 +17,10 @@ import ProductsBySearchTerm from './components/ProductsBySearchTerm/ProductsBySe
 
 function App() {
   return (
-    
     <React.Fragment>
       <div>
-        <NavBar />
         <Router>
+        <NavBar />
           <Switch>
             <Route path='/Search' component={ProductsBySearchTerm}/>
             <Route exact path="/" component={Home} />

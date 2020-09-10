@@ -2,7 +2,7 @@ import React from 'react'
 import './ProductCard.css'
 import imge from './imge/plantita.jpg'
 import {
-    Card, CardImg, CardText, CardBody, Row,
+    Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
 import ButtonAddToCart from '../ButtonAddToCart';
 

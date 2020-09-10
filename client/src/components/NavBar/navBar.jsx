@@ -10,7 +10,6 @@ import Register from '../Register/Register'
 const NavBar = () => {
 
     // ---------------------------- States ---------------------------- //
-    
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
 
@@ -36,9 +35,6 @@ const NavBar = () => {
                 <div className='navContainer'>
                     <div className='routerContainer'>
                         <div className='buttonsContainer'>
-                            <form action="/home">
-                                <button className='buttonHome'>Home</button>
-                            </form>
                             <form action="/catalogue">
                                 <button className='buttonProducts'>Products</button>
                             </form>
