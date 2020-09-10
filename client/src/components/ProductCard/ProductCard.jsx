@@ -21,7 +21,9 @@ const ProductCard = (props) => {
         <div>
             <Card className='productCard'>
                 <div className='content'>
+                <a href='/products/:id'>
                     <CardImg className='image' src={imge} alt="Card image cap" />
+                    </a>
                     <CardBody>
                         <h3 className='productName'>{name}</h3>
                         <CardText className='description'>{cutDescription(description)}</CardText>
