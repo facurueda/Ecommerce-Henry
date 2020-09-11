@@ -18,20 +18,21 @@ const ProductCard = (props) => {
     }
 
     return (
-        <div>
+        <div className='ProductCard_Container'>
             <Card className='productCard'>
-            <a href='/products/:id'>
                 <div className='content'>
-                <a href='/products/:id'>
-                    <CardImg className='image' src={imge} alt="Card image cap" />
+                    <a className='imgStyle' href='/products/:id'>
+                        <CardImg className='image' src={imge} alt="Card image cap" />
                     </a>
                     <CardBody>
                         <h3 className='productName'>{name}</h3>
-                        <CardText className='description'>{cutDescription(description)}</CardText>
-                        <div style={{display: "flex", flexDirection: "row",justifyContent: "flex-end"}}><h3><b>$ {price}</b></h3><ButtonAddToCart props={{ idProduct, quantity: 1, price }} /><h5 className='price'></h5></div>
+                        <div className='ProductDataContainer'>
+                            <CardText className='description'>{cutDescription(description)}</CardText>
+                            <b className='price'>${price}</b>
+                        </div>
+                        <ButtonAddToCart props={{ idProduct, quantity: 1, price }} />
                     </CardBody>
                 </div>
-            </a>
             </Card>
         </div>
     )
