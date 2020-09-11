@@ -33,7 +33,7 @@ server.get('/:id', (req, res, next) => {
 	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
 	Product.findOne({
 		where: {
-			idProduct: req.body.idProduct
+			idProduct: req.params.id
 		},
 		include: [{
 			model: Categories,

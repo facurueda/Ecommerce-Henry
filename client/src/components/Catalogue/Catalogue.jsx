@@ -51,7 +51,8 @@ const Catalogue = (props) => {
                             name={product.name}
                             description={product.description}
                             price={product.precio}
-                            image={product.image} />
+                            image={product.image} 
+                            idProduct={product.idProduct}/>
                     }
                 })
             }
