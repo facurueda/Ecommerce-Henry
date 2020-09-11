@@ -49,9 +49,9 @@ const Catalogue = (props) => {
                         return <ProductCard className='productCard'
                             name={product.name}
                             description={product.description}
-                            price={product.precio} />
-                        // image = {product.image}
-                    }
+                            price={product.precio}
+                            image={product.image} />
+  }
                 })
             }
             </div>

@@ -20,6 +20,7 @@ const ProductCard = (props) => {
     return (
         <div>
             <Card className='productCard'>
+            <a href='/products/:id'>
                 <div className='content'>
                 <a href='/products/:id'>
                     <CardImg className='image' src={imge} alt="Card image cap" />
@@ -30,6 +31,7 @@ const ProductCard = (props) => {
                         <div style={{display: "flex", flexDirection: "row",justifyContent: "flex-end"}}><h3><b>$ {price}</b></h3><ButtonAddToCart props={{ idProduct, quantity: 1, price }} /><h5 className='price'></h5></div>
                     </CardBody>
                 </div>
+            </a>
             </Card>
         </div>
     )

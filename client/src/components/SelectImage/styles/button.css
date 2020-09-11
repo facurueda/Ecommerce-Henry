@@ -1,0 +1,21 @@
+.buttonCropContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.buttonStyles{
+    border: 2px solid #fcaf16;
+    background-color: #fcaf16;
+    color: #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    appearance: none;
+    cursor: pointer;
+    transition: all 200ms;
+}
+.buttonStyles:hover{
+  background:transparent;
+}
