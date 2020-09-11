@@ -60,6 +60,7 @@ server.get('/', (req, res, next) => {
 //////////////////////////////////////////////////////////////////POST
 
 server.post('/:idUser/cart', (req, res, next) => {
+      // body: { idProduct, quantity }
     let respuesta = {}
     Order.findOne({
         where:
@@ -72,7 +73,7 @@ server.post('/:idUser/cart', (req, res, next) => {
             order.update({
                 ...order,
                 status: 'CARRITO'
-            });
+            }).catch(next)
             respuesta = {
                 result: 'Primer producto agregado'
             }
@@ -81,11 +82,21 @@ server.post('/:idUser/cart', (req, res, next) => {
                 result: 'Producto sumado a los anteriores'
             }
         }
-        return Inter_Prod_Order.create({
+        Inter_Prod_Order.findOne({where: {
             idOrder: order.idOrder,
-            idProduct: req.body.idProduct,
-            quantity: req.body.quantity,
-            price: req.body.price
+            idProduct: req.body.idProduct
+        }}).then((inter) =>{
+            return inter.update({
+                ...inter,
+                quantity: inter.quantity + req.body.quantity
+            })
+        }).catch(() => {
+            return Inter_Prod_Order.create({
+                idOrder: order.idOrder,
+                idProduct: req.body.idProduct,
+                quantity: req.body.quantity,
+                price: req.body.price
+            })
         })
     }).then((respuesta) => {
         res.send(respuesta)

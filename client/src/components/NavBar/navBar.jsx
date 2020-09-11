@@ -1,16 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from './Images/Logo.png'
 import Cart from './Images/Cart.png'
 import './navBar.css'
 import SearchBar from '../SearchBar/SearchBar'
+import { Modal, Button } from 'reactstrap'
+import Login from '../LogIn/Login'
+import Register from '../Register/Register'
 
 const NavBar = () => {
+
+    // ---------------------------- States ---------------------------- //
+    
+    const [modalLogin, setModalLogin] = useState(false)
+    const [modalRegister, setModalRegister] = useState(false)
+
+    // ---------------------------- Functions ---------------------------- //
+
+    // ----- To Open Modals ----- //
+    const modalLoginView = () => setModalLogin(!modalLogin);
+    const modalRegisterView = () => setModalRegister(!modalRegister);
+
+    // ----- To Close Modals ----- //
+    const modalLoginClose = () => setModalLogin(false);
+    const modalRegisterClose = () => setModalRegister(false);
+
+
+
     return (
 
         <div >
             {window.location.pathname === "/" ? (
 
-                // ---------------------------- When the user is in "/" ---------------------------- //
+    // ---------------------------- When the user is in "/" ---------------------------- //
 
                 <div className='navContainer'>
                     <div className='routerContainer'>
@@ -32,10 +53,20 @@ const NavBar = () => {
 
                         {/* Si no esta logeado, se muestra para crear cuenta o logearse */}
 
-                        {/* <div className='registerContainer'>
-                                <div className='signup'>Crear Cuenta</div>
-                                <div className='login'>Iniciar Sesion</div>
-                            </div> */}
+                        <div className='registerContainer'>
+                            <button className='signup' onClick={e => modalLoginView()}>Login</button>
+                            <button className='login' onClick={e => modalRegisterView()}>Register</button>
+                        </div>
+
+                        <Modal isOpen={modalLogin}>
+                            <Login modalLoginClose={modalLoginClose}/>
+                        </Modal>
+
+                        <Modal isOpen={modalRegister}>
+                            <Register modalRegisterClose={modalRegisterClose}/>
+                        </Modal>
+
+
 
 
                         {/* Carrito para cuanto esta logeado */}
@@ -75,7 +106,7 @@ const NavBar = () => {
                                 </form>
                             </div>
                             <div className='searchBar'>
-                                <SearchBar/>
+                                <SearchBar />
                             </div>
 
                             {/* Si no esta logeado, se muestra para crear cuenta o logearse */}

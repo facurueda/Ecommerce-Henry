@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+
+
+.NameAndDesc,
+.categories,
+body,
+Button{
+    font-family: 'Poppins', sans-serif;
+}
+.table thead th,
+.table td{
+    border: 0px
+}
