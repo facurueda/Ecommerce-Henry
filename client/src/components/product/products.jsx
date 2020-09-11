@@ -1,11 +1,10 @@
 import React from 'react';
-import prod_img from './images/rayuela_libro.jpg'
 import './products.css'
 
 function Products(props) {
 
-    // const { name, description, precio, stock } = props;
-    // const setStock = 0
+    const { name, description, precio, stock, image } = props;
+
 
     return (
         <div>
@@ -13,18 +12,18 @@ function Products(props) {
                 <div className='prodCard'>
                     <div id='hover-img'>
                         <div className= 'card overflow-hidde'>
-                        <img className= "img-fluid"  src={prod_img} alt="..." />
+                        <img className= "img-fluid"  src={image} alt="..." />
                         </div>
                     </div>
                     <div className= 'prodComp1'>
                         <div className= 'prodComp2'> 
                         <h1 className='prodName'>
-                            Mesita de luz
+                            {name}
                         </h1>
-                        <span className='prodDescription'>De pino, 10*15, color marron</span>   
+                        <span className='prodDescription'>{description}</span>   
                         </div>    
                         <div className= 'prodComp3'>
-                            <span className='prodPrice'>$5500.99</span>
+                            <span className='prodPrice'>{precio} </span>
                             <div className= 'buttons'>
                             <button class="cart noselect"><span>
                                 Add to Cart</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

@@ -1,0 +1,31 @@
+.editCategory {
+    background-color: #def5d1;
+}
+
+.submitButton,
+.exitButton {
+    cursor: pointer;
+    box-shadow: -1px 3px 3px 0 rgba(80, 80, 80, .2);
+    border: none;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    font-size: 10px;
+}
+
+.exitButton {
+    background: rgb(179, 104, 104);
+}
+
+.submitButton {
+    background-color: #DFA06E;
+}
+
+.submitButton:hover {
+    background-color: #df9457;
+    box-shadow: -1px 6px 10px 0 rgba(120, 60, 20, .2);
+}
+
+.exitButton:hover {
+    background: rgb(148, 37, 37);
+    box-shadow: -1px 6px 10px 0 rgba(120, 60, 20, .2);
+}

@@ -68,7 +68,7 @@ const Categories = (props) => {
     <div className='componentsContainer'>
       <Container>
       {/* <a href="#" class="button-add"  onClick={e => modalAddView()}><span>+</span></a> */}
-        <Button color="success" onClick={e => modalAddView()}>Add Category</Button> 
+        <button className = "addProd" onClick={e => modalAddView()}> + </button> 
         <br />
         <br />
         <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />

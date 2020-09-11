@@ -19,6 +19,7 @@ const ProductCard = (props) => {
     return (
         <div>
             <Card className='productCard'>
+            <a href='/products/:id'>
                 <div className='content'>
                     <CardImg className='image' src={imge} alt="Card image cap" />
                     <CardBody>
@@ -27,6 +28,7 @@ const ProductCard = (props) => {
                         <h5 className='price'>$ {price}</h5>
                     </CardBody>
                 </div>
+            </a>
             </Card>
         </div>
     )

@@ -6,6 +6,7 @@ import {
     FormGroup,
     ModalFooter,
 } from "reactstrap";
+import './FormModalAdd.css'
 
 const FormModalAdd = (props) => {
 
@@ -20,7 +21,7 @@ const FormModalAdd = (props) => {
     }
 
     return (
-        <div>
+        <div className='addCategory'>
             <ModalHeader>
                 <div><h3>Add Category</h3></div>
             </ModalHeader>
@@ -37,7 +38,7 @@ const FormModalAdd = (props) => {
                 </FormGroup>
             </ModalBody>
             <ModalFooter>
-                <Button color='primary'
+                <Button className='submitButton'
                     onClick={event => {
                         event.preventDefault()
                         if (!category.name || !category.description) return window.alert('Empty Inputs')
@@ -47,7 +48,7 @@ const FormModalAdd = (props) => {
                     }}
                 >
                     Submit </Button>
-                <Button color='danger' onClick={e => modalAddViewFalse()}>Exit</Button>
+                <Button className='exitButton' onClick={e => modalAddViewFalse()}>Exit</Button>
             </ModalFooter>
         </div>
     )
