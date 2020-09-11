@@ -52,6 +52,7 @@ const Categories = (props) => {
     await props.actionPostCategory(category);
     await window.location.reload(false)
   }
+  console.log(props.categories)
 
 
 
@@ -59,6 +60,7 @@ const Categories = (props) => {
   // Update Category after edit
   const updateCategory = (updatedCategory) => {
     props.actionUpdateCategory(updatedCategory)
+    
   }
 
 
@@ -67,10 +69,14 @@ const Categories = (props) => {
   return (
     <div className='componentsContainer'>
       <Container>
+<<<<<<< HEAD
       {/* <a href="#" class="button-add"  onClick={e => modalAddView()}><span>+</span></a> */}
         <button className = "addProd" onClick={e => modalAddView()}> + </button> 
         <br />
         <br />
+=======
+        <Button color="success" onClick={e => modalAddView()}>Add Category</Button>
+>>>>>>> 65ef2484c70c5b0941c17718758a3f22f7adaa7b
         <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />
       </Container>
       <Modal isOpen={modalAdd}>

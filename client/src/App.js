@@ -5,14 +5,18 @@ import MenuCrud from './components/MenuCrud/MenuCrud'
 import Home from './components/Home/Home'
 import Product from './components/product/products'
 import Categories from './components/Categories/Categories';
+import AdminNavBar from './components/AdminNavBar/AdminNavBar'
 
 import './App.css'
 import Order from './components/Order/order';
 import NavBar from './components/NavBar/navBar';
 import adminOrdersTable from './components/adminOrdersTable/adminOrdersTable';
+import Login from './components/LogIn/Login';
+import Register from './components/Register/Register';
 
 function App() {
   return (
+    
     <React.Fragment>
       <div>
         <NavBar />
@@ -24,7 +28,10 @@ function App() {
             <Route path="/menuCrud" component={MenuCrud} />
             <Route path="/products/:id" component={Product} />
             <Route path='/order' component={Order} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
+            <Route exact path='/admin' component={AdminNavBar}/>
           </Switch>
         </Router>
 

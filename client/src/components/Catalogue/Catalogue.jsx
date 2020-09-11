@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 const Catalogue = (props) => {
     useEffect(() => {
         props.actionGetCategories()
-    }, [])
+    },[])
 
 
 
@@ -38,8 +38,7 @@ const Catalogue = (props) => {
             {/* <NavBar /> */}
             <div className='categories'>
                 {categories.map(category => {
-                    return <Category className='categoryImage'
-                        name={category.name} productsFilter={productsFilter} />
+                    return <Category className='categoryImage' name={category.name} productsFilter={productsFilter} />
                 })}
                 <Button onClick={e => productsFilter('none')}>All Products</Button>
             </div>

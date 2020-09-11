@@ -1,6 +1,7 @@
-import {GET_USER_BY_ID} from './constants'
+import {GET_USER_BY_ID, USER_CREATED} from './constants'
 
 var initialState = {
+    idUser: 0,
     name: '',
     level: ''
 }
@@ -11,8 +12,11 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 name: action.payload.name,
-                level: action.payload.level
+                level: action.payload.level,
+                idUser: action.payload.idUser
             }
+        case USER_CREATED:
+            return state;
         default:
             return state;
     }
