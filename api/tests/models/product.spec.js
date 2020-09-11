@@ -1,15 +1,16 @@
-const { Product, conn } = require('../../src/db.js');
-const { expect } = require('chai');
-
+const {
+  Product,
+  conn
+} = require('../../src/db.js');
+const {
+  expect
+} = require('chai');
 describe(' --- Product model', () => {
-
   before(() => conn.authenticate()
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
     }));
-
   describe('El modelo', () => {
-
     it('tiene los atributos minimos', () => {
       expect(Product.tableAttributes.name).to.be.an('object');
       expect(Product.tableAttributes.description).to.be.an('object');
@@ -17,15 +18,14 @@ describe(' --- Product model', () => {
       expect(Product.tableAttributes.stock).to.be.an('object');
       expect(Product.tableAttributes.rating).to.be.an('object');
     });
-
   })
-
   describe('Validators', () => {
-    beforeEach(() => Product.sync({ force: true }));
+    beforeEach(() => Product.sync({
+      force: true
+    }));
     describe('name', () => {
       it('should throw an error if name is null', (done) => {
-        Product.create({
-        })
+        Product.create({})
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
@@ -40,6 +40,4 @@ describe(' --- Product model', () => {
       });
     });
   });
-
 });
-

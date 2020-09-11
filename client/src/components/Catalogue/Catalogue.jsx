@@ -39,6 +39,7 @@ const Catalogue = (props) => {
             <div className='categories'>
                 {categories.map(category => {
                     return <Category className='categoryImage' name={category.name} productsFilter={productsFilter} />
+
                 })}
                 <Button onClick={e => productsFilter('none')}>All Products</Button>
             </div>
@@ -50,7 +51,7 @@ const Catalogue = (props) => {
                             description={product.description}
                             price={product.precio}
                             image={product.image} />
-                    }
+  }
                 })
             }
             </div>

@@ -13,15 +13,16 @@ import NavBar from './components/NavBar/navBar';
 import adminOrdersTable from './components/adminOrdersTable/adminOrdersTable';
 import Login from './components/LogIn/Login';
 import Register from './components/Register/Register';
+import ProductsBySearchTerm from './components/ProductsBySearchTerm/ProductsBySearchTerm';
 
 function App() {
   return (
-    
     <React.Fragment>
       <div>
-        <NavBar />
         <Router>
+        <NavBar />
           <Switch>
+            <Route path='/Search' component={ProductsBySearchTerm}/>
             <Route exact path="/" component={Home} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path='/categories' component={Categories} />
@@ -34,11 +35,8 @@ function App() {
             <Route exact path='/admin' component={AdminNavBar}/>
           </Switch>
         </Router>
-
       </div>
     </React.Fragment>
   );
 }
-
-
 export default App;

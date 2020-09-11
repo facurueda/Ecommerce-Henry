@@ -17,12 +17,25 @@ const Register = (props) => {
     // ---------------------------- States ---------------------------- //
     
     const [registerInputs, setRegisterInputs] = useState({name:'null', email:'null', password:'null',level:'USER'})
+    const [secondPassword, setSecondPassword] = useState('')
 
     // ---------------------------- Functions ---------------------------- //
 
     const handleChange = event => {
         const { name, value } = event.target
-        setRegisterInputs({ ...registerInputs, [name]: value })
+        if (name === 'seconPassword'){
+            setSecondPassword(value);
+        } else {
+            setRegisterInputs({ ...registerInputs, [name]: value })
+        }
+    }
+    const VerificarYRegistrar = () => {
+        if (secondPassword === registerInputs.password){
+            actionUserCreate(registerInputs)
+            console.log('Usuario registrado.')
+        }else {
+            console.log("Credenciales Incorrectas")
+        }
     }
 
     return (
@@ -37,8 +50,8 @@ const Register = (props) => {
                     <input className='name' name='name' type='text' placeholder='Name' onChange={handleChange}/>
                     <input className='emailInput' name='email' type='email' placeholder='Email' onChange={handleChange}/>
                     <input className='passwordInput' name='password' type="password" placeholder='Password'onChange={handleChange}/>
-                    <input className='passwordInput' type="password" placeholder='Repeat Password' />
-                    <button className='buttonLogin' onClick={e => actionUserCreate(registerInputs)} >CREATE ACCOUNT</button>
+                    <input className='passwordInput' name='secondPassword' type="password" placeholder='Repeat Password' />
+                    <button className='buttonLogin' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </ModalBody>
                 <ModalFooter id='loginFooterContainer'>
                     <a><div className='createAccount'>Already have an account? <a>Login</a></div></a>

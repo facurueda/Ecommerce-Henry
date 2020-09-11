@@ -1,9 +1,10 @@
-import {PRODUCT_PUT,PRODUCT_POST,DELETE_PRODUCT,PRODUCTS_ERROR, GET_PRODUCTS, PRODUCTS_LOADING, GET_PRODUCTS_BY_CATEGORY} from './constants'
+import { GET_PRODUCTS_BY_SEARCH_TERM, PRODUCT_PUT, PRODUCT_POST, DELETE_PRODUCT, PRODUCTS_ERROR, GET_PRODUCTS, PRODUCTS_LOADING, GET_PRODUCTS_BY_CATEGORY } from './constants'
 
 var initialState = {
     loading: false,
     products: [],
     error: '',
+    term: [],
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -15,10 +16,15 @@ const productsReducer = (state = initialState, action) => {
         case DELETE_PRODUCT:
             return state;
         case GET_PRODUCTS_BY_CATEGORY:
-      return {
-        ...state,
-        products: action.payload
-      }
+            return {
+                ...state,
+                products: action.payload
+            }
+        case GET_PRODUCTS_BY_SEARCH_TERM:
+            return {
+                ...state,
+                term: action.payload
+            };
         case PRODUCTS_LOADING:
             return {
                 ...state,

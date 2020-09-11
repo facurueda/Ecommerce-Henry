@@ -2,7 +2,7 @@ import React from 'react'
 import './ProductCard.css'
 import imge from './imge/plantita.jpg'
 import {
-    Card, CardImg, CardText, CardBody, Row,
+    Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
 import ButtonAddToCart from '../ButtonAddToCart';
 
@@ -22,7 +22,9 @@ const ProductCard = (props) => {
             <Card className='productCard'>
             <a href='/products/:id'>
                 <div className='content'>
+                <a href='/products/:id'>
                     <CardImg className='image' src={imge} alt="Card image cap" />
+                    </a>
                     <CardBody>
                         <h3 className='productName'>{name}</h3>
                         <CardText className='description'>{cutDescription(description)}</CardText>
