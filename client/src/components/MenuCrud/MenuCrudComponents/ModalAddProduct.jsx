@@ -70,29 +70,14 @@ const ModalAddProduct = (props) => {
                 body: data
             })
         const file = await res.json()
-
-
-        // setImagesUpload(file.secure_url)
         setProduct({ ...product, images: file.secure_url })
         setImagesUpload(file.secure_url)
-
-        // setImagesUpload(true)
-
         setLoading(false)
     }
-
-    // States DropdownCategories
-
-    // const [dropdownOpen, setDropdownOpen] = useState(false);
-
-    // const toggle = () => setDropdownOpen(prevState => !prevState);
-
 
     const [fileNames, setFileNames] = useState([]);
     const handleDrop = acceptedFiles =>
         setFileNames(acceptedFiles.map(file => file.name));
-
-
 
     return (
         <div>
@@ -125,7 +110,7 @@ const ModalAddProduct = (props) => {
                             init={{
                                 height: 250,
                                 menubar: false
-                            }}
+                            }}   
                             onEditorChange={handleChangeDescription}
                         />
                     </form>
@@ -152,21 +137,8 @@ const ModalAddProduct = (props) => {
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
                         <label>Categories: </label>
-
-                        {/* <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {
-                                setCategory(e.target.value)
-                            }}>
-                            <DropdownToggle caret>
-                                Select Categorie
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                {totalCat.map(c => (<DropdownItem key={c.name}>{c.name}</DropdownItem>))}   
-                            </DropdownMenu>
-                        </Dropdown> */}
-
-
                         <select multiple class="form-control"
-                            onChange={e => {
+                            onClick={e => {
                                 setCategory(e.target.value)
                             }}
                         >
@@ -174,17 +146,6 @@ const ModalAddProduct = (props) => {
                         </select>
                     </FormGroup>
                 </ListGroup>
-                {/* <FormGroup>
-                    <label>Images: </label>
-                    <input
-                        className = 'form-control'
-                        name = 'images'
-                        //cambiar type
-                        type = 'text'
-                        onChange = {handleChange}
-                        value = {product.images}
-                    />
-                </FormGroup> */}
             </ModalBody>
             <ModalFooter>
                 <Button color='success'
@@ -193,7 +154,6 @@ const ModalAddProduct = (props) => {
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
                         if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         addProduct(product);
-
                         setProduct(initialState)
                         modalCloseAdd();
                     }}

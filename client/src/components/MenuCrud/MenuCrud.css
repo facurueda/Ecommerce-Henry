@@ -11,22 +11,6 @@
     width: -webkit-fill-available;
 }
 
-/*
-.NameAndDesc,
-.categories {
-    border-top: 1px solid black;
-    width: -webkit-fill-available;
-    align-items: center;
-    display: flex;
-    font-family: 'Roboto', sans-serif;
-}
-.table thead th{
-    font-weight: 600;
-}
-.table th{
-    font-weight: 400;
-} */
-
 /* ////////////////////////////////////////////////////////////////////BOTONES */
 
 .btn-circle.btn-xl {
