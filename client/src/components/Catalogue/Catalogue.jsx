@@ -5,7 +5,7 @@ import Category from './Category'
 import { actionGetProducts, actionGetProductsByCategory } from '../../redux/productsActions'
 import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
-
+import { connect } from 'react-redux' 
 const Catalogue = (props) => {
     useEffect(() => {
         props.actionGetCategories()
