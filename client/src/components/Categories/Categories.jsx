@@ -60,7 +60,6 @@ const Categories = (props) => {
   // Update Category after edit
   const updateCategory = (updatedCategory) => {
     props.actionUpdateCategory(updatedCategory)
-    
   }
 
 
@@ -71,7 +70,7 @@ const Categories = (props) => {
       <Container>
 
       {/* <a href="#" class="button-add"  onClick={e => modalAddView()}><span>+</span></a> */}
-        <button className = "addProd" onClick={e => modalAddView()}> + </button> 
+        <button className = "addProd" onClick={e => modalAddView()}> + </button>
         <br />
         <br />
 

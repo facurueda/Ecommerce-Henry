@@ -34,15 +34,15 @@ useEffect(() => {
   const modalCloseEdit = () => setModalEdit(false);
   const deleteProduct = async (id) => {
     await props.actionDeleteProduct(id)
-    await window.location.reload(false)
+    await window.location.reload()
   }
   const addProduct = async(product) => {
     await props.actionPostProduct(product)
-    await window.location.reload(false);
+    await window.location.reload();
   }
   const updateProduct = async (product) => {
     await props.actionUpdateProduct(product)
-    await window.location.reload(false);
+    await window.location.reload();
   }
   const editProduct = (product) => {
     setCurrentProduct(product);
@@ -54,7 +54,6 @@ useEffect(() => {
 
   return (
     <div>
-      {/* <NavBar/> */}
       <Container>
         <br/>
           <button className = "addProd" onClick={e => modalAddView()}> + </button> 

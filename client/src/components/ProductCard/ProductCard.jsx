@@ -1,15 +1,17 @@
 import React from 'react'
 import './ProductCard.css'
-import imge from './imge/plantita.jpg'
 import {
     Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
 import ButtonAddToCart from '../ButtonAddToCart';
-import productsReducer from '../../redux/productsReducer';
+import { useDispatch } from 'react-redux';
+import {useHistory} from 'react-router'
+import {actionGetProduct} from '../../redux/productsActions'
 
 const ProductCard = (props) => {
 
     const { name, price, description, idProduct, images } = props;
+    const history = useHistory()
 
     const cutDescription = (description) => {
         if (description.length > 80) {
@@ -17,18 +19,24 @@ const ProductCard = (props) => {
         }
         return description;
     }
+    const dispatch = useDispatch()
+    const handleChancla = () => {
+        dispatch(actionGetProduct(idProduct))
+        history.push('/productDetail')
+    }
 
     return (
-        <div>
+        <div className='ProductCard_Container'>
             <Card className='productCard'>
                 <div className='content'>
-                <a href='/products/:id'>
-                    <CardImg className='image' src={images} alt="Card image cap" />
-                    </a>
+                        <CardImg className='image' src={images} alt="Card image cap" onClick={handleChancla}/>
                     <CardBody>
                         <h3 className='productName'>{name}</h3>
-                        <CardText className='description'>{cutDescription(description)}</CardText>
-                        <div style={{display: "flex", flexDirection: "row",justifyContent: "flex-end"}}><h3><b>$ {price}</b></h3><ButtonAddToCart props={{ idProduct, quantity: 1, price }} /><h5 className='price'></h5></div>
+                        <div className='ProductDataContainer'>
+                            <CardText className='description'>{cutDescription(description)}</CardText>
+                            <b className='price'>${price}</b>
+                        </div>
+                        <ButtonAddToCart props={{ idProduct, quantity: 1, price }} />
                     </CardBody>
                 </div>
             </Card>

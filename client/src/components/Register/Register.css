@@ -1,0 +1,10 @@
+.FormRegisterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.standardInput {
+    margin-top: 5px;
+    border-radius: 7px;
+    text-align: center;
+}
