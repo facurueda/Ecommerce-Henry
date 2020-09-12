@@ -210,6 +210,7 @@ const ModalAddProduct = (props) => {
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
                         if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         addProduct(product);
+
                         setProduct(initialState)
                         modalCloseAdd();
                     }}

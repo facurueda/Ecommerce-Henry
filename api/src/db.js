@@ -40,9 +40,9 @@ const {
 } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Product.hasMany(Image, {
-  foreignKey: 'idProduct'
-});
+// Product.hasMany(Image, {
+//   foreignKey: 'idProduct'
+// });
 Product.belongsToMany(Categories, {
   through: "Inter_Cat_Prod",
   foreignKey: 'idProduct',

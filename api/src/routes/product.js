@@ -4,7 +4,6 @@ const {
 	Product,
 	Categories,
 	Inter_Cat_Prod,
-	Image
 } = require('../db.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 server.get('/search', (req, res, next) => {
@@ -38,9 +37,6 @@ server.get('/:id', (req, res, next) => {
 		include: [{
 			model: Categories,
 			as: 'categories'
-		}, {
-			model: Image,
-			as: 'images'
 		}]
 	}).then((product) => {
 		res.send(product)
@@ -60,6 +56,7 @@ server.post('/aaa', (req, res, next) => {
 		precio: 10,
 		rating: 5,
 		stock: 10,
+		images: 'http://www.google.com/'
 	}).then(() => {
 		return Categories.create({
 			name: "animales",
@@ -82,6 +79,7 @@ server.post('/aaa', (req, res, next) => {
 			precio: 10,
 			rating: 5,
 			stock: 10,
+			images: 'http://www.google.com'
 		})
 	}).then(() => {
 		return Inter_Cat_Prod.create({
@@ -92,16 +90,6 @@ server.post('/aaa', (req, res, next) => {
 		return Inter_Cat_Prod.create({
 			idCategory: 1,
 			idProduct: 2
-		})
-	}).then(() => {
-		return Image.create({
-			idProduct: 1,
-			link: 'http://dreamicus.com/data/dragon/dragon-05.jpg'
-		})
-	}).then(() => {
-		return Image.create({
-			idProduct: 1,
-			link: 'https://i.ytimg.com/vi/9dcQxfY2NH4/maxresdefault.jpg'
 		})
 	}).then(() => {
 		return res.send({
@@ -115,7 +103,8 @@ server.post('/create', (req, res, next) => {
 		description,
 		precio,
 		rating,
-		stock
+		stock,
+		images
 	} = req.body;
 	Product.create({
 		name,
@@ -123,6 +112,7 @@ server.post('/create', (req, res, next) => {
 		precio,
 		rating,
 		stock,
+		images
 	}).then(() => {
 		res.send(req.body)
 	}).catch(next);
@@ -176,7 +166,8 @@ server.put('/:id', (req, res, next) => {
 			name: req.body.name,
 			description: req.body.description,
 			precio: req.body.precio,
-			stock: req.body.stock
+			stock: req.body.stock,
+			images: req.body.images
 		}).then(() => {
 			res.send(product)
 		})
