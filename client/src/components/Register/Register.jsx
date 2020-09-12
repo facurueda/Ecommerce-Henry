@@ -57,7 +57,7 @@ const Register = (props) => {
                 </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
-                <a><div className='createAccount'>Already have an account? <a onClick={ChangeModal}>Login</a></div></a>
+                <a><div className='createAccount'>Already have an account? <a href='#' onClick={ChangeModal}>Login</a></div></a>
             </ModalFooter>
         </div>
     )
