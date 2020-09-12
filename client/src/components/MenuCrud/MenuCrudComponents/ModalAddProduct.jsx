@@ -104,23 +104,6 @@ const ModalAddProduct = (props) => {
 
                     <ListGroup horizontal className="inputContainer">
                         <SelectImage uploadImage={uploadImage}/>
-                        
-                        {/* <button onClick={console.log(e => console.log(getInputProps))}/> */}
-
-
-
-
-                        {/* <div class="myButton"><input type="image" name="" value=""/></div> */}
-
-                        {/* <input className="inputImage" type='file' name='file' onChange={uploadImage}/>
-                        {
-                            loading ? (
-                                <h3 style={{ width: '150px', marginLeft: '-175px' }}>Loading...</h3>
-                            ) : (
-                                    <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
-                                )
-                        } */}
-
                     </ListGroup>
                 </FormGroup>
 

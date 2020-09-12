@@ -14,10 +14,12 @@ const ProductCard = (props) => {
     const history = useHistory()
 
     const cutDescription = (description) => {
-        if (description.length > 80) {
-            return (description.substring(0, 80) + '...')
+        let aux = description.replace('</p>', '')
+        let descriptionAux = aux.replace('<p>', '')
+        if (descriptionAux.length > 80) {
+            return (descriptionAux.substring(0, 80) + '...')
         }
-        return description;
+        return descriptionAux;
     }
     const dispatch = useDispatch()
     const handleChancla = () => {
@@ -33,7 +35,7 @@ const ProductCard = (props) => {
                     <CardBody>
                         <h3 className='productName'>{name}</h3>
                         <div className='ProductDataContainer'>
-                            <CardText className='description'>{cutDescription(description)}</CardText>
+                            {cutDescription(description)}
                             <b className='price'>${price}</b>
                         </div>
                         <ButtonAddToCart props={{ idProduct, quantity: 1, price }} />

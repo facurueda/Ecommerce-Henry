@@ -11,15 +11,14 @@ const Catalogue = (props) => {
         props.actionGetCategories()
     }, [])
 
-
-
     const productsFilter = (e) => {
         if (e !== 'All categories') {
-            props.actionGetProductsByCategory(e)
+            props.actionGetProductsByCategory()
         } else {
-            props.actionGetProducts()
+            props.actionGetProducts(e)
         }
     }
+
     const { categories } = props
     if (props.categories.length === 0) {
         return (
@@ -30,12 +29,12 @@ const Catalogue = (props) => {
             </div>
         )
     }
+
     return (
         <div>
-            {/* <NavBar /> */}
             <div className='categories_menu'>
                 {categories.map(category => {
-                    return <Category className='categoryImage' name={category.name} productsFilter={productsFilter} />
+                    return <Category className='categoryImage' name={category.name}  productsFilter={productsFilter} />
 
                 })
                 }
@@ -48,7 +47,7 @@ const Catalogue = (props) => {
                             name={product.name}
                             description={product.description}
                             price={product.precio}
-                            images={product.image} 
+                            images={product.images} 
                             idProduct={product.idProduct}/>
                     }
                 })
