@@ -5,11 +5,9 @@ import './Login.css'
 
 const Login = (props) => {
 
-    const {modalLoginClose} = props;
+    const {modalLoginClose, ChangeModal} = props;
 
     return (
-
-    
     <div className='loginContainer'>
         <ModalHeader id='loginHeaderContainer'>
                 <div className="addProductTitle">Login with</div>
@@ -23,7 +21,7 @@ const Login = (props) => {
             <button className='standardInput' onClick={e => modalLoginClose()}>LOGIN</button>
         </ModalBody>
         <ModalFooter id='loginFooterContainer'>
-            <a><div className='createAccount'>Looking for <a href='/register'>Create Account</a>?</div></a>
+            <a><div className='createAccount'>Looking for <a onClick={ChangeModal}>Create Account</a>?</div></a>
         </ModalFooter>
 
 

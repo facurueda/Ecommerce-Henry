@@ -6,12 +6,15 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Modal, Button } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
+import { useSelector } from 'react-redux'
 
 const NavBar = () => {
 
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
+    // const { user } = useSelector(state => state.usersReducer.idUser)
+    const user = undefined
 
     // ---------------------------- Functions ---------------------------- //
 
@@ -24,13 +27,65 @@ const NavBar = () => {
     const modalRegisterClose = () => setModalRegister(false);
 
 
-
+    const ChangeModal = async () => {
+        await modalLoginView()
+        await modalRegisterView()
+    }
     return (
 
         <div >
-            {window.location.pathname === "/" ? (
+            <div className='navContainer'>
+                <div className='logoContainer'>
+                    <a href="/">
+                        <img className='imageLogo' src={Logo} alt='Logo' />
+                    </a>
+                </div>
+                <div className='routerContainer'>
+                    <div className='buttonsContainer'>
+                        <form action="/">
+                            <button className='buttonHome'>Home</button>
+                        </form>
+                        <form action="/catalogue">
+                            <button className='buttonProducts'>Products</button>
+                        </form>
 
-    // ---------------------------- When the user is in "/" ---------------------------- //
+                        {user ? (<form action="/Account">
+                        <button className='buttonProducts'>My Account</button>
+                    </form>):(<div></div>)}
+                    </div>
+                    <div className='searchBar'>
+                        <SearchBar />
+                    </div>
+
+                    {/* Si no esta logeado, se muestra para crear cuenta o logearse */}
+
+                    {/* <div className='registerContainer'>
+                                    <div className='signup'>Crear Cuenta</div>
+                                    <div className='login'>Iniciar Sesion</div>
+                                </div> */}
+
+
+                    {user ? (<div className='cartContainer'>
+                    <a href='/order'>
+                        <img className='buttonCart' src={Cart} alt='Cart' />
+                    </a>
+                    <div className='quantityProducts'>7</div>
+                </div>):(<div className='registerContainer'>
+                <button className='signup' onClick={e => modalLoginView()}>Login</button>
+                <button className='login' onClick={e => modalRegisterView()}>Register</button>
+            </div>)}
+            <Modal isOpen={modalLogin}>
+            <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal}/>
+        </Modal>
+
+        <Modal isOpen={modalRegister}>
+            <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} />
+        </Modal>
+                </div>
+            </div>
+            {/*window.location.pathname === "/" ? (
+
+                // ---------------------------- When the user is in "/" ---------------------------- //
 
                 <div className='navContainer'>
                     <div className='routerContainer'>
@@ -39,7 +94,7 @@ const NavBar = () => {
                                 <button className='buttonProducts'>Products</button>
                             </form>
 
-                            {/* Si esta logeado se muestra el boton My Account */}
+                             //Si esta logeado se muestra el boton My Account
 
                             <form action="/Account">
                                 <button className='buttonProducts'>My Account</button>
@@ -47,7 +102,7 @@ const NavBar = () => {
 
                         </div>
 
-                        {/* Si no esta logeado, se muestra para crear cuenta o logearse */}
+                        // Si no esta logeado, se muestra para crear cuenta o logearse 
 
                         <div className='registerContainer'>
                             <button className='signup' onClick={e => modalLoginView()}>Login</button>
@@ -55,17 +110,17 @@ const NavBar = () => {
                         </div>
 
                         <Modal isOpen={modalLogin}>
-                            <Login modalLoginClose={modalLoginClose}/>
+                            <Login modalLoginClose={modalLoginClose} />
                         </Modal>
 
                         <Modal isOpen={modalRegister}>
-                            <Register modalRegisterClose={modalRegisterClose}/>
+                            <Register modalRegisterClose={modalRegisterClose} />
                         </Modal>
 
 
 
 
-                        {/* Carrito para cuanto esta logeado */}
+                        // Carrito para cuanto esta logeado 
 
                         <div className='cartContainer'>
                             <a href='/order'>
@@ -95,7 +150,7 @@ const NavBar = () => {
                                     <button className='buttonProducts'>Products</button>
                                 </form>
 
-                                {/* Si esta logeado se muestra el boton My Account */}
+                                // Si esta logeado se muestra el boton My Account
 
                                 <form action="/Account">
                                     <button className='buttonProducts'>My Account</button>
@@ -105,15 +160,15 @@ const NavBar = () => {
                                 <SearchBar />
                             </div>
 
-                            {/* Si no esta logeado, se muestra para crear cuenta o logearse */}
+                            // Si no esta logeado, se muestra para crear cuenta o logearse
 
-                            {/* <div className='registerContainer'>
-                                    <div className='signup'>Crear Cuenta</div>
-                                    <div className='login'>Iniciar Sesion</div>
-                                </div> */}
+                            //<div className='registerContainer'>
+                            //        <div className='signup'>Crear Cuenta</div>
+                            //        <div className='login'>Iniciar Sesion</div>
+                            //    </div> 
 
 
-                            {/* Carrito para cuanto esta logeado */}
+                            // Carrito para cuanto esta logeado 
 
                             <div className='cartContainer'>
                                 <a href='/order'>
@@ -123,7 +178,7 @@ const NavBar = () => {
                             </div>
                         </div>
                     </div>
-                )}
+            )*/}
         </div>
     )
 }
