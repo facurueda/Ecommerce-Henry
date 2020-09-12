@@ -69,7 +69,6 @@ const ModalAddProduct = (props) => {
                 method: 'POST',
                 body: data
             })
-
         const file = await res.json()
 
 
@@ -80,8 +79,6 @@ const ModalAddProduct = (props) => {
         // setImagesUpload(true)
 
         setLoading(false)
-
-        console.log(product)
     }
 
     // States DropdownCategories

@@ -19,9 +19,7 @@ function Products(props) {
                     </div>
                     <div className='prodComp1'>
                         <div className='prodComp2'>
-                            <h1 className='prodName'>
-                                {name}
-                            </h1>
+                            <h1 className='prodName'>{name}</h1>
                             <span className='prodDescription'>{description}</span>
                         </div>
                         <div className='prodComp3'>
@@ -30,7 +28,6 @@ function Products(props) {
                                 <ButtonAddToCart />
                                 <button className='buyProd'>Comprar</button>
                             </div>
-                            {/* <span className='prodStock'>45</span> */}
                         </div>
                     </div>
                 </div>

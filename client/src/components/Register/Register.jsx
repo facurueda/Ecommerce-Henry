@@ -1,72 +1,75 @@
 import React from 'react'
-import { actionAddToCart } from '../../redux/ordersActions'
 import { actionUserCreate } from '../../redux/usersActions'
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
 import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useState } from 'react'
+import { useHistory } from 'react-router'
+import './Register.css'
 
 // name, email, password, level
 // ejecutar props.actionUserCreate({ name: input.name, email: input.email, password: input.password, level: input.level })
 
-    
+
 const Register = (props) => {
-
-    const {modalRegisterClose, actionUserCreate} = props;
-
+    const history = useHistory()
+    const { modalRegisterClose, actionUserCreate } = props;
     // ---------------------------- States ---------------------------- //
-    
-    const [registerInputs, setRegisterInputs] = useState({name:'null', email:'null', password:'null',level:'USER'})
+    const [registerInputs, setRegisterInputs] = useState({ name: 'null', email: 'null', password: 'null', level: 'USER' })
     const [secondPassword, setSecondPassword] = useState('')
 
     // ---------------------------- Functions ---------------------------- //
 
     const handleChange = event => {
         const { name, value } = event.target
-        if (name === 'seconPassword'){
+        if (name === 'seconPassword') {
             setSecondPassword(value);
         } else {
             setRegisterInputs({ ...registerInputs, [name]: value })
         }
     }
     const VerificarYRegistrar = () => {
-        if (secondPassword === registerInputs.password){
+        if (secondPassword === registerInputs.password) {
             actionUserCreate(registerInputs)
             console.log('Usuario registrado.')
-        }else {
+        } else {
             console.log("Credenciales Incorrectas")
         }
     }
+    const tologin = () => {
+        history.push('/login')
+    }
 
     return (
-            <div className='loginContainer'>
-                <ModalHeader id='loginHeaderContainer'>
-                    <div className="addProductTitle">Register with</div>
-                </ModalHeader>
-                <ModalBody id='loginBodyContainer'>
-                    <div>
-                        {/* Buttons GitHub, Google, Facebook? */}
-                    </div>
-                    <input className='name' name='name' type='text' placeholder='Name' onChange={handleChange}/>
-                    <input className='emailInput' name='email' type='email' placeholder='Email' onChange={handleChange}/>
-                    <input className='passwordInput' name='password' type="password" placeholder='Password'onChange={handleChange}/>
-                    <input className='passwordInput' name='secondPassword' type="password" placeholder='Repeat Password' />
+        <div className='loginContainer'>
+            <ModalHeader id='loginHeaderContainer'>
+                <div className="addProductTitle">Register with</div>
+            </ModalHeader>
+            <ModalBody id='loginBodyContainer'>
+                <div>
+                    {/* Buttons GitHub, Google, Facebook? */}
+                </div>
+                <div className='FormRegisterContainer'>
+                    <input className='standardInput' name='name' type='text' placeholder='Name' onChange={handleChange} />
+                    <input className='standardInput' name='email' type='email' placeholder='Email' onChange={handleChange} />
+                    <input className='standardInput' name='password' type="password" placeholder='Password' onChange={handleChange} />
+                    <input className='standardInput' name='secondPassword' type="password" placeholder='Repeat Password' />
                     <button className='buttonLogin' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
-                </ModalBody>
-                <ModalFooter id='loginFooterContainer'>
-                    <a><div className='createAccount'>Already have an account? <a>Login</a></div></a>
-                </ModalFooter>
-            </div>
+                </div>
+            </ModalBody>
+            <ModalFooter id='loginFooterContainer'>
+                <a><div className='createAccount'>Already have an account? <a href='/login' >Login</a></div></a>
+            </ModalFooter>
+        </div>
     )
 
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-                actionUserCreate: (props) => {
-                dispatch(actionUserCreate(props))
-            }
+        actionUserCreate: (props) => {
+            dispatch(actionUserCreate(props))
+        }
     }
 }
 
-export default connect(() => {}, mapDispatchToProps)(Register);
+export default connect(() => { }, mapDispatchToProps)(Register);

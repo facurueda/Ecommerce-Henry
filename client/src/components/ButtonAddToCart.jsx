@@ -1,16 +1,20 @@
 import React from 'react'
 import { Button } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
+import {useHistory} from 'react-router'
 import { actionAddToCart } from '../redux/ordersActions'
 import './ButtonAddToCart.css'
 
 
 const ButtonAddToCart = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const user = useSelector(state => state.usersReducer.idUser)
     const handleChancla = () => {
         if (user){
         dispatch(actionAddToCart({ idUser: user, idProduct: props.idProduct, quantity: props.quantity, price: props.price }))
+        }else {
+            history.push('/register')
         }
     }
     return (<div>
