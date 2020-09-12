@@ -9,6 +9,7 @@ const Login = (props) => {
 
     return (
     <div className='loginContainer'>
+    <button className='closeButton' onClick={modalLoginClose}>x</button>
         <ModalHeader id='loginHeaderContainer'>
                 <div className="addProductTitle">Login with</div>
         </ModalHeader>

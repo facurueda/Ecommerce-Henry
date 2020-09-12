@@ -41,6 +41,7 @@ const Register = (props) => {
 
     return (
         <div className='loginContainer'>
+        <button className='closeButton' onClick={modalRegisterClose}>x</button>
             <ModalHeader id='loginHeaderContainer'>
                 <div className="addProductTitle">Register with</div>
             </ModalHeader>

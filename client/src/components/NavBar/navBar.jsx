@@ -14,7 +14,7 @@ const NavBar = () => {
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     // const { user } = useSelector(state => state.usersReducer.idUser)
-    const user = 5
+    const user = 0
 
     // ---------------------------- Functions ---------------------------- //
 
