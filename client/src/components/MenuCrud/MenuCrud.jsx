@@ -57,16 +57,10 @@ useEffect(() => {
       {/* <NavBar/> */}
       <Container>
         <br/>
-          <Button
-          style={{
-            float:'right',
-            height: "50px", width: "150px", borderRadius:"10px",
-            margin:"15px"
-          }}
-          color='success' onClick = {e => modalAddView()}>Add product</Button>
+          <button className = "addProd" onClick={e => modalAddView()}> + </button> 
         <br/>
         <br/>
-        <ProductTable
+        <ProductTable 
         products = {products}
         deleteProduct = {deleteProduct}
         editProduct = {editProduct}

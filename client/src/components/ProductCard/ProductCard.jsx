@@ -5,10 +5,11 @@ import {
     Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
 import ButtonAddToCart from '../ButtonAddToCart';
+import productsReducer from '../../redux/productsReducer';
 
 const ProductCard = (props) => {
 
-    const { name, price, description, idProduct } = props;
+    const { name, price, description, idProduct, images } = props;
 
     const cutDescription = (description) => {
         if (description.length > 80) {
@@ -20,10 +21,9 @@ const ProductCard = (props) => {
     return (
         <div>
             <Card className='productCard'>
-            <a href='/products/:id'>
                 <div className='content'>
                 <a href='/products/:id'>
-                    <CardImg className='image' src={imge} alt="Card image cap" />
+                    <CardImg className='image' src={images} alt="Card image cap" />
                     </a>
                     <CardBody>
                         <h3 className='productName'>{name}</h3>
@@ -31,7 +31,6 @@ const ProductCard = (props) => {
                         <div style={{display: "flex", flexDirection: "row",justifyContent: "flex-end"}}><h3><b>$ {price}</b></h3><ButtonAddToCart props={{ idProduct, quantity: 1, price }} /><h5 className='price'></h5></div>
                     </CardBody>
                 </div>
-            </a>
             </Card>
         </div>
     )

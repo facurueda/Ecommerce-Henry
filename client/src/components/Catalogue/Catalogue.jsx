@@ -28,7 +28,7 @@ const Catalogue = (props) => {
         return (
         <div>
             <div className='categories'>
-                <h3><b>products not found</b></h3>
+                <h3><b>Products not found</b></h3>
             </div>
         </div>
         )
@@ -50,7 +50,7 @@ const Catalogue = (props) => {
                             name={product.name}
                             description={product.description}
                             price={product.precio}
-                            image={product.image} />
+                            images={product.images} />
   }
                 })
             }
