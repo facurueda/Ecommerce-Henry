@@ -24,10 +24,10 @@ function App() {
           <Switch>
             <Route path='/Search' component={ProductsBySearchTerm}/>
             <Route exact path="/" component={Home} />
+            <Route path='/productDetail' component={Product} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path='/categories' component={Categories} />
             <Route path="/menuCrud" component={MenuCrud} />
-            <Route path="/products/:id" component={Product} />
             <Route path='/order' component={Order} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />

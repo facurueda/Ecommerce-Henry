@@ -12,12 +12,12 @@ import { connect } from 'react-redux'
 const Catalogue = (props) => {
     useEffect(() => {
         props.actionGetCategories()
-    },[])
+    }, [])
 
 
 
     const productsFilter = (e) => {
-        if (e !== 'none') {
+        if (e !== 'All categories') {
             props.actionGetProductsByCategory(e)
         } else {
             props.actionGetProducts()
@@ -26,22 +26,23 @@ const Catalogue = (props) => {
     const { categories } = props
     if (props.categories.length === 0) {
         return (
-        <div>
-            <div className='categories'>
-                <h3><b>products not found</b></h3>
+            <div>
+                <div className='categories'>
+                    <h3><b>products not found</b></h3>
+                </div>
             </div>
-        </div>
         )
     }
     return (
         <div>
             {/* <NavBar /> */}
-            <div className='categories'>
+            <div className='categories_menu'>
                 {categories.map(category => {
                     return <Category className='categoryImage' name={category.name} productsFilter={productsFilter} />
 
-                })}
-                <Button onClick={e => productsFilter('none')}>All Products</Button>
+                })
+                }
+                <Category className='categoryImage' name={"All categories"} productsFilter={productsFilter} />
             </div>
             <div className='products'> {
                 props.products.map(product => {
@@ -50,8 +51,9 @@ const Catalogue = (props) => {
                             name={product.name}
                             description={product.description}
                             price={product.precio}
-                            image={product.image} />
-  }
+                            image={product.image} 
+                            idProduct={product.idProduct}/>
+                    }
                 })
             }
             </div>

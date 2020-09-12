@@ -8,26 +8,39 @@
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 .content {
+    display: flex;
     width: 90%;
     justify-content: center;
-    display: flex;
     flex-direction: row;
+}
+.ProductDataContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: "row";
 }
 .image.card-img {
     height: 125px;
     width: auto;
     margin: 3px;
     align-self: center;
+    justify-self: center;
     margin-top: 5px
+}
+.imgStyle {
+    display: flex;
 }
 .productName {
     display: flex;
-    justify-content: center
+    justify-content: flex-start;
 }
 .description{
     font-style:italic
 }
 .price {
     font-weight: bold;
+    font-size: 30px;
     float: right
+}
+.productCard.card{
+    margin: 10px;
 }

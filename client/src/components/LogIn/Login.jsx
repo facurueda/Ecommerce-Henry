@@ -18,12 +18,12 @@ const Login = (props) => {
             <div>
                 {/* Buttons GitHub, Google, Facebook? */}
             </div>
-            <input className='emailInput' type='email'/>
-            <input className='passwordInput' type="password"/>
-            <button className='buttonLogin' onClick={e => modalLoginClose()}>LOGIN</button>
+            <input className='standardInput' type='email' placeholder='laCoseria@gmail.com'/>
+            <input className='standardInput' type="password" placeholder='··············'/>
+            <button className='standardInput' onClick={e => modalLoginClose()}>LOGIN</button>
         </ModalBody>
         <ModalFooter id='loginFooterContainer'>
-            <a><div className='createAccount'>Looking to <a>Create Account</a> ?</div></a>
+            <a><div className='createAccount'>Looking for <a href='/register'>Create Account</a>?</div></a>
         </ModalFooter>
 
 
