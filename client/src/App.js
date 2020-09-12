@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Catalogue from './components/Catalogue/Catalogue'
-import MenuCrud from './components/MenuCrud/MenuCrud'
-import Home from './components/Home/Home'
-import Product from './components/product/products'
+import Catalogue from './components/Catalogue/Catalogue';
+import MenuCrud from './components/MenuCrud/MenuCrud';
+import Home from './components/Home/Home';
+import Product from './components/product/products';
 import Categories from './components/Categories/Categories';
-import AdminNavBar from './components/AdminNavBar/AdminNavBar'
+import AdminNavBar from './components/AdminNavBar/AdminNavBar';
+import NotFound from './components/NotFound/NotFound';
 
 import './App.css'
 import Order from './components/Order/order';
@@ -33,6 +34,7 @@ function App() {
             <Route path='/register' component={Register} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route exact path='/admin' component={AdminNavBar}/>
+            <Route component={NotFound} />
           </Switch>
         </Router>
       </div>
