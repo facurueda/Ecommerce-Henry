@@ -14,7 +14,6 @@ import {
 } from "reactstrap";
 import './ModalAddProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
-import Select from "react-dropdown-select";
 
 const ModalAddProduct = (props) => {
 
@@ -176,7 +175,6 @@ const ModalAddProduct = (props) => {
                                         <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
                                     )
                                 })}
-                  
                             </DropdownMenu>
                         </Dropdown>
                     </FormGroup>

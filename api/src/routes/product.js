@@ -113,7 +113,15 @@ server.post('/create', (req, res, next) => {
 		rating,
 		stock,
 		images
-	}).then(() => {
+	}).then((product) => {
+		Categories.findOne({
+			where: { name: req.body.categories }
+		}).then(category => {
+			Inter_Cat_Prod.create({
+				idCategory: category.idCategory,
+				idProduct: product.idProduct
+			})
+		})
 		res.send(req.body)
 	}).catch(next);
 });
