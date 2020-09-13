@@ -149,7 +149,7 @@ const ModalAddProduct = (props) => {
 
                         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                             <DropdownToggle caret>
-                                Select Cat
+                               {product.categories}
                             </DropdownToggle>
                             <DropdownMenu>
                                 {categories.map( c => {
