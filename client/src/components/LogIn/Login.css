@@ -4,7 +4,8 @@
     color: #ffffff;
     width: 500px;
     height: 500px;
-    background-color: #2f3640;
+    background-color: rgba(222, 245, 209, 0.25);
+    backdrop-filter: blur(7px);    
     border-radius: 15px;
     font-family:'Roboto', sans-serif;
     font-weight:300;
@@ -22,7 +23,7 @@
     font-weight:300;
     color:#ffffff;
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    background-color:#2f3640;
+    background-color: rgba(47, 54, 64, 0.57);
     text-align:center;
     transition: all 0.15s;
  }
@@ -74,9 +75,11 @@
     text-align: center;
     border: 0px;
     box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.25);
+    background-color: rgba(255, 255, 255);
     font-family:'Roboto', sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 13px;
+    color: black;
 }
 
 #loginFooterContainer{
@@ -127,4 +130,7 @@
 .createAccount,
 .createAccount:hover {
     color: #DFA06E
+}
+.GoogleLogin {
+    border: 0px;
 }

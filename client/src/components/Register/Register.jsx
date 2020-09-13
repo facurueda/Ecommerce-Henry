@@ -55,10 +55,10 @@ const Register = (props) => {
                     {/* Buttons GitHub, Google, Facebook? */}
                 </div>
                 <div className='FormRegisterContainer'>
-                    <input className='standardInput' name='name' type='text' placeholder='Name' onChange={handleChange} />
-                    <input className='standardInput' name='email' type='email' placeholder='Email' onChange={handleChange} />
-                    <input className='standardInput' name='password' type="password" placeholder='Password' onChange={handleChange} />
-                    <input className='standardInput' name='secondPassword' type="password" placeholder='Repeat Password' />
+                    <input className='inputRegister' name='name' type='text' placeholder='Name' onChange={handleChange} />
+                    <input className='inputRegister' name='email' type='email' placeholder='Email' onChange={handleChange} />
+                    <input className='inputRegister' name='password' type="password" placeholder='Password' onChange={handleChange} />
+                    <input className='inputRegister' name='secondPassword' type="password" placeholder='Repeat Password' />
                     <button className='buttonRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </div>
             </ModalBody>
@@ -69,14 +69,14 @@ const Register = (props) => {
                 <p className = 'orLogin'>or login with</p>
                 <GoogleLogin 
                 clientId= '201334037554-3dqbt2c7a5hij69djsfp0kc4mtgb1bgj.apps.googleusercontent.com' 
-                buttonText = 'Login' 
+                buttonText = 'Google' 
                 onSuccess = {responseGoogle}
                 onFailure = {responseGoogle} 
                 cookiePolicy = {'single_host_origin'}/> 
                 <FacebookLogin 
                 appId="340361817317695"
                 autoLoad={false}
-                textButton= 'Login with Facebook'
+                textButton= 'Facebook'
                 fields="name,email,picture"
                 onClick={componentClicked}
                 callback={responseFacebook}

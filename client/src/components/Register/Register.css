@@ -33,7 +33,7 @@
     font-weight:300;
     color:#ffffff;
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    background-color:#2f3640;
+    background-color: rgba(47, 54, 64, 0.57);
     text-align:center;
     transition: all 0.15s;
  }
@@ -53,7 +53,7 @@
     flex-direction: column;
     justify-content: space-around;
 }
-.standardInput {
+.inputRegister {
     margin-top: 5px;
     border-radius: 11px;
     width: 100%;
@@ -61,9 +61,11 @@
     text-align: center;
     border: 0px;
     box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.25);
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    background-color: rgba(255, 255, 255);
+    font-family:'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 13px;
+    color: black;
 }
 
 .closeButton {
@@ -104,7 +106,10 @@
     align-content: center;
     justify-content: center;
 }
-.createAccount,
-.createAccount:hover {
+.logAccount,
+.logAccount:hover {
     color: #DFA06E
+}
+.GoogleLogin {
+    border: 0px;
 }

@@ -37,17 +37,17 @@ const Login = (props) => {
             <a className= 'createComponent '><div>Looking for <a  className='createAccount' href='#' onClick={ChangeModal}> create account</a>?</div></a>
             <div className = 'LoginAccountAux'> 
             <p className = 'orLogin'>or login with</p>
-                <GoogleLogin 
+                <GoogleLogin className = 'GoogleLogin' 
                 clientId= '201334037554-3dqbt2c7a5hij69djsfp0kc4mtgb1bgj.apps.googleusercontent.com' 
                 buttonText = 'Google' 
                 onSuccess = {responseGoogle}
                 onFailure = {responseGoogle} 
                 cookiePolicy = {'single_host_origin'} />
-                <FacebookLogin 
+                <FacebookLogin  
                 className = 'FacebookLogin'
                 appId="340361817317695"
                 autoLoad={false}
-                textButton= 'Facebook'
+                textButton= 'facebook'
                 fields="name,email,picture"
                 onClick={componentClicked}
                 callback={responseFacebook}
