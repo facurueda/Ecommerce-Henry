@@ -6,28 +6,8 @@ import logo2 from '../../product/images/2.jpeg'
 
 const ProductTable = (props) => {
 
-    // const products = [{
-    //     id: 12,
-    //     images: logo1,
-    //     name: "Bicicleta",
-    //     description: "dskajhasdkjasd",
-    //     precio: 4500,
-    //     stock: 74,
-    //     categories: 'Bicicletas'
-    // },
-    // {
-    //     id: 2,
-    //     images: logo2,
-    //     name: "Bicicleta",
-    //     description: "dskajhasdkjasd",
-    //     precio: 4500,
-    //     stock: 74,
-    //     categories: 'Bicicletas'
-    // }]
-
     const { products, editProduct, deleteProduct, categories } = props;
-    // const {editProduct, deleteProduct } = props;
-
+  
     return (
         products.length > 0 ? (
             products.map(product => (
@@ -50,50 +30,12 @@ const ProductTable = (props) => {
                     <div className="buttonContainer">
                         <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}
                         <Button color = 'danger' onClick = {e => deleteProduct(product.idProduct)}>Delete</Button>
-                        <Button color = 'danger' onClick = {e => console.log(products)}>TEST PRO</Button>
-                        <Button color = 'danger' onClick = {e => console.log(categories)}>TEST CAT</Button>
                     </div>
                 </div>
             ))
         ) : (
             <span>No Products</span>
         )
-        
-
-        // <Table>
-        //     <thead> 
-        //             <th>Images</th>
-        //             <th>Name</th>
-        //             {/* <th>Description</th> */}
-        //             <th>Price</th>
-        //             <th>Stock</th>
-        //             <th>Categories</th>
-        //             <th></th>
-        //     </thead>
-        //     <div className="separator"></div>
-        //     <tbody>
-        //         { products.length > 0 ? (
-        //             products.map(product => (
-        //                 <tr key = {product.id} className="productBody">
-        //                     <td> <img src= {product.images} alt="Product"></img> </td>
-
-        //                     <td>{product.name}</td>
-        //                     {/* <td > <div dangerouslySetInnerHTML={{ __html: product.description }} /></td> */}
-        //                     <td>{'$ '}{product.precio}</td>
-        //                     <td>{product.stock}</td>
-        //                     <td> {product.categories} </td>
-        //                     <td className= 'buttons'>
-        //                         <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}
-        //                         <Button color = 'danger' onClick = {e => deleteProduct(product.idProduct)}>Delete</Button>
-        //                     </td>
-        //                 </tr>
-        //             ))):(
-        //                 <tr>
-        //                     <td>No productos</td>
-        //                 </tr>
-        //             )}
-        //     </tbody>
-        // </Table>
     )
 }
 

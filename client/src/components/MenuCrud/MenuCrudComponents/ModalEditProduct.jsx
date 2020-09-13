@@ -16,11 +16,8 @@ import './ModalEditProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
 
 const ModalEditProduct = (props) => {
-
     const { currentProducts, updateProduct, modalCloseEdit, categories } = props;
-
     const [product, setProduct] = useState(currentProducts);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProduct({
@@ -28,111 +25,53 @@ const ModalEditProduct = (props) => {
             [name]: value
         });
     }
-
-
     // States Upload Image
-
     const [loading, setLoading] = useState(false)
     const [imagesUpload, setImagesUpload] = useState('')
-
     // Funciones Upload Image
-
     const uploadImage = async e => {
-        // const files = e.target.files
         const files = e
         const data = new FormData()
         data.append('file', files)
         data.append('upload_preset', 'ecommerceHenry')
         setLoading(true)
-
         const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
             {
                 method: 'POST',
                 body: data
             })
         const file = await res.json()
-
-
-        // setImagesUpload(file.secure_url)
         setProduct({ ...product, images: file.secure_url })
         setImagesUpload(file.secure_url)
-
-        // setImagesUpload(true)
-
         setLoading(false)
     }
-
     // ESTADOS DESCRIPTION
-
     const [descriptionState, setDescriptionState] = useState(product.description)
-
-
     const descriptionChange = (value) => {
-        // setDescriptionState(value)
-
-
         setProduct({
             ...product,
             description: value
         })
     }
-
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setProduct({
-    //         ...product,
-    //         [ name ] : value
-    //     });
-    // }
-
-
     const setCategory = (e) => {
         setProduct({
             ...product,
             categories: e.target.value
         })
     }
-
-
-
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
     const toggle = () => setDropdownOpen(prevState => !prevState);
-
-
     return (
         <div>
-
             <ModalHeader>
                 <div><h3>Edit product</h3></div>
             </ModalHeader>
-
             <ModalBody>
-
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
-
-                    <ListGroup horizontal className="inputContainer">
-
-                        <SelectImage uploadImage={uploadImage} />
-
+                   <ListGroup horizontal className="inputContainer">
+                       <SelectImage uploadImage={uploadImage} />
                     </ListGroup>
-                </FormGroup>
-
-
-
-                {/* <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
-                    <ListGroup horizontal style={{ alignItems: 'center' }}>
-
-
-
-                        <input type='file' name='file' placeholder='Upload' style={{ color: 'transparent' }} onChange={uploadImage} />
-                        {
-                            <img src={product.images} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
-                        }
-                    </ListGroup>
-                </FormGroup> */}
-
+                </FormGroup>              
                 <FormGroup>
                     <label>Product name: </label>
                     <input
@@ -143,7 +82,6 @@ const ModalEditProduct = (props) => {
                         value={product.name}
                     />
                 </FormGroup>
-
                 <FormGroup>
                     <label>Description: </label>
                     <form>
@@ -181,7 +119,6 @@ const ModalEditProduct = (props) => {
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
                         <label>Categories: </label>
-
                         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                             <DropdownToggle caret>
                             {product.categories}
@@ -191,14 +128,12 @@ const ModalEditProduct = (props) => {
                                     return(
                                         <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
                                     )
-                                })}
-                  
+                                })}                  
                             </DropdownMenu>
                         </Dropdown>
                     </FormGroup>
                 </ListGroup>
             </ModalBody>
-
             <ModalFooter>
                 <Button
                     color='success'
@@ -216,7 +151,6 @@ const ModalEditProduct = (props) => {
                     onClick={e => modalCloseEdit()}
                 >Exit
                 </Button>
-
                 <Button
                     color='danger'
                     onClick={e => console.log(currentProducts.image)}
@@ -226,5 +160,4 @@ const ModalEditProduct = (props) => {
         </div>
     )
 }
-
 export default ModalEditProduct;

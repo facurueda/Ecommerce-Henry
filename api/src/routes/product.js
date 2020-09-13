@@ -42,6 +42,8 @@ server.get('/:id', (req, res, next) => {
 		res.send(product)
 	}).catch(next)
 });
+
+
 server.get('/', (req, res, next) => {
 	Product.findAll({
 		include: [{

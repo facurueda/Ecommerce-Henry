@@ -4,11 +4,8 @@ import './Login.css'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
 
-
 const Login = (props) => {
-
     const {modalLoginClose, ChangeModal} = props;
-
     const responseGoogle = (response) => {
         console.log(response);
         console.log(response.profileObj)
@@ -16,8 +13,6 @@ const Login = (props) => {
     
     const responseFacebook = (response) => console.log(response);
     const componentClicked = () => console.log('clicked')
-
-
     return (
     <div className='loginContainer'>
     <button className='closeButton' onClick={modalLoginClose}>x</button>
@@ -55,8 +50,6 @@ const Login = (props) => {
             </div>
             </div>
         </ModalFooter>
-
-
     </div>
 )}
 
