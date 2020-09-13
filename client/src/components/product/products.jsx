@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 import ButtonAddToCart from '../ButtonAddToCart';
 import './products.css';
 import renderHTML from 'react-render-html';
+import StarRating from '../starRating/starRating.js';
 
 function Products(props) {
 
-    const { name, description, precio, images } = useSelector(state => state.productsReducer.product)
+    const { name, description, precio, images, rating} = useSelector(state => state.productsReducer.product)
 
     function test() {
         return {__html: description}
@@ -30,10 +31,14 @@ function Products(props) {
                             </div>
                         </div>
                         <div className='prodComp3'>
-                            <span className='prodPrice'>{precio} </span>
+                            <div><span className='prodPrice'> ${precio} </span></div>
                             <div className='buttons'>
                                 <ButtonAddToCart />
+                               
                                 <button className='buyProd'>Comprar</button>
+                                <div className = 'conteiner-star'>
+                                <StarRating rating={rating}/>
+                                </div>
                             </div>
                         </div>
                     </div>

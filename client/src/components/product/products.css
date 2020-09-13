@@ -13,6 +13,8 @@
     -moz-osx-font-smoothing: grayscale
 }
 
+.prodDescription {}
+
 /* /////////////////////////////////////////////////////////////////// IMAGEN */
 
 img {
@@ -46,6 +48,8 @@ img {
     flex-direction: row;
     align-content: center;
     /* background: #def5d1; */
+    margin-top: 20px;
+    
     
 }
 .prodComp2 {
@@ -53,7 +57,9 @@ img {
     align-self: flex-end;
     justify-self: flex-end;
     flex-direction: column;
-    margin-bottom: 20px;
+   margin-bottom: 300px;
+   margin-left: 20px;
+   margin-right: 30px;
 }
 .prodComp3{
     display: flex;
@@ -66,6 +72,8 @@ img {
     color: #2f3640;
     font-weight: 500;
     margin: 20px;
+    margin-bottom: 350px;
+    margin-left: 30px;
 }
 .buyProd,
 .cart {
@@ -140,4 +148,15 @@ button {
 
   span:hover {
       border: 0
+  }
+
+
+  .conteiner-star {
+      margin-top: 30px;
+      margin-left: 35px;
+  }
+
+  .prodName {
+      margin-bottom: 20px;
+      margin-left: 20px;
   }
