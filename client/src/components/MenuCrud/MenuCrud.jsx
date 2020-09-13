@@ -63,6 +63,7 @@ useEffect(() => {
         products = {products}
         deleteProduct = {deleteProduct}
         editProduct = {editProduct}
+        categories = {categories}
         />
       </Container>
       <Modal isOpen = {modalAdd}>

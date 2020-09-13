@@ -5,9 +5,8 @@ import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
 import './Register.css'
-
-// name, email, password, level
-// ejecutar props.actionUserCreate({ name: input.name, email: input.email, password: input.password, level: input.level })
+import { GoogleLogin } from 'react-google-login'
+import FacebookLogin from 'react-facebook-login'
 
 
 const Register = (props) => {
@@ -19,6 +18,12 @@ const Register = (props) => {
 
     // ---------------------------- Functions ---------------------------- //
 
+    const responseGoogle = (response) => {
+        console.log(response);
+        console.log(response.profileObj)
+    }
+    const responseFacebook = (response) => console.log(response);
+    const componentClicked = () => console.log('clicked')
     const handleChange = event => {
         const { name, value } = event.target
         if (name === 'seconPassword') {
@@ -43,22 +48,41 @@ const Register = (props) => {
         <div className='loginContainer'>
         <button className='closeButton' onClick={modalRegisterClose}>x</button>
             <ModalHeader id='loginHeaderContainer'>
-                <div className="addProductTitle">Register with</div>
+                <div className="registerTitle">Register with</div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
                 <div>
                     {/* Buttons GitHub, Google, Facebook? */}
                 </div>
                 <div className='FormRegisterContainer'>
-                    <input className='standardInput' name='name' type='text' placeholder='Name' onChange={handleChange} />
-                    <input className='standardInput' name='email' type='email' placeholder='Email' onChange={handleChange} />
-                    <input className='standardInput' name='password' type="password" placeholder='Password' onChange={handleChange} />
-                    <input className='standardInput' name='secondPassword' type="password" placeholder='Repeat Password' />
-                    <button className='buttonLogin' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
+                    <input className='inputRegister' name='name' type='text' placeholder='Name' onChange={handleChange} />
+                    <input className='inputRegister' name='email' type='email' placeholder='Email' onChange={handleChange} />
+                    <input className='inputRegister' name='password' type="password" placeholder='Password' onChange={handleChange} />
+                    <input className='inputRegister' name='secondPassword' type="password" placeholder='Repeat Password' />
+                    <button className='buttonRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
-                <a><div className='createAccount'>Already have an account? <a href='#' onClick={ChangeModal}>Login</a></div></a>
+                <div className = 'LoginAccount'>
+                <a><div className='logComponent'>Already have an account? <a className='logAccount' href='#' onClick={ChangeModal}>Login</a></div></a>
+                <div className = 'LoginAccountAux'> 
+                <p className = 'orLogin'>or login with</p>
+                <GoogleLogin 
+                clientId= '201334037554-3dqbt2c7a5hij69djsfp0kc4mtgb1bgj.apps.googleusercontent.com' 
+                buttonText = 'Google' 
+                onSuccess = {responseGoogle}
+                onFailure = {responseGoogle} 
+                cookiePolicy = {'single_host_origin'}/> 
+                <FacebookLogin 
+                appId="340361817317695"
+                autoLoad={false}
+                textButton= 'Facebook'
+                fields="name,email,picture"
+                onClick={componentClicked}
+                callback={responseFacebook}
+                icon="fa-facebook"/>
+                </div>
+                </div>
             </ModalFooter>
         </div>
     )
