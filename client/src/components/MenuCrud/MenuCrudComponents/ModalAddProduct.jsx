@@ -126,7 +126,6 @@ const ModalAddProduct = (props) => {
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
                         <label className = 'productDetail'>Categories: </label>
-
                         <Dropdown className = 'dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
                             <DropdownToggle className = 'dropdownCat' caret>
                                 {product.categories}
