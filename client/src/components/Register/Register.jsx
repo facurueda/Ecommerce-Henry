@@ -21,7 +21,7 @@ const Register = (props) => {
 
     const handleChange = event => {
         const { name, value } = event.target
-        if (name === 'seconPassword') {
+        if (name === 'secondPassword') {
             setSecondPassword(value);
         } else {
             setRegisterInputs({ ...registerInputs, [name]: value })
@@ -53,7 +53,7 @@ const Register = (props) => {
                     <input className='standardInput' name='name' type='text' placeholder='Name' onChange={handleChange} />
                     <input className='standardInput' name='email' type='email' placeholder='Email' onChange={handleChange} />
                     <input className='standardInput' name='password' type="password" placeholder='Password' onChange={handleChange} />
-                    <input className='standardInput' name='secondPassword' type="password" placeholder='Repeat Password' />
+                    <input className='standardInput' name='secondPassword' type="password" placeholder='Repeat Password' onChange={handleChange}/>
                     <button className='buttonLogin' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </div>
             </ModalBody>

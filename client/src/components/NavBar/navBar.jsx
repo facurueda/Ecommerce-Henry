@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from './Images/Logo.png'
 import Cart from './Images/Cart.png'
 import './navBar.css'
@@ -6,15 +6,20 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Modal, Button } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { actionGetUserById } from '../../redux/usersActions'
 
 const NavBar = () => {
+    //// ---------------------------- DEV ---------------------------- //
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(actionGetUserById(1))
+    },[])
 
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
-    // const { user } = useSelector(state => state.usersReducer.idUser)
-    const user = 0
+    const user = useSelector(state => state.usersReducer.idUser)
 
     // ---------------------------- Functions ---------------------------- //
 
@@ -49,7 +54,7 @@ const NavBar = () => {
                             <button className='buttonProducts'>Products</button>
                         </form>
                         {user ? (
-                            <form action="/Account">
+                            <form action="/admin">
                                 <button className='buttonProducts'>My Account</button>
                             </form>
                         ) : (<div></div>)}
