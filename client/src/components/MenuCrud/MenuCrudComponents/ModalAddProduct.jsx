@@ -74,35 +74,20 @@ const ModalAddProduct = (props) => {
                 body: data
             })
         const file = await res.json()
-
-
-        // setImagesUpload(file.secure_url)
         setProduct({ ...product, images: file.secure_url })
         setImagesUpload(file.secure_url)
-
-        // setImagesUpload(true)
-
         setLoading(false)
     }
-
-    // States DropdownCategories
-
-    // const [dropdownOpen, setDropdownOpen] = useState(false);
-
-    // const toggle = () => setDropdownOpen(prevState => !prevState);
-
 
     const [fileNames, setFileNames] = useState([]);
     const handleDrop = acceptedFiles =>
         setFileNames(acceptedFiles.map(file => file.name));
-
 
     // const AllCategories = categories.map( c => {c.name})
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
-
 
     return (
         <div>
@@ -111,11 +96,8 @@ const ModalAddProduct = (props) => {
             </ModalHeader>
             <ModalBody>
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
-
                     <ListGroup horizontal className="inputContainer">
-
-                        <SelectImage uploadImage={uploadImage} />
-
+                        <SelectImage uploadImage={uploadImage}/>
                     </ListGroup>
                 </FormGroup>
 
@@ -137,7 +119,7 @@ const ModalAddProduct = (props) => {
                             init={{
                                 height: 250,
                                 menubar: false
-                            }}
+                            }}   
                             onEditorChange={handleChangeDescription}
                         />
                     </form>
@@ -177,6 +159,7 @@ const ModalAddProduct = (props) => {
                                 })}
                             </DropdownMenu>
                         </Dropdown>
+                      
                     </FormGroup>
                 </ListGroup>
             </ModalBody>
@@ -187,7 +170,9 @@ const ModalAddProduct = (props) => {
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
                         if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         addProduct(product);
-                        setProduct(initialState);
+
+                        setProduct(initialState)
+
                         modalCloseAdd();
                     }}
                 > Submit</Button>

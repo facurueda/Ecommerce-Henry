@@ -1,12 +1,12 @@
 import React, { useState,useEffect } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"; 
-import {   Button,   Container,   Modal, } from "reactstrap";
+import {   Container,   Modal, } from "reactstrap";
 import ProductTable from './MenuCrudComponents/ProductTable';
 import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
-import SelectImage from '../SelectImage/SelectImage'
+
 
 import { connect, useSelector } from 'react-redux';
 
@@ -56,16 +56,10 @@ useEffect(() => {
     <div>
       <Container>
         <br/>
-          <Button
-          style={{
-            float:'right',
-            height: "50px", width: "150px", borderRadius:"10px",
-            margin:"15px"
-          }}
-          color='success' onClick = {e => modalAddView()}>Add product</Button>
+          <button className = "addProd" onClick={e => modalAddView()}> + </button> 
         <br/>
         <br/>
-        <ProductTable
+        <ProductTable 
         products = {products}
         deleteProduct = {deleteProduct}
         editProduct = {editProduct}

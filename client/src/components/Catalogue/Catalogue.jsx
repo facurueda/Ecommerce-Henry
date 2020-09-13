@@ -2,19 +2,14 @@ import React from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import './Catalogue.css'
 import Category from './Category'
-import { Button } from 'reactstrap'
 import { actionGetProducts, actionGetProductsByCategory } from '../../redux/productsActions'
 import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
-import { connect } from 'react-redux'
-
-
+import { connect } from 'react-redux' 
 const Catalogue = (props) => {
     useEffect(() => {
         props.actionGetCategories()
     }, [])
-
-
 
     const productsFilter = (e) => {
         if (e !== 'All categories') {
@@ -23,22 +18,23 @@ const Catalogue = (props) => {
             props.actionGetProducts()
         }
     }
+
     const { categories } = props
     if (props.categories.length === 0) {
         return (
             <div>
                 <div className='categories'>
-                    <h3><b>products not found</b></h3>
+                    <h3><b>Products not found</b></h3>
                 </div>
             </div>
         )
     }
+
     return (
         <div>
-            {/* <NavBar /> */}
             <div className='categories_menu'>
                 {categories.map(category => {
-                    return <Category className='categoryImage' name={category.name} productsFilter={productsFilter} />
+                    return <Category className='categoryImage' name={category.name}  productsFilter={productsFilter} />
 
                 })
                 }
@@ -51,7 +47,7 @@ const Catalogue = (props) => {
                             name={product.name}
                             description={product.description}
                             price={product.precio}
-                            image={product.image} 
+                            images={product.images} 
                             idProduct={product.idProduct}/>
                     }
                 })

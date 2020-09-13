@@ -170,7 +170,7 @@ const ModalEditProduct = (props) => {
                         <select multiple class="form-control"
 
                             // ============== VEEEEEEEEEEEEERRRRRRRRRRR
-                            onChange={e => {
+                            onClick={e => {
                                 setCategory(e)
                             }}
                         >

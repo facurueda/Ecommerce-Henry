@@ -2,11 +2,8 @@ import React from 'react'
 import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import './Login.css'
 
-
 const Login = (props) => {
-
     const {modalLoginClose, ChangeModal} = props;
-
     return (
     <div className='loginContainer'>
     <button className='closeButton' onClick={modalLoginClose}>x</button>
@@ -24,8 +21,6 @@ const Login = (props) => {
         <ModalFooter id='loginFooterContainer'>
             <a><div className='createAccount'>Looking for <a href='#' onClick={ChangeModal}>Create Account</a>?</div></a>
         </ModalFooter>
-
-
     </div>
 )}
 
