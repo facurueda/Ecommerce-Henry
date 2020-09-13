@@ -45,12 +45,7 @@ server.get('/:id', (req, res, next) => {
 
 
 server.get('/', (req, res, next) => {
-	Product.findAll({
-		include: [{
-			model: Categories,
-			as: 'categories'
-		}]
-	})
+	Product.findAll()
 		.then((products) => {
 			res.send(products);
 		}).catch(next)
@@ -104,6 +99,7 @@ server.post('/aaa', (req, res, next) => {
 		})
 	}).catch(next)
 })
+
 server.post('/create', (req, res, next) => {
 	const {
 		name,
@@ -132,6 +128,7 @@ server.post('/create', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next);
 });
+
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
@@ -140,9 +137,10 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
+
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
+
 server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
-	/////////////////////////// Elimina la categoria del producto:
 	Inter_Cat_Prod.destroy({
 		where: {
 			idProduct: req.body.idProduct,
@@ -152,8 +150,9 @@ server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
+
 server.delete('/:idProducto', (req, res, next) => {
-	/////////////////////////// Elimina un producto:
+
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
@@ -169,6 +168,7 @@ server.delete('/:idProducto', (req, res, next) => {
 		res.status(400)
 	})
 })
+
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 server.put('/:id', (req, res, next) => {
 	Product.findOne({

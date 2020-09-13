@@ -39,35 +39,23 @@ const ModalAddProduct = (props) => {
             [name]: value
         })
     }
-
-    // const totalCat = [{ name: 'Buzos' }, { name: 'Remeras' }, { name: 'Pantalones' }]
-
+    
     const [category, setCategory] = useState('')
-
-    // States
     const [content, setContent] = useState('');
-
     // Functions
     const handleChangeDescription = (content, editor) => {
         setContent(content)
     }
-
-
     // States Upload Image
-
     const [loading, setLoading] = useState(false)
     const [imagesUpload, setImagesUpload] = useState('')
-
     // Funciones Upload Image
-
     const uploadImage = async e => {
-        // const files = e.target.files
         const files = e
         const data = new FormData()
         data.append('file', files)
         data.append('upload_preset', 'ecommerceHenry')
         setLoading(true)
-
         const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
             {
                 method: 'POST',
@@ -78,58 +66,47 @@ const ModalAddProduct = (props) => {
         setImagesUpload(file.secure_url)
         setLoading(false)
     }
-
     const [fileNames, setFileNames] = useState([]);
     const handleDrop = acceptedFiles =>
         setFileNames(acceptedFiles.map(file => file.name));
-
-    // const AllCategories = categories.map( c => {c.name})
-
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
     const toggle = () => setDropdownOpen(prevState => !prevState);
-
-
-    const [catSel, setCatSel] = useState('Select Cat')
-
     return (
-        <div>
+        <div className='addProdContainer'>
             <ModalHeader>
-                <div className="addProductTitle">Add product</div>
+                <div>Add product</div>
             </ModalHeader>
             <ModalBody>
-                <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
+                <FormGroup className = 'uploadImage' style={{ display: "flex", justifyContent: 'center' }}>
                     <ListGroup horizontal className="inputContainer">
-                        <SelectImage uploadImage={uploadImage}/>
+                        <SelectImage uploadImage={uploadImage} />
                     </ListGroup>
                 </FormGroup>
-
-                <FormGroup>
-                    <label>Product name: </label>
-                    <input
-                        className='form-control'
+                <FormGroup className = 'productName'>
+                    <label className = 'productDetail'>Product name: </label>
+                    <input className = 'inputName'
                         name='name'
                         type='text'
                         onChange={handleChange}
                     />
                 </FormGroup>
                 <FormGroup>
-                    <label>Description: </label>
+                    <label className = 'productDetail'>Description: </label>
                     <form>
-                        <Editor
+                        <Editor id = 'productEditor'
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
                             value={content}
                             init={{
-                                height: 250,
-                                menubar: false
-                            }}   
+                                height: 150,
+                                menubar: false,
+                            }}
                             onEditorChange={handleChangeDescription}
                         />
                     </form>
                 </FormGroup>
                 <ListGroup horizontal className="propertyContainer">
                     <FormGroup className="priceContainer">
-                        <label>Price: </label>
+                        <label className = 'productDetail'>Price: </label>
                         <input
                             className='form-control'
                             name='precio'
@@ -138,7 +115,7 @@ const ModalAddProduct = (props) => {
                         />
                     </FormGroup>
                     <FormGroup className="stockContainer">
-                        <label>Stock: </label>
+                        <label className = 'productDetail' >Stock: </label>
                         <input
                             className='form-control'
                             name='stock'
@@ -148,38 +125,36 @@ const ModalAddProduct = (props) => {
                         />
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
-                        <label>Categories: </label>
+                        <label className = 'productDetail'>Categories: </label>
 
-                        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                            <DropdownToggle caret>
-                            {product.categories}
+                        <Dropdown className = 'dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
+                            <DropdownToggle className = 'dropdownCat' caret>
+                                {product.categories}
                             </DropdownToggle>
-                            <DropdownMenu>
-                                {categories.map( c => {
-                                    return(
+                            <DropdownMenu className = 'dropdownCat' >
+                                {categories.map(c => {
+                                    return (
                                         <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
                                     )
                                 })}
                             </DropdownMenu>
                         </Dropdown>
-                      
+
                     </FormGroup>
                 </ListGroup>
             </ModalBody>
             <ModalFooter>
-                <Button color='success'
+                <Button className = 'buttonAdd'
                     onClick={e => {
                         e.preventDefault();
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
                         if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         addProduct(product);
-
                         setProduct(initialState)
-
                         modalCloseAdd();
                     }}
                 > Submit</Button>
-                <Button color='danger' onClick={e => modalCloseAdd()}>Exit</Button>
+                <Button className = 'buttonExit' onClick={e => modalCloseAdd()}>Exit</Button>
             </ModalFooter>
         </div>
     )

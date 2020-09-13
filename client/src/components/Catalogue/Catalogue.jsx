@@ -5,7 +5,7 @@ import Category from './Category'
 import { actionGetProducts, actionGetProductsByCategory } from '../../redux/productsActions'
 import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
-import { connect } from 'react-redux' 
+import { connect } from 'react-redux'
 const Catalogue = (props) => {
     useEffect(() => {
         props.actionGetCategories()
@@ -34,8 +34,7 @@ const Catalogue = (props) => {
         <div>
             <div className='categories_menu'>
                 {categories.map(category => {
-                    return <Category className='categoryImage' name={category.name}  productsFilter={productsFilter} />
-
+                    return <Category className='categoryImage' name={category.name} productsFilter={productsFilter} />
                 })
                 }
                 <Category className='categoryImage' name={"All categories"} productsFilter={productsFilter} />
@@ -47,8 +46,8 @@ const Catalogue = (props) => {
                             name={product.name}
                             description={product.description}
                             price={product.precio}
-                            images={product.images} 
-                            idProduct={product.idProduct}/>
+                            images={product.images}
+                            idProduct={product.idProduct} />
                     }
                 })
             }

@@ -13,21 +13,12 @@ const ProductCard = (props) => {
 
     const { name, price, description, idProduct, images } = props;
     const history = useHistory()
-
-    // const cutDescription = (description) => {
-    //     // let aux = description.replace('</p>', '')
-    //     // let descriptionAux = aux.replace('<p>', '')
-    //     if (description.length > 80) {
-    //         return (description.substring(0, 80) + '...')
-    //     }
-    //     return description;
-    // }
     const dispatch = useDispatch()
     const handleChancla = async() => {
         await dispatch(actionGetProduct(idProduct))
         history.push('/productDetail')
     }
-
+    
     return (
         <div className='ProductCard_Container'>
             <Card className='productCard'>

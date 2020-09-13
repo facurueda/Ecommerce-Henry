@@ -6,7 +6,7 @@ import renderHTML from 'react-render-html';
 
 function Products(props) {
 
-    const { name, description, precio, images } = useSelector(state => state.productsReducer.product)
+    const { idProduct, name, description, precio, images } = useSelector(state => state.productsReducer.product)
 
     function test() {
         return {__html: description}
@@ -30,9 +30,9 @@ function Products(props) {
                             </div>
                         </div>
                         <div className='prodComp3'>
-                            <span className='prodPrice'>{precio} </span>
+                            <span className='prodPrice'>${precio} </span>
                             <div className='buttons'>
-                                <ButtonAddToCart />
+                                <ButtonAddToCart props={{ idProduct, quantity: 1, precio }}/>
                                 <button className='buyProd'>Comprar</button>
                             </div>
                         </div>

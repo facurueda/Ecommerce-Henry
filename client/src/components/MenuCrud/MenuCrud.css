@@ -11,6 +11,19 @@
     width: -webkit-fill-available;
 }
 
+#modalAdd {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(222, 245, 209, 0.25);
+    backdrop-filter: blur(7px);    
+    border-radius: 15px;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+}
+
 /* ////////////////////////////////////////////////////////////////////BOTONES */
 
 .btn-circle.btn-xl {

@@ -1,0 +1,134 @@
+.modal-header {
+    display: none;
+}
+.modal-footer {
+    border: 0px;
+}
+label {
+    font-size: 20px;
+    font-weight: 800;
+}
+.inputContainer {
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+.inputImage {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border: 4px dashed grey;
+}
+
+.propertyContainer {
+    justify-content: space-around;
+    align-items: 'center',
+}
+
+.priceContainer,
+.stockContainer,
+.categoriesContainer {
+    flex-direction: column;
+    width: 100px;
+    height: 50px;
+}
+
+.editProdContainer {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(222, 245, 209, 0.25);
+    backdrop-filter: blur(7px);
+    border-radius: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    border: 0px;
+}
+
+.buttonAdd,
+.buttonExit {
+    display: inline-block;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    margin: 10px 0.2em 0.2em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.buttonAdd:hover,
+.buttonExit:hover {
+    text-shadow: 0 0 0.5px #DFA06E;
+    color: #DFA06E;
+    border-color: #DFA06E;
+}
+
+@media all and (max-width:30em) {
+
+    .buttonAdd,
+    .buttonExit {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+.productDetail {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.inputName {
+    border-radius: 11px;
+    width: 60%;
+    padding: 5px 65px;
+    text-align: center;
+    border: 0px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.85);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: black;
+}
+
+.form-control,
+.dropdownCat {
+    border-radius: 11px;
+    text-align: center;
+    border: 0px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.85);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: black;
+    margin: 0;
+}
+
+.productName {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: fit-content;
+}
+
+.uploadImage {
+    height: 150px;
+}
+
+div.tox-statusbar,
+a {
+    display: none;
+    height: 0;
+}
