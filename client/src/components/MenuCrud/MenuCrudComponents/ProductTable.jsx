@@ -25,7 +25,7 @@ const ProductTable = (props) => {
     //     categories: 'Bicicletas'
     // }]
 
-    const { products, editProduct, deleteProduct } = props;
+    const { products, editProduct, deleteProduct, categories } = props;
     // const {editProduct, deleteProduct } = props;
 
     return (
@@ -50,6 +50,8 @@ const ProductTable = (props) => {
                     <div className="buttonContainer">
                         <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}
                         <Button color = 'danger' onClick = {e => deleteProduct(product.idProduct)}>Delete</Button>
+                        <Button color = 'danger' onClick = {e => console.log(products)}>TEST PRO</Button>
+                        <Button color = 'danger' onClick = {e => console.log(categories)}>TEST CAT</Button>
                     </div>
                 </div>
             ))

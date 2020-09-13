@@ -6,13 +6,18 @@ import {
     ModalBody,
     FormGroup,
     ModalFooter,
-    ListGroup
+    ListGroup,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from "reactstrap";
 import './ModalEditProduct.css'
+import SelectImage from '../../SelectImage/SelectImage'
 
 const ModalEditProduct = (props) => {
 
-    const {currentProducts, updateProduct, modalCloseEdit, categories } = props;
+    const { currentProducts, updateProduct, modalCloseEdit, categories } = props;
 
     const [product, setProduct] = useState(currentProducts);
 
@@ -33,9 +38,10 @@ const ModalEditProduct = (props) => {
     // Funciones Upload Image
 
     const uploadImage = async e => {
-        const files = e.target.files
+        // const files = e.target.files
+        const files = e
         const data = new FormData()
-        data.append('file', files[0])
+        data.append('file', files)
         data.append('upload_preset', 'ecommerceHenry')
         setLoading(true)
 
@@ -44,22 +50,17 @@ const ModalEditProduct = (props) => {
                 method: 'POST',
                 body: data
             })
-
         const file = await res.json()
 
 
         // setImagesUpload(file.secure_url)
         setProduct({ ...product, images: file.secure_url })
-
         setImagesUpload(file.secure_url)
 
         // setImagesUpload(true)
 
         setLoading(false)
-
-        console.log(product)
     }
-
 
     // ESTADOS DESCRIPTION
 
@@ -94,6 +95,12 @@ const ModalEditProduct = (props) => {
     }
 
 
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+
+
     return (
         <div>
 
@@ -104,13 +111,27 @@ const ModalEditProduct = (props) => {
             <ModalBody>
 
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
+
+                    <ListGroup horizontal className="inputContainer">
+
+                        <SelectImage uploadImage={uploadImage} />
+
+                    </ListGroup>
+                </FormGroup>
+
+
+
+                {/* <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
                     <ListGroup horizontal style={{ alignItems: 'center' }}>
+
+
+
                         <input type='file' name='file' placeholder='Upload' style={{ color: 'transparent' }} onChange={uploadImage} />
                         {
                             <img src={product.images} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
                         }
                     </ListGroup>
-                </FormGroup>
+                </FormGroup> */}
 
                 <FormGroup>
                     <label>Product name: </label>
@@ -158,24 +179,22 @@ const ModalEditProduct = (props) => {
                             value={product.stock}
                         />
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="categoriesContainer">
                         <label>Categories: </label>
-                        {/* <input
-                            className = 'form-control'
-                            name = 'categories'
-                            type = 'text'
-                            onChange = {handleChange}
-                            value = {product.categories}
-                        /> */}
-                        <select multiple class="form-control"
 
-                            // ============== VEEEEEEEEEEEEERRRRRRRRRRR
-                            onChange={e => {
-                                setCategory(e)
-                            }}
-                        >
-                            {categories.map(c => (<option key={c.name}> {c.name} </option>))}
-                        </select>
+                        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                            <DropdownToggle caret>
+                            {product.categories}
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                {categories.map( c => {
+                                    return(
+                                        <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
+                                    )
+                                })}
+                  
+                            </DropdownMenu>
+                        </Dropdown>
                     </FormGroup>
                 </ListGroup>
             </ModalBody>
@@ -198,11 +217,11 @@ const ModalEditProduct = (props) => {
                 >Exit
                 </Button>
 
-                {/* <Button 
-                    color = 'danger' 
-                    onClick = {e => console.log(currentProducts)}
+                <Button
+                    color='danger'
+                    onClick={e => console.log(currentProducts.image)}
                 >TEST
-                </Button> */}
+                </Button>
             </ModalFooter>
         </div>
     )

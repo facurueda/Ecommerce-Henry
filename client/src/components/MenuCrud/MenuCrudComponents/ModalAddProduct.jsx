@@ -24,7 +24,7 @@ const ModalAddProduct = (props) => {
         precio: '',
         stock: '',
         images: '',
-        categories: [],
+        categories: 'Choose Category',
         rating: 1
     };
 
@@ -103,6 +103,9 @@ const ModalAddProduct = (props) => {
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
+    const [catSel, setCatSel] = useState('Select Cat')
+
+
 
     return (
         <div>
@@ -167,7 +170,7 @@ const ModalAddProduct = (props) => {
 
                         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                             <DropdownToggle caret>
-                                Select Cat
+                            {product.categories}
                             </DropdownToggle>
                             <DropdownMenu>
                                 {categories.map( c => {
