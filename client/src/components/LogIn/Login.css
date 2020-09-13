@@ -1,25 +1,61 @@
 .loginContainer{
     display: flex;
     flex-direction: column;
-    border: black 1px solid;
+    color: #ffffff;
     width: 500px;
     height: 500px;
-    background-color: #f7f7f7;
+    background-color: #2f3640;
     border-radius: 15px;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
 }
+
+.logginButton {
+    display:inline-block;
+    padding:0.46em 1.6em;
+    border:0.1em solid #ffffff;
+    margin:10px 0.2em 0.2em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+    color:#ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color:#2f3640;
+    text-align:center;
+    transition: all 0.15s;
+ }
+.logginButton:hover{
+    text-shadow: 0 0 0.5px #DFA06E;
+    color:#DFA06E;
+    border-color:#DFA06E;
+}
+@media all and (max-width:30em){
+.logginButton{
+    display:block;
+    margin:0.4em auto;
+}}
 
 
 #loginHeaderContainer{
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
     display: flex;
-    justify-content: flex-start;
+    padding: 0;
+    padding-bottom: 15px;
 }
 .addProductTitle{
     float: left;
     font-size: 20px;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
 }
 
 
 #loginBodyContainer{
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,11 +68,20 @@
 }
 .standardInput {
     margin-top: 5px;
-    border-radius: 7px;
+    border-radius: 11px;
+    width: 75%;
+    padding: 5px 65px;
     text-align: center;
+    border: 0px;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.25);
+    font-family:'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
 }
 
 #loginFooterContainer{
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -49,13 +94,37 @@
     margin-bottom: 0px;
     margin-left: 0px;
     background-color: darkred;
-    width: 20px;
-    height: 20px;
-    border-radius: 5px;
+    width: 25px;
+    border-radius: 10px;
     text-align: center;
-    text-justify: auto;
+    justify-content: center;
     color: white
 }
-.createAccount{
+.LoginAccount{
+    display: flex;
+    flex-direction: column;
+}
 
+.modal-content{
+    border-radius: 15px;
+    background-color: transparent;
+}
+.createComponent {
+    display: flex;
+    justify-content: center;
+}
+.orLogin{
+    margin-bottom: 0;
+    padding-right: 10px;
+    align-self: center;
+    display: flex;
+} 
+.LoginAccountAux{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.createAccount,
+.createAccount:hover {
+    color: #DFA06E
 }

@@ -178,7 +178,6 @@ const ModalAddProduct = (props) => {
                                         <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
                                     )
                                 })}
-                  
                             </DropdownMenu>
                         </Dropdown>
                     </FormGroup>
