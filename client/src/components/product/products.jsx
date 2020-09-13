@@ -1,34 +1,38 @@
-import React from 'react';
-import StarRating from '../starRating/starRating'
-
-import logo from './images/1.jpeg'
-import logo1 from './images/2.jpeg'
-import logo2 from './images/3.jpeg'
-import logo3 from './images/4.jpeg'
-import NavBar from '../NavBar/navBar';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import ButtonAddToCart from '../ButtonAddToCart';
+import './products.css'
 
 function Products(props) {
 
-    const { name, description, precio, stock } = props;
-    const setStock = 0
+    const { name, description, precio, image } = useSelector(state => state.productsReducer.product)
+
 
     return (
-            <div className= 'prodCard'>
-                <NavBar/>
-                <div>
-                    <img className = 'imageProd' src={logo} alt="..."/>
+        <div>
+            <body>
+                <div className='prodCard'>
+                    <div id='hover-img'>
+                        <div className='card overflow-hidde'>
+                            <img className="img-fluid" src={image} alt="..." />
+                        </div>
+                    </div>
+                    <div className='prodComp1'>
+                        <div className='prodComp2'>
+                            <h1 className='prodName'>{name}</h1>
+                            <span className='prodDescription'>{description}</span>
+                        </div>
+                        <div className='prodComp3'>
+                            <span className='prodPrice'>{precio} </span>
+                            <div className='buttons'>
+                                <ButtonAddToCart />
+                                <button className='buyProd'>Comprar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <title className = 'nameProd'>
-                        {name}
-                    </title>
-                    <span className = 'descriptionProd'>{description}</span>
-                    <span className = 'precioProd'>{precio}</span>
-                    <span className = 'stockProd'>{stock}</span>
-                    <button className = 'addCart'>Añadir al carrito</button>
-                    <button className = 'buyProd'>Comprar</button>
-                </div>
-            </div>
+            </body>
+        </div>
     )
 }
 

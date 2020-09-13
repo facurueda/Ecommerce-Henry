@@ -52,6 +52,7 @@ const Categories = (props) => {
     await props.actionPostCategory(category);
     await window.location.reload(false)
   }
+  console.log(props.categories)
 
 
 
@@ -67,10 +68,12 @@ const Categories = (props) => {
   return (
     <div className='componentsContainer'>
       <Container>
+
+      {/* <a href="#" class="button-add"  onClick={e => modalAddView()}><span>+</span></a> */}
+        <button className = "addProd" onClick={e => modalAddView()}> + </button>
         <br />
-        <Button color="success" onClick={e => modalAddView()}>Add Category</Button>
         <br />
-        <br />
+
         <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />
       </Container>
       <Modal isOpen={modalAdd}>
@@ -78,7 +81,6 @@ const Categories = (props) => {
       </Modal>
       <Modal isOpen={modalEdit}>
         <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories} />
-
       </Modal>
     </div>
   )

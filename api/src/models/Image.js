@@ -1,4 +1,6 @@
-const { DataTypes } = require('sequelize');
+const {
+    DataTypes
+} = require('sequelize');
 module.exports = (sequelize) => {
     sequelize.define('image', {
         idImage: {
@@ -12,8 +14,8 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         link: {
-            type:DataTypes.STRING,
-            allowNull:false
+            type: DataTypes.STRING,
+            allowNull: false
         }
     })
 }

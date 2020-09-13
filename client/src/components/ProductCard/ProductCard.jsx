@@ -4,10 +4,15 @@ import imge from './imge/plantita.jpg'
 import {
     Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
+import ButtonAddToCart from '../ButtonAddToCart';
+import { useDispatch } from 'react-redux';
+import {useHistory} from 'react-router'
+import {actionGetProduct} from '../../redux/productsActions'
 
 const ProductCard = (props) => {
 
-    const { name, price, description } = props;
+    const { name, price, description, idProduct } = props;
+    const history = useHistory()
 
     const cutDescription = (description) => {
         if (description.length > 80) {
@@ -15,16 +20,25 @@ const ProductCard = (props) => {
         }
         return description;
     }
+    const dispatch = useDispatch()
+    const handleChancla = () => {
+        console.log(idProduct)
+        dispatch(actionGetProduct(idProduct))
+        history.push('/productDetail')
+    }
 
     return (
-        <div>
+        <div className='ProductCard_Container'>
             <Card className='productCard'>
                 <div className='content'>
-                    <CardImg className='image' src={imge} alt="Card image cap" />
+                        <CardImg className='image' src={imge} alt="Card image cap" onClick={handleChancla}/>
                     <CardBody>
                         <h3 className='productName'>{name}</h3>
-                        <CardText className='description'>{cutDescription(description)}</CardText>
-                        <h5 className='price'>$ {price}</h5>
+                        <div className='ProductDataContainer'>
+                            <CardText className='description'>{cutDescription(description)}</CardText>
+                            <b className='price'>${price}</b>
+                        </div>
+                        <ButtonAddToCart props={{ idProduct, quantity: 1, price }} />
                     </CardBody>
                 </div>
             </Card>

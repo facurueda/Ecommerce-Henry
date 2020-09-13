@@ -1,15 +1,25 @@
 const server = require('express').Router();
 const Sequelize = require("sequelize");
-const { Product, Categories, Inter_Cat_Prod, Image } = require('../db.js');
-
-
+const {
+	Product,
+	Categories,
+	Inter_Cat_Prod,
+} = require('../db.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 server.get('/search', (req, res, next) => {
-	Product.findAll(
-		{
+	Product.findAll({
 			where: {
-				[Sequelize.Op.or]: [{ name: { [Sequelize.Op.like]: "%" + req.query.query + "%" } },
-				{ description: { [Sequelize.Op.like]: "%" + req.query.query + "%" } }]
+				[Sequelize.Op.or]: [{
+						name: {
+							[Sequelize.Op.like]: "%" + req.query.query + "%"
+						}
+					},
+					{
+						description: {
+							[Sequelize.Op.like]: "%" + req.query.query + "%"
+						}
+					}
+				]
 			}
 		})
 		.then((products) => {
@@ -17,31 +27,27 @@ server.get('/search', (req, res, next) => {
 		}).catch(next)
 });
 
-
 server.get('/:id', (req, res, next) => {
 	// GET /products/:id
 	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
 	Product.findOne({
-		where: { idProduct: req.body.idProduct },
-		include: [{ model: Categories, as: 'categories' }, { model: Image, as: 'images' }]
+		where: {
+			idProduct: req.params.id
+		},
+		include: [{
+			model: Categories,
+			as: 'categories'
+		}]
 	}).then((product) => {
 		res.send(product)
 	}).catch(next)
 });
-
-
-
-
 server.get('/', (req, res, next) => {
 	Product.findAll()
 		.then((products) => {
 			res.send(products);
 		}).catch(next)
 });
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
 server.post('/aaa', (req, res, next) => {
 	Product.create({
@@ -50,39 +56,40 @@ server.post('/aaa', (req, res, next) => {
 		precio: 10,
 		rating: 5,
 		stock: 10,
+		images: 'http://www.google.com/'
 	}).then(() => {
 		return Categories.create({
-			name: "animales", description: "Todo tipo de animales"
+			name: "animales",
+			description: "Todo tipo de animales"
 		})
 	}).then(() => {
 		return Categories.create({
-			name: "Objetos", description: "Todo tipo de objetos"
+			name: "Objetos",
+			description: "Todo tipo de objetos"
 		})
 	}).then(() => {
 		return Categories.create({
-			name: "Perros", description: "la recontra descripcion"
+			name: "Perros",
+			description: "la recontra descripcion"
 		})
 	}).then(() => {
 		return Product.create({
-			name: "Perro", description: "Hace afuera", precio: 10, rating: 5, stock: 10,
+			name: "Perro",
+			description: "Hace afuera",
+			precio: 10,
+			rating: 5,
+			stock: 10,
+			images: 'http://www.google.com'
 		})
 	}).then(() => {
 		return Inter_Cat_Prod.create({
-			idCategory: 2, idProduct: 1
+			idCategory: 2,
+			idProduct: 1
 		})
 	}).then(() => {
 		return Inter_Cat_Prod.create({
-			idCategory: 1, idProduct: 2
-		})
-	}).then(() => {
-		return Image.create({
-			idProduct: 1,
-			link: 'http://dreamicus.com/data/dragon/dragon-05.jpg'
-		})
-	}).then(() => {
-		return Image.create({
-			idProduct: 1,
-			link: 'https://i.ytimg.com/vi/9dcQxfY2NH4/maxresdefault.jpg'
+			idCategory: 1,
+			idProduct: 2
 		})
 	}).then(() => {
 		return res.send({
@@ -90,20 +97,34 @@ server.post('/aaa', (req, res, next) => {
 		})
 	}).catch(next)
 })
-
 server.post('/create', (req, res, next) => {
-	const { name, description, precio, rating, stock } = req.body;
+	const {
+		name,
+		description,
+		precio,
+		rating,
+		stock,
+		images
+	} = req.body;
 	Product.create({
 		name,
 		description,
 		precio,
 		rating,
 		stock,
-	}).then(() => {
+		images
+	}).then((product) => {
+		Categories.findOne({
+			where: { name: req.body.categories }
+		}).then(category => {
+			Inter_Cat_Prod.create({
+				idCategory: category.idCategory,
+				idProduct: product.idProduct
+			})
+		})
 		res.send(req.body)
 	}).catch(next);
 });
-
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
@@ -112,10 +133,6 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
 server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 	/////////////////////////// Elimina la categoria del producto:
@@ -128,8 +145,6 @@ server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-
-
 server.delete('/:idProducto', (req, res, next) => {
 	/////////////////////////// Elimina un producto:
 	Product.destroy({
@@ -140,18 +155,13 @@ server.delete('/:idProducto', (req, res, next) => {
 	}).then((product) => {
 		if (product) {
 			res.status(200).send()
-		}
-		else {
+		} else {
 			res.status(400).send()
 		}
 	}).catch(() => {
 		res.status(400)
 	})
 })
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 server.put('/:id', (req, res, next) => {
 	Product.findOne({
@@ -164,14 +174,11 @@ server.put('/:id', (req, res, next) => {
 			name: req.body.name,
 			description: req.body.description,
 			precio: req.body.precio,
-			stock: req.body.stock
+			stock: req.body.stock,
+			images: req.body.images
 		}).then(() => {
 			res.send(product)
 		})
 	}).catch(next);
 })
-
-
-
-
 module.exports = server;

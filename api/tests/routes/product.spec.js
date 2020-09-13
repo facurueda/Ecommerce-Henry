@@ -1,9 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require('chai');
+const {
+  expect
+} = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
-const { Product, conn } = require('../../src/db.js');
-
+const {
+  Product,
+  conn
+} = require('../../src/db.js');
 const agent = session(app);
 const product = {
   name: 'producto',
@@ -12,17 +16,18 @@ const product = {
   rating: 1,
   stock: 1
 };
-
 describe('PRODUCT routes', () => {
   before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
-  beforeEach(() => Product.sync({ force: true })
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    }));
+  beforeEach(() => Product.sync({
+      force: true
+    })
     .then(() => Product.create(product)));
   describe('GET /products', () => {
     it('should be an Array', (done) => {
-      agent.get('/products/').end((err,res) => {
+      agent.get('/products/').end((err, res) => {
         expect(res.body).to.be.an('array')
         done()
       })

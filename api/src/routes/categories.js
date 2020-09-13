@@ -1,6 +1,6 @@
 
 const server = require('express').Router();
-const { Categories, Product} = require('../db.js');
+const { Categories, Product } = require('../db.js');
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
@@ -8,15 +8,13 @@ server.get('/:nombreCat', (req, res, next) => {
     Categories.findOne({
         where: {
             name: req.params.nombreCat
-
         },
         include: [{ model: Product, as: 'products' }]
     }).then((category) => {
         res.send(category.products)
     }).catch(next)
 })
-
-server.get('/', (req,res,next) => {
+server.get('/', (req, res, next) => {
     Categories.findAll().then(categories => {
         res.send(categories)
     }).catch(next)
@@ -53,22 +51,22 @@ server.delete('/:id', (req, res, next) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 server.put('/:id', (req, res, next) => {
-	Categories.findOne({
-		where: {
-			idCategory: req.body.idCategory
-		}
-	}).then(category => {
-		category.update({
-			...category,
-			name: req.body.name,
-			description: req.body.description
-		}).then(() => {
+    Categories.findOne({
+        where: {
+            idCategory: req.body.idCategory
+        }
+    }).then(category => {
+        category.update({
+            ...category,
+            name: req.body.name,
+            description: req.body.description
+        }).then(() => {
             res.status(200)
             res.send(category)
-		}).catch(() => {
+        }).catch(() => {
             res.status(400)
-		}).catch(next)
-	})
+        }).catch(next)
+    })
 })
 
 module.exports = server;

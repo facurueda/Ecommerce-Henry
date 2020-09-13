@@ -9,24 +9,24 @@ body {
   .search-box {
     display: flex;
     background: #2f3640;
-    height: 60px;
+    height: 40px;
     border-radius: 40px;
-    padding: 10px;
+    padding: 7px;
 }
   .search-box:hover > .search-text{
     width: 240px;
     padding: 0 6px;
   }
   .search-box:hover > .search-btn{
-    background: #DFA06E; 
+    background: #DFA06E;
     color: #2f3640;
     text-decoration: none;
   }
   .search-btn {
     color:#DFA06E;;
     float: right;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #2f3640;
     display: flex;
@@ -35,9 +35,10 @@ body {
     transition: 0.4s;
     cursor: pointer;
     text-decoration: none;
+    align-self: center;
   }
   .search-btn > i {
-    font-size: 30px;
+    font-size: 20px;
   }
   .search-text {
     border: none;

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap%27');
+.textNotFound {
+    display: flex;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 50px;
+    color: aliceblue;
+}
+
+.contenedorNotFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cajadino{
+    justify-content: center;
+   
+}
+.dino{
+    width: 300px;
+    height: 300px;
+}
+
+.textGoHome{
+    display: flex;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 20px;
+    color: aliceblue;
+
+}

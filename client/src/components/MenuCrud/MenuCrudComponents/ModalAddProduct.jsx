@@ -7,8 +7,13 @@ import {
     FormGroup,
     ModalFooter,
     ListGroup,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from "reactstrap";
 import './ModalAddProduct.css'
+import SelectImage from '../../SelectImage/SelectImage'
 
 const ModalAddProduct = (props) => {
 
@@ -56,9 +61,10 @@ const ModalAddProduct = (props) => {
     // Funciones Upload Image
 
     const uploadImage = async e => {
-        const files = e.target.files
+        // const files = e.target.files
+        const files = e
         const data = new FormData()
-        data.append('file', files[0])
+        data.append('file', files)
         data.append('upload_preset', 'ecommerceHenry')
         setLoading(true)
 
@@ -67,7 +73,6 @@ const ModalAddProduct = (props) => {
                 method: 'POST',
                 body: data
             })
-
         const file = await res.json()
 
 
@@ -78,8 +83,6 @@ const ModalAddProduct = (props) => {
         // setImagesUpload(true)
 
         setLoading(false)
-
-        console.log(product)
     }
 
     // States DropdownCategories
@@ -88,6 +91,17 @@ const ModalAddProduct = (props) => {
 
     // const toggle = () => setDropdownOpen(prevState => !prevState);
 
+
+    const [fileNames, setFileNames] = useState([]);
+    const handleDrop = acceptedFiles =>
+        setFileNames(acceptedFiles.map(file => file.name));
+
+
+    // const AllCategories = categories.map( c => {c.name})
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
 
 
     return (
@@ -100,24 +114,7 @@ const ModalAddProduct = (props) => {
 
                     <ListGroup horizontal className="inputContainer">
 
-                    <div class="drop-zone">
-                        <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                        <input type="file" name="myFile" class="drop-zone__input"/>
-                    </div>
-
-                   
-
-                        
-                        {/* <div class="myButton"><input type="image" name="" value=""/></div> */}
-
-                        {/* <input className="inputImage" type='file' name='file' onChange={uploadImage}/>
-                        {
-                            loading ? (
-                                <h3 style={{ width: '150px', marginLeft: '-175px' }}>Loading...</h3>
-                            ) : (
-                                    <img src={imagesUpload} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
-                                )
-                        } */}
+                        <SelectImage uploadImage={uploadImage} />
 
                     </ListGroup>
                 </FormGroup>
@@ -168,38 +165,20 @@ const ModalAddProduct = (props) => {
                     <FormGroup className="categoriesContainer">
                         <label>Categories: </label>
 
-                        {/* <Dropdown isOpen={dropdownOpen} toggle={toggle} onChange={e => {
-                                setCategory(e.target.value)
-                            }}>
+                        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                             <DropdownToggle caret>
-                                Select Categorie
+                                Select Cat
                             </DropdownToggle>
                             <DropdownMenu>
-                                {totalCat.map(c => (<DropdownItem key={c.name}>{c.name}</DropdownItem>))}   
+                                {categories.map( c => {
+                                    return(
+                                        <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
+                                    )
+                                })}
                             </DropdownMenu>
-                        </Dropdown> */}
-
-                        
-                        <select multiple class="form-control"
-                            onChange={e => {
-                                setCategory(e.target.value)
-                            }}
-                        >
-                            {categories.map(c => (<option key={c.name}>{c.name}</option>))}
-                        </select>
+                        </Dropdown>
                     </FormGroup>
                 </ListGroup>
-                {/* <FormGroup>
-                    <label>Images: </label>
-                    <input
-                        className = 'form-control'
-                        name = 'images'
-                        //cambiar type
-                        type = 'text'
-                        onChange = {handleChange}
-                        value = {product.images}
-                    />
-                </FormGroup> */}
             </ModalBody>
             <ModalFooter>
                 <Button color='success'
@@ -208,7 +187,7 @@ const ModalAddProduct = (props) => {
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
                         if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         addProduct(product);
-                        setProduct(initialState)
+                        setProduct(initialState);
                         modalCloseAdd();
                     }}
                 > Submit</Button>

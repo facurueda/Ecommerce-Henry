@@ -1,5 +1,10 @@
 const server = require('express').Router();
-const { User, Order, Inter_Prod_Order, Product } = require('../db.js');
+const {
+    User,
+    Order,
+    Inter_Prod_Order,
+    Product
+} = require('../db.js');
 const Sequelize = require("sequelize");
 
 /////////////////////////////////////////////////////////////////GET
@@ -13,7 +18,6 @@ server.get('/:idUser/orders', (req, res, next) => {
         res.send(orders)
     }).catch(next);
 })
-
 server.get('/:idUser/cart', (req, res, next) => {
     Order.findOne({
         where: {
@@ -36,34 +40,44 @@ server.get('/:idUser/cart', (req, res, next) => {
             }
         })
     }).then(() => {
-        res.send({ result: 'Carrito vaciado' })
+        res.send({
+            result: 'Carrito vaciado'
+        })
     }).catch(next);
 })
-
-
+server.get('/:idUser', (req, res, next) => {
+    User.findOne({
+        where: {
+            idUser: req.params.idUser
+        }
+    }).then((user) => {
+        res.send(user)
+    })
+})
 server.get('/', (req, res, next) => {
     User.findAll().then((users) => {
         res.send(users)
     });
 })
-
-
 //////////////////////////////////////////////////////////////////POST
-
 server.post('/:idUser/cart', (req, res, next) => {
+    // body: { idProduct, quantity }
     let respuesta = {}
     Order.findOne({
-        where:
-        {
+        where: {
             idUser: req.params.idUser,
-            [Sequelize.Op.or] : [{ status: 'CREADA'} , { status: 'CARRITO' }]
+            [Sequelize.Op.or]: [{
+                status: 'CREADA'
+            }, {
+                status: 'CARRITO'
+            }]
         }
     }).then(order => {
-        if(order.status === 'CREADA'){
+        if (order.status === 'CREADA') {
             order.update({
                 ...order,
                 status: 'CARRITO'
-            });
+            }).catch(next)
             respuesta = {
                 result: 'Primer producto agregado'
             }
@@ -72,19 +86,35 @@ server.post('/:idUser/cart', (req, res, next) => {
                 result: 'Producto sumado a los anteriores'
             }
         }
-        return Inter_Prod_Order.create({
-            idOrder: order.idOrder,
-            idProduct: req.body.idProduct,
-            quantity: req.body.quantity,
-            price: req.body.price
+        Inter_Prod_Order.findOne({
+            where: {
+                idOrder: order.idOrder,
+                idProduct: req.body.idProduct
+            }
+        }).then((inter) => {
+            return inter.update({
+                ...inter,
+                quantity: inter.quantity + req.body.quantity
+            })
+        }).catch(() => {
+            return Inter_Prod_Order.create({
+                idOrder: order.idOrder,
+                idProduct: req.body.idProduct,
+                quantity: req.body.quantity,
+                price: req.body.price
+            })
         })
     }).then((respuesta) => {
         res.send(respuesta)
     }).catch(next)
 })
-
 server.post('/', (req, res, next) => {
-    const { name, email, password, level } = req.body
+    const {
+        name,
+        email,
+        password,
+        level
+    } = req.body
     User.create({
         name,
         email,
@@ -95,14 +125,17 @@ server.post('/', (req, res, next) => {
             idUser: newUser.idUser,
         })
     }).then(() => {
-        res.send({ result : 'Usuario creado' })
+        res.send({
+            result: 'Usuario creado'
+        })
     }).catch(next);
 });
-
 ///////////////////////////////////////////////////////////////PUT
-
 server.put('/:idUser/cart', (req, res, next) => {
-    const { idProduct, quantity } = req.body
+    const {
+        idProduct,
+        quantity
+    } = req.body
     Order.findOne({
         where: {
             idUser: req.params.idUser,
@@ -114,8 +147,8 @@ server.put('/:idUser/cart', (req, res, next) => {
                 idOrder: order.idOrder,
                 idProduct: idProduct
             }
-        }),order)
-    }).then((relacion,order) => {
+        }), order)
+    }).then((relacion, order) => {
         relacion.update({
             ...relacion,
             quantity: quantity
@@ -125,8 +158,6 @@ server.put('/:idUser/cart', (req, res, next) => {
         res.send(order)
     }).catch(next);
 })
-
-
 server.put('/:idUser', (req, res, next) => {
     User.findOne({
         where: {
@@ -143,10 +174,7 @@ server.put('/:idUser', (req, res, next) => {
         res.send(userActualizado)
     }).catch(next);
 });
-
-
 ///////////////////////////////////////////////////////////DELETE
-
 server.delete('/:idUser/cart', (req, res, next) => {
     Order.findOne({
         where: {
@@ -154,31 +182,32 @@ server.delete('/:idUser/cart', (req, res, next) => {
             status: 'CARRITO'
         }
     }).then(order => {
-       return order.update({
-           ...order,
-           status: 'CANCELADA'
-       })
+        return order.update({
+            ...order,
+            status: 'CANCELADA'
+        })
     }).then(() => {
         return Order.create({
             idUser: req.params.idUser
         })
     }).then(() => {
-        res.send({ result: 'Carrito vaciado' })
+        res.send({
+            result: 'Carrito vaciado'
+        })
     }).catch(next);
 })
-
 server.delete('/:idUser', (req, res, next) => {
     User.destroy({
         where: {
             idUser: req.body.idUser
         }
     }).then(() => {
-        res.send({ result: 'User eliminado' })
+        res.send({
+            result: 'User eliminado'
+        })
     }).catch(next);
 });
-
 /////////////////////////////////////////////DEV
-
 server.post('/aaa', (req, res, next) => {
     User.create({
         name: 'Michael',
@@ -208,8 +237,9 @@ server.post('/aaa', (req, res, next) => {
             })
         })
     }).then(() => {
-        res.send({ result: 'user creados' })
+        res.send({
+            result: 'user creados'
+        })
     }).catch(next)
 })
-
 module.exports = server;

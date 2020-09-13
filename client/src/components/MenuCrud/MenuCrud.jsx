@@ -6,6 +6,7 @@ import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
+import SelectImage from '../SelectImage/SelectImage'
 
 import { connect, useSelector } from 'react-redux';
 
@@ -33,15 +34,15 @@ useEffect(() => {
   const modalCloseEdit = () => setModalEdit(false);
   const deleteProduct = async (id) => {
     await props.actionDeleteProduct(id)
-    await window.location.reload(false)
+    await window.location.reload()
   }
   const addProduct = async(product) => {
     await props.actionPostProduct(product)
-    await window.location.reload(false);
+    await window.location.reload();
   }
   const updateProduct = async (product) => {
     await props.actionUpdateProduct(product)
-    await window.location.reload(false);
+    await window.location.reload();
   }
   const editProduct = (product) => {
     setCurrentProduct(product);
@@ -53,7 +54,6 @@ useEffect(() => {
 
   return (
     <div>
-      {/* <NavBar/> */}
       <Container>
         <br/>
           <Button

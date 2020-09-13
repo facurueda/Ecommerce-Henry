@@ -3,6 +3,7 @@ import {
     Table,
     Button,
 } from "reactstrap";
+import './CategoryTable.css'
 
 const CategoryTable = (props) => {
     // Destructuring props
@@ -11,9 +12,10 @@ const CategoryTable = (props) => {
     return (
             <Table>
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
+                    <tr className = 'NameAndDesc'>
+                        <th className = 'Name'>Name</th>
+                        <th className = 'Desc'>Description</th>
+                        <th className = 'buttons'/>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,20 +25,18 @@ const CategoryTable = (props) => {
                     {categories.length > 0 ? (
 
                     categories.map(category => (
-                        <tr key={category.idCategory}>
-                            <td>{category.name}</td>
-                            <td>{category.description}</td>
-                            <td>
-                                <Button color="primary"
-                                    onClick={() => editCategory(category)}
-                                >
-                                    Edit
-                                </Button>{" "}
-                                <Button color="danger"
-                                   onClick={() => deleteCategory(category)}
-                                >Delete</Button>
-                            </td>
-                        </tr>
+                            <tr  className='categories' key={category.idCategory}>
+                                <th>{category.name}</th>
+                                <th>{category.description}</th>
+                                <th> 
+                                    <button type="button" class="btn btn-primary btn-circle" 
+                                    onClick={() => editCategory(category)}><i class="fas fa-edit" ></i>
+                                    </button>{" "}
+                                    <button type="button" class="btn btn-warning btn-circle btn-lg"
+                                    onClick={() => deleteCategory(category)}><i class="fa fa-times"></i>
+                                    </button>
+                                </th>
+                            </tr>
                     ))
 
                     )

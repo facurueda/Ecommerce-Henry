@@ -1,33 +1,88 @@
-import React from 'react'
-import { Button } from 'reactstrap';
+import React, { useState } from 'react'
+import Logo from './Images/Logo.png'
+import Cart from './Images/Cart.png'
 import './navBar.css'
+import SearchBar from '../SearchBar/SearchBar'
+import { Modal, Button } from 'reactstrap'
+import Login from '../LogIn/Login'
+import Register from '../Register/Register'
+import { useSelector } from 'react-redux'
 
 const NavBar = () => {
+
+    // ---------------------------- States ---------------------------- //
+    const [modalLogin, setModalLogin] = useState(false)
+    const [modalRegister, setModalRegister] = useState(false)
+    // const { user } = useSelector(state => state.usersReducer.idUser)
+    const user = 0
+
+    // ---------------------------- Functions ---------------------------- //
+
+    // ----- To Open Modals ----- //
+    const modalLoginView = () => setModalLogin(!modalLogin);
+    const modalRegisterView = () => setModalRegister(!modalRegister);
+
+    // ----- To Close Modals ----- //
+    const modalLoginClose = () => setModalLogin(false);
+    const modalRegisterClose = () => setModalRegister(false);
+
+
+    const ChangeModal = async () => {
+        await modalLoginView()
+        await modalRegisterView()
+    }
     return (
-        <div className='Home' style={{ marginBottom: "30px" }}>
-            <div class="fixed-top">
-                <div class="collapse" id="navbarToggleExternalContent" style={{ opacity: '0.8' }}>
-                    <div class="bg-dark p-4">
-                        <div className='buttonsContainer'>
+
+        <div >
+            <div className='navContainer'>
+                <div className='logoContainer'>
+                    <a href="/">
+                        <img className='imageLogo' src={Logo} alt='Logo' />
+                    </a>
+                </div>
+                <div className='routerContainer'>
+                    <div className='buttonsContainer'>
                         <form action="/">
-                            <Button className='buttonStyle'>Home</Button>
+                            <button className='buttonHome'>Home</button>
                         </form>
                         <form action="/catalogue">
-                            <Button className='buttonStyle'>Catalogo</Button>
+                            <button className='buttonProducts'>Products</button>
                         </form>
-                        <form action="/order">
-                            <Button className='buttonStyle'>Carrito</Button>
-                        </form>
-                        </div>
+                        {user ? (
+                            <form action="/Account">
+                                <button className='buttonProducts'>My Account</button>
+                            </form>
+                        ) : (<div></div>)}
                     </div>
+                    <div className='searchBar'>
+                        <SearchBar />
+                    </div>
+                    {user ?
+                        (
+                            <div className='cartContainer'>
+                                <a href='/order'>
+                                    <img className='buttonCart' src={Cart} alt='Cart' />
+                                </a>
+                                <div className='quantityProducts'>7</div>
+                            </div>
+                        )
+                        :
+                        (
+                            <div className='registerContainer'>
+                                <button className='signup' onClick={e => modalLoginView()}>Login</button>
+                                <button className='login' onClick={e => modalRegisterView()}>Register</button>
+                            </div>
+                        )}
+                    <Modal isOpen={modalLogin}>
+                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} />
+                    </Modal>
+
+                    <Modal isOpen={modalRegister}>
+                        <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} />
+                    </Modal>
                 </div>
-                <nav class="navbar navbar-dark bg-dark">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" >
-                        <span class="navbar-toggler-icon" ></span>
-                    </button>
-                </nav>
             </div>
-        </div >
+        </div>
     )
 }
 export default NavBar;
