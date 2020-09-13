@@ -12,7 +12,7 @@ import './Register.css'
 
 const Register = (props) => {
     const history = useHistory()
-    const { modalRegisterClose, actionUserCreate } = props;
+    const { modalRegisterClose, actionUserCreate,ChangeModal } = props;
     // ---------------------------- States ---------------------------- //
     const [registerInputs, setRegisterInputs] = useState({ name: 'null', email: 'null', password: 'null', level: 'USER' })
     const [secondPassword, setSecondPassword] = useState('')
@@ -41,6 +41,7 @@ const Register = (props) => {
 
     return (
         <div className='loginContainer'>
+        <button className='closeButton' onClick={modalRegisterClose}>x</button>
             <ModalHeader id='loginHeaderContainer'>
                 <div className="addProductTitle">Register with</div>
             </ModalHeader>
@@ -57,7 +58,7 @@ const Register = (props) => {
                 </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
-                <a><div className='createAccount'>Already have an account? <a href='/login' >Login</a></div></a>
+                <a><div className='createAccount'>Already have an account? <a href='#' onClick={ChangeModal}>Login</a></div></a>
             </ModalFooter>
         </div>
     )

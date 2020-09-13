@@ -7,6 +7,10 @@ import {
     FormGroup,
     ModalFooter,
     ListGroup,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from "reactstrap";
 import './ModalAddProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
@@ -79,6 +83,12 @@ const ModalAddProduct = (props) => {
     const handleDrop = acceptedFiles =>
         setFileNames(acceptedFiles.map(file => file.name));
 
+    // const AllCategories = categories.map( c => {c.name})
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+
     return (
         <div>
             <ModalHeader>
@@ -86,7 +96,6 @@ const ModalAddProduct = (props) => {
             </ModalHeader>
             <ModalBody>
                 <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
-
                     <ListGroup horizontal className="inputContainer">
                         <SelectImage uploadImage={uploadImage}/>
                     </ListGroup>
@@ -137,13 +146,20 @@ const ModalAddProduct = (props) => {
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
                         <label>Categories: </label>
-                        <select multiple class="form-control"
-                            onClick={e => {
-                                setCategory(e.target.value)
-                            }}
-                        >
-                            {categories.map(c => (<option key={c.name}>{c.name}</option>))}
-                        </select>
+
+                        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                            <DropdownToggle caret>
+                                Select Cat
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                {categories.map( c => {
+                                    return(
+                                        <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
+                                    )
+                                })}
+                            </DropdownMenu>
+                        </Dropdown>
+                      
                     </FormGroup>
                 </ListGroup>
             </ModalBody>
@@ -154,7 +170,9 @@ const ModalAddProduct = (props) => {
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
                         if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
                         addProduct(product);
+
                         setProduct(initialState)
+
                         modalCloseAdd();
                     }}
                 > Submit</Button>
