@@ -67,6 +67,7 @@ img {
     font-weight: 500;
     margin: 20px;
 }
+
 .buyProd,
 .cart {
     color: #2f3640;
@@ -79,16 +80,8 @@ img {
     width: 200px;
     box-shadow:0px 13px 21px -5px rgba(0, 0, 0, 0.3);
     margin: 5px;
-    /* align-content: center;
-    justify-content: center;
-    background:#DFA06E;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 11px;
-    height: 48px;
-    border-radius: 20px;
-    width: 210px;
-    margin: 20px; */
 }
 .buttons {
     justify-content: center;
@@ -100,8 +93,7 @@ button {
     align-content: center;
     justify-content: center;
     cursor: pointer;
-    margin: 5px;
-    
+    margin: 5px
 }
 
 

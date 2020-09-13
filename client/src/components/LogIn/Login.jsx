@@ -24,6 +24,7 @@ const Login = (props) => {
         </ModalBody>
         <ModalFooter id='loginFooterContainer'>
             <a><div className='createAccount'>Looking for <a href='/register'>Create Account</a>?</div></a>
+
         </ModalFooter>
 
 
