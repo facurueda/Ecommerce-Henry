@@ -97,7 +97,7 @@ FileSelector.propTypes = {
 
 function SelectImage(props) {
 
-  const {uploadImage} = props;
+  const {uploadImage, currentProducts} = props;
 
 
   const [imageSrc, setImageSrc] = useState(null);
@@ -113,27 +113,37 @@ function SelectImage(props) {
     setCroppedUrl(null);
   };
 
+  const currentImages = currentProducts;
+
   return (
+
     <div style={{display:'flex', flexDirection:'row-reverse', alignItems:'center', justifyContent:'center', height: '200px'}}>
-      {!imageSrc && <FileSelector onSelect={onImageSelect} />}
+      
+          {!imageSrc && <FileSelector onSelect={onImageSelect} />}
 
-      {imageSrc && !croppedUrl && (
-        
-        <ImageCropper src={imageSrc} onSave={onCropSave} onCancel={onReset} uploadImage={uploadImage}/>
-      )}
+          {imageSrc && !croppedUrl && (
 
-      {imageSrc && croppedUrl && (
-        <Fragment style={{height:'150px'}}>
-          <img
-            src={croppedUrl}
-            style={{ maxWidth: '150px', display: "block", marginLeft:'1rem'}}
-            alt=""
-          />
-          <Button onClick={onReset}>Change Image</Button>
-          <Button onClick={e => console.log(croppedUrl)}>Test URL</Button>
+            <ImageCropper src={imageSrc} onSave={onCropSave} onCancel={onReset} uploadImage={uploadImage}/>
+            
+          )}
+
+          {imageSrc && croppedUrl && (
           
-        </Fragment>
-      )}
+            
+            <Fragment style={{height:'150px'}}>
+              <img
+                src={croppedUrl}
+                style={{ maxWidth: '150px', display: "block", marginLeft:'1rem'}}
+                alt=""
+              />
+              <Button onClick={onReset}>Change Image</Button>
+              <Button onClick={e => console.log('current', currentProducts.images)}>Test URL</Button>
+
+
+
+              
+            </Fragment>
+        )}
     </div>
   );
 }
