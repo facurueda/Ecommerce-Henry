@@ -35,6 +35,7 @@ function App() {
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
+            {/* <Router history={BrowserHistory}></Router> */}
           </Switch>
         </Router>
       </div>

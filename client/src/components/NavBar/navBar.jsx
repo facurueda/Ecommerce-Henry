@@ -6,6 +6,8 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Modal, Button } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
+import gatito from './Images/gatito.png'
+import home from './Images/home.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
 
@@ -43,15 +45,18 @@ const NavBar = () => {
                 <div className='logoContainer'>
                     <a href="/">
                         <img className='imageLogo' src={Logo} alt='Logo' />
+                       
                     </a>
                 </div>
+                <div> <img className='nomematen' src={gatito}/></div>
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
                         <form action="/">
-                            <button className='buttonHome'>Home</button>
+                            <div><button className='buttonHome'><p className='textnav'>Home</p></button></div>
+                           
                         </form>
                         <form action="/catalogue">
-                            <button className='buttonProducts'>Products</button>
+                            <button className='buttonProducts'><p className='textnav'>Products</p></button>
                         </form>
                         {user ? (
                             <form action="/Admin">
@@ -80,8 +85,8 @@ const NavBar = () => {
                         :
                         (
                             <div className='registerContainer'>
-                                <button className='signup' onClick={e => modalLoginView()}>Login</button>
-                                <button className='login' onClick={e => modalRegisterView()}>Register</button>
+                                <button className='signup' onClick={e => modalLoginView()}><p className='textnav'>Login</p></button>
+                                <button className='login' onClick={e => modalRegisterView()}><p className='textnavreg'>Register</p></button>
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>

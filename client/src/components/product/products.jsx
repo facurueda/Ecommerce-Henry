@@ -3,6 +3,10 @@ import { useSelector } from 'react-redux';
 import ButtonAddToCart from '../ButtonAddToCart';
 import './products.css';
 import renderHTML from 'react-render-html';
+import StarRating from '../starRating/starRating.js';
+import Item from './Bottomback.jsx';
+
+
 
 function Products(props) {
 
@@ -11,14 +15,20 @@ function Products(props) {
     function test() {
         return {__html: description}
     }
+    
+
 
 
     return (
         <div>
             <body>
-                <div className='prodCard'>
+                <div className='prodCard'>       
+                
                     <div id='hover-img'>
                         <div className='card overflow-hidde'>
+                        <div clasName= 'conteinerbuttonback'>
+                        <Item/>
+                        </div>
                             <img className="img-fluid" src={images} alt="..." />
                         </div>
                     </div>
@@ -30,10 +40,14 @@ function Products(props) {
                             </div>
                         </div>
                         <div className='prodComp3'>
+
                             <span className='prodPrice'>${precio} </span>
                             <div className='buttons'>
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }}/>
                                 <button className='buyProd'>Comprar</button>
+                                <div className = 'conteiner-star'>
+                                <StarRating rating={rating}/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,6 +56,7 @@ function Products(props) {
         </div>
     )
 }
+
 
 
 export default Products;

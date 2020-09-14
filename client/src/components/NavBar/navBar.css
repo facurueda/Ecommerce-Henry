@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap%27');
 
+ .textnav{
+     margin-top: 20px;
+    font-family: Verdana;
+}
+.textnavreg{
+    margin-top: none;
+    font-family: Verdana;
+
+}
+ 
+.nomematen{
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+.nomematen1{
+    width: 20px;
+    height: 20px;
+    margin-left: 50px;
+    margin-top: none;
+    
+
+}
+
 .navContainer{
     display:flex;
     flex-direction: row;
