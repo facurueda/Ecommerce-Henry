@@ -1,13 +1,35 @@
+
 .buttonStyle {
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    color: #DFA06E;
-    background-color: #2f3640;
-    font-weight: bold;
+    display: inline-block;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    margin: 10px 0.2em 0.2em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
 }
+
+.buttonStyle:hover {
+    text-shadow: 0 0 0.5px #DFA06E;
+    color: #DFA06E;
+    border-color: #DFA06E;
+}
+
+@media all and (max-width:30em) {
+    .buttonStyle {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
 .admincontainer {
     display: flex;
-    flex-direction: row;
     justify-content: center;
 }
