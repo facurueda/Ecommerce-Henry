@@ -11,6 +11,7 @@
     "bootstrap": "^4.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropdown-select": "^4.5.1",
     "react-dropzone": "^11.1.0",
     "react-icons": "^3.11.0",
     "react-id-generator": "^3.0.1",

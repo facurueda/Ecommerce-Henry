@@ -178,7 +178,7 @@ ImageCropper.propTypes = {
 };
 
 ImageCropper.defaultProps = {
-  outputSize: 5000
+  outputSize: 1500
 };
 
 export default ImageCropper;

@@ -18,6 +18,7 @@ function Products(props) {
         <div>
             <body>
                 <div className='prodCard'>
+                <input type="button" value="Back" onclick="window.history.back()" /> 
                     <div id='hover-img'>
                         <div className='card overflow-hidde'>
                             <img className="img-fluid" src={images} alt="..." />

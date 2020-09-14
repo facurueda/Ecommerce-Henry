@@ -8,3 +8,108 @@
     border-radius: 7px;
     text-align: center;
 }
+#loginFooterContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.registerTitle{
+    float: left;
+    font-size: 20px;
+    font-family:'Roboto',
+    sans-serif;
+    font-weight:300; 
+}
+
+.buttonRegister {
+    display:inline-block;
+    padding:0.46em 1.6em;
+    border:0.1em solid #ffffff;
+    margin:10px 0.2em 0.2em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+    color:#ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align:center;
+    transition: all 0.15s;
+ }
+.buttonRegister:hover{
+    text-shadow: 0 0 0.5px #DFA06E;
+    color:#DFA06E;
+    border-color:#DFA06E;
+}
+@media all and (max-width:30em){
+.buttonRegister{
+    display:block;
+    margin:0.4em auto;
+}}
+
+.FormRegisterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.inputRegister {
+    margin-top: 5px;
+    border-radius: 11px;
+    width: 100%;
+    padding: 5px 65px;
+    text-align: center;
+    border: 0px;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.25);
+    background-color: rgba(255, 255, 255);
+    font-family:'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: black;
+}
+
+.closeButton {
+    align-self: flex-end;
+    justify-self: flex-end;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    background-color: darkred;
+    width: 25px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    color: white
+}
+.LoginAccount{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content{
+    border-radius: 15px;
+    background-color: transparent;
+}
+.logComponent {
+    display: flex;
+    justify-content: center;
+}
+.orLogin{
+    margin-bottom: 0;
+    padding-right: 10px;
+    align-self: center;
+    display: flex;
+} 
+.LoginAccountAux{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.logAccount,
+.logAccount:hover {
+    color: #DFA06E
+}
+.GoogleLogin {
+    border: 0px;
+}

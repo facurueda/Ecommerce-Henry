@@ -13,9 +13,9 @@ const Catalogue = (props) => {
 
     const productsFilter = (e) => {
         if (e !== 'All categories') {
-            props.actionGetProductsByCategory()
+            props.actionGetProductsByCategory(e)
         } else {
-            props.actionGetProducts(e)
+            props.actionGetProducts()
         }
     }
 
