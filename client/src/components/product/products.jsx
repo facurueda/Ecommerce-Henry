@@ -10,7 +10,7 @@ import Item from './Bottomback.jsx';
 
 function Products(props) {
 
-    const { name, description, precio, images, rating} = useSelector(state => state.productsReducer.product)
+    const { idProduct, name, description, precio, images } = useSelector(state => state.productsReducer.product)
 
     function test() {
         return {__html: description}
@@ -40,10 +40,10 @@ function Products(props) {
                             </div>
                         </div>
                         <div className='prodComp3'>
-                            <div><span className='prodPrice'> ${precio} </span></div>
+
+                            <span className='prodPrice'>${precio} </span>
                             <div className='buttons'>
-                                <ButtonAddToCart />
-                               
+                                <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }}/>
                                 <button className='buyProd'>Comprar</button>
                                 <div className = 'conteiner-star'>
                                 <StarRating rating={rating}/>

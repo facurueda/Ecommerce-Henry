@@ -62,20 +62,20 @@ const ModalEditProduct = (props) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
     return (
-        <div>
+        <div className='editProdContainer'>
             <ModalHeader>
                 <div><h3>Edit product</h3></div>
             </ModalHeader>
             <ModalBody>
-                <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
+                <FormGroup className = 'uploadImage'  style={{ display: "flex", justifyContent: 'center' }}>
                    <ListGroup horizontal className="inputContainer">
                        <SelectImage uploadImage={uploadImage} />
                     </ListGroup>
                 </FormGroup>              
-                <FormGroup>
-                    <label>Product name: </label>
+                <FormGroup className = 'productName'>
+                    <label className = 'productDetail'>Product name: </label>
                     <input
-                        className='form-control'
+                        className = 'inputName'
                         name='name'
                         type='text'
                         onChange={handleChange}
@@ -83,22 +83,22 @@ const ModalEditProduct = (props) => {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <label>Description: </label>
+                    <label className = 'productDetail'>Description: </label>
                     <form>
-                        <Editor
+                        <Editor id = 'productEditor'
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
                             value={descriptionState}
                             init={{
-                                height: 250,
+                                height: 150,
                                 menubar: false
                             }}
                             onEditorChange={descriptionChange}
                         />
                     </form>
                 </FormGroup>
-                <ListGroup horizontal style={{ alignItems: 'center', justifyContent: 'space-around' }}>
-                    <FormGroup>
-                        <label>Price: </label>
+                <ListGroup horizontal className="propertyContainer" style={{ alignItems: 'center', justifyContent: 'space-around' }}>
+                    <FormGroup className="priceContainer">
+                        <label className="productDetail">Price: </label>
                         <input
                             className='form-control'
                             name='precio'
@@ -107,8 +107,8 @@ const ModalEditProduct = (props) => {
                             value={product.precio}
                         />
                     </FormGroup>
-                    <FormGroup>
-                        <label>Stock: </label>
+                    <FormGroup  className="stockContainer">
+                        <label  className="productDetail">Stock: </label>
                         <input
                             className='form-control'
                             name='stock'
@@ -118,12 +118,12 @@ const ModalEditProduct = (props) => {
                         />
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
-                        <label>Categories: </label>
-                        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                            <DropdownToggle caret>
+                        <label className = 'productDetail'>Categories: </label>
+                        <Dropdown className = 'dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
+                            <DropdownToggle className = 'dropdownCat' caret>
                             {product.categories}
                             </DropdownToggle>
-                            <DropdownMenu>
+                            <DropdownMenu className = 'dropdownCat'>
                                 {categories.map( c => {
                                     return(
                                         <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
@@ -135,8 +135,7 @@ const ModalEditProduct = (props) => {
                 </ListGroup>
             </ModalBody>
             <ModalFooter>
-                <Button
-                    color='success'
+                <button className='buttonAdd'
                     onClick={e => {
                         e.preventDefault();
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
@@ -145,17 +144,11 @@ const ModalEditProduct = (props) => {
                         modalCloseEdit();
                     }}
                 >Submit
-                </Button>
-                <Button
-                    color='danger'
+                </button>
+                <button className='buttonExit'
                     onClick={e => modalCloseEdit()}
                 >Exit
-                </Button>
-                <Button
-                    color='danger'
-                    onClick={e => console.log(currentProducts.image)}
-                >TEST
-                </Button>
+                </button>
             </ModalFooter>
         </div>
     )

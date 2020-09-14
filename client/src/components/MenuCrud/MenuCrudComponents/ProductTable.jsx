@@ -1,8 +1,5 @@
 import React from 'react';
-import { Table, Button } from 'reactstrap';
 import './ProductTable.css'
-import logo1 from '../../product/images/1.jpeg'
-import logo2 from '../../product/images/2.jpeg'
 
 const ProductTable = (props) => {
 
@@ -24,12 +21,9 @@ const ProductTable = (props) => {
                     <div className="stockContainer">
                         <span>{product.stock} u.</span>
                     </div>
-                    <div className="categoriesContainer">
-                        <span>{product.categories}</span>
-                    </div>
                     <div className="buttonContainer">
-                        <Button color = 'primary' onClick = {e => editProduct(product)}>Edit</Button> {'  '}
-                        <Button color = 'danger' onClick = {e => deleteProduct(product.idProduct)}>Delete</Button>
+                        <button className = 'buttonEdit' onClick = {e => editProduct(product)}>Edit</button> {'  '}
+                        <button className = 'buttonDelete' onClick = {e => deleteProduct(product.idProduct)}>Delete</button>
                     </div>
                 </div>
             ))

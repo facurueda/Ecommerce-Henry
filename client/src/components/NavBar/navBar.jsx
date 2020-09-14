@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from './Images/Logo.png'
 import Cart from './Images/Cart.png'
 import './navBar.css'
@@ -6,19 +6,24 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Modal, Button } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
-import { useSelector } from 'react-redux'
 import gatito from './Images/gatito.png'
 import home from './Images/home.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { actionGetOrder } from '../../redux/ordersActions'
 
 const NavBar = () => {
 
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
-    // const { user } = useSelector(state => state.usersReducer.idUser)
-    const user = 0
-
-    // ---------------------------- Functions ---------------------------- //
+    const user = useSelector(state => state.usersReducer.idUser)
+    console.log(user)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(actionGetOrder(user));
+    }, [])
+    const order = useSelector(state => state.ordersReducer.order)
+    console.log(order) // ---------------------------- Functions ---------------------------- //
 
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
@@ -54,7 +59,7 @@ const NavBar = () => {
                             <button className='buttonProducts'><p className='textnav'>Products</p></button>
                         </form>
                         {user ? (
-                            <form action="/Account">
+                            <form action="/Admin">
                                 <button className='buttonProducts'>My Account</button>
                             </form>
                         ) : (<div></div>)}
@@ -68,7 +73,13 @@ const NavBar = () => {
                                 <a href='/order'>
                                     <img className='buttonCart' src={Cart} alt='Cart' />
                                 </a>
-                                <div className='quantityProducts'>7</div>
+                                <div className='quantityProducts'>
+                                    {(order.products) ?
+                                        (order.products.reduce((acum, product) => {
+                                            return acum + product.Inter_Prod_Order.quantity
+                                        }, 0)) : (<div> </div>)
+                                    }
+                        </div>
                             </div>
                         )
                         :

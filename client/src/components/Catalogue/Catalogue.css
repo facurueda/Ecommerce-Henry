@@ -28,25 +28,3 @@ button{
     background-color: transparent;
     border: 0px;
 }
-/* button,
-button::after { */
-  /* -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-    transition: all 0.3s;
-    border: 0px */
-/* } */
-
-
-
-/* BUTTON 1 */
-/* .btn-1::after {
-  height: 0;
-  left: 0;
-  top: 0;
-  width: 100%;
-}
-
-.btn-1:hover:after {
-  height: 100%;
-} */

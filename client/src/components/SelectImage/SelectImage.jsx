@@ -1,6 +1,6 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
-
+import './SelectImage.css'
 import React, { Fragment, useState } from "react";
 import ReactDOM from "react-dom";
 import Button from "./Button";
@@ -117,31 +117,19 @@ function SelectImage(props) {
 
   return (
 
-    <div style={{display:'flex', flexDirection:'row-reverse', alignItems:'center', justifyContent:'center', height: '200px'}}>
-      
+    <div style={{display:'flex', flexDirection:'row-reverse', alignItems:'center', justifyContent:'center', height: '200px'}}>    
           {!imageSrc && <FileSelector onSelect={onImageSelect} />}
-
           {imageSrc && !croppedUrl && (
-
-            <ImageCropper src={imageSrc} onSave={onCropSave} onCancel={onReset} uploadImage={uploadImage}/>
-            
+            <ImageCropper src={imageSrc} onSave={onCropSave} onCancel={onReset} uploadImage={uploadImage}/>           
           )}
-
-          {imageSrc && croppedUrl && (
-          
-            
+          {imageSrc && croppedUrl && (      
             <Fragment style={{height:'150px'}}>
               <img
                 src={croppedUrl}
                 style={{ maxWidth: '150px', display: "block", marginLeft:'1rem'}}
                 alt=""
               />
-              <Button onClick={onReset}>Change Image</Button>
-              <Button onClick={e => console.log('current', currentProducts.images)}>Test URL</Button>
-
-
-
-              
+              <button className='buttonImage' onClick={onReset}>Change Image</button>
             </Fragment>
         )}
     </div>

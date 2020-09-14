@@ -1,7 +1,10 @@
 .orderContainer{
     display: flex;
-    margin-top: 100px;
+    margin-top: 10px;
     flex-direction: column;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 .footerContent{
     display: flex;
@@ -18,9 +21,37 @@
     justify-content: center;
     align-items: center;
     margin-right: 10px;
-    font-size: 35px;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
 }
-#buttonEndOrden{
-    height: 100px;
-    width: 200px;
+
+.buttonEndOrden {
+    display: inline-block;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    margin: 10px 0.2em 0.2em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.buttonEndOrden:hover {
+    text-shadow: 0 0 0.5px #DFA06E;
+    color: #DFA06E;
+    border-color: #DFA06E;
+}
+
+@media all and (max-width:30em) {
+    .buttonEndOrden {
+        display: block;
+        margin: 0.4em auto;
+    }
 }

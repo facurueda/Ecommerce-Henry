@@ -4,10 +4,11 @@ const { Order, Product, Inter_Prod_Order } = require('../db.js');
 
 ///////////////////////////////////////////GET
 
-server.get('/:idOrder', (req, res, next) => {
+server.get('/:idUser', (req, res, next) => {
     Order.findOne({
         where: {
-            idOrder: req.params.idOrder,
+            idUser: req.params.idUser,
+            [Sequelize.Op.or] : [{status : "CREADA"} , {status : 'CARRITO' }]
         },
         include: [{
             model: Product,
@@ -42,7 +43,6 @@ server.post('/', (req, res, next) => {
     }).catch(next)
 });
 ///////////////////////////////////////////////////////////////////////////PUT
-
 
 
 

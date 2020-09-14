@@ -1,7 +1,7 @@
 import {GET_USER_BY_ID, USER_CREATED} from './constants'
 
 var initialState = {
-    idUser: 0,
+    idUser: 1,
     name: '',
     level: ''
 }
