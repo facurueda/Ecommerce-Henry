@@ -6,21 +6,16 @@ import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
-
-
 import { connect, useSelector } from 'react-redux';
-
+import './MenuCrud.css'
 
 const MenuCrud = (props) => {
-useEffect(() => {
+  useEffect(() => {
     props.actionGetProducts()
-},[])
-useEffect(() => {
+  }, [])
+  useEffect(() => {
     props.actionGetCategories()
-},[])
-
-// const { products,categories } = props
-
+  }, [])
 
   //Estados
   const [modalAdd, setModalAdd] = useState(false);
@@ -36,7 +31,7 @@ useEffect(() => {
     await props.actionDeleteProduct(id)
     await window.location.reload()
   }
-  const addProduct = async(product) => {
+  const addProduct = async (product) => {
     await props.actionPostProduct(product)
     await window.location.reload();
   }
@@ -55,37 +50,37 @@ useEffect(() => {
   return (
     <div>
       <Container>
-        <br/>
-          <button className = "addProd" onClick={e => modalAddView()}> + </button> 
-        <br/>
-        <br/>
-        <ProductTable 
-        products = {products}
-        deleteProduct = {deleteProduct}
-        editProduct = {editProduct}
+        <br />
+        <button id="buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
+        <br />
+        <br />
+        <ProductTable
+          products={products}
+          deleteProduct={deleteProduct}
+          editProduct={editProduct}
+          categories={categories}
         />
       </Container>
-      <Modal isOpen = {modalAdd}>
-        <ModalAddProduct
-        products = {products}
-        addProduct = {addProduct}
-        modalCloseAdd = {modalCloseAdd}
-        categories={categories}
+      <Modal isOpen={modalAdd}>
+        <ModalAddProduct id='modalAdd'
+          products={products}
+          addProduct={addProduct}
+          modalCloseAdd={modalCloseAdd}
+          categories={categories}
         />
       </Modal>
-      <Modal isOpen = {modalEdit}>
+      <Modal isOpen={modalEdit}>
         <ModalEditProduct
-        products = {products}
-        currentProducts = {currentProduct}
-        updateProduct = {updateProduct}
-        modalCloseEdit = {modalCloseEdit}
-        categories={categories}
+          products={products}
+          currentProducts={currentProduct}
+          updateProduct={updateProduct}
+          modalCloseEdit={modalCloseEdit}
+          categories={categories}
         />
       </Modal>
     </div>
   )
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     actionGetProducts: () => {
@@ -106,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(() => {},mapDispatchToProps)(MenuCrud);
+export default connect(() => { }, mapDispatchToProps)(MenuCrud);
