@@ -6,14 +6,12 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Modal, Button } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
-import { useSelector } from 'react-redux'
 
 const NavBar = () => {
 
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
-    // const { user } = useSelector(state => state.usersReducer.idUser)
     const user = 0
 
     // ---------------------------- Functions ---------------------------- //

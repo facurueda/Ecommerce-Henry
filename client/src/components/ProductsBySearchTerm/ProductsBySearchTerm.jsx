@@ -1,11 +1,19 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { actionGetProductsBySearchTerm } from '../../redux/productsActions';
+import { useSelector } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
 
 
 const ProductsBySearchTerm = (props) => {
     const products = useSelector(state =>  state.productsReducer.term)
+
+    if (products.length === 0) {
+        return (
+            <div>
+                <h3> WTF ese producto ?</h3>
+            </div>
+        )
+        
+    } 
 
     return (
         <div>
