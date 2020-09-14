@@ -48,6 +48,7 @@
     display: flex;
     padding: 0;
     padding-bottom: 15px;
+    justify-content: center;
 }
 
 .addProductTitle {
@@ -141,4 +142,13 @@
 
 .GoogleLogin {
     border: 0px;
+}
+
+.lookingFor {
+    margin-right: 4px;
+}
+
+.accountComponent {
+    display: flex;
+    flex-direction: row;
 }

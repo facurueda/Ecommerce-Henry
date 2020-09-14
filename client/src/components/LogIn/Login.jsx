@@ -30,9 +30,10 @@ const Login = (props) => {
             <ModalFooter id='loginFooterContainer'>
                 <div className='LoginAccount'>
                     <a className='createComponent '>
-                        <div>Looking for 
-                            <a className='createAccount' href='#' onClick={ChangeModal}> 
-                            create account
+                        <div className='accountComponent'>
+                            <p className='lookingFor' >Looking for </p>
+                            <a className='createAccount' href='#' onClick={ChangeModal}>
+                                create account
                             </a>?
                         </div>
                     </a>

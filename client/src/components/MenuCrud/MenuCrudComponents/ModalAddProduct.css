@@ -114,11 +114,6 @@ label {
 .uploadImage {
     height: 150px;
 }
-div.tox-statusbar,
-a {
-    display: none;
-    height: 0;
-}
-.uploadImage.form-group{
-
+.tox-statusbar__branding{
+    display:none
 }
