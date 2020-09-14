@@ -6,16 +6,22 @@
     justify-self: center;
     justify-content: space-around;
     /* align-items: center; */
-    background: none;
+    background: #8cc29a;   
+    border-radius: 70px;
+    margin-right: 200px;
+    margin-left: 200px;
+    margin-top: 50px;
     /* width: 100%; */
     padding-right: 10%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
 }
 
-.prodDescription {}
+
 
 /* /////////////////////////////////////////////////////////////////// IMAGEN */
+
+
 
 img {
     display: flex;
@@ -26,6 +32,7 @@ img {
     max-height: 400px;
 }
 .card {
+ 
     background: none;
     border-style: none;
     /* width: 500px; */
@@ -65,8 +72,14 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 
+.conteinerprice{
+    margin-bottom: 300px;
+    display: flex;
+    
+}
 .prodPrice {
     font-size: 50px;
     color: #2f3640;
@@ -75,7 +88,6 @@ img {
     margin-bottom: 350px;
     margin-left: 30px;
 }
-
 .buyProd,
 .cart {
     color: #2f3640;
@@ -88,8 +100,16 @@ img {
     width: 200px;
     box-shadow:0px 13px 21px -5px rgba(0, 0, 0, 0.3);
     margin: 5px;
+    /* align-content: center;
+    justify-content: center;
+    background:#DFA06E;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
+    font-size: 11px;
+    height: 48px;
+    border-radius: 20px;
+    width: 210px;
+    margin: 20px; */
 }
 .buttons {
     justify-content: center;
@@ -101,7 +121,8 @@ button {
     align-content: center;
     justify-content: center;
     cursor: pointer;
-    margin: 5px
+    margin: 5px;
+    
 }
 
 
@@ -144,7 +165,7 @@ button {
 
 
   .conteiner-star {
-      margin-top: 30px;
+      margin-top: 100px;
       margin-left: 35px;
   }
 

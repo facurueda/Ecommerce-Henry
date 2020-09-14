@@ -4,6 +4,9 @@ import ButtonAddToCart from '../ButtonAddToCart';
 import './products.css';
 import renderHTML from 'react-render-html';
 import StarRating from '../starRating/starRating.js';
+import Item from './Bottomback.jsx';
+
+
 
 function Products(props) {
 
@@ -12,15 +15,20 @@ function Products(props) {
     function test() {
         return {__html: description}
     }
+    
+
 
 
     return (
         <div>
             <body>
-                <div className='prodCard'>
-                <input type="button" value="Back" onclick="window.history.back()" /> 
+                <div className='prodCard'>       
+                
                     <div id='hover-img'>
                         <div className='card overflow-hidde'>
+                        <div clasName= 'conteinerbuttonback'>
+                        <Item/>
+                        </div>
                             <img className="img-fluid" src={images} alt="..." />
                         </div>
                     </div>
@@ -48,6 +56,7 @@ function Products(props) {
         </div>
     )
 }
+
 
 
 export default Products;
