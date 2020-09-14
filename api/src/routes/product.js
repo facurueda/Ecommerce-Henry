@@ -45,12 +45,7 @@ server.get('/:id', (req, res, next) => {
 
 
 server.get('/', (req, res, next) => {
-	Product.findAll({
-		include: [{
-			model: Categories,
-			as: 'categories'
-		}]
-	})
+	Product.findAll()
 		.then((products) => {
 			res.send(products);
 		}).catch(next)
