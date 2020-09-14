@@ -12,11 +12,13 @@ const ProductsBySearchTerm = (props) => {
             <div className='products'> {
                 products.map(product => {
                     if (product.stock > 0) {
-                        return <ProductCard className='productCard'
+                        return <ProductCard 
+                            className='productCard'
                             name={product.name}
                             description={product.description}
-                            price={product.precio} />
-                        // image = {product.image}
+                            price={product.precio} 
+                            images = {product.images}
+                        />
                     }
                 })
             }

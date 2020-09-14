@@ -67,7 +67,6 @@ label {
     border-color: #DFA06E;
 }
 @media all and (max-width:30em) {
-
     .buttonAdd,
     .buttonExit {
         display: block;
@@ -119,4 +118,7 @@ div.tox-statusbar,
 a {
     display: none;
     height: 0;
+}
+.uploadImage.form-group{
+
 }
