@@ -15,6 +15,7 @@ import adminOrdersTable from './components/adminOrdersTable/adminOrdersTable';
 import Login from './components/LogIn/Login';
 import Register from './components/Register/Register';
 import ProductsBySearchTerm from './components/ProductsBySearchTerm/ProductsBySearchTerm';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
+            <Route path='/404NotFound' component={ErrorPage} />
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
           </Switch>
