@@ -2,18 +2,18 @@ const {
     DataTypes,
 } = require('sequelize');
 module.exports = (sequelize) => {
-    sequelize.define('Inter_Cat_Prod', {
+    sequelize.define('Inter_Prod_Review', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             notNull: true
         },
-        idCategory: {
+        idProduct: {
             type: DataTypes.INTEGER,
             notNull: true
         },
-        idProduct: {
+        idReview: {
             type: DataTypes.INTEGER,
             notNull: true
         }
