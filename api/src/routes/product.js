@@ -4,24 +4,25 @@ const {
 	Product,
 	Categories,
 	Inter_Cat_Prod,
+	Review
 } = require('../db.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 server.get('/search', (req, res, next) => {
 	Product.findAll({
-			where: {
-				[Sequelize.Op.or]: [{
-						name: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
-						}
-					},
-					{
-						description: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
-						}
-					}
-				]
+		where: {
+			[Sequelize.Op.or]: [{
+				name: {
+					[Sequelize.Op.like]: "%" + req.query.query + "%"
+				}
+			},
+			{
+				description: {
+					[Sequelize.Op.like]: "%" + req.query.query + "%"
+				}
 			}
-		})
+			]
+		}
+	})
 		.then((products) => {
 			res.send(products);
 		}).catch(next)
@@ -51,51 +52,16 @@ server.get('/', (req, res, next) => {
 		}).catch(next)
 });
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
-server.post('/aaa', (req, res, next) => {
-	Product.create({
-		name: "Dragon",
-		description: "Escupe Fuego",
-		precio: 10,
-		rating: 5,
-		stock: 10,
-		images: 'http://www.google.com/'
-	}).then(() => {
-		return Categories.create({
-			name: "animales",
-			description: "Todo tipo de animales"
-		})
-	}).then(() => {
-		return Categories.create({
-			name: "Objetos",
-			description: "Todo tipo de objetos"
-		})
-	}).then(() => {
-		return Categories.create({
-			name: "Perros",
-			description: "la recontra descripcion"
-		})
-	}).then(() => {
-		return Product.create({
-			name: "Perro",
-			description: "Hace afuera",
-			precio: 10,
-			rating: 5,
-			stock: 10,
-			images: 'http://www.google.com'
-		})
-	}).then(() => {
-		return Inter_Cat_Prod.create({
-			idCategory: 2,
-			idProduct: 1
-		})
-	}).then(() => {
-		return Inter_Cat_Prod.create({
-			idCategory: 1,
-			idProduct: 2
-		})
-	}).then(() => {
-		return res.send({
-			result: "Elementos creados."
+// POST /product/:id/review
+server.post('/:idProduct/review', (req, res, next) => {
+	Review.create({
+		description: req.body.description,
+		rating: req.body.rating,
+		idUser: req.body.idUser,
+		idProduct: req.params.idProduct
+	}).then((result) => {
+		res.send({
+			result
 		})
 	}).catch(next)
 })
@@ -165,6 +131,24 @@ server.delete('/:idProducto', (req, res, next) => {
 	})
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
+// PUT /product/:id/review/:idReview
+server.put('/:idProduct/review/:idReview', (req, res, next) => {
+	Review.findOne({
+		where: {
+			idReview: req.params.idReview
+		}
+	}).then(review => {
+		review.update({
+			description: req.body.description,
+			rating: req.body.rating,
+		})
+	}).catch(next)
+})
+server.put('amadre/:quelopario', (req, res, next) => {
+	res.send({
+		result: "huevin de pascualina papv :v"
+	})
+})
 server.put('/:id', (req, res, next) => {
 	Product.findOne({
 		where: {
@@ -182,5 +166,54 @@ server.put('/:id', (req, res, next) => {
 			res.send(product)
 		})
 	}).catch(next);
+})
+/////////////////////////////////////////////////////////////////////////////////////////////// DEV
+server.post('/aaa', (req, res, next) => {
+	Product.create({
+		name: "Dragon",
+		description: "Escupe Fuego",
+		precio: 10,
+		rating: 5,
+		stock: 10,
+		images: 'http://www.google.com/'
+	}).then(() => {
+		return Categories.create({
+			name: "animales",
+			description: "Todo tipo de animales"
+		})
+	}).then(() => {
+		return Categories.create({
+			name: "Objetos",
+			description: "Todo tipo de objetos"
+		})
+	}).then(() => {
+		return Categories.create({
+			name: "Perros",
+			description: "la recontra descripcion"
+		})
+	}).then(() => {
+		return Product.create({
+			name: "Perro",
+			description: "Hace afuera",
+			precio: 10,
+			rating: 5,
+			stock: 10,
+			images: 'http://www.google.com'
+		})
+	}).then(() => {
+		return Inter_Cat_Prod.create({
+			idCategory: 2,
+			idProduct: 1
+		})
+	}).then(() => {
+		return Inter_Cat_Prod.create({
+			idCategory: 1,
+			idProduct: 2
+		})
+	}).then(() => {
+		return res.send({
+			result: "Elementos creados."
+		})
+	}).catch(next)
 })
 module.exports = server;

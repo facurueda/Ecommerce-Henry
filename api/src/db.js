@@ -58,9 +58,8 @@ User.hasMany(Order, {
 User.hasMany(Review, {
   foreignKey: 'idUser'
 });
-Review.belongsToMany(Product, {
-  through: 'Inter_Prod_Review',
-  foreignKey: 'idReview'
+Product.hasMany(Review, {
+  foreignKey: 'idProduct'
 })
 Order.belongsToMany(Product, {
   through: "Inter_Prod_Order",

@@ -14,6 +14,14 @@ module.exports = (sequelize) => {
     rating: {
         type: DataTypes.INTEGER,
         allowNull: false
-    }
+    },
+    idUser: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      idProduct: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
   });
 };
