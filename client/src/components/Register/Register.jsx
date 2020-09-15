@@ -26,7 +26,7 @@ const Register = (props) => {
     const componentClicked = () => console.log('clicked')
     const handleChange = event => {
         const { name, value } = event.target
-        if (name === 'seconPassword') {
+        if (name === 'secondPassword') {
             setSecondPassword(value);
         } else {
             setRegisterInputs({ ...registerInputs, [name]: value })
@@ -55,11 +55,11 @@ const Register = (props) => {
                     {/* Buttons GitHub, Google, Facebook? */}
                 </div>
                 <div className='FormRegisterContainer'>
-                    <input className='inputRegister' name='name' type='text' placeholder='Name' onChange={handleChange} />
-                    <input className='inputRegister' name='email' type='email' placeholder='Email' onChange={handleChange} />
-                    <input className='inputRegister' name='password' type="password" placeholder='Password' onChange={handleChange} />
-                    <input className='inputRegister' name='secondPassword' type="password" placeholder='Repeat Password' />
-                    <button className='buttonRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
+                    <input className='standardInput' name='name' type='text' placeholder='Name' onChange={handleChange} />
+                    <input className='standardInput' name='email' type='email' placeholder='Email' onChange={handleChange} />
+                    <input className='standardInput' name='password' type="password" placeholder='Password' onChange={handleChange} />
+                    <input className='standardInput' name='secondPassword' type="password" placeholder='Repeat Password' onChange={handleChange}/>
+                    <button className='buttonLogin' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
