@@ -32,7 +32,7 @@ function Products(props) {
                         <div className='prodComp3'>
                             <span className='prodPrice'>${precio} </span>
                             <div className='buttons'>
-                                <ButtonAddToCart props={{ idProduct, quantity: 1, precio }}/>
+                                <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }}/>
                                 <button className='buyProd'>Comprar</button>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
 import { connect, useSelector } from 'react-redux';
+import './MenuCrud.css'
 
 const MenuCrud = (props) => {
   useEffect(() => {
@@ -50,7 +51,7 @@ const MenuCrud = (props) => {
     <div>
       <Container>
         <br />
-        <button className="addProd" onClick={e => modalAddView()}> + </button>
+        <button id="buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
         <br />
         <br />
         <ProductTable

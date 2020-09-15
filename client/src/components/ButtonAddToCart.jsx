@@ -12,7 +12,7 @@ const ButtonAddToCart = (props) => {
     const user = useSelector(state => state.usersReducer.idUser)
     const handleChancla = () => {
         if (user){
-        dispatch(actionAddToCart({ idUser: user, idProduct: props.idProduct, quantity: props.quantity, price: props.price }))
+        dispatch(actionAddToCart({ idUser: user, idProduct: props.datos.idProduct, quantity: props.datos.quantity, price: props.datos.price }))
         }else {
             history.push('/register')
         }

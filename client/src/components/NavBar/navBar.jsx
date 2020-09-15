@@ -7,7 +7,7 @@ import { Modal, Button } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
 import { useDispatch, useSelector } from 'react-redux'
-import { actionGetUserById } from '../../redux/usersActions'
+import { actionGetOrder } from '../../redux/ordersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
@@ -20,8 +20,13 @@ const NavBar = () => {
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const user = useSelector(state => state.usersReducer.idUser)
-
-    // ---------------------------- Functions ---------------------------- //
+    console.log(user)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(actionGetOrder(user));
+    }, [])
+    const order = useSelector(state => state.ordersReducer.order)
+    console.log(order) // ---------------------------- Functions ---------------------------- //
 
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
@@ -54,7 +59,7 @@ const NavBar = () => {
                             <button className='buttonProducts'>Products</button>
                         </form>
                         {user ? (
-                            <form action="/admin">
+                            <form action="/Admin">
                                 <button className='buttonProducts'>My Account</button>
                             </form>
                         ) : (<div></div>)}
@@ -68,7 +73,13 @@ const NavBar = () => {
                                 <a href='/order'>
                                     <img className='buttonCart' src={Cart} alt='Cart' />
                                 </a>
-                                <div className='quantityProducts'>7</div>
+                                <div className='quantityProducts'>
+                                    {(order.products) ?
+                                        (order.products.reduce((acum, product) => {
+                                            return acum + product.Inter_Prod_Order.quantity
+                                        }, 0)) : (<div> </div>)
+                                    }
+                        </div>
                             </div>
                         )
                         :

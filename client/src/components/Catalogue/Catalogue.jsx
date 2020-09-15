@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 const Catalogue = (props) => {
     useEffect(() => {
         props.actionGetCategories()
+        props.actionGetProducts()
     }, [])
 
     const productsFilter = (e) => {

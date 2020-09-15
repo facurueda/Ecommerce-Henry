@@ -29,11 +29,11 @@ const CategoryTable = (props) => {
                                 <th>{category.name}</th>
                                 <th>{category.description}</th>
                                 <th> 
-                                    <button type="button" class="btn btn-primary btn-circle" 
-                                    onClick={() => editCategory(category)}><i class="fas fa-edit" ></i>
+                                    <button type="button" className = 'buttonEdit'
+                                    onClick={() => editCategory(category)}>Edit
                                     </button>{" "}
-                                    <button type="button" class="btn btn-warning btn-circle btn-lg"
-                                    onClick={() => deleteCategory(category)}><i class="fa fa-times"></i>
+                                    <button type="button" className = 'buttonDelete'
+                                    onClick={() => deleteCategory(category)}>Delete
                                     </button>
                                 </th>
                             </tr>
