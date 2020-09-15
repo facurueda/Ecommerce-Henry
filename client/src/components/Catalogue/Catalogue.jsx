@@ -40,7 +40,7 @@ const Catalogue = (props) => {
                 }
                 <Category className='categoryImage' name={"All categories"} productsFilter={productsFilter} />
             </div>
-            <div className='products'> {
+            <div className='products' > {
                 props.products.map(product => {
                     if (product.stock > 0) {
                         return <ProductCard className='productCard'

@@ -1,10 +1,9 @@
 import React from 'react'
 import TotalByProduct from './orderComponents/totalByProduct';
-import { Button } from 'reactstrap';
 import './order.css'
 import { useEffect } from 'react';
 import { actionGetOrder } from '../../redux/ordersActions';
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Order = (props) => {
 
@@ -15,7 +14,7 @@ const Order = (props) => {
     }, [])
     const order = useSelector(state => state.ordersReducer.order)
 
-    if (Object.keys(props.order).length < 1) {
+    if (Object.keys(order).length < 1) {
         return (
             <div className='orderContainer'>
                 <h3 style={{ display: 'flex', justifyContent: 'center' }}>
@@ -49,17 +48,4 @@ const Order = (props) => {
         )
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        order: state.ordersReducer.order,
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actionGetOrder: (idOrder) => {
-            dispatch(actionGetOrder(idOrder))
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Order);
+export default Order;

@@ -8,22 +8,22 @@ import Login from '../LogIn/Login'
 import Register from '../Register/Register'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
+import { actionGetUserById } from '../../redux/usersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
     const dispatch = useDispatch()
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(actionGetUserById(1))
-    },[])
+    }, [])
 
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const user = useSelector(state => state.usersReducer.idUser)
-    console.log(user)
-    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(actionGetOrder(user));
+        console.log("pase por el effect")
     }, [])
     const order = useSelector(state => state.ordersReducer.order)
     console.log(order) // ---------------------------- Functions ---------------------------- //
@@ -79,7 +79,7 @@ const NavBar = () => {
                                             return acum + product.Inter_Prod_Order.quantity
                                         }, 0)) : (<div> </div>)
                                     }
-                        </div>
+                                </div>
                             </div>
                         )
                         :
