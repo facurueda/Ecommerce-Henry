@@ -1,4 +1,4 @@
-.addCategory {
+/* .addCategory {
     background-color: #def5d1;
 }
 
@@ -28,4 +28,39 @@
 .exitButton:hover {
     background: rgb(148, 37, 37);
     box-shadow: -1px 6px 10px 0 rgba(120, 60, 20, .2);
+} */
+
+.addCategory {
+        display: flex;
+        flex-direction: column;
+        color: #ffffff;
+        width: 500px;
+        background-color: rgba(222, 245, 209, 0.25);
+        backdrop-filter: blur(7px);
+        border-radius: 15px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+}
+
+.inputName {
+    margin-top: 5px;
+    border-radius: 7px;
+    text-align: center;
+    width: 100%;
+}
+.categoryDetail {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    margin: 5px 0
+}
+.categoryName,
+.categoryDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.categoryName {
+    padding-top: 25px;
 }

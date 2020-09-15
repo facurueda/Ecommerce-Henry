@@ -39,7 +39,9 @@
 .price {
     font-weight: bold;
     font-size: 30px;
-    float: right
+    float: right;
+    margin-right: -10px;
+    align-self: center;
 }
 .productCard.card{
     margin: 10px;
