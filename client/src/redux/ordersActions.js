@@ -9,9 +9,9 @@ export const actionUpdateOrder = (idUser) => {
         })
     }
 }
-export const actionGetOrder = (idOrder) => {
+export const actionGetOrder = (idUser) => {
     return (dispatch) => {
-        axios.get(url + 'order/' + idOrder).then(res => {
+        axios.get(url + 'order/' + idUser).then(res => {
             dispatch({ type: GET_ORDER_BY_ID, payload: res.data })
         })
     }

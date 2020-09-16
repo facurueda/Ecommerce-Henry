@@ -11,7 +11,7 @@ import renderHTML from 'react-render-html';
 
 const ProductCard = (props) => {
 
-    const { name, price, description, idProduct, images } = props;
+    const { name, price, description, idProduct, images, stock } = props;
     const history = useHistory()
     const dispatch = useDispatch()
     const handleChancla = async () => {
@@ -30,6 +30,7 @@ const ProductCard = (props) => {
                         <h3 className='productName'>{name}</h3>
                         <div className='ProductDataContainer'>
                             {renderHTML(description)}
+                            <p>Unidades disponibles: {stock}</p>
                             <b className='price'>${price}</b>
                         </div>
                         {((window.location.pathname) !== '/order' && (window.location.pathname) !== '/adminOrdersTable')?

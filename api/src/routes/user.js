@@ -52,7 +52,7 @@ server.get('/:idUser', (req, res, next) => {
         },
         include : [{
             model : Order,
-            as : 'order'
+            as : 'orders'
         }]
     }).then((user) => {
         res.send(user)

@@ -15,7 +15,6 @@ const ButtonAddToCart = (props) => {
         if (user){
         dispatch(actionAddToCart({ idUser: user, idProduct: props.datos.idProduct, quantity: props.datos.quantity, price: props.datos.price }))
         dispatch(actionUpdateOrder(user))
-        aa({value: ''})
         }else {
             history.push('/register')
         }

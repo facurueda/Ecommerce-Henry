@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import './Login.css'
 import GoogleLogin from 'react-google-login'
@@ -6,9 +6,20 @@ import FacebookLogin from 'react-facebook-login'
 
 const Login = (props) => {
     const { modalLoginClose, ChangeModal } = props;
+    const [inputs, setInputs] = useState({})
     const responseGoogle = (response) => {
         console.log(response);
         console.log(response.profileObj)
+    }
+    const handleChancla = () => {
+
+    }
+    const handleInput = (e) => {
+        const {type,value} = e.target
+        setInputs({
+            ...inputs,
+            [type]: value
+        })
     }
 
     const responseFacebook = (response) => console.log(response);
@@ -23,9 +34,9 @@ const Login = (props) => {
                 <div>
                     {/* Buttons GitHub, Google, Facebook? */}
                 </div>
-                <input className='standardInput' type='email' placeholder='laCoseria@gmail.com' />
-                <input className='standardInput' type="password" placeholder='··············' />
-                <button className='logginButton' onClick={e => modalLoginClose()}>LOGIN</button>
+                <input className='standardInput' type='email' placeholder='laCoseria@gmail.com' onChange={handleInput}/>
+                <input className='standardInput' type="password" placeholder='··············' onChange={handleInput}/>
+                <button className='logginButton' onClick={handleChancla}>LOGIN</button>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
                 <div className='LoginAccount'>

@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { actionGetProduct } from '../../../redux/productsActions';
 import './ProductTable.css'
 
 const ProductTable = (props) => {
 
     const { products, editProduct, deleteProduct, categories } = props;
-  
+    const dispatch = useDispatch()
+
     return (
         products.length > 0 ? (
             products.map(product => (
@@ -22,14 +25,17 @@ const ProductTable = (props) => {
                         <span>{product.stock} u.</span>
                     </div>
                     <div className="buttonContainer">
-                        <button className = 'buttonEdit' onClick = {e => editProduct(product)}>Edit</button> {'  '}
-                        <button className = 'buttonDelete' onClick = {e => deleteProduct(product.idProduct)}>Delete</button>
+                        <button className='buttonEdit' onClick={ e => {
+                            dispatch(actionGetProduct(product.idProduct))
+                            editProduct()
+                        }}>Edit</button> {'  '}
+                        <button className='buttonDelete' onClick={e => deleteProduct(product.idProduct)}>Delete</button>
                     </div>
                 </div>
             ))
         ) : (
-            <span>No Products</span>
-        )
+                <span>No Products</span>
+            )
     )
 }
 

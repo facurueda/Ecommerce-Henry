@@ -5,9 +5,9 @@ import { GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_SEARCH_TERM, PRODUCT_PUT, PRODUCT_PO
 const url = "http://localhost:3000/";
 
 export const actionGetProduct = (idProduct) => {
-    return (dispatch) => {
+    return async(dispatch) => {
         console.log(idProduct)
-        axios.get(url + 'products/' + idProduct).then((res) => {
+        await axios.get(url + 'products/' + idProduct).then((res) => {
             dispatch({ type: GET_PRODUCT_BY_ID, payload: res.data })
         })
     }
@@ -43,7 +43,7 @@ export const actionLoadingProducts = () => {
     }
 }
 export const actionGetProducts = () => {
-    return async (dispatch) => {
+    return async(dispatch) => {
         dispatch(actionLoadingProducts())
         await axios.get(url + 'products/').then(res => {
             dispatch({ type: GET_PRODUCTS, payload: res.data })
@@ -53,15 +53,15 @@ export const actionGetProducts = () => {
     }
 }
 export const actionDeleteProduct = (id) => {
-    return (dispatch) => {
-        axios.delete(url + 'products/' + id).then(dispatch({ type: DELETE_PRODUCT })).catch(error => {
+    return async(dispatch) => {
+        await axios.delete(url + 'products/' + id).then(dispatch({ type: DELETE_PRODUCT })).catch(error => {
             dispatch({ type: PRODUCTS_ERROR, payload: error })
         })
     }
 }
 export const actionPostProduct = (product) => {
-    return (dispatch) => {
-        axios.post(url + 'products/create', product).then(() => {
+    return async(dispatch) => {
+        await axios.post(url + 'products/create', product).then(() => {
             dispatch({ type: PRODUCT_POST })
         })
     }

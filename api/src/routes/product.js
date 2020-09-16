@@ -4,24 +4,25 @@ const {
 	Product,
 	Categories,
 	Inter_Cat_Prod,
+	Inter_Prod_Order,
 } = require('../db.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 server.get('/search', (req, res, next) => {
 	Product.findAll({
-			where: {
-				[Sequelize.Op.or]: [{
-						name: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
-						}
-					},
-					{
-						description: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
-						}
-					}
-				]
+		where: {
+			[Sequelize.Op.or]: [{
+				name: {
+					[Sequelize.Op.like]: "%" + req.query.query + "%"
+				}
+			},
+			{
+				description: {
+					[Sequelize.Op.like]: "%" + req.query.query + "%"
+				}
 			}
-		})
+			]
+		}
+	})
 		.then((products) => {
 			res.send(products);
 		}).catch(next)
@@ -34,11 +35,9 @@ server.get('/:id', (req, res, next) => {
 		where: {
 			idProduct: req.params.id
 		},
-		include: [{
-			model: Categories,
-			as: 'categories'
-		}]
+		include: [{ model: Categories, as: "categories" }]
 	}).then((product) => {
+		console.log(product)
 		res.send(product)
 	}).catch(next)
 });
@@ -184,6 +183,14 @@ server.put('/:id', (req, res, next) => {
 			stock: req.body.stock,
 			images: req.body.images
 		}).then(() => {
+			return Inter_Cat_Prod.findOne({
+				where: { idProduct: req.body.idProduct}
+			}).then(inter => {
+				inter.update({
+					...inter,
+					idCategory: parseInt(req.body.categories)
+				})
+			})
 			res.send(product)
 		})
 	}).catch(next);

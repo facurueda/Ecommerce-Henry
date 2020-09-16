@@ -13,20 +13,17 @@ import { actionGetUserById } from '../../redux/usersActions'
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
     const dispatch = useDispatch()
-    useEffect(() => {
+    useEffect(async () => {
         dispatch(actionGetUserById(1))
-    }, [])
+        dispatch(actionGetOrder(1));
+    },[])
 
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const user = useSelector(state => state.usersReducer.idUser)
-    useEffect(() => {
-        dispatch(actionGetOrder(user));
-        console.log("pase por el effect")
-    }, [])
     const order = useSelector(state => state.ordersReducer.order)
-    console.log(order) // ---------------------------- Functions ---------------------------- //
+    // ---------------------------- Functions ---------------------------- //
 
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
