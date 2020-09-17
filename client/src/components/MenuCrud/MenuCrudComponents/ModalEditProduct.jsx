@@ -14,21 +14,18 @@ import {
 } from "reactstrap";
 import './ModalEditProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
-import { actionGetProduct } from "../../../redux/productsActions";
 import { useDispatch, useSelector } from "react-redux";
-import { compose } from "redux";
+import { actionUpdateProduct, actionUpdateProductLocalStore } from "../../../redux/productsActions";
 
 const ModalEditProduct = (props) => {
     const dispatch = useDispatch()
-    const { currentProduct, updateProduct, modalCloseEdit, categories } = props;
-    const [productEdited, setProductEdited] = useState(currentProduct)
-    console.log("edited: ",productEdited)
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProductEdited({
-            ...productEdited,
-            [name]: value
-        });
+    const { modalCloseEdit } = props
+    const categories = useSelector(state => state.categoriesReducer.categories)
+    const currentProduct = useSelector(store => store.productsReducer.product)
+    console.log("edited: ", currentProduct)
+    const updateProduct = (product) => {
+        dispatch(actionUpdateProduct(product))
+        window.location.reload();
     }
     // States Upload Image
     const [loading, setLoading] = useState(false)
@@ -46,23 +43,24 @@ const ModalEditProduct = (props) => {
                 body: data
             })
         const file = await res.json()
-        setProductEdited({ ...productEdited, images: file.secure_url })
+        actionUpdateProductLocalStore({ ...currentProduct, images: file.secure_url })
         setImagesUpload(file.secure_url)
         setLoading(false)
     }
     // ESTADOS DESCRIPTION
-    const [descriptionState, setDescriptionState] = useState(currentProduct.description)
-    const descriptionChange = (value) => {
-        setProductEdited({
-            ...productEdited,
-            description: value
-        })
+    const handleChange = (event) => {
+        const { name, value } = event.target
+        dispatch(actionUpdateProductLocalStore({
+            ...currentProduct,
+            [name]: value
+        }))
     }
-    const setCategory = (e) => {
-        setProductEdited({
-            ...productEdited,
-            categories: e.target.value
-        })
+
+    const descriptionChange = (event) => {
+        dispatch(actionUpdateProductLocalStore({
+            ...currentProduct,
+            description: event
+        }))
     }
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -85,7 +83,7 @@ const ModalEditProduct = (props) => {
                         name='name'
                         type='text'
                         onChange={handleChange}
-                        value={productEdited.name}
+                        value={currentProduct.name}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -93,7 +91,7 @@ const ModalEditProduct = (props) => {
                     <form>
                         <Editor id='productEditor'
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
-                            value={productEdited.description}
+                            value={currentProduct.description}
                             init={{
                                 height: 150,
                                 menubar: false
@@ -110,7 +108,7 @@ const ModalEditProduct = (props) => {
                             name='precio'
                             type='number'
                             onChange={handleChange}
-                            value={productEdited.precio}
+                            value={currentProduct.precio}
                         />
                     </FormGroup>
                     <FormGroup className="stockContainer">
@@ -120,7 +118,7 @@ const ModalEditProduct = (props) => {
                             name='stock'
                             type='number'
                             onChange={handleChange}
-                            value={productEdited.stock}
+                            value={currentProduct.stock}
                         />
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
@@ -128,8 +126,8 @@ const ModalEditProduct = (props) => {
                         <select className='form-control' name='categories' onChange={handleChange} >
                             {categories.map(c => {
                                 return (
-                                    (currentProduct.categories !== undefined )?((c.name === currentProduct.categories[0].name) ? (<option className='form-control' selected name='categories' value={c.name}>{c.name}</option>) :
-                                        (<option className='form-control' name='categories' value={c.idCategory}>{c.name}</option>)): (<option></option>)
+                                    (currentProduct.categories !== undefined) ? ((c.name === currentProduct.categories[0].name) ? (<option className='form-control' selected name='categories' value={c.name}>{c.name}</option>) :
+                                        (<option className='form-control' name='categories' value={c.idCategory}>{c.name}</option>)) : (<option></option>)
                                 )
                             })}
                         </select>
@@ -147,9 +145,10 @@ const ModalEditProduct = (props) => {
                 <button className='buttonAdd'
                     onClick={e => {
                         e.preventDefault();
-                        if (!productEdited.name || !productEdited.description || !productEdited.precio || !productEdited.stock) return window.alert('Empty input')
-                        updateProduct(productEdited);
+                        if (!currentProduct.name || !currentProduct.description || !currentProduct.precio || !currentProduct.stock) return window.alert('Empty input')
+                        dispatch(actionUpdateProduct(currentProduct));
                         modalCloseEdit();
+                        window.location.reload()
                     }}
                 >Submit
                 </button>
