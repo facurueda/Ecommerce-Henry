@@ -39,6 +39,11 @@ img {
 }
 
 /* /////////////////////////////////////////////////////////////////// TEXTO */
+.prodStock{
+    display: flex;
+    align-self: center;
+    border: 1px solid black;
+}
 
 .prodComp1{
     font-family: 'Poppins', sans-serif;
@@ -46,7 +51,6 @@ img {
     flex-direction: row;
     align-content: center;
     /* background: #def5d1; */
-    
 }
 .prodComp2 {
     display: flex;

@@ -70,7 +70,7 @@ const Categories = (props) => {
       <Container>
 
       {/* <a href="#" class="button-add"  onClick={e => modalAddView()}><span>+</span></a> */}
-        <button className = "addProd" onClick={e => modalAddView()}> + </button>
+        <button id = "buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
         <br />
         <br />
 

@@ -5,13 +5,13 @@ const AdminNavBar = (props) => {
     return (
         <div className='admincontainer'>
             <form action="/MenuCrud">
-                <Button className='buttonStyle'>Lista de productos</Button>
+                <button className='buttonStyle'>Lista de productos</button>
             </form>
             <form action="/Categories">
-                <Button className='buttonStyle'>Modificar categorias</Button>
+                <button className='buttonStyle'>Modificar categorias</button>
             </form>
             <form action="/adminOrdersTable">
-                <Button className='buttonStyle'>Lista de ordenes</Button>
+                <button className='buttonStyle'>Lista de ordenes</button>
             </form>
         </div>
     )

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Table, Button } from 'reactstrap';
+import { useDispatch } from 'react-redux';
+import { actionGetProduct } from '../../../redux/productsActions';
 import './ProductTable.css'
-import logo1 from '../../product/images/1.jpeg'
-import logo2 from '../../product/images/2.jpeg'
 
 const ProductTable = (props) => {
 
-    const { products, editProduct, deleteProduct } = props;
+    const { products, editProduct, deleteProduct, categories } = props;
+    const dispatch = useDispatch()
 
     return (
         products.length > 0 ? (
@@ -24,18 +24,18 @@ const ProductTable = (props) => {
                     <div className="stockContainer">
                         <span>{product.stock} u.</span>
                     </div>
-                    <div className="categoriesContainer">
-                        <span>{product.categories}</span>
-                    </div>
                     <div className="buttonContainer">
-                        <button className= 'editProduct' onClick = {e => editProduct(product)}>Edit</button> {'  '}
-                        <button className= 'deleteProduct'onClick = {e => deleteProduct(product.idProduct)}>Delete</button>
+                        <button className='buttonEdit' onClick={ e => {
+                            dispatch(actionGetProduct(product.idProduct))
+                            editProduct()
+                        }}>Edit</button> {'  '}
+                        <button className='buttonDelete' onClick={e => deleteProduct(product.idProduct)}>Delete</button>
                     </div>
                 </div>
             ))
         ) : (
-            <span>No Products</span>
-        )
+                <span>No Products</span>
+            )
     )
 }
 

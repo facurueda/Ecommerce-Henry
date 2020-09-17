@@ -26,19 +26,19 @@ const FormModalAdd = (props) => {
                 <div><h3>Add Category</h3></div>
             </ModalHeader>
 
-            <ModalBody>
-                <FormGroup >
-                    <label> Category Name: </label>
-                    <input className="form-control" name="name" type="text" onChange={handleChange} />
+            <ModalBody className = 'addCatBody'>
+                <FormGroup className='categoryName'>
+                    <label className="categoryDetail"> Category Name: </label>
+                    <input className="inputName" name="name" type="text" onChange={handleChange} />
                 </FormGroup>
 
-                <FormGroup>
-                    <label>Description:</label>
-                    <input className="form-control" name="description" type="text" onChange={handleChange} />
+                <FormGroup className='categoryDescription'>
+                    <label className="categoryDetail">Description:</label>
+                    <input className="inputName" name="description" type="text" onChange={handleChange} />
                 </FormGroup>
             </ModalBody>
             <ModalFooter>
-                <Button className='submitButton'
+                <Button className='buttonAdd'
                     onClick={event => {
                         event.preventDefault()
                         if (!category.name || !category.description) return window.alert('Empty Inputs')
@@ -48,7 +48,7 @@ const FormModalAdd = (props) => {
                     }}
                 >
                     Submit </Button>
-                <Button className='exitButton' onClick={e => modalAddViewFalse()}>Exit</Button>
+                <Button className='buttonExit' onClick={e => modalAddViewFalse()}>Exit</Button>
             </ModalFooter>
         </div>
     )

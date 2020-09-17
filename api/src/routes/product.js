@@ -4,7 +4,7 @@ const {
 	Product,
 	Categories,
 	Inter_Cat_Prod,
-	Review
+	Inter_Prod_Order,
 } = require('../db.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 server.get('/search', (req, res, next) => {
@@ -35,11 +35,9 @@ server.get('/:id', (req, res, next) => {
 		where: {
 			idProduct: req.params.id
 		},
-		include: [{
-			model: Categories,
-			as: 'categories'
-		}]
+		include: [{ model: Categories, as: "categories" }]
 	}).then((product) => {
+		console.log(product)
 		res.send(product)
 	}).catch(next)
 });
@@ -65,6 +63,7 @@ server.post('/:idProduct/review', (req, res, next) => {
 		})
 	}).catch(next)
 })
+
 server.post('/create', (req, res, next) => {
 	const {
 		name,
@@ -93,6 +92,7 @@ server.post('/create', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next);
 });
+
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
@@ -101,9 +101,10 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
+
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
+
 server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
-	/////////////////////////// Elimina la categoria del producto:
 	Inter_Cat_Prod.destroy({
 		where: {
 			idProduct: req.body.idProduct,
@@ -113,8 +114,9 @@ server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
+
 server.delete('/:idProducto', (req, res, next) => {
-	/////////////////////////// Elimina un producto:
+
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
@@ -130,6 +132,7 @@ server.delete('/:idProducto', (req, res, next) => {
 		res.status(400)
 	})
 })
+
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 // PUT /product/:id/review/:idReview
 server.put('/:idProduct/review/:idReview', (req, res, next) => {
@@ -163,6 +166,14 @@ server.put('/:id', (req, res, next) => {
 			stock: req.body.stock,
 			images: req.body.images
 		}).then(() => {
+			return Inter_Cat_Prod.findOne({
+				where: { idProduct: req.body.idProduct}
+			}).then(inter => {
+				inter.update({
+					...inter,
+					idCategory: parseInt(req.body.categories)
+				})
+			})
 			res.send(product)
 		})
 	}).catch(next);

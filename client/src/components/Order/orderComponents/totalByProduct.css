@@ -1,10 +1,26 @@
 .ProductContainer{
+    align-items: center;
     display: flex;
-    justify-content: space-between;
-    margin: 20px;
+    justify-content: space-around;
+    height: 130px;
+    margin: 10px;
     padding: 5px;
+    background-color: rgba(255, 255, 255, 0.57);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    width: 700px;
+    box-shadow:0px 13px 21px -5px rgba(0, 0, 0, 0.3);
 }
-
+/* .buttonRestar {
+    display: flex;
+    justify-self: flex-end;
+} */
+.textQuantity {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
 .card{
     width: 600px;
     max-width: 750px;
@@ -13,14 +29,38 @@
 }
 .textContent{
     display: flex;
-    width: 500px;
+    width: 50%;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    text-align-last: right;
 }
 .textQuantity{
-    font-size: 45px;
+    font-size: 15px;
 }
 .textAmount{
-    font-size: 25px;
+    font-size: 15px;
+}
+.ProductImage {
+    height: 100px;
+}
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+.descriptionContainer {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.productInfo,
+.productInfoName {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+.productInfoName {
+    font-size: 17px;
 }

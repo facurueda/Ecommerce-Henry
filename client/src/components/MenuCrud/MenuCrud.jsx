@@ -6,47 +6,37 @@ import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
 import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
+import { connect, useDispatch, useSelector } from 'react-redux';
+import './MenuCrud.css'
 
-
-import { connect, useSelector } from 'react-redux';
-
-
-const MenuCrud = (props) => {
-useEffect(() => {
-    props.actionGetProducts()
-},[])
-useEffect(() => {
-    props.actionGetCategories()
-},[])
-
-// const { products,categories } = props
-
+const MenuCrud = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(actionGetProducts())
+    dispatch(actionGetCategories())
+  }, [])
 
   //Estados
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState({})
+  const currentProduct = useSelector(store => store.productsReducer.product)
 
   //Funciones
   const modalAddView = () => setModalAdd(!modalAdd);
   const modalEditView = () => setModalEdit(!modalEdit);
   const modalCloseAdd = () => setModalAdd(false);
   const modalCloseEdit = () => setModalEdit(false);
-  const deleteProduct = async (id) => {
-    await props.actionDeleteProduct(id)
+  const deleteProduct =async (id) => {
+    dispatch(actionDeleteProduct(id))
     await window.location.reload()
   }
-  const addProduct = async(product) => {
-    await props.actionPostProduct(product)
+  const addProduct = async (product) => {
+    await dispatch(actionPostProduct(product))
     await window.location.reload();
   }
   const updateProduct = async (product) => {
-    await props.actionUpdateProduct(product)
+    await dispatch(actionUpdateProduct(product))
     await window.location.reload();
-  }
-  const editProduct = (product) => {
-    setCurrentProduct(product);
-    modalEditView();
   }
 
   const products = useSelector(state => state.productsReducer.products)
@@ -55,55 +45,37 @@ useEffect(() => {
   return (
     <div>
       <Container>
-        <br/>
-          <button className = "addProd" onClick={e => modalAddView()}> + </button> 
-        <br/>
-        <br/>
-        <ProductTable 
-        products = {products}
-        deleteProduct = {deleteProduct}
-        editProduct = {editProduct}
+        <br />
+        <button id="buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
+        <br />
+        <br />
+        <ProductTable
+          products={products}
+          deleteProduct={deleteProduct}
+          editProduct={modalEditView}
+          categories={categories}
         />
       </Container>
-      <Modal isOpen = {modalAdd}>
-        <ModalAddProduct
-        products = {products}
-        addProduct = {addProduct}
-        modalCloseAdd = {modalCloseAdd}
-        categories={categories}
+      <Modal isOpen={modalAdd}>
+        <ModalAddProduct id='modalAdd'
+          products={products}
+          addProduct={addProduct}
+          modalCloseAdd={modalCloseAdd}
+          categories={categories}
         />
       </Modal>
-      <Modal isOpen = {modalEdit}>
+      <Modal isOpen={modalEdit}>
         <ModalEditProduct
-        products = {products}
-        currentProducts = {currentProduct}
-        updateProduct = {updateProduct}
-        modalCloseEdit = {modalCloseEdit}
-        categories={categories}
+          products={products}
+          currentProduct={currentProduct}
+          updateProduct={updateProduct}
+          modalCloseEdit={modalCloseEdit}
+          categories={categories}
         />
       </Modal>
     </div>
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actionGetProducts: () => {
-      dispatch(actionGetProducts())
-    },
-    actionDeleteProduct: (id) => {
-      dispatch(actionDeleteProduct(id))
-    },
-    actionGetCategories: () => {
-      dispatch(actionGetCategories())
-    },
-    actionPostProduct: (product) => {
-      dispatch(actionPostProduct(product))
-    },
-    actionUpdateProduct: (product) => {
-      dispatch(actionUpdateProduct(product))
-    }
-  }
-}
 
-export default connect(() => {},mapDispatchToProps)(MenuCrud);
+export default MenuCrud;
