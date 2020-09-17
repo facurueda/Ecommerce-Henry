@@ -6,7 +6,6 @@ const url = "http://localhost:3000/";
 
 export const actionGetProduct = (idProduct) => {
     return (dispatch) => {
-        console.log(idProduct)
         axios.get(url + 'products/' + idProduct).then((res) => {
             dispatch({ type: GET_PRODUCT_BY_ID, payload: res.data })
         })
@@ -15,7 +14,6 @@ export const actionGetProduct = (idProduct) => {
 export const actionGetProductsBySearchTerm = (term) => {
     return (dispatch) => {
         axios.get(url + 'products/search?query=' + term).then(res => {
-            console.log(res.data)
             dispatch({ type: GET_PRODUCTS_BY_SEARCH_TERM, payload: res.data })
         })
     }
@@ -28,10 +26,15 @@ export const actionGetProductsByCategory = (name) => {
         })
     }
 }
+export const actionUpdateProductLocalStore = (product) => {
+    return (dispatch) => {
+        dispatch({type: PRODUCT_PUT, payload: product})
+    }
+}
 export const actionUpdateProduct = (product) => {
     return (dispatch) => {
-        axios.put(url + 'products/' + product.idProduct, product).then(() => {
-            dispatch({ type: PRODUCT_PUT })
+        axios.put(url + 'products/' + product.idProduct, product).then((res) => {
+            dispatch({ type: PRODUCT_PUT, payload: res.data })
         }).catch((error) => {
             dispatch({ type: PRODUCTS_ERROR, payload: error })
         })
@@ -43,9 +46,9 @@ export const actionLoadingProducts = () => {
     }
 }
 export const actionGetProducts = () => {
-    return async (dispatch) => {
+    return (dispatch) => {
         dispatch(actionLoadingProducts())
-        await axios.get(url + 'products/').then(res => {
+        axios.get(url + 'products/').then(res => {
             dispatch({ type: GET_PRODUCTS, payload: res.data })
         }).catch(error => {
             dispatch({ type: PRODUCTS_ERROR, payload: error })

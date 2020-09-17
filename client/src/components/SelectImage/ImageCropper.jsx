@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import ReactCrop from "react-image-crop";
 import Button from "./Button";
-import './styles/imageCropper.css'
-
+import './SelectImage.css'
 import "react-image-crop/dist/ReactCrop.css";
 
 const Cropper = (props) => {
@@ -112,7 +111,7 @@ const Cropper = (props) => {
   };
 
   return (
-    <div>
+    <div className= 'imageCropper'>
       <ReactCrop
         src={src}
         crop={crop}
@@ -122,27 +121,16 @@ const Cropper = (props) => {
         onChange={onCropChange}
         onImageLoaded={onImageLoaded}
         id='cropper'
-        style={{ justifyContent:'center', alignItems:'center', height:'150px', width:'150px'}}
+        style={{ justifyContent:'center', alignItems:'center', height:'100px', width:'100px'}}
 
       />
       {image && (
         <Fragment>
-          <Button onClick={onSaveClick} css={{ display: "block" }} > 
+          <button className='buttonImage' onClick={onSaveClick} > 
             Use this Image
-          </Button>
-          <Button onClick={e => console.log(fileUrl)}>Test</Button>
-          {/* <button
-            type="button"
-            onClick={onCancel}
-            style={{ marginTop: "0.5rem" }}
-          >
-            Choose another photo
-          </button> */}
+          </button>
         </Fragment>
       )}
-      {/* <pre style={{ font: "9px/1 monospace" }}>
-        {JSON.stringify(crop, null, 2)}
-      </pre> */}
     </div>
   );
 };

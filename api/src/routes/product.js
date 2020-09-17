@@ -4,7 +4,7 @@ const {
 	Product,
 	Categories,
 	Inter_Cat_Prod,
-	Review
+	Inter_Prod_Order,
 } = require('../db.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 server.get('/search', (req, res, next) => {
@@ -35,10 +35,7 @@ server.get('/:id', (req, res, next) => {
 		where: {
 			idProduct: req.params.id
 		},
-		include: [{
-			model: Categories,
-			as: 'categories'
-		}]
+		include: [{ model: Categories, as: "categories" }]
 	}).then((product) => {
 		res.send(product)
 	}).catch(next)
@@ -65,6 +62,7 @@ server.post('/:idProduct/review', (req, res, next) => {
 		})
 	}).catch(next)
 })
+
 server.post('/create', (req, res, next) => {
 	const {
 		name,
@@ -93,6 +91,7 @@ server.post('/create', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next);
 });
+
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
@@ -101,9 +100,10 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
+
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
+
 server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
-	/////////////////////////// Elimina la categoria del producto:
 	Inter_Cat_Prod.destroy({
 		where: {
 			idProduct: req.body.idProduct,
@@ -113,8 +113,9 @@ server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
+
 server.delete('/:idProducto', (req, res, next) => {
-	/////////////////////////// Elimina un producto:
+
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
@@ -130,41 +131,36 @@ server.delete('/:idProducto', (req, res, next) => {
 		res.status(400)
 	})
 })
+
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
-// PUT /product/:id/review/:idReview
-server.put('/:idProduct/review/:idReview', (req, res, next) => {
-	Review.findOne({
-		where: {
-			idReview: req.params.idReview
-		}
-	}).then(review => {
-		review.update({
-			description: req.body.description,
-			rating: req.body.rating,
-		})
-	}).catch(next)
-})
-server.put('amadre/:quelopario', (req, res, next) => {
-	res.send({
-		result: "huevin de pascualina papv :v"
-	})
-})
-server.put('/:id', (req, res, next) => {
+server.put('/:idProduct', (req, res, next) => {
 	Product.findOne({
 		where: {
-			idProduct: req.body.idProduct
+			idProduct: req.params.idProduct
 		}
 	}).then(product => {
-		product.update({
+		return product.update({
 			...product,
 			name: req.body.name,
 			description: req.body.description,
 			precio: req.body.precio,
 			stock: req.body.stock,
 			images: req.body.images
-		}).then(() => {
-			res.send(product)
 		})
+	}).then((product) => {
+		if (req.body.categories) {
+			Inter_Cat_Prod.findOne({
+				where: { idProduct: product.idProduct }
+			}).then((inter) => {
+					return inter.update({
+						...inter,
+						idCategory: parseInt(req.body.categories)
+					})
+				}).catch(next)
+		}
+		return product
+	}).then((product) => {
+		res.send(product)
 	}).catch(next);
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// DEV

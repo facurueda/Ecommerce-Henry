@@ -50,7 +50,7 @@ const Categories = (props) => {
   // Funciones para el Modal ADD:
   const addCategory = async (category) => {
     await props.actionPostCategory(category);
-    await window.location.reload(false)
+    await window.location.reload()
   }
   console.log(props.categories)
 
@@ -70,7 +70,7 @@ const Categories = (props) => {
       <Container>
 
       {/* <a href="#" class="button-add"  onClick={e => modalAddView()}><span>+</span></a> */}
-        <button className = "addProd" onClick={e => modalAddView()}> + </button>
+        <button id = "buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
         <br />
         <br />
 

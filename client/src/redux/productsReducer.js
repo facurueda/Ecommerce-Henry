@@ -16,7 +16,10 @@ const productsReducer = (state = initialState, action) => {
                 product: action.payload
             }
         case PRODUCT_PUT:
-            return state;
+            return {
+                ...state,
+                product: action.payload
+            };
         case PRODUCT_POST:
             return state;
         case DELETE_PRODUCT:

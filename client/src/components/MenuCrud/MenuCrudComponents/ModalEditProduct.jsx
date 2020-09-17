@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import {
     Button,
@@ -6,206 +6,158 @@ import {
     ModalBody,
     FormGroup,
     ModalFooter,
-    ListGroup
+    ListGroup,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from "reactstrap";
 import './ModalEditProduct.css'
+import SelectImage from '../../SelectImage/SelectImage'
+import { useDispatch, useSelector } from "react-redux";
+import { actionUpdateProduct, actionUpdateProductLocalStore } from "../../../redux/productsActions";
 
 const ModalEditProduct = (props) => {
-
-    const {currentProducts, updateProduct, modalCloseEdit, categories } = props;
-
-    const [product, setProduct] = useState(currentProducts);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProduct({
-            ...product,
-            [name]: value
-        });
+    const dispatch = useDispatch()
+    const { modalCloseEdit } = props
+    const categories = useSelector(state => state.categoriesReducer.categories)
+    const currentProduct = useSelector(store => store.productsReducer.product)
+    console.log("edited: ", currentProduct)
+    const updateProduct = (product) => {
+        dispatch(actionUpdateProduct(product))
+        window.location.reload();
     }
-
-
     // States Upload Image
-
     const [loading, setLoading] = useState(false)
     const [imagesUpload, setImagesUpload] = useState('')
-
     // Funciones Upload Image
-
     const uploadImage = async e => {
-        const files = e.target.files
+        const files = e
         const data = new FormData()
-        data.append('file', files[0])
+        data.append('file', files)
         data.append('upload_preset', 'ecommerceHenry')
         setLoading(true)
-
         const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
             {
                 method: 'POST',
                 body: data
             })
-
         const file = await res.json()
-
-
-        // setImagesUpload(file.secure_url)
-        setProduct({ ...product, images: file.secure_url })
-
+        actionUpdateProductLocalStore({ ...currentProduct, images: file.secure_url })
         setImagesUpload(file.secure_url)
-
-        // setImagesUpload(true)
-
         setLoading(false)
-
-        console.log(product)
     }
-
-
     // ESTADOS DESCRIPTION
-
-    const [descriptionState, setDescriptionState] = useState(product.description)
-
-
-    const descriptionChange = (value) => {
-        // setDescriptionState(value)
-
-
-        setProduct({
-            ...product,
-            description: value
-        })
+    const handleChange = (event) => {
+        const { name, value } = event.target
+        dispatch(actionUpdateProductLocalStore({
+            ...currentProduct,
+            [name]: value
+        }))
     }
 
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setProduct({
-    //         ...product,
-    //         [ name ] : value
-    //     });
-    // }
-
-
-    const setCategory = (e) => {
-        setProduct({
-            ...product,
-            categories: e.target.value
-        })
+    const descriptionChange = (event) => {
+        dispatch(actionUpdateProductLocalStore({
+            ...currentProduct,
+            description: event
+        }))
     }
-
-
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+    console.log(currentProduct)
     return (
-        <div>
-
+        <div className='editProdContainer'>
             <ModalHeader>
                 <div><h3>Edit product</h3></div>
             </ModalHeader>
-
             <ModalBody>
-
-                <FormGroup style={{ display: "flex", justifyContent: 'center' }}>
-                    <ListGroup horizontal style={{ alignItems: 'center' }}>
-                        <input type='file' name='file' placeholder='Upload' style={{ color: 'transparent' }} onChange={uploadImage} />
-                        {
-                            <img src={product.images} alt='' style={{ width: '150px', marginLeft: '-175px' }} />
-                        }
+                <FormGroup className='uploadImage' style={{ display: "flex", justifyContent: 'center' }}>
+                    <ListGroup horizontal className="inputContainer">
+                        <SelectImage uploadImage={uploadImage} />
                     </ListGroup>
                 </FormGroup>
-
-                <FormGroup>
-                    <label>Product name: </label>
+                <FormGroup className='productName'>
+                    <label className='productDetail'>Product name: </label>
                     <input
-                        className='form-control'
+                        className='inputName'
                         name='name'
                         type='text'
                         onChange={handleChange}
-                        value={product.name}
+                        value={currentProduct.name}
                     />
                 </FormGroup>
-
                 <FormGroup>
-                    <label>Description: </label>
+                    <label className='productDetail'>Description: </label>
                     <form>
-                        <Editor
+                        <Editor id='productEditor'
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
-                            value={descriptionState}
+                            value={currentProduct.description}
                             init={{
-                                height: 250,
+                                height: 150,
                                 menubar: false
                             }}
                             onEditorChange={descriptionChange}
                         />
                     </form>
                 </FormGroup>
-                <ListGroup horizontal style={{ alignItems: 'center', justifyContent: 'space-around' }}>
-                    <FormGroup>
-                        <label>Price: </label>
+                <ListGroup horizontal className="propertyContainer" style={{ alignItems: 'center', justifyContent: 'space-around' }}>
+                    <FormGroup className="priceContainer">
+                        <label className="productDetail">Price: </label>
                         <input
                             className='form-control'
                             name='precio'
                             type='number'
                             onChange={handleChange}
-                            value={product.precio}
+                            value={currentProduct.precio}
                         />
                     </FormGroup>
-                    <FormGroup>
-                        <label>Stock: </label>
+                    <FormGroup className="stockContainer">
+                        <label className="productDetail">Stock: </label>
                         <input
                             className='form-control'
                             name='stock'
                             type='number'
                             onChange={handleChange}
-                            value={product.stock}
+                            value={currentProduct.stock}
                         />
                     </FormGroup>
-                    <FormGroup>
-                        <label>Categories: </label>
-                        {/* <input
-                            className = 'form-control'
-                            name = 'categories'
-                            type = 'text'
-                            onChange = {handleChange}
-                            value = {product.categories}
-                        /> */}
-                        <select multiple class="form-control"
-
-                            // ============== VEEEEEEEEEEEEERRRRRRRRRRR
-                            onClick={e => {
-                                setCategory(e)
-                            }}
-                        >
-                            {categories.map(c => (<option key={c.name}> {c.name} </option>))}
+                    <FormGroup className="categoriesContainer">
+                        <label className='productDetail'>Categories: </label>
+                        <select className='form-control' name='categories' onChange={handleChange} >
+                            {categories.map(c => {
+                                return (
+                                    (currentProduct.categories !== undefined) ? ((c.name === currentProduct.categories[0].name) ? (<option className='form-control' selected name='categories' value={c.name}>{c.name}</option>) :
+                                        (<option className='form-control' name='categories' value={c.idCategory}>{c.name}</option>)) : (<option></option>)
+                                )
+                            })}
                         </select>
+                        {/*<Dropdown className='dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
+                            <DropdownToggle className='dropdownCat' caret>
+                                {product.categories}
+                            </DropdownToggle>
+                            <DropdownMenu className='dropdownCat' >
+                            </DropdownMenu>
+                        </Dropdown>*/}
                     </FormGroup>
                 </ListGroup>
             </ModalBody>
-
             <ModalFooter>
-                <Button
-                    color='success'
+                <button className='buttonAdd'
                     onClick={e => {
                         e.preventDefault();
-                        if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
-                        updateProduct(product);
-                        console.log(product)
+                        if (!currentProduct.name || !currentProduct.description || !currentProduct.precio || !currentProduct.stock) return window.alert('Empty input')
+                        dispatch(actionUpdateProduct(currentProduct));
                         modalCloseEdit();
+                        window.location.reload()
                     }}
                 >Submit
-                </Button>
-                <Button
-                    color='danger'
+                </button>
+                <button className='buttonExit'
                     onClick={e => modalCloseEdit()}
                 >Exit
-                </Button>
-
-                {/* <Button 
-                    color = 'danger' 
-                    onClick = {e => console.log(currentProducts)}
-                >TEST
-                </Button> */}
+                </button>
             </ModalFooter>
         </div>
     )
 }
-
 export default ModalEditProduct;

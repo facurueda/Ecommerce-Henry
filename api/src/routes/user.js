@@ -49,7 +49,11 @@ server.get('/:idUser', (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.params.idUser
-        }
+        },
+        include : [{
+            model : Order,
+            as : 'orders'
+        }]
     }).then((user) => {
         res.send(user)
     })
@@ -97,6 +101,7 @@ server.post('/:idUser/cart', (req, res, next) => {
                 quantity: inter.quantity + req.body.quantity
             })
         }).catch(() => {
+            console.log(req.body);
             return Inter_Prod_Order.create({
                 idOrder: order.idOrder,
                 idProduct: req.body.idProduct,

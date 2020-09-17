@@ -1,5 +1,10 @@
+.imageCropper {
+    display: flex;
+    flex-direction: inherit;
+    align-items: center;
+}
 
-.buttonStyle {
+.buttonImage{
     display: inline-block;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
@@ -14,22 +19,16 @@
     background-color: rgba(47, 54, 64, 0.57);
     text-align: center;
     transition: all 0.15s;
+    margin-right: 10px
 }
-
-.buttonStyle:hover {
+.buttonImage:hover {
     text-shadow: 0 0 0.5px #DFA06E;
     color: #DFA06E;
     border-color: #DFA06E;
 }
-
 @media all and (max-width:30em) {
-    .buttonStyle {
+    .buttonImage {
         display: block;
         margin: 0.4em auto;
     }
-}
-
-.admincontainer {
-    display: flex;
-    justify-content: center;
 }
