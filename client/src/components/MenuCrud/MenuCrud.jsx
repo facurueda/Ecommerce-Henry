@@ -34,10 +34,7 @@ const MenuCrud = () => {
     await dispatch(actionPostProduct(product))
     await window.location.reload();
   }
-  const updateProduct = async (product) => {
-    await dispatch(actionUpdateProduct(product))
-    await window.location.reload();
-  }
+  
 
   const products = useSelector(state => state.productsReducer.products)
   const categories = useSelector(state => state.categoriesReducer.categories)
@@ -66,11 +63,7 @@ const MenuCrud = () => {
       </Modal>
       <Modal isOpen={modalEdit}>
         <ModalEditProduct
-          products={products}
-          currentProduct={currentProduct}
-          updateProduct={updateProduct}
           modalCloseEdit={modalCloseEdit}
-          categories={categories}
         />
       </Modal>
     </div>

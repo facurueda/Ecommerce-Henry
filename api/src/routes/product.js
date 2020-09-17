@@ -37,7 +37,6 @@ server.get('/:id', (req, res, next) => {
 		},
 		include: [{ model: Categories, as: "categories" }]
 	}).then((product) => {
-		console.log(product)
 		res.send(product)
 	}).catch(next)
 });
@@ -169,30 +168,34 @@ server.delete('/:idProducto', (req, res, next) => {
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
-server.put('/:id', (req, res, next) => {
+server.put('/:idProduct', (req, res, next) => {
 	Product.findOne({
 		where: {
-			idProduct: req.body.idProduct
+			idProduct: req.params.idProduct
 		}
 	}).then(product => {
-		product.update({
+		return product.update({
 			...product,
 			name: req.body.name,
 			description: req.body.description,
 			precio: req.body.precio,
 			stock: req.body.stock,
 			images: req.body.images
-		}).then(() => {
-			return Inter_Cat_Prod.findOne({
-				where: { idProduct: req.body.idProduct}
-			}).then(inter => {
-				inter.update({
-					...inter,
-					idCategory: parseInt(req.body.categories)
-				})
-			})
-			res.send(product)
 		})
+	}).then((product) => {
+		if (req.body.categories) {
+			Inter_Cat_Prod.findOne({
+				where: { idProduct: product.idProduct }
+			}).then((inter) => {
+					return inter.update({
+						...inter,
+						idCategory: parseInt(req.body.categories)
+					})
+				}).catch(next)
+		}
+		return product
+	}).then((product) => {
+		res.send(product)
 	}).catch(next);
 })
 module.exports = server;

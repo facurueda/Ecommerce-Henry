@@ -50,7 +50,7 @@ const Categories = (props) => {
   // Funciones para el Modal ADD:
   const addCategory = async (category) => {
     await props.actionPostCategory(category);
-    await window.location.reload(false)
+    await window.location.reload()
   }
   console.log(props.categories)
 
