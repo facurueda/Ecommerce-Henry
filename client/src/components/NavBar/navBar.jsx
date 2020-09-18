@@ -22,7 +22,6 @@ const NavBar = () => {
     const user = useSelector(state => state.usersReducer.idUser)
     const quantity = useSelector(store => store.ordersReducer.quantity)
     // ---------------------------- Functions ---------------------------- //
-
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
