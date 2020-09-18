@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from "./constants";
+import { GET_ORDER_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from "./constants";
 const url = "http://localhost:3000/";
 
 export const actionUpdateOrder = (idUser) => {
@@ -10,8 +10,14 @@ export const actionUpdateOrder = (idUser) => {
     }
 }
 export const actionGetOrder = (idUser) => {
-    return (dispatch) => {
-        axios.get(url + 'order/' + idUser).then(res => {
+    return async (dispatch) => {
+        await axios.get(url + 'order/' + idUser).then(res => {
+            console.log('res.data: ', res.data)
+             dispatch({
+                type: GET_ORDER_QUANTITY, payload: res.data.products.reduce((acum, product) => {
+                    return acum + product.Inter_Prod_Order.quantity
+                }, 0)
+            })
             dispatch({ type: GET_ORDER_BY_ID, payload: res.data })
         })
     }

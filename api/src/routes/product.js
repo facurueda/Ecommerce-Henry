@@ -27,7 +27,6 @@ server.get('/search', (req, res, next) => {
 			res.send(products);
 		}).catch(next)
 });
-
 server.get('/:id', (req, res, next) => {
 	// GET /products/:id
 	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
@@ -97,7 +96,6 @@ server.post('/aaa', (req, res, next) => {
 		})
 	}).catch(next)
 })
-
 server.post('/create', (req, res, next) => {
 	const {
 		name,
@@ -126,7 +124,6 @@ server.post('/create', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next);
 });
-
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
@@ -135,9 +132,7 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
-
 server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 	Inter_Cat_Prod.destroy({
 		where: {
@@ -148,9 +143,7 @@ server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-
 server.delete('/:idProducto', (req, res, next) => {
-
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
@@ -166,7 +159,6 @@ server.delete('/:idProducto', (req, res, next) => {
 		res.status(400)
 	})
 })
-
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 server.put('/:idProduct', (req, res, next) => {
 	Product.findOne({

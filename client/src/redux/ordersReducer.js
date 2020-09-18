@@ -1,9 +1,10 @@
-import { UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from './constants'
+import { GET_ORDER_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from './constants'
 
 var initialState = {
     loading: false,
     order: [],
-    orders: []
+    orders: [],
+    quantity:0
 };
 
 const ordersReducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ const ordersReducer = (state = initialState, action) => {
                 ...state,
                 order: action.payload
             }
+            case GET_ORDER_QUANTITY:
+                return {
+                    ...state,
+                    quantity: action.payload
+                }
             case UPDATE_ORDER:
                 return {
                     ...state,

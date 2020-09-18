@@ -3,26 +3,24 @@ import Logo from './Images/Logo.png'
 import Cart from './Images/Cart.png'
 import './navBar.css'
 import SearchBar from '../SearchBar/SearchBar'
-import { Modal, Button } from 'reactstrap'
+import { Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
-import { actionGetUserById } from '../../redux/usersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
     const dispatch = useDispatch()
     useEffect(async () => {
-        dispatch(actionGetUserById(1))
-        dispatch(actionGetOrder(1));
+        dispatch(actionGetOrder(user));
     },[])
 
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const user = useSelector(state => state.usersReducer.idUser)
-    const order = useSelector(state => state.ordersReducer.order)
+    const quantity = useSelector(store => store.ordersReducer.quantity)
     // ---------------------------- Functions ---------------------------- //
 
     // ----- To Open Modals ----- //
@@ -34,9 +32,9 @@ const NavBar = () => {
     const modalRegisterClose = () => setModalRegister(false);
 
 
-    const ChangeModal = async () => {
-        await modalLoginView()
-        await modalRegisterView()
+    const ChangeModal =  () => {
+         modalLoginView()
+         modalRegisterView()
     }
     return (
 
@@ -71,11 +69,7 @@ const NavBar = () => {
                                     <img className='buttonCart' src={Cart} alt='Cart' />
                                 </a>
                                 <div className='quantityProducts'>
-                                    {(order.products) ?
-                                        (order.products.reduce((acum, product) => {
-                                            return acum + product.Inter_Prod_Order.quantity
-                                        }, 0)) : (<div> </div>)
-                                    }
+                                    {quantity}
                                 </div>
                             </div>
                         )
