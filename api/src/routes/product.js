@@ -146,12 +146,13 @@ server.put('/:idProduct', (req, res, next) => {
 			}).then((inter) => {
 					return inter.update({
 						...inter,
-						idCategory: parseInt(req.body.categories)
+						idCategory: req.body.categories
 					})
 				}).catch(next)
 		}
 		return product
 	}).then((product) => {
+		console.log('responding', product)
 		res.send(product)
 	}).catch(next);
 })

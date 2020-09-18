@@ -13,11 +13,18 @@ export const actionGetOrder = (idUser) => {
     return async (dispatch) => {
         await axios.get(url + 'order/' + idUser).then(res => {
             console.log('res.data: ', res.data)
-             dispatch({
-                type: GET_ORDER_QUANTITY, payload: res.data.products.reduce((acum, product) => {
-                    return acum + product.Inter_Prod_Order.quantity
-                }, 0)
-            })
+            if(res.data.products !== undefined) {
+                dispatch({
+                    type: GET_ORDER_QUANTITY, payload: res.data.products.reduce((acum, product) => {
+                        return acum + product.Inter_Prod_Order.quantity
+                    }, 0)
+                })
+            } else {
+                dispatch({
+                    type: GET_ORDER_QUANTITY, payload: 0
+                })
+            }
+             
             dispatch({ type: GET_ORDER_BY_ID, payload: res.data })
         })
     }

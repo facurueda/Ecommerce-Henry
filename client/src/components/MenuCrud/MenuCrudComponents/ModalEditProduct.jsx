@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import {
-    Button,
     ModalHeader,
     ModalBody,
     FormGroup,
     ModalFooter,
-    ListGroup,
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    ListGroup
 } from "reactstrap";
 import './ModalEditProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
@@ -131,13 +126,6 @@ const ModalEditProduct = (props) => {
                                 )
                             })}
                         </select>
-                        {/*<Dropdown className='dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
-                            <DropdownToggle className='dropdownCat' caret>
-                                {product.categories}
-                            </DropdownToggle>
-                            <DropdownMenu className='dropdownCat' >
-                            </DropdownMenu>
-                        </Dropdown>*/}
                     </FormGroup>
                 </ListGroup>
             </ModalBody>
