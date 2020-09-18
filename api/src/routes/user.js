@@ -45,14 +45,15 @@ server.get('/:idUser/cart', (req, res, next) => {
         })
     }).catch(next);
 })
+
 server.get('/:idUser', (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.params.idUser
         },
-        include : [{
-            model : Order,
-            as : 'orders'
+        include: [{
+            model: Order,
+            as: 'orders'
         }]
     }).then((user) => {
         res.send(user)
@@ -96,10 +97,19 @@ server.post('/:idUser/cart', (req, res, next) => {
                 idProduct: req.body.idProduct
             }
         }).then((inter) => {
-            return inter.update({
-                ...inter,
-                quantity: inter.quantity + req.body.quantity
-            })
+            if (inter.quantity <= 1 && req.body.quantity === -1) {
+                return Inter_Prod_Order.destroy({
+                    where: {
+                        idOrder: order.idOrder,
+                        idProduct: req.body.idProduct
+                    }
+                })
+            } else {
+                return inter.update({
+                    ...inter,
+                    quantity: inter.quantity + req.body.quantity
+                })
+            }
         }).catch(() => {
             console.log(req.body);
             return Inter_Prod_Order.create({
