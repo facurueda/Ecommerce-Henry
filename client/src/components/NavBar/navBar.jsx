@@ -8,6 +8,7 @@ import Register from '../Register/Register'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
+import { useCookies } from 'react-cookie';
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
@@ -15,8 +16,9 @@ const NavBar = () => {
     useEffect(async () => {
         dispatch(actionGetOrder(user));
     },[])
-
+   
     // ---------------------------- States ---------------------------- //
+    const [ cookies , setCookies ] = useCookies(['Alfredito'])
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const user = useSelector(state => state.usersReducer.idUser)
@@ -30,7 +32,10 @@ const NavBar = () => {
     const modalLoginClose = () => setModalLogin(false);
     const modalRegisterClose = () => setModalRegister(false);
 
-
+    const handleChancha = () => {
+        setCookies('Alfredito', 'alfredito')
+        console.log(cookies)
+    }
     const ChangeModal =  () => {
          modalLoginView()
          modalRegisterView()
@@ -53,9 +58,9 @@ const NavBar = () => {
                             <button className='buttonProducts'>Products</button>
                         </form>
                         {user ? (
-                            <form action="/Admin">
-                                <button className='buttonProducts'>My Account</button>
-                            </form>
+                           
+                                <button className='buttonProducts' onClick = { handleChancha } >My Account</button>
+                            
                         ) : (<div></div>)}
                     </div>
                     <div className='searchBar'>

@@ -3,18 +3,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 import { actionAddToCart, actionGetOrder } from '../redux/ordersActions'
 import './ButtonAddToCart.css'
-
+import { useCookies } from 'react-cookie';
 
 const ButtonAddToCart = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.usersReducer.idUser)
+
+    const [cookies, setCookie] = useCookies(['cart'])
+
     const handleChancla = () => {
         if (user) {
             dispatch(actionAddToCart({ idUser: user, idProduct: props.datos.idProduct, quantity: 1, price: props.datos.price }))
             dispatch(actionGetOrder(user))
         } else {
-            history.push('/register')
+            
         }
     }
     return (<div>
