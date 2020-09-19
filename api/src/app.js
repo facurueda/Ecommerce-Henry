@@ -42,6 +42,8 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 server.use(auth(config));
 
+// Path to login ./login -- Path to logout ./logout
+
 // req.isAuthenticated is provided from the auth router
 server.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
