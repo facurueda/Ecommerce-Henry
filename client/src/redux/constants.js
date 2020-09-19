@@ -20,10 +20,15 @@ export const PRODUCT_PUT = 'PRODUCT_PUT'
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
+export const GET_ORDER_QUANTITY = 'GET_ORDER_QUANTITY'
 
 export const GET_USER_BY_ID = 'GET_USER_BY_ID'
 export const USER_CREATED = 'USER_CREATED'
+export const AUTH_FAILED = 'AUTH_FAILED'
+export const POST_LOGIN = 'POST_LOGIN'
+export const USER_LOGGED = 'USER_LOGGED'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 
-
+export const REVIEW_POST = 'REVIEW_POST'
+export const GET_REVIEWS_BY_PRODUCT = 'GET_REVIEWS_BY_PRODUCT'

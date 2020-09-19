@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ButtonAddToCart from '../ButtonAddToCart';
 import './products.css';
 import renderHTML from 'react-render-html';
+import Review from '../Review/Review'
+import { actionGetReviews } from '../../redux/reviewsAction';
 
 function Products(props) {
 
@@ -12,6 +14,10 @@ function Products(props) {
         return {__html: description}
     }
 
+    const dispatch = useDispatch();
+    const reviewFinder = () => {
+        dispatch(actionGetReviews(idProduct))
+    }
 
     return (
         <div>
@@ -28,6 +34,7 @@ function Products(props) {
                             <div>
                             <div className='prodDescription' dangerouslySetInnerHTML = {test()}/>
                             </div>
+                            <div>{reviewFinder()}</div>
                         </div>
                         <div className='prodComp3'>
                             <span className='prodPrice'>Precio: ${precio} </span>

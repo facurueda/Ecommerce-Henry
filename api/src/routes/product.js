@@ -39,7 +39,6 @@ server.get('/search', (req, res, next) => {
 			res.send(products);
 		}).catch(next)
 });
-
 server.get('/:id', (req, res, next) => {
 	// GET /products/:id
 	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
@@ -80,7 +79,6 @@ server.post('/product/:idProduct/review', (req, res, next) => {
 		})
 	}).catch(next)
 })
-
 server.post('/create', (req, res, next) => {
 	const {
 		name,
@@ -111,7 +109,6 @@ server.post('/create', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next);
 });
-
 server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
@@ -120,8 +117,8 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
+
 
 ///////////////////////////// RUTA PARA DELETE REVIEW
 server.delete('/product/:id/review/:idReview', (req, res, next) => {
@@ -150,9 +147,7 @@ server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-
 server.delete('/:idProducto', (req, res, next) => {
-
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
@@ -168,7 +163,6 @@ server.delete('/:idProducto', (req, res, next) => {
 		res.status(400)
 	})
 })
-
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 
 ///////////////////////////// RUTA PARA MODIFICAR REVIEW
@@ -191,6 +185,7 @@ server.put('/:idProduct/review/:idReview', (req, res, next) => {
 
 
 server.put('/:idProduct', (req, res, next) => {
+	let productUpdated = null
 	Product.findOne({
 		where: {
 			idProduct: req.params.idProduct
@@ -205,21 +200,19 @@ server.put('/:idProduct', (req, res, next) => {
 			images: req.body.images
 		})
 	}).then((product) => {
-		if (req.body.categories) {
-			Inter_Cat_Prod.findOne({
-				where: {
-					idProduct: product.idProduct
-				}
-			}).then((inter) => {
-				return inter.update({
-					...inter,
-					idCategory: parseInt(req.body.categories)
-				})
-			}).catch(next)
-		}
-		return product
-	}).then((product) => {
-		res.send(product)
+		productUpdated = product;
+			return Inter_Cat_Prod.findOne({
+				where: { idProduct: product.idProduct }
+			})
+	}).then((inter) => {
+			return inter.update({
+						...inter,
+						idCategory: req.body.categories
+					})
+				
+	}).then((interUpdated) => {
+		console.log('responding', productUpdated, interUpdated)
+		res.send({product : productUpdated, category: interUpdated })
 	}).catch(next);
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// DEV

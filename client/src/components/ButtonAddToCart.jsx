@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import { Button } from 'reactstrap'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { actionAddToCart, actionGetOrder, actionUpdateOrder } from '../redux/ordersActions'
+import { actionAddToCart, actionGetOrder } from '../redux/ordersActions'
 import './ButtonAddToCart.css'
 
 
@@ -12,8 +11,8 @@ const ButtonAddToCart = (props) => {
     const user = useSelector(state => state.usersReducer.idUser)
     const handleChancla = () => {
         if (user) {
-            dispatch(actionAddToCart({ idUser: user, idProduct: props.datos.idProduct, quantity: props.datos.quantity, price: props.datos.price }))
-            dispatch(actionUpdateOrder(user))
+            dispatch(actionAddToCart({ idUser: user, idProduct: props.datos.idProduct, quantity: 1, price: props.datos.price }))
+            dispatch(actionGetOrder(user))
         } else {
             history.push('/register')
         }

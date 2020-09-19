@@ -138,6 +138,7 @@ server.post('/', (req, res, next) => {
     }).then((newUser) => {
         return Order.create({
             idUser: newUser.idUser,
+            status: 'CREADA'
         })
     }).then(() => {
         res.send({
