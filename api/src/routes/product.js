@@ -5,24 +5,36 @@ const {
 	Categories,
 	Inter_Cat_Prod,
 	Inter_Prod_Order,
+	Review
 } = require('../db.js');
+// const Review = require('../models/Review.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
+
+///////////////////////////// RUTA PARA OBTENER TODAS REVIEW DE UN PRODUCTO
+
+server.get('/product/:id/review/', (req, res, next) => {
+	Review.findAll()
+		.then((rev) => {
+			res.send(rev)
+		}).catch(next)
+});
+
 server.get('/search', (req, res, next) => {
 	Product.findAll({
-		where: {
-			[Sequelize.Op.or]: [{
-				name: {
-					[Sequelize.Op.like]: "%" + req.query.query + "%"
-				}
-			},
-			{
-				description: {
-					[Sequelize.Op.like]: "%" + req.query.query + "%"
-				}
+			where: {
+				[Sequelize.Op.or]: [{
+						name: {
+							[Sequelize.Op.like]: "%" + req.query.query + "%"
+						}
+					},
+					{
+						description: {
+							[Sequelize.Op.like]: "%" + req.query.query + "%"
+						}
+					}
+				]
 			}
-			]
-		}
-	})
+		})
 		.then((products) => {
 			res.send(products);
 		}).catch(next)
@@ -34,7 +46,10 @@ server.get('/:id', (req, res, next) => {
 		where: {
 			idProduct: req.params.id
 		},
-		include: [{ model: Categories, as: "categories" }]
+		include: [{
+			model: Categories,
+			as: "categories"
+		}]
 	}).then((product) => {
 		res.send(product)
 	}).catch(next)
@@ -49,7 +64,10 @@ server.get('/', (req, res, next) => {
 });
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
 // POST /product/:id/review
-server.post('/:idProduct/review', (req, res, next) => {
+
+///////////////////////////// RUTA PARA CREAR REVIEW
+
+server.post('/product/:idProduct/review', (req, res, next) => {
 	Review.create({
 		description: req.body.description,
 		rating: req.body.rating,
@@ -79,7 +97,9 @@ server.post('/create', (req, res, next) => {
 		images
 	}).then((product) => {
 		Categories.findOne({
-			where: { name: req.body.categories }
+			where: {
+				name: req.body.categories
+			}
 		}).then(category => {
 			Inter_Cat_Prod.create({
 				idCategory: category.idCategory,
@@ -98,6 +118,25 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 	}).catch(next)
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
+
+
+///////////////////////////// RUTA PARA DELETE REVIEW
+server.delete('/product/:id/review/:idReview', (req, res, next) => {
+	Review.destroy({
+		where: {
+			idReview: req.params.idReview
+		}
+	}).then((rev) => {
+		if(rev) {
+			res.status(200).send('Success')
+		} else {
+			res.status(400).send('Error, this review doesnt exist')
+		}
+	}).catch(() => {
+		res.status(400)
+	})
+})
+
 server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 	Inter_Cat_Prod.destroy({
 		where: {
@@ -125,6 +164,26 @@ server.delete('/:idProducto', (req, res, next) => {
 	})
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
+
+///////////////////////////// RUTA PARA MODIFICAR REVIEW
+server.put('/:idProduct/review/:idReview', (req, res, next) => {
+	Review.findOne({
+		where: {
+			idReview: req.params.idReview
+		}
+	}).then(rev => {
+		return rev.update({	
+			...rev,
+			description: req.body.description,
+			rating: req.body.rating
+		})
+	})
+	.then((rev) => {
+		res.send(rev)
+	}).catch(next)
+})
+
+
 server.put('/:idProduct', (req, res, next) => {
 	let productUpdated = null
 	Product.findOne({
