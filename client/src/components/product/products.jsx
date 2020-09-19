@@ -34,7 +34,7 @@ function Products(props) {
                             <div>
                             <div className='prodDescription' dangerouslySetInnerHTML = {test()}/>
                             </div>
-                            <Review />
+                            <div>{reviewFinder()}</div>
                         </div>
                         <div className='prodComp3'>
                             <span className='prodPrice'>Precio: ${precio} </span>

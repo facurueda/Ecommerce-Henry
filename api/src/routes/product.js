@@ -126,6 +126,7 @@ server.delete('/:idProducto', (req, res, next) => {
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 server.put('/:idProduct', (req, res, next) => {
+	let productUpdated = null
 	Product.findOne({
 		where: {
 			idProduct: req.params.idProduct
@@ -140,20 +141,19 @@ server.put('/:idProduct', (req, res, next) => {
 			images: req.body.images
 		})
 	}).then((product) => {
-		if (req.body.categories) {
-			Inter_Cat_Prod.findOne({
+		productUpdated = product;
+			return Inter_Cat_Prod.findOne({
 				where: { idProduct: product.idProduct }
-			}).then((inter) => {
-					return inter.update({
+			})
+	}).then((inter) => {
+			return inter.update({
 						...inter,
 						idCategory: req.body.categories
 					})
-				}).catch(next)
-		}
-		return product
-	}).then((product) => {
-		console.log('responding', product)
-		res.send(product)
+				
+	}).then((interUpdated) => {
+		console.log('responding', productUpdated, interUpdated)
+		res.send({product : productUpdated, category: interUpdated })
 	}).catch(next);
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// DEV

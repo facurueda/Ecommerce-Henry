@@ -33,7 +33,6 @@ export const actionUpdateProductLocalStore = (product) => {
 }
 export const actionUpdateProduct = (product) => {
     return (dispatch) => {
-        product.categories = parseInt(product.categories)
         axios.put(url + 'products/' + product.idProduct, product).then((res) => {
             dispatch({ type: PRODUCT_PUT, payload: res.data })
         }).catch((error) => {

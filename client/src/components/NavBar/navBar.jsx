@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Logo from './Images/Logo.png'
-import Cart from './Images/Cart.png'
 import './navBar.css'
 import SearchBar from '../SearchBar/SearchBar'
 import { Modal } from 'reactstrap'
@@ -8,6 +7,7 @@ import Login from '../LogIn/Login'
 import Register from '../Register/Register'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
+import UserLogged from '../UserLogged/UserLogged'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
@@ -64,12 +64,7 @@ const NavBar = () => {
                     {user ?
                         (
                             <div className='cartContainer'>
-                                <a href='/order'>
-                                    <img className='buttonCart' src={Cart} alt='Cart' />
-                                </a>
-                                <div className='quantityProducts'>
-                                    {quantity}
-                                </div>
+                                <UserLogged/>
                             </div>
                         )
                         :

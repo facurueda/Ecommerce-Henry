@@ -121,7 +121,7 @@ const ModalEditProduct = (props) => {
                         <select className='form-control' name='categories' onChange={handleChange} >
                             {categories.map(c => {
                                 return (
-                                    (currentProduct.categories !== undefined) ? ((c.name === currentProduct.categories[0].name) ? (<option className='form-control' selected name='categories' value={c.name}>{c.name}</option>) :
+                                    (currentProduct.categories !== undefined) ? ((c.name === currentProduct.categories.name) ? (<option className='form-control' selected name='categories' value={c.name}>{c.name}</option>) :
                                         (<option className='form-control' name='categories' value={c.idCategory}>{c.name}</option>)) : (<option></option>)
                                 )
                             })}
