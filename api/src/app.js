@@ -9,6 +9,8 @@ require('./db.js');
 const flash = require('express-flash')
 const session = require('express-session');
 const passport = require('passport');
+const cookieSession = require('cookie-session')
+
 
 const server = express();
 server.name = 'API';
@@ -40,6 +42,10 @@ server.use(session({
 }))
 server.use(passport.initialize())
 server.use(passport.session())
+server.use(cookieSession({
+  maxAge: 14400,
+  keys: ['testCookiesTestTest']
+}))
 /* server.use(express.cookieParser('your secret here'));
 server.use(express.session());
  */
