@@ -141,23 +141,11 @@ server.post('/:idUser/cart', (req, res, next) => {
 
 
 
-server.post('/auth/login', passport.authenticate('local',{
-    
-    // en el caso que se logee bien a donde enviamos?
-    successRedirect: '/',
-    failureRedirect: '/auth/login',
-    failureFlash: true,
-})
-)
-
-server.get('/auth/login',(req, res, next) => {
-    res.send('la puta madre funciona')
-})
-
-/// USER REGISTER
 
 
-server.post('/register', async (req, res, next) => {
+
+
+server.post('/', async (req, res, next) => {
    
     const {
         name,
@@ -186,6 +174,7 @@ server.post('/register', async (req, res, next) => {
 
 
 
+<<<<<<< HEAD
 //////////////////////////////////////////////////////logout
 //s64
  server.get('/auth/logout', (req,res) => {
@@ -218,6 +207,8 @@ User.findOne({
     })
 })
 }) 
+=======
+>>>>>>> 95e65014f289ec501f392a5ae1bdd9ca879e92d0
 
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
