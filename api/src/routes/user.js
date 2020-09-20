@@ -157,7 +157,7 @@ server.get('/auth/login',(req, res, next) => {
 /// USER REGISTER
 
 
-server.post('/', async (req, res, next) => {
+server.post('/register', async (req, res, next) => {
    
     const {
         name,
@@ -186,8 +186,38 @@ server.post('/', async (req, res, next) => {
 
 
 
+//////////////////////////////////////////////////////logout
+//s64
+ server.get('/auth/logout', (req,res) => {
+    req.logout();
+    res.redirect('/');
+    // remove the session user id
+    // req.session.userId = null;
+});
+//s65 devuelve el usuario logeado
+server.get('/auth/me', (req,res) => {
+        // req.body.user?
+if(req.user.authenticated){ 
+    res.send(user) 
+    } else {
+    redirect('/')
+    }
+     
+})
 
-
+//s67 cambio el perfil a admin
+server.post('/auth/promote/:id', (req, res) => {
+User.findOne({
+    where:{
+        idUser : req.body.id,
+    }
+}).then(user => {
+    user.update({
+        ...user,
+        level : Admin,
+    })
+})
+}) 
 
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
