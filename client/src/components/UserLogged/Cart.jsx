@@ -17,7 +17,7 @@ const Cart = () => {
     return (
         <div className='Cart'>
             <a href='/order'>
-                <img className='buttonCart' src={CartImg} alt='Cart' />
+                <i class="fa fa-shopping-cart fa_custom fa-1x"></i>
             </a>
             <div className='quantityProducts'>
                 {quantity}

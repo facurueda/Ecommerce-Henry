@@ -49,7 +49,7 @@ const Register = (props) => {
         <div className='loginContainer'>
             <button className='closeButton' onClick={modalRegisterClose}>x</button>
             <ModalHeader id='loginHeaderContainer'>
-                <div className="registerTitle">Register with</div>
+                <div className="registerTitle">Register</div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
                 <div>
@@ -61,7 +61,7 @@ const Register = (props) => {
                     <input className='inputRegister' name='password' type="password" placeholder='Password' onChange={handleChange} />
                     <input className='inputRegister' name='secondPassword' type="password" placeholder='Repeat Password' onChange={handleChange}/>
 
-                    <button className='buttonRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
+                    <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>

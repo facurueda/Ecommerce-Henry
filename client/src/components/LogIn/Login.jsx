@@ -33,12 +33,12 @@ const Login = (props) => {
         <div className='loginContainer'>
             <button className='closeButton' onClick={modalLoginClose}>x</button>
             <ModalHeader id='loginHeaderContainer'>
-                <div className="addProductTitle">Login with</div>
+                <div className="addProductTitle">Login </div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
                 <input className='standardInput' type='email' placeholder='info@lacoseria.com' onChange={handleInput}/>
                 <input className='standardInput' type="password" placeholder='··············' onChange={handleInput}/>
-                <button className='logginButton' onClick={handleChancla}>LOGIN</button>
+                <button className='buttonLoginAndRegister' onClick={handleChancla}>LOGIN</button>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
                 <div className='LoginAccount'>

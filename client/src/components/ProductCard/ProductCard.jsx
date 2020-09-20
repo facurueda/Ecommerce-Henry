@@ -23,23 +23,23 @@ const ProductCard = (props) => {
 
     return (
         <div className='ProductCard_Container'>
-            <Card className='productCard'>
                 <div className='content'>
-                    <CardImg className='image' src={images} alt="Card image cap" onClick={handleChancla} />
-                    <CardBody>
+                    <img className='imageCard' src={images} alt="Card image cap" onClick={handleChancla} />
+                    <div className='contentCard'>
                         <h3 className='productName'>{name}</h3>
                         <div className='ProductDataContainer'>
-                            {renderHTML(description)}
-                            <p>Unidades disponibles: {stock}</p>
-                            <b className='price'>${price}</b>
+                            <div className='ProductDescription'>{renderHTML(description)}</div>
+                            <div className= 'productDiv'>
+                                <b className='productPrice'>${price}</b>
+                                <p className = 'productStock'>U: {stock}</p>
+                            </div>
                         </div>
                         {((window.location.pathname) !== '/order' && (window.location.pathname) !== '/adminOrdersTable')?
                             (< ButtonAddToCart className='buttonAddToCart' datos={{ idProduct: idProduct, quantity: 1, price: price }} />)
                         :(<div></div>)
                         }
-                        </CardBody>
+                        </div>
                 </div>
-            </Card>
         </div>
     )
 }
