@@ -1,15 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import './Review.css'
 
 const Review = () => {
-    const review = useSelector(state => state.reviewsReducer.review)
-    
+    const reviews = useSelector(state => state.reviewsReducer.review)
     return (
         <div>
-            <div>Fecha de creacion: {review.createdAt} </div>
-            <div>Usuario:  {review.usuario}</div>
-            <div>Calificacion:  {review.calificacion}</div>
-            <div>Descripcion:  {review.descripcion}</div>
+            {reviews.map(review => {
+                return (
+                    <div className='reviewContainer'>
+                        <div>Ultima reseña: {review.updatedAt} </div>
+                        <div>Usuario:  {review.usuario}</div>
+                        <div>Calificacion:  {review.calificacion}</div>
+                        <div>Descripcion:  {review.descripcion}</div>
+                    </div>)
+            })}
         </div>
     )
 }

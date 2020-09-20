@@ -16,7 +16,8 @@ function Products(props) {
 
     const dispatch = useDispatch();
     const reviewFinder = () => {
-        dispatch(actionGetReviews(idProduct))
+        // dispatch(actionGetReviews(idProduct))
+        return <Review />
     }
 
     return (

@@ -45,7 +45,7 @@ const ModalAddProduct = (props) => {
     // Functions
     const handleChangeDescription = (content, editor) => {
         if(content.length > 255){
-            window.alert('No se debe exceder los 255 caracteres. Si lo bueno, es simple, es doblemente bueno.')
+            window.alert('Maximo 255 caracteres. Si lo bueno es breve, es doblemente bueno.')
         }
         content = content.replace('<p>', "")
         content = content.replace('</p>','')

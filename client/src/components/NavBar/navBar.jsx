@@ -10,6 +10,7 @@ import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
+import { actionVerifyCookies } from '../../redux/usersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
@@ -18,15 +19,25 @@ const NavBar = () => {
     const dispatch = useDispatch()
     useEffect(async () => {
         if (cookie.idUser) {
-            // dispatch(actionVerifyCookies(cookie))
+            dispatch(actionVerifyCookies(cookie))
             //PREGUNTAR A BACK COMO PEDIRLE LA VALIDACION DE LA COOKIE Y CREAR EL ACTION
+        } else {
+            await dispatch(actionVerifyCookies(cookie))
+            setCookie('idUser', user);
+            setCookie('name', name);
+            setCookie('email', email);
+            setCookie('level', level);
         }
+
         dispatch(actionGetOrder(user));
     }, [])
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const user = useSelector(state => state.usersReducer.idUser)
+    const name = useSelector(state => state.usersReducer.name)
+    const email = useSelector(state => state.usersReducer.email)
+    const level = useSelector(state => state.usersReducer.level)
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
@@ -37,7 +48,7 @@ const NavBar = () => {
     const modalRegisterClose = () => setModalRegister(false);
 
     const handleChancha = () => {
-        setCookie('idUser', user)
+
     }
     const ChangeModal = () => {
         modalLoginView()
