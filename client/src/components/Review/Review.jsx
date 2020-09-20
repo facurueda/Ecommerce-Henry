@@ -11,7 +11,7 @@ const Review = () => {
                     <div className='reviewContainer'>
                         <div>Ultima reseña: {review.updatedAt} </div>
                         <div>Usuario:  {review.usuario}</div>
-                        <div>Calificacion:  {review.calificacion}</div>
+                        <div>{review.calificacion}</div>
                         <div>Descripcion:  {review.descripcion}</div>
                     </div>)
             })}

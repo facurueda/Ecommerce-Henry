@@ -35,9 +35,9 @@ export const actionLogin = (inputs) => {
         (dispatch) => {
             axios.post(url + 'auth/login', { email, password }).then(() => {
                 return dispatch({ type: POST_LOGIN })
-            }).then(() => {
+            }).then((res) => {
                 axios.get(url + 'auth/me').then((res) => {
-                    if (res.status === 401) return dispatch({ type: AUTH_FAILED })
+                    if (res.status === 401) return dispatch({ type: AUTH_FAILED, payload: res.data })
                     return dispatch({ type: USER_LOGGED_IN, payload: res.data })
                 })
             })
