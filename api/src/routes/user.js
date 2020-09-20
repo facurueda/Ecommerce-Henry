@@ -194,15 +194,15 @@ server.post('/register', async (req, res, next) => {
     // remove the session user id
     // req.session.userId = null;
 });
-//s65 devuelve el usuario logeado
+//s65 devuelve el usuario logeado o envia error 401
 server.get('/auth/me', (req,res) => {
         // req.body.user?
 if(req.user.authenticated){ 
     res.send(user) 
     } else {
-    redirect('/')
-    }
-     
+    res.status(401)
+    res.redirect('/')
+    }     
 })
 
 //s67 cambio el perfil a admin
