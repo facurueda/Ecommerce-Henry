@@ -11,7 +11,7 @@ function Products(props) {
     const { idProduct, name, description, precio, images, stock } = useSelector(store => store.productsReducer.product)
 
     function test() {
-        return {__html: description}
+        return { __html: description }
     }
 
     const dispatch = useDispatch();
@@ -24,23 +24,25 @@ function Products(props) {
             <body>
                 <div className='prodCard'>
                     <div id='hover-img'>
-                        <div className='card overflow-hidde'>
-                            <img className="img-fluid" src={images} alt="..." />
-                        </div>
+                        <img className="img-fluid" src={images} alt="..." />
                     </div>
                     <div className='prodComp1'>
                         <div className='prodComp2'>
-                            <h1 className='prodName'>{name}</h1>
-                            <div>
-                            <div className='prodDescription' dangerouslySetInnerHTML = {test()}/>
+
+                            <div className='TitlesContainer'>
+                                <h1 className='prodName'>{name}</h1>
+                                <div className='prodDescription' dangerouslySetInnerHTML={test()} />
+
                             </div>
                             <div>{reviewFinder()}</div>
                         </div>
                         <div className='prodComp3'>
-                            <span className='prodPrice'>Precio: ${precio} </span>
-                            <p className='prodStock'>Unidades disponibles: {stock}</p>
+                            <div className='priceAndStockContainer'>
+                                <span className='prodPrice'>${precio} </span>
+                                <p className='prodStock'>Unidades disponibles: {stock}</p>
+                            </div>
                             <div className='buttons'>
-                                <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }}/>
+                                <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />
                                 <button className='buyProd'>Comprar</button>
                             </div>
                         </div>

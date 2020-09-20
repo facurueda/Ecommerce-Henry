@@ -28,7 +28,7 @@ const ProductCard = (props) => {
                     <div className='contentCard'>
                         <h3 className='productName'>{name}</h3>
                         <div className='ProductDataContainer'>
-                            <div className='ProductDescription'>{renderHTML(description)}</div>
+                            <div className='ProductDescription'>{renderHTML(description.slice(0,10))}</div>
                             <div className= 'productDiv'>
                                 <b className='productPrice'>${price}</b>
                                 <p className = 'productStock'>U: {stock}</p>

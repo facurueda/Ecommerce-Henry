@@ -44,6 +44,13 @@ const ModalAddProduct = (props) => {
     const [content, setContent] = useState('');
     // Functions
     const handleChangeDescription = (content, editor) => {
+        if(content.length > 255){
+            window.alert('No se debe exceder los 255 caracteres. Si lo bueno, es simple, es doblemente bueno.')
+        }
+        content = content.replace('<p>', "")
+        content = content.replace('</p>','')
+        content = '<p>' + content.slice(0,250) + "</p>"
+        console.log(content)
         setContent(content)
     }
     // States Upload Image

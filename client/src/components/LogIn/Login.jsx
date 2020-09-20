@@ -17,7 +17,7 @@ const Login = (props) => {
         dispatch(actionLogin(inputs))
     }
     const handleInput = (e) => {
-        const {type,value} = e.target
+        const { type, value } = e.target
         setInputs({
             ...inputs,
             [type]: value
@@ -36,8 +36,14 @@ const Login = (props) => {
                 <div className="addProductTitle">Login </div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
-                <input className='standardInput' type='email' placeholder='info@lacoseria.com' onChange={handleInput}/>
-                <input className='standardInput' type="password" placeholder='··············' onChange={handleInput}/>
+                <input className='standardInput' id='email' type='email' placeholder='info@lacoseria.com' onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                        document.getElementById('password').focus()
+                    }
+                }} onChange={handleInput} />
+                <input className='standardInput' id='password' type="password" placeholder='··············' onKeyPress={e => {
+                    if (e.key === 'Enter') { handleChancla(e) }
+                }} onChange={handleInput} />
                 <button className='buttonLoginAndRegister' onClick={handleChancla}>LOGIN</button>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>

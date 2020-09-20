@@ -56,10 +56,24 @@ const Register = (props) => {
                     {/* Buttons GitHub, Google, Facebook? */}
                 </div>
                 <div className='FormRegisterContainer'>
-                    <input className='inputRegister' name='name' type='text' placeholder='Name' onChange={handleChange} />
-                    <input className='inputRegister' name='email' type='email' placeholder='Email' onChange={handleChange} />
-                    <input className='inputRegister' name='password' type="password" placeholder='Password' onChange={handleChange} />
-                    <input className='inputRegister' name='secondPassword' type="password" placeholder='Repeat Password' onChange={handleChange}/>
+                    <input className='inputRegister' id='nameRegister' name='name' type='text' placeholder='Name' onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            document.getElementById('emailRegister').focus()
+                        }
+                    }} onChange={handleChange} />
+                    <input className='inputRegister' id='emailRegister' name='email' type='email' placeholder='Email' onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            document.getElementById('passwordRegister').focus()
+                        }
+                    }} onChange={handleChange} />
+                    <input className='inputRegister' id='passwordRegister' name='password' type="password" placeholder='Password' onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            document.getElementById('secondPasswordRegister').focus()
+                        }
+                    }} onChange={handleChange} />
+                    <input className='inputRegister' id='secondPasswordRegister' name='secondPassword' type="password" placeholder='Repeat Password' onKeyPress={e => {
+                        if (e.key === 'Enter') { VerificarYRegistrar() }
+                    }} onChange={handleChange}/>
 
                     <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </div>

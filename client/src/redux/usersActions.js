@@ -33,10 +33,10 @@ export const actionLogin = (inputs) => {
     const { email, password } = inputs
     return (
         (dispatch) => {
-            axios.post(url + '/auth/login', { email, password }).then(() => {
+            axios.post(url + 'auth/login', { email, password }).then(() => {
                 return dispatch({ type: POST_LOGIN })
             }).then(() => {
-                axios.get(url + '/auth/me').then((res) => {
+                axios.get(url + 'auth/me').then((res) => {
                     if (res.status === 401) return dispatch({ type: AUTH_FAILED })
                     return dispatch({ type: USER_LOGGED_IN, payload: res.data })
                 })
@@ -46,7 +46,7 @@ export const actionLogin = (inputs) => {
 export const actionLogOut = (user) => {
     return (
         (dispatch) => {
-            axios.post(url + '/auth/logout', user).then((res) => {
+            axios.post(url + 'auth/logout', user).then((res) => {
                 localStorage.removeItem("user");
                 return dispatch({ type: USER_LOGGED_OUT , payload: res.data})
             })

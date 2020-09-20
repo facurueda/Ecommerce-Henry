@@ -7,9 +7,9 @@ input:focus {
   outline: none;
 }
 
-html, 
-body, 
-#root, 
+html,
+body,
+#root,
 #root>div {
   height: 100%;
   background-color: #212529;
@@ -52,4 +52,7 @@ body,
 
 input[type="radio"]{
   display: none;
+}
+p {
+  white-space: pre-wrap;
 }
