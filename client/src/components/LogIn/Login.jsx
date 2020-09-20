@@ -16,7 +16,6 @@ const Login = (props) => {
     const handleChancla = () => {
         dispatch(actionLogin(inputs))
     }
-    
     const handleInput = (e) => {
         const {type,value} = e.target
         setInputs({
@@ -37,10 +36,7 @@ const Login = (props) => {
                 <div className="addProductTitle">Login with</div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
-                <div>
-                    {/* Buttons GitHub, Google, Facebook? */}
-                </div>
-                <input className='standardInput' type='email' placeholder='laCoseria@gmail.com' onChange={handleInput}/>
+                <input className='standardInput' type='email' placeholder='info@lacoseria.com' onChange={handleInput}/>
                 <input className='standardInput' type="password" placeholder='··············' onChange={handleInput}/>
                 <button className='logginButton' onClick={handleChancla}>LOGIN</button>
             </ModalBody>

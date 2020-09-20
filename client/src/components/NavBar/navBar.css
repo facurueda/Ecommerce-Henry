@@ -84,6 +84,11 @@
 
 /* ------------------- Register Space ------------------- */
 
+.SessionContainer {
+    display: flex;
+    flex-direction: row;
+}
+
 .registerContainer{
     display:flex;
     justify-content: center;
