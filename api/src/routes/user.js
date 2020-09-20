@@ -6,6 +6,19 @@ const {
     Product
 } = require('../db.js');
 const Sequelize = require("sequelize");
+const bcrypt = require('bcrypt')
+
+const passport = require('passport');
+const initializePassport = require('../passport-config');
+initializePassport(passport, email => {
+    passport,
+    email => User.findOne({
+            where: {
+            email: email
+            }
+        })
+})
+
 
 /////////////////////////////////////////////////////////////////GET
 
@@ -123,17 +136,42 @@ server.post('/:idUser/cart', (req, res, next) => {
         res.send(respuesta)
     }).catch(next)
 })
-server.post('/', (req, res, next) => {
+
+
+
+
+
+server.post('/auth/login', passport.authenticate('local',{
+    
+    // en el caso que se logee bien a donde enviamos?
+    successRedirect: '/',
+    failureRedirect: '/auth/login',
+    failureFlash: true,
+})
+)
+
+server.get('/auth/login',(req, res, next) => {
+    res.send('la puta madre funciona')
+})
+
+/// USER REGISTER
+
+
+server.post('/', async (req, res, next) => {
+   
     const {
         name,
         email,
         password,
         level
     } = req.body
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+
     User.create({
         name,
         email,
-        password,
+        password : hashedPassword,
         level
     }).then((newUser) => {
         return Order.create({
@@ -141,11 +179,16 @@ server.post('/', (req, res, next) => {
             status: 'CREADA'
         })
     }).then(() => {
-        res.send({
-            result: 'Usuario creado'
-        })
+        res.redirect('http://localhost:3000/user/auth/login')
+        
     }).catch(next);
 });
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
     const {
