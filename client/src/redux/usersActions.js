@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED, AUTH_FAILED } from "./constants";
+import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT} from "./constants";
 const url = "http://localhost:3000/";
 
 
@@ -14,7 +14,7 @@ export const actionUserCreate = (props) => {
     const {name, email, password, level} = props
     return (dispatch) => {
         axios.post(url + 'user', {name, email, password, level}).then(() => {
-            dispatch({type: USER_CREATED})
+            dispatch({ type: USER_CREATED })
         })
     }
 }
@@ -27,8 +27,20 @@ export const actionLogin = (inputs) => {
        }).then(() => {
             axios.get(url + '/auth/me').then((res)=> {
                 if (res.status === 401)  return dispatch({ type: AUTH_FAILED })
-                return dispatch({ type: USER_LOGGED })
+                localStorage.user = res.data;
+                return dispatch({ type: USER_LOGGED_IN })                 
             })
        })
     })
+}
+
+export const actionLogOut = (user) => {
+    return(
+        (dispatch) => {
+            axios.post(url + '/auth/logout', user).then(()=> {
+                localStorage.removeItem("user");
+                return dispatch({ type: USER_LOGGED_OUT })
+            })
+        }
+    )
 }

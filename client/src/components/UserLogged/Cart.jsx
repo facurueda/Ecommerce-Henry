@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
+import  { actionLogOut } from '../../redux/usersActions'
 import CartImg from '../NavBar/Images/Cart.png'
 
 const Cart = () => {
@@ -11,6 +12,10 @@ const Cart = () => {
         dispatch(actionGetOrder(user));
     },[])
 
+    const handleChange = () => {
+        dispatch(actionLogOut(user));
+    }
+
     return (
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <a href='/order'>
@@ -20,7 +25,7 @@ const Cart = () => {
                 {quantity}
             </div>
             <a class="dropdown-item" href="/Admin">My Account</a>
-            <a class="dropdown-item" href="#">Log out</a>
+            <a class="dropdown-item" href="/" onClick = { e => handleChange() }>Log out</a>
         </div>
     )
 }
