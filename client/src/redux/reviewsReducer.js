@@ -1,4 +1,4 @@
-import { REVIEW_POST, GET_REVIEWS_BY_PRODUCT } from './constants';
+import { SET_REVIEW,REVIEW_POST, GET_REVIEWS_BY_PRODUCT } from './constants';
 
 // <div>Ultima reseña: {review.updatedAt} </div>
 // <div>Usuario:  {review.usuario}</div>
@@ -11,6 +11,11 @@ const initialState = {
 
 const reviewsReducer = ( state = initialState, action) => {
     switch(action.type) {
+        case SET_REVIEW:
+            return {
+                ...state,
+                review: action.payload
+            }
         case REVIEW_POST:
             return {
                 ...state,

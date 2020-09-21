@@ -1,9 +1,10 @@
 import { GET_USER_BY_ID, USER_CREATED, USER_LOGGED_IN, POST_LOGIN, AUTH_FAILED, USER_LOGGED_OUT } from './constants'
 var initialState = {
-    idUser: 0,
+    idUser: 3,
     name: 'Guest',
     email: 'no-email',
     level: 'GUEST',
+    verified: false
 }
 
 
@@ -42,7 +43,8 @@ const usersReducer = (state = initialState, action) => {
                 name: action.payload.name,
                 email: action.payload.email,
                 level: action.payload.level,
-                idUser: action.payload.idUser
+                idUser: action.payload.idUser,
+                verified: action.payload.verified
             };
 
         default:

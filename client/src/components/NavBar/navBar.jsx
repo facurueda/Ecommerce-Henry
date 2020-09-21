@@ -17,27 +17,19 @@ const NavBar = () => {
     const [cookie, setCookie] = useCookies(['ttkk']);
     const cookieValidation = useSelector(store => store.usersReducer.cookieValidation)
     const dispatch = useDispatch()
-    useEffect(async () => {
-        if (cookie.idUser) {
-            dispatch(actionVerifyCookies(cookie))
-            //PREGUNTAR A BACK COMO PEDIRLE LA VALIDACION DE LA COOKIE Y CREAR EL ACTION
-        } else {
-            await dispatch(actionVerifyCookies(cookie))
-            setCookie('idUser', user);
-            setCookie('name', name);
-            setCookie('email', email);
-            setCookie('level', level);
-        }
-
-        dispatch(actionGetOrder(user));
+    useEffect(() => {
+        dispatch(actionVerifyCookies(cookie))
+        dispatch(actionGetOrder(idUser));
     }, [])
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
-    const user = useSelector(state => state.usersReducer.idUser)
-    const name = useSelector(state => state.usersReducer.name)
-    const email = useSelector(state => state.usersReducer.email)
+    const idUser = useSelector(state => state.usersReducer.idUser)
     const level = useSelector(state => state.usersReducer.level)
+    const verified = useSelector(state => state.usersReducer.verified)
+    if (verified){
+        setCookie('idUser', idUser)
+    }
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
@@ -71,14 +63,14 @@ const NavBar = () => {
                         <form action="/catalogue">
                             <button className='buttonProducts'>Products</button>
                         </form>
-                        {user ? (
+                        {level === 'USER' ? (
                             <button className='buttonProducts' onClick={handleChancha} >My Account</button>
                         ) : (<div></div>)}
                     </div>
                     <div className='searchBar'>
                         <SearchBar />
                     </div>
-                    {user ?
+                    {level === 'USER' ?
                         (
                             <div><UserLogged /></div>
                         )

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_REVIEWS_BY_PRODUCT, REVIEW_POST } from './constants';
+import { SET_REVIEW ,GET_REVIEWS_BY_PRODUCT, REVIEW_POST } from './constants';
 
 export const actionPostReview = (reviewData) => {
     return (dispatch) => {
@@ -11,9 +11,17 @@ export const actionPostReview = (reviewData) => {
 
 export const actionGetReviews = (idProduct) => {
     return (dispatch) => {
-        axios.get(url + '/products/' + idProduct + '/review').then((res) => {
+        axios.get(url + 'products/' + idProduct + '/review').then((res) => {
             dispatch ({ type: GET_REVIEWS_BY_PRODUCT , payload: res.data })
+            if (res.data.length > 0){
+            dispatch({type: SET_REVIEW, payload: res.data[Math.floor(Math.random() * (res.data.length - 0) + 0)]})
+            }
         })
+    }
+}
+export const actionSetReview = (review) => {
+    return (dispatch) => {
+        dispatch({type: SET_REVIEW, payload: review})
     }
 }
 

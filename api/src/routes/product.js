@@ -5,17 +5,18 @@ const {
 	Categories,
 	Inter_Cat_Prod,
 	Inter_Prod_Order,
-	Review
+	Review,
+	User
 } = require('../db.js');
 // const Review = require('../models/Review.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 
 ///////////////////////////// RUTA PARA OBTENER TODAS REVIEW DE UN PRODUCTO
 
-server.get('/product/:id/review/', (req, res, next) => {
-	Review.findAll()
+server.get('/:id/review/', (req, res, next) => {
+	Product.findOne({where: {idProduct: req.params.id},include: [{model: Review, as: 'reviews'}]})
 		.then((rev) => {
-			res.send(rev)
+			res.send(rev.reviews)
 		}).catch(next)
 });
 

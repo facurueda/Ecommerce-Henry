@@ -14,6 +14,7 @@ export const PRODUCTS_LOADING = 'PRODUCTS_LOADING'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const PRODUCT_POST = 'PRODUCT_POST'
 export const PRODUCT_PUT = 'PRODUCT_PUT'
+export const SET_PRODUCT = 'SET_PRODUCT'
 
 
 
@@ -33,3 +34,4 @@ export const ADD_TO_CART = 'ADD_TO_CART'
 
 export const REVIEW_POST = 'REVIEW_POST'
 export const GET_REVIEWS_BY_PRODUCT = 'GET_REVIEWS_BY_PRODUCT'
+export const SET_REVIEW = 'SET_REVIEW'
