@@ -5,7 +5,7 @@ import { REVIEW_POST, GET_REVIEWS_BY_PRODUCT } from './constants';
 // <div>Calificacion:  {review.calificacion}</div>
 // <div>Descripcion:  {review.descripcion}</div>
 const initialState = {
-    review : [{updatedAt: '29/02/1990 08:00:00',usuario: 'Invoker', calificacion: 3, descripcion: 'mmm... bueno pero vino cachado en el torax.'}],
+    review : {},
     reviews: []
 }
 

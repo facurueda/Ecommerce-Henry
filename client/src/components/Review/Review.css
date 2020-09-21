@@ -1,5 +1,44 @@
 .reviewContainer{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: white;
+    border: 2px groove whitesmoke;
+    padding: 10px;
+}
+.fa, .fa-star, .checked  {
+    display: flex;
+    color: white;
+}
+.dateAndButtonContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+    font-size: 12px;
+}
+.viewMoreButton{
+    display: inline-block;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    margin: 2px 0.2em 0.2em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+}
+.viewMoreButton:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(7px);
 }
