@@ -13,24 +13,24 @@ const {
 
 ///////////////////////////// RUTA PARA OBTENER TODAS REVIEW DE UN PRODUCTO
 
-server.get('/product/:id/review/', (req, res, next) => {
-	Review.findAll()
-		.then((rev) => {
-			res.send(rev)
-		}).catch(next)
-});
+server.get('/:id/review/', (req, res, next) => {
+	Product.findOne({where: {idProduct: req.params.id},include: [{model: Review, as: 'reviews'}]})
+	  .then((rev) => {
+		res.send(rev.reviews)
+	  }).catch(next)
+  });
 
 server.get('/search', (req, res, next) => {
 	Product.findAll({
 			where: {
 				[Sequelize.Op.or]: [{
 						name: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
+							[Sequelize.Op.like]: "%$" + req.query.query + "$%"
 						}
 					},
 					{
 						description: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
+							[Sequelize.Op.like]: "%$" + req.query.query + "$%"
 						}
 					}
 				]

@@ -13,10 +13,10 @@ const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
     passport,
     email => User.findOne({
-            where: {
+        where: {
             email: email
-            }
-        })
+        }
+    })
 })
 
 
@@ -139,8 +139,9 @@ server.post('/:idUser/cart', (req, res, next) => {
 
 //////// register 
 server.post('/', async (req, res, next) => {
-   
+
     const {
+        idUser,
         name,
         email,
         password,
@@ -148,28 +149,43 @@ server.post('/', async (req, res, next) => {
     } = req.body
 
     const hashedPassword = await bcrypt.hash(password, 10)
-
-    User.create({
-        name,
-        email,
-        password : hashedPassword,
-        level
-    }).then((newUser) => {
-        return Order.create({
-            idUser: newUser.idUser,
-            status: 'CREADA'
+    
+    User.findOne({
+        where: {
+            idUser: idUser
+        }
+    }).then((user) => {
+        user.update({
+            ...user,
+            name: name,
+            email: email,
+            password: hashedPassword,
+            level: 'user'
         })
     }).then(() => {
-        res.redirect('http://localhost:3000/user/auth/login')        
+        res.redirect('http://localhost:3000/user/auth/login')
     })
-    .catch(next);
-    
+
+    // User.create({
+    //         name,
+    //         email,
+    //         password: hashedPassword,
+    //         level
+    //     }).then((newUser) => {
+    //         return Order.create({
+    //             idUser: newUser.idUser,
+    //             status: 'CREADA'
+    //         })
+    //     }).then(() => {
+    //         res.redirect('http://localhost:3000/user/auth/login')
+    //     })
+    //     .catch(next);
+
 });
 
 
 
 //////////////////////////////////////////////////////logout
-//s64
 
 
 
