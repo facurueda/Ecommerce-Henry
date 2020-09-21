@@ -73,7 +73,12 @@ const NavBar = () => {
                     </div>
                     {level === 'USER' ?
                         (
-                            <div><UserLogged /></div>
+                            <div className='userLogged' >
+                                <UserLogged />
+                                <div className='cartContainer'>
+                                    <Cart />
+                                </div>
+                            </div>
                         )
                         :
                         (

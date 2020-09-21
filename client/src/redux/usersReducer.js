@@ -3,7 +3,7 @@ var initialState = {
     idUser: 3,
     name: 'Guest',
     email: 'no-email',
-    level: 'GUEST',
+    level: 'USER',
     verified: false
 }
 
