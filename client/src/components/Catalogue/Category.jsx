@@ -7,7 +7,7 @@ const Category = ( props ) => {
 
     return (
         <div>
-            <button class="btn-1" onClick = { e => productsFilter(name) }>
+            <button class="categoryButton" onClick = { e => productsFilter(name) }>
                 <span>{name}</span>
             </button>
         </div>

@@ -26,7 +26,8 @@ export const GET_USER_BY_ID = 'GET_USER_BY_ID'
 export const USER_CREATED = 'USER_CREATED'
 export const AUTH_FAILED = 'AUTH_FAILED'
 export const POST_LOGIN = 'POST_LOGIN'
-export const USER_LOGGED = 'USER_LOGGED'
+export const USER_LOGGED_IN = 'USER_LOGGED_IN'
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 

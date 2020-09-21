@@ -1,23 +1,27 @@
-.btn-1{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+.categoryButton{
     border-radius: 3px;
     margin-left: 5px;
     margin-right: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 20px;
-    font-weight: bold;
     padding: 15px;
     padding-bottom: 5px;
     padding-top: 5px;
     display: flex;
-    background-color: #86BA90;
-    border: 1px solid transparent;
-    color: #2f3640;
+    background-color: transparent;
+    color: #ffffff;
     -webkit-border-radius: 3px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+
 }
-.btn-1::before,
-.btn-1::after {
+.categoryButton::before,
+.categoryButton::after {
     opacity: 50%;
     background: #F5F3BB;
     content: '';
@@ -27,7 +31,7 @@
     z-index: -1;
 }
 
-.btn-1:hover {
+.categoryButton:hover {
     background-color: #2f3640;
-    color: #DFA06E;
+    border: 0.5px solid #ffffff;
 }

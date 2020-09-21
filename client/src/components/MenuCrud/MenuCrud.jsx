@@ -16,6 +16,7 @@ const MenuCrud = () => {
     dispatch(actionGetCategories())
   }, [])
 
+  
   //Estados
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);

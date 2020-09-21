@@ -1,34 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 body {
     margin: 0;
     padding: 0;
-    background: #86BA90;
   }
 
   .search-box {
     display: flex;
-    background: #2f3640;
+    background: #ffffff;
+    opacity: 85%;
     height: 40px;
     border-radius: 40px;
     padding: 7px;
 }
   .search-box:hover > .search-text{
     width: 240px;
+    color: #2f3640;
     padding: 0 6px;
   }
   .search-box:hover > .search-btn{
-    background: #DFA06E;
+    background: #ffffff;
     color: #2f3640;
     text-decoration: none;
   }
   .search-btn {
-    color:#DFA06E;;
+    color: #2f3640;
     float: right;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #2f3640;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,8 +47,8 @@ body {
     outline: none;
     float: left;
     padding: 0;
-    color:  #F5F3BB; 
-    font-family: 'Roboto', sans-serif;
+    color: #2f3640; 
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: normal;
     transition: 0.4s;
@@ -58,4 +59,6 @@ body {
   .search-box:focus-within > .search-text {
     width: 240px;
     padding: 0 6px;
+    color: #2f3640;
+    opacity: 75%;
   }

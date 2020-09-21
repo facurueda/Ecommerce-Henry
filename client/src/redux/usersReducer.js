@@ -1,11 +1,11 @@
-import {GET_USER_BY_ID, USER_CREATED, USER_LOGGED, POST_LOGIN, AUTH_FAILED} from './constants'
-
+import { GET_USER_BY_ID, USER_CREATED, USER_LOGGED_IN, POST_LOGIN, AUTH_FAILED, USER_LOGGED_OUT } from './constants'
 var initialState = {
-    idUser: 2,
-    name: '',
-    email: '',
-    level: ''
+    idUser: 0,
+    name: 'Guest',
+    email: 'no-email',
+    level: 'GUEST',
 }
+
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -18,7 +18,7 @@ const usersReducer = (state = initialState, action) => {
             }
         case USER_CREATED:
             return state;
-        case USER_LOGGED:
+        case USER_LOGGED_IN:
             return {
                 ...state,
                 name: action.payload.name,
@@ -26,10 +26,25 @@ const usersReducer = (state = initialState, action) => {
                 level: action.payload.level,
                 idUser: action.payload.idUser
             }
-        case POST_LOGIN: 
+        case USER_LOGGED_OUT:
+            return {
+                ...state,
+                name: action.payload.name,
+                email: action.payload.email,
+                level: action.payload.level,
+                idUser: action.payload.idUser
+            };
+        case POST_LOGIN:
             return state;
         case AUTH_FAILED:
-            return state;
+            return {
+                ...state,
+                name: action.payload.name,
+                email: action.payload.email,
+                level: action.payload.level,
+                idUser: action.payload.idUser
+            };
+
         default:
             return state;
     }
