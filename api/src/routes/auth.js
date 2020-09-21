@@ -23,25 +23,31 @@ server.get('/', (req, res, next) => {
     res.send('funciona')
 })
 
+/////s63 ---> creo ruta de login 
 server.post('/login', passport.authenticate('local', {
-
     // en el caso que se logee bien a donde enviamos?
     successRedirect: 'http://localhost:3000/auth/',
     failureRedirect: 'http://localhost:3000/auth/login',
     failureFlash: true,
+    
 }))
 
 
 
-//////////////////////////////////////////////////////logout
-//s64
-server.get('/logout', (req, res) => {
-    req.logout();
+
+/////s64 ---> creo ruta de logout
+server.post('/logout', (req, res) => {
+    req.logout(); //----> hace falta??
+     // remove the session user id
+    /* req.session.userId = null; */
+    request.session.destroy();
+    response.send({ result: 'OK', message: 'Session destroyed' });
     res.redirect('/');
-    // remove the session user id
-    // req.session.userId = null;
 });
-//s65 devuelve el usuario logeado
+
+
+/////s65 devuelve el usuario logeado ----> me parece que esta muy mal esto jaja y 
+//no se si aca debe ser lo de la cookie?
 server.get('/me', (req, res) => {
     // req.body.user?
     if (req.user.authenticated) {
@@ -52,7 +58,7 @@ server.get('/me', (req, res) => {
 
 })
 
-//s67 cambio el perfil a admin
+/////s67 cambio el perfil a admin
 server.post('/promote/:id', (req, res) => {
     User.findOne({
         where: {

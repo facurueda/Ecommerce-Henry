@@ -137,14 +137,7 @@ server.post('/:idUser/cart', (req, res, next) => {
     }).catch(next)
 })
 
-
-
-
-
-
-
-
-
+//////// register 
 server.post('/', async (req, res, next) => {
    
     const {
@@ -167,48 +160,18 @@ server.post('/', async (req, res, next) => {
             status: 'CREADA'
         })
     }).then(() => {
-        res.redirect('http://localhost:3000/user/auth/login')
-        
-    }).catch(next);
+        res.redirect('http://localhost:3000/user/auth/login')        
+    })
+    .catch(next);
+    
 });
 
 
 
-<<<<<<< HEAD
 //////////////////////////////////////////////////////logout
 //s64
- server.get('/auth/logout', (req,res) => {
-    req.logout();
-    res.redirect('/');
-    // remove the session user id
-    // req.session.userId = null;
-});
-//s65 devuelve el usuario logeado o envia error 401
-server.get('/auth/me', (req,res) => {
-        // req.body.user?
-if(req.user.authenticated){ 
-    res.send(user) 
-    } else {
-    res.status(401)
-    res.redirect('/')
-    }     
-})
 
-//s67 cambio el perfil a admin
-server.post('/auth/promote/:id', (req, res) => {
-User.findOne({
-    where:{
-        idUser : req.body.id,
-    }
-}).then(user => {
-    user.update({
-        ...user,
-        level : Admin,
-    })
-})
-}) 
-=======
->>>>>>> 95e65014f289ec501f392a5ae1bdd9ca879e92d0
+
 
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {

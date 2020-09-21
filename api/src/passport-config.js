@@ -42,16 +42,19 @@ function initialize(passport, getUserByEmail, getUserById) {
 
   passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser))
   
-  passport.serializeUser( function(id, done) {
+  passport.serializeUser( function(user, done) {
     done(null, user.idUser)
   });
 
     // (user, done) => done(null, user.idUser))
   
   passport.deserializeUser( function(id, done) {
-    User.findById(id, function(err, user) {
+    /* User.findById(id, function(err, user) {
       done(err, user)
-    })
+    }) */
+    
+       done(null, getUserId(id));
+  // });
   });
     
     
