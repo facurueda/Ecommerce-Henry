@@ -1,4 +1,4 @@
-import { SET_REVIEW,REVIEW_POST, GET_REVIEWS_BY_PRODUCT } from './constants';
+import { SET_REVIEW, REVIEW_POST, GET_REVIEWS_BY_PRODUCT } from './constants';
 
 // <div>Ultima reseña: {review.updatedAt} </div>
 // <div>Usuario:  {review.usuario}</div>

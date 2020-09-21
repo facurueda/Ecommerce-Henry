@@ -10,12 +10,11 @@ import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
-import { actionVerifyCookies } from '../../redux/usersActions'
+import { actionSetVerified, actionVerifyCookies } from '../../redux/usersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
     const [cookie, setCookie] = useCookies(['ttkk']);
-    const cookieValidation = useSelector(store => store.usersReducer.cookieValidation)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(actionVerifyCookies(cookie))
@@ -29,6 +28,8 @@ const NavBar = () => {
     const verified = useSelector(state => state.usersReducer.verified)
     if (verified){
         setCookie('idUser', idUser)
+        setCookie('level', level)
+        dispatch(actionSetVerified(false))
     }
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
