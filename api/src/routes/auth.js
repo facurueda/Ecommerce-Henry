@@ -19,7 +19,7 @@ initializePassport(passport, email => {
 
 
 server.get('/', (req, res, next) => {
-    console.log('asdas')
+    console.log(req.sessionID)
     res.send('funciona')
 })
 
@@ -37,12 +37,15 @@ server.post('/login', passport.authenticate('local', {
 
 /////s64 ---> creo ruta de logout
 server.post('/logout', (req, res) => {
-    req.logout(); //----> hace falta??
+    // req.logout(); //----> hace falta??
      // remove the session user id
     /* req.session.userId = null; */
-    request.session.destroy();
-    response.send({ result: 'OK', message: 'Session destroyed' });
-    res.redirect('/');
+    res.status(200).clearCookie('connect.sid', {
+        path:'/'
+    });
+    req.session.destroy( err => {
+        res.redirect('/')   
+    });
 });
 
 
