@@ -5,6 +5,8 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
+import gatito from './Images/gatito.png'
+import home from './Images/home.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
@@ -54,15 +56,18 @@ const NavBar = () => {
                 <div className='logoContainer'>
                     <a href="/">
                         <img className='imageLogo' src={Logo} alt='Logo' />
+                       
                     </a>
                 </div>
+                <div> <img className='nomematen' src={gatito}/></div>
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
                         <form action="/">
-                            <button className='buttonHome'>Home</button>
+                            <div><button className='buttonHome'><p className='textnav'>Home</p></button></div>
+                           
                         </form>
                         <form action="/catalogue">
-                            <button className='buttonProducts'>Products</button>
+                            <button className='buttonProducts'><p className='textnav'>Products</p></button>
                         </form>
                         {level === 'USER' ? (
                             <button className='buttonProducts' onClick={handleChancha} >My Account</button>
@@ -90,6 +95,7 @@ const NavBar = () => {
                                 <div className='cartContainer'>
                                     <Cart />
                                 </div>
+
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>

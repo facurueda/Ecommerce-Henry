@@ -7,10 +7,13 @@
     justify-self: center;
     justify-content: space-evenly;
     background: none;
+
     padding-right: 10%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
 }
+
+
 
 /* /////////////////////////////////////////////////////////////////// IMAGEN */
 
@@ -55,7 +58,9 @@
     align-self: flex-start;
     justify-self: flex-end;
     flex-direction: column;
-    margin-bottom: 20px;
+   margin-bottom: 300px;
+   margin-left: 20px;
+   margin-right: 30px;
 }
 .prodComp3{
     display: flex;
@@ -64,6 +69,7 @@
     font-family: 'Poppins', sans-serif;
     justify-content: space-between;
     align-items: center;
+    
 }
 .priceAndStockContainer {
     display: flex;
@@ -85,7 +91,7 @@ p {
 }
 .buyProd,
 .cart {
-    color: white;
+     color: white;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -108,7 +114,8 @@ button {
     align-content: center;
     justify-content: center;
     cursor: pointer;
-    margin: 5px
+    margin: 5px;
+    
 }
 
 
@@ -147,4 +154,15 @@ button {
 
   span:hover {
       border: 0
+  }
+
+
+  .conteiner-star {
+      margin-top: 100px;
+      margin-left: 35px;
+  }
+
+  .prodName {
+      margin-bottom: 20px;
+      margin-left: 20px;
   }
