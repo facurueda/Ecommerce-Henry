@@ -6,6 +6,19 @@ const {
     Product
 } = require('../db.js');
 const Sequelize = require("sequelize");
+const bcrypt = require('bcrypt')
+
+const passport = require('passport');
+const initializePassport = require('../passport-config');
+initializePassport(passport, email => {
+    passport,
+    email => User.findOne({
+        where: {
+            email: email
+        }
+    })
+})
+
 
 /////////////////////////////////////////////////////////////////GET
 
@@ -123,29 +136,59 @@ server.post('/:idUser/cart', (req, res, next) => {
         res.send(respuesta)
     }).catch(next)
 })
-server.post('/', (req, res, next) => {
+
+//////// register 
+server.post('/', async (req, res, next) => {
+
     const {
+        idUser,
         name,
         email,
         password,
         level
     } = req.body
-    User.create({
-        name,
-        email,
-        password,
-        level
-    }).then((newUser) => {
-        return Order.create({
-            idUser: newUser.idUser,
-            status: 'CREADA'
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+    
+    User.findOne({
+        where: {
+            idUser: idUser
+        }
+    }).then((user) => {
+        user.update({
+            ...user,
+            name: name,
+            email: email,
+            password: hashedPassword,
+            level: 'user'
         })
     }).then(() => {
-        res.send({
-            result: 'Usuario creado'
-        })
-    }).catch(next);
+        res.redirect('http://localhost:3000/user/auth/login')
+    })
+
+    // User.create({
+    //         name,
+    //         email,
+    //         password: hashedPassword,
+    //         level
+    //     }).then((newUser) => {
+    //         return Order.create({
+    //             idUser: newUser.idUser,
+    //             status: 'CREADA'
+    //         })
+    //     }).then(() => {
+    //         res.redirect('http://localhost:3000/user/auth/login')
+    //     })
+    //     .catch(next);
+
 });
+
+
+
+//////////////////////////////////////////////////////logout
+
+
+
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
     const {

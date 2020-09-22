@@ -9,28 +9,29 @@ const {
 	User
 } = require('../db.js');
 // const Review = require('../models/Review.js');
-/////////////////////////////////////////////////////////////////////////////////////////////// GETS
+/////////////////////////////////////////////////////////////////////////////////////////////// GETS  
+
 
 ///////////////////////////// RUTA PARA OBTENER TODAS REVIEW DE UN PRODUCTO
 
 server.get('/:id/review/', (req, res, next) => {
 	Product.findOne({where: {idProduct: req.params.id},include: [{model: Review, as: 'reviews'}]})
-		.then((rev) => {
-			res.send(rev.reviews)
-		}).catch(next)
-});
+	  .then((rev) => {
+		res.send(rev.reviews)
+	  }).catch(next)
+  });
 
 server.get('/search', (req, res, next) => {
 	Product.findAll({
 			where: {
 				[Sequelize.Op.or]: [{
 						name: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
+							[Sequelize.Op.like]: "%$" + req.query.query + "$%"
 						}
 					},
 					{
 						description: {
-							[Sequelize.Op.like]: "%" + req.query.query + "%"
+							[Sequelize.Op.like]: "%$" + req.query.query + "$%"
 						}
 					}
 				]
