@@ -3,9 +3,6 @@ const {
     User,
     Order
 } = require('../db.js');
-// const Sequelize = require("sequelize");
-// const bcrypt = require('bcrypt')
-// const cookieParser = require('cookie-parser')
 const passport = require('passport');
 const bcrypt = require('bcrypt')
 
@@ -22,10 +19,6 @@ const bcrypt = require('bcrypt')
 const aleatoryNumber = () => {
     return Date.now() + Math.random()
 }
-// let aleatoryNumber = function () => {
-//     Date.now() + Math.random()
-// }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
 
@@ -37,34 +30,27 @@ server.get('/', (req, res, next) => {
 /////s65 devuelve el usuario logeado ----> me parece que esta muy mal esto jaja y 
 //no se si aca debe ser lo de la cookie?
 server.get('/me', (req, res) => {
-    // req.body.user?
-    if (req.user.authenticated) {
+    User.findOne({
+        where: {
+            idUser: req.body.idUser
+        }
+    }).then(user => {
         res.send(user)
-    } else {
-        redirect('/')
-    }
+    })
 
 })
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
-/////s63 ---> creo ruta de login 
+
 server.post('/login', passport.authenticate('local', {
     successRedirect: 'http://localhost:3000/auth/',
     failureRedirect: 'http://localhost:3000/auth/login',
     failureFlash: true,
 }))
 
-/////s64 ---> creo ruta de logout
 server.post('/logout', (req, res) => {
-    // req.logout(); //----> hace falta??
-    // remove the session user id
-    /* req.session.userId = null; */
-
     const {
         idUser,
-        name,
-        email,
         level
     } = req.body
 
@@ -76,9 +62,6 @@ server.post('/logout', (req, res) => {
             res.redirect('/')
         });
     } else {
-        // si el usuario que hace logout no es user ni admin, es decir es GUEST
-
-        console.log('entro')
         Order.findOne({
             where: {
                 idUser: idUser,
@@ -116,36 +99,24 @@ server.post('/logout', (req, res) => {
 server.post('/promote/:id', (req, res) => {
     User.findOne({
         where: {
-            idUser: req.body.id,
+            idUser: req.params.id,
         }
     }).then(user => {
         user.update({
             ...user,
-            level: Admin,
+            level: 'Admin',
         })
     })
 })
 
 server.post('/cookie', async (req, res) => {
 
-    const {
-        carrito,
-        idUser,
-        name,
-        email,
-        level
-    } = req.body
-
-    console.log(req.body)
-
+    const { idUser } = req.body
     let aleatoryEmail = aleatoryNumber();
-
     const hashedPassword = await bcrypt.hash('guest', 10)
 
     // Llega info del front, si idUser no existe o es 0 se cre el usuario GUEST con su Orden
     if (idUser == 0) {
-
-        console.log('entro a guest')
 
         User.create({
             name: 'guest',
@@ -160,7 +131,6 @@ server.post('/cookie', async (req, res) => {
             return newUser
             
         }).then((newUser) => {
-            console.log(newUser)
             res.status(401).send({
                 'idUser': newUser.idUser,
                 'name': newUser.name,
@@ -168,15 +138,9 @@ server.post('/cookie', async (req, res) => {
                 'level': newUser.level,
                 'verified': true
             })
-        }
-            
-        )
+        })
     }
-    // En el caso que el idUser exista y sea valido busca el usuario y devuelve sus datos
     else {
-
-        console.log('entro a findOne')
-
         User.findOne({
             where: {
                 idUser: idUser

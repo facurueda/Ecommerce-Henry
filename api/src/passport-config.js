@@ -8,15 +8,6 @@ const {
 
 function initialize(passport) {
 
-  // Tengo GUEST {
-  //    idUser: 123
-  //    email: aasldjaslk@gmail.com
-  // }
-  // ME llega un usuario login {
-  //    email: facu@gmail.com,
-  //    password: 1234 
-  // }
-
   const authenticateUser = async (req, email, password, done) => {
 
     const {
@@ -29,22 +20,39 @@ function initialize(passport) {
       }
     })
 
+    ///////////////////////////////// In case the user doesnt exist
     if (user == null) {
       return done(null, false, {
         message: 'No user with that email'
       })
     }
-    console.log('console 1')
-    console.log(user.idUser)
 
-
+    ///////////////////////////////// In case the user exist and test the password
     try {
       if (await bcrypt.compare(password, user.password)) {
+ 
+        const orderUserLogin = await User.findOne({
+          where: {
+            email: email
+          }
+        }).then(user => {
+          return Order.findOne({
+            where: {
+              idUser: user.idUser
+            }
+          })
+        })
+
+        const orderGuest = await Order.findOne({
+          where: {
+            idUser: idUser
+          }
+        })
 
         Order.findOne({
           where: {
-            idUser: idUser,
-          },
+            idUser: idUser
+          }
         }).then(order => {
           return Inter_Prod_Order.findAll({
             where: {
@@ -52,35 +60,16 @@ function initialize(passport) {
             }
           })
         }).then(inters => {
-          return User.findOne({
-            where: {
-              email: email
-            }
-          }).then(user => {
-            return Order.findOne({
-              where: {
-                idUser: user.idUser
-              }
-            })
-          }).then(order => {
-            inters.map(inter => {
-              return Inter_Prod_Order.create({
-                ...inter,
-                idOrder: order.idOrder
-              })
-            })
-            return order
-          }).then(order => {
-            Inter_Prod_Order.destroy({
-              where: {
-                idOrder: order.idOrder
-              }
+          inters.map(e => {
+            return Inter_Prod_Order.create({
+              ...e.dataValues,
+              idOrder: orderUserLogin.idOrder
             })
           })
         }).then(() => {
-          Order.destroy({
+          Inter_Prod_Order.destroy({
             where: {
-              idUser: idUser
+              idOrder: orderGuest.idOrder
             }
           })
         }).then(() => {
@@ -90,6 +79,7 @@ function initialize(passport) {
             }
           })
         }).catch()
+
 
         return done(null, user)
       } else {
