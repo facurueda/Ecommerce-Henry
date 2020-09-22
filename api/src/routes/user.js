@@ -19,6 +19,30 @@ initializePassport(passport, email => {
     })
 })
 
+/////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated()){
+        if(req.user.level === 'admin'){
+            console.log('this user is ADMIN')
+            return next()
+        } console.log('this user DOESNT ADMIN')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
+    res.redirect('/')
+}
+
+function isUserOrAdmin(req, res, next) {
+    if(req.isAuthenticated()){
+        if(req.user.level === 'user' || req.user.level === 'admin'){
+            console.log('el usuario esta logeado')
+            return next()
+        } console.log('this user is GUEST')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    res.redirect('htpp://localhost:3000/auth/login')
+}
+
 
 /////////////////////////////////////////////////////////////////GET
 
@@ -72,6 +96,7 @@ server.get('/:idUser', (req, res, next) => {
         res.send(user)
     })
 })
+
 server.get('/', (req, res, next) => {
     User.findAll().then((users) => {
         res.send(users)
@@ -162,31 +187,10 @@ server.post('/', async (req, res, next) => {
             level: 'user'
         })
     }).then(() => {
-        res.redirect('http://localhost:3000/user/auth/login')
+        res.redirect('http://localhost:3000/auth/login')
     })
 
-    // User.create({
-    //         name,
-    //         email,
-    //         password: hashedPassword,
-    //         level
-    //     }).then((newUser) => {
-    //         return Order.create({
-    //             idUser: newUser.idUser,
-    //             status: 'CREADA'
-    //         })
-    //     }).then(() => {
-    //         res.redirect('http://localhost:3000/user/auth/login')
-    //     })
-    //     .catch(next);
-
 });
-
-
-
-//////////////////////////////////////////////////////logout
-
-
 
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
@@ -265,6 +269,7 @@ server.delete('/:idUser', (req, res, next) => {
         })
     }).catch(next);
 });
+
 /////////////////////////////////////////////DEV
 server.post('/aaa', (req, res, next) => {
     User.create({
