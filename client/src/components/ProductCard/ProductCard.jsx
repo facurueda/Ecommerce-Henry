@@ -4,19 +4,25 @@ import {
     Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
 import ButtonAddToCart from '../ButtonAddToCart';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router'
-import { actionGetProduct } from '../../redux/productsActions';
+import { actionGetProduct, actionSetProduct } from '../../redux/productsActions';
 import renderHTML from 'react-render-html';
+import { actionGetReviews, actionSetReview } from '../../redux/reviewsAction';
 
 const ProductCard = (props) => {
 
     const { name, price, description, idProduct, images, stock } = props;
+    console.log(images)
     const history = useHistory()
     const dispatch = useDispatch()
     const handleChancla = async () => {
         await dispatch(actionGetProduct(idProduct))
-        history.push('/productDetail')
+        await dispatch(actionGetReviews(idProduct))
+        await dispatch(actionSetProduct({ name, price, description, idProduct, images, stock }))
+        setTimeout(()=>{
+            return history.push('/productDetail')
+        },200)
     }
 
 

@@ -33,7 +33,7 @@ const stars = (num) => {
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
-                <span className="fa fa-star"></span>
+                <span className="far fa-star"></span>
             </div>)
         case 5:
             return (<div>

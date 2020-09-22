@@ -5,39 +5,34 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
+import gatito from './Images/gatito.png'
+import home from './Images/home.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
-import { actionVerifyCookies } from '../../redux/usersActions'
+import { actionSetVerified, actionVerifyCookies } from '../../redux/usersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
     const [cookie, setCookie] = useCookies(['ttkk']);
-    const cookieValidation = useSelector(store => store.usersReducer.cookieValidation)
     const dispatch = useDispatch()
-    useEffect(async () => {
-        if (cookie.idUser) {
-            dispatch(actionVerifyCookies(cookie))
-            //PREGUNTAR A BACK COMO PEDIRLE LA VALIDACION DE LA COOKIE Y CREAR EL ACTION
-        } else {
-            await dispatch(actionVerifyCookies(cookie))
-            setCookie('idUser', user);
-            setCookie('name', name);
-            setCookie('email', email);
-            setCookie('level', level);
-        }
-
-        dispatch(actionGetOrder(user));
+    useEffect(() => {
+        dispatch(actionVerifyCookies(cookie))
+        dispatch(actionGetOrder(idUser));
     }, [])
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
-    const user = useSelector(state => state.usersReducer.idUser)
-    const name = useSelector(state => state.usersReducer.name)
-    const email = useSelector(state => state.usersReducer.email)
+    const idUser = useSelector(state => state.usersReducer.idUser)
     const level = useSelector(state => state.usersReducer.level)
+    const verified = useSelector(state => state.usersReducer.verified)
+    if (verified){
+        setCookie('idUser', idUser)
+        setCookie('level', level)
+        dispatch(actionSetVerified(false))
+    }
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
@@ -61,26 +56,34 @@ const NavBar = () => {
                 <div className='logoContainer'>
                     <a href="/">
                         <img className='imageLogo' src={Logo} alt='Logo' />
+                       
                     </a>
                 </div>
+                <div> <img className='nomematen' src={gatito}/></div>
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
                         <form action="/">
-                            <button className='buttonHome'>Home</button>
+                            <div><button className='buttonHome'><p className='textnav'>Home</p></button></div>
+                           
                         </form>
                         <form action="/catalogue">
-                            <button className='buttonProducts'>Products</button>
+                            <button className='buttonProducts'><p className='textnav'>Products</p></button>
                         </form>
-                        {user ? (
+                        {level === 'USER' ? (
                             <button className='buttonProducts' onClick={handleChancha} >My Account</button>
                         ) : (<div></div>)}
                     </div>
                     <div className='searchBar'>
                         <SearchBar />
                     </div>
-                    {user ?
+                    {level === 'USER' ?
                         (
-                            <div><UserLogged /></div>
+                            <div className='userLogged' >
+                                <UserLogged />
+                                <div className='cartContainer'>
+                                    <Cart />
+                                </div>
+                            </div>
                         )
                         :
                         (
@@ -92,6 +95,7 @@ const NavBar = () => {
                                 <div className='cartContainer'>
                                     <Cart />
                                 </div>
+
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>
