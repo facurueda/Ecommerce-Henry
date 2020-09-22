@@ -15,7 +15,7 @@ const Login = (props) => {
     const idUser = useSelector(store => store.usersReducer.idUser)
 
     const handleChancla = () => {
-        dispatch(actionLogin({ ...inputs, idUser }))
+        dispatch(actionLogin({ ...inputs, idUser: idUser }))
     }
     const handleInput = (e) => {
         const { type, value } = e.target

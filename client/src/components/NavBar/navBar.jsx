@@ -6,7 +6,6 @@ import { Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
 import gatito from './Images/gatito.png'
-import home from './Images/home.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
@@ -18,21 +17,22 @@ const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
     const [cookie, setCookie] = useCookies(['ttkk']);
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(actionVerifyCookies(cookie))
-        dispatch(actionGetOrder(idUser));
-    }, [])
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const idUser = useSelector(state => state.usersReducer.idUser)
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
-    if (verified){
+    console.log(cookie)
+    if (verified) {
+        console.log("ping")
         setCookie('idUser', idUser)
         setCookie('level', level)
         dispatch(actionSetVerified(false))
     }
+    useEffect(() => {
+        dispatch(actionGetOrder(idUser));
+    },[])
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
@@ -43,7 +43,7 @@ const NavBar = () => {
     const modalRegisterClose = () => setModalRegister(false);
 
     const handleChancha = () => {
-
+        dispatch(actionVerifyCookies({ ...cookie, idUser: idUser, level: level }))
     }
     const ChangeModal = () => {
         modalLoginView()
@@ -52,19 +52,19 @@ const NavBar = () => {
     return (
 
         <div >
-            <div className='navContainer'>
+            <div className='navContainer' onClick={handleChancha}>
                 <div className='logoContainer'>
                     <a href="/">
                         <img className='imageLogo' src={Logo} alt='Logo' />
-                       
+
                     </a>
                 </div>
-                <div> <img className='nomematen' src={gatito}/></div>
+                <div> <img className='nomematen' src={gatito} /></div>
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
                         <form action="/">
                             <div><button className='buttonHome'><p className='textnav'>Home</p></button></div>
-                           
+
                         </form>
                         <form action="/catalogue">
                             <button className='buttonProducts'><p className='textnav'>Products</p></button>

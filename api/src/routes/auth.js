@@ -27,7 +27,7 @@ server.get('/', (req, res, next) => {
     res.send('funciona')
 })
 
-/////s65 devuelve el usuario logeado ----> me parece que esta muy mal esto jaja y 
+/////s65 devuelve el usuario logeado ----> me parece que esta muy mal esto jaja y
 //no se si aca debe ser lo de la cookie?
 server.get('/me', (req, res) => {
     User.findOne({
@@ -111,12 +111,13 @@ server.post('/promote/:id', (req, res) => {
 
 server.post('/cookie', async (req, res) => {
 
-    const { idUser } = req.body
+    const { idUser, level } = req.body
+    console.log(req.body)
     let aleatoryEmail = aleatoryNumber();
     const hashedPassword = await bcrypt.hash('guest', 10)
 
     // Llega info del front, si idUser no existe o es 0 se cre el usuario GUEST con su Orden
-    if (idUser == 0) {
+    if (idUser === 0) {
 
         User.create({
             name: 'guest',
@@ -124,33 +125,36 @@ server.post('/cookie', async (req, res) => {
             password: hashedPassword,
             level: 'GUEST'
         }).then((newUser) => {
-                Order.create({
+            Order.create({
                 idUser: newUser.idUser,
                 status: 'CREADA'
             })
             return newUser
-            
         }).then((newUser) => {
-            res.status(401).send({
-                'idUser': newUser.idUser,
-                'name': newUser.name,
-                'email': newUser.email,
-                'level': newUser.level,
-                'verified': true
+            // status(401)
+            res.send({
+                idUser: newUser.idUser,
+                name: newUser.name,
+                email: newUser.email,
+                level: newUser.level,
+                verified: true
             })
         })
     }
     else {
+        console.log('yup')
         User.findOne({
             where: {
                 idUser: idUser
             }
-        }).then((user) => res.send({
-            'idUser': user.idUser,
-            'name': user.name,
-            'email': user.email,
-            'level': user.level
-        }))
+        }).then((user) => {
+            res.send({
+                idUser: user.idUser,
+                name: user.name,
+                email: user.email,
+                level: user.level
+            })
+        })
     }
 })
 

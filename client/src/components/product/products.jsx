@@ -49,7 +49,6 @@ function Products(props) {
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />
                                 <button className='buyProd'>Comprar</button>
                                 <div className = 'conteiner-star'>
-                                <StarRating rating={rating}/>
                                 </div>
                             </div>
                         </div>

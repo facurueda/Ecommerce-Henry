@@ -149,7 +149,6 @@ server.post('/', async (req, res, next) => {
     } = req.body
 
     const hashedPassword = await bcrypt.hash(password, 10)
-    
     User.findOne({
         where: {
             idUser: idUser
