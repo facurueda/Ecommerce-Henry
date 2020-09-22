@@ -14,15 +14,25 @@ export const PRODUCTS_LOADING = 'PRODUCTS_LOADING'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const PRODUCT_POST = 'PRODUCT_POST'
 export const PRODUCT_PUT = 'PRODUCT_PUT'
+export const SET_PRODUCT = 'SET_PRODUCT'
 
 
 
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
+export const UPDATE_ORDER = 'UPDATE_ORDER'
+export const SET_QUANTITY = 'SET_QUANTITY'
 
 export const GET_USER_BY_ID = 'GET_USER_BY_ID'
 export const USER_CREATED = 'USER_CREATED'
+export const AUTH_FAILED = 'AUTH_FAILED'
+export const POST_LOGIN = 'POST_LOGIN'
+export const USER_LOGGED_IN = 'USER_LOGGED_IN'
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
+export const SET_VERIFIED = 'SET_VERIFIED'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 
-
+export const REVIEW_POST = 'REVIEW_POST'
+export const GET_REVIEWS_BY_PRODUCT = 'GET_REVIEWS_BY_PRODUCT'
+export const SET_REVIEW = 'SET_REVIEW'

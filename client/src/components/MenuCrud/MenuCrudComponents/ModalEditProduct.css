@@ -67,9 +67,10 @@ label {
 
 .buttonAdd:hover,
 .buttonExit:hover {
-    text-shadow: 0 0 0.5px #DFA06E;
-    color: #DFA06E;
-    border-color: #DFA06E;
+    text-shadow: 0 0 0.5px rgba(47, 54, 64, 0.77);
+    background-color:rgba(255, 255, 255, 0.53);
+    color: white;
+    border-color: rgba(47, 54, 64, 0.57);
 }
 
 @media all and (max-width:30em) {
