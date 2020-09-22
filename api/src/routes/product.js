@@ -8,9 +8,33 @@ const {
 	Review
 } = require('../db.js');
 // const Review = require('../models/Review.js');
+
+/////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated()){
+        if(req.user.level === 'admin'){
+            console.log('this user is ADMIN')
+            return next()
+        } console.log('this user DOESNT ADMIN')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
+    res.redirect('/')
+}
+
+function isUserOrAdmin(req, res, next) {
+    if(req.isAuthenticated()){
+        if(req.user.level === 'user' || req.user.level === 'admin'){
+            console.log('el usuario esta logeado')
+            return next()
+        } console.log('this user is GUEST')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    res.redirect('htpp://localhost:3000/auth/login')
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS  
-
-
 ///////////////////////////// RUTA PARA OBTENER TODAS REVIEW DE UN PRODUCTO
 
 server.get('/:id/review/', (req, res, next) => {
@@ -68,7 +92,7 @@ server.get('/', (req, res, next) => {
 
 ///////////////////////////// RUTA PARA CREAR REVIEW
 
-server.post('/product/:idProduct/review', (req, res, next) => {
+server.post('/product/:idProduct/review', isUserOrAdmin, (req, res, next) => {
 	Review.create({
 		description: req.body.description,
 		rating: req.body.rating,
@@ -80,7 +104,7 @@ server.post('/product/:idProduct/review', (req, res, next) => {
 		})
 	}).catch(next)
 })
-server.post('/create', (req, res, next) => {
+server.post('/create', isAdmin,(req, res, next) => {
 	const {
 		name,
 		description,
@@ -110,7 +134,7 @@ server.post('/create', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next);
 });
-server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
+server.post('/:idProducto/category/:idCategoria', isAdmin, (req, res, next) => {
 	Inter_Cat_Prod.create({
 		idCategory: req.body.idCategory,
 		idProduct: req.body.idProduct
@@ -122,7 +146,7 @@ server.post('/:idProducto/category/:idCategoria', (req, res, next) => {
 
 
 ///////////////////////////// RUTA PARA DELETE REVIEW
-server.delete('/product/:id/review/:idReview', (req, res, next) => {
+server.delete('/product/:id/review/:idReview', isAdmin, (req, res, next) => {
 	Review.destroy({
 		where: {
 			idReview: req.params.idReview
@@ -138,7 +162,7 @@ server.delete('/product/:id/review/:idReview', (req, res, next) => {
 	})
 })
 
-server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
+server.delete('/:idProduct/category/:idCategory', isAdmin, (req, res, next) => {
 	Inter_Cat_Prod.destroy({
 		where: {
 			idProduct: req.body.idProduct,
@@ -148,7 +172,7 @@ server.delete('/:idProduct/category/:idCategory', (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-server.delete('/:idProducto', (req, res, next) => {
+server.delete('/:idProducto', isAdmin, (req, res, next) => {
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
@@ -167,7 +191,7 @@ server.delete('/:idProducto', (req, res, next) => {
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 
 ///////////////////////////// RUTA PARA MODIFICAR REVIEW
-server.put('/:idProduct/review/:idReview', (req, res, next) => {
+server.put('/:idProduct/review/:idReview', isUserOrAdmin, (req, res, next) => {
 	Review.findOne({
 		where: {
 			idReview: req.params.idReview
@@ -185,7 +209,7 @@ server.put('/:idProduct/review/:idReview', (req, res, next) => {
 })
 
 
-server.put('/:idProduct', (req, res, next) => {
+server.put('/:idProduct', isAdmin, (req, res, next) => {
 	let productUpdated = null
 	Product.findOne({
 		where: {

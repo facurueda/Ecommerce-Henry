@@ -2,6 +2,29 @@
 const server = require('express').Router();
 const { Categories, Product } = require('../db.js');
 
+/////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated()){
+        if(req.user.level === 'admin'){
+            console.log('this user is ADMIN')
+            return next()
+        } console.log('this user DOESNT ADMIN')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
+    res.redirect('/')
+}
+
+function isUserOrAdmin(req, res, next) {
+    if(req.isAuthenticated()){
+        if(req.user.level === 'user' || req.user.level === 'admin'){
+            console.log('el usuario esta logeado')
+            return next()
+        } console.log('this user is GUEST')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    res.redirect('htpp://localhost:3000/auth/login')
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
 server.get('/:nombreCat', (req, res, next) => {
@@ -22,7 +45,7 @@ server.get('/', (req, res, next) => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
-server.post('/create', (req, res, next) => {
+server.post('/create', isAdmin, (req, res, next) => {
     const { name, description } = req.body;
     Categories.create({
         name,
@@ -35,7 +58,7 @@ server.post('/create', (req, res, next) => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
-server.delete('/:id', (req, res, next) => {
+server.delete('/:id', isAdmin, (req, res, next) => {
     console.log(req.params)
     Categories.destroy({
         where: { idCategory: req.params.id }
@@ -50,7 +73,7 @@ server.delete('/:id', (req, res, next) => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
-server.put('/:id', (req, res, next) => {
+server.put('/:id', isAdmin, (req, res, next) => {
     Categories.findOne({
         where: {
             idCategory: req.body.idCategory

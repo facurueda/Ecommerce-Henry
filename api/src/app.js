@@ -32,8 +32,6 @@ server.use((req, res, next) => {
 
 ////////////  --------------------
 
-server.use(express.urlencoded({ extended: false }))
-server.use(flash())
 server.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -41,6 +39,7 @@ server.use(session({
 }))
 server.use(passport.initialize())
 server.use(passport.session())
+server.use(flash())
 
  
 

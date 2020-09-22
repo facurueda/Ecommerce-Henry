@@ -30,7 +30,7 @@ function initialize(passport) {
     ///////////////////////////////// In case the user exist and test the password
     try {
       if (await bcrypt.compare(password, user.password)) {
- 
+
         const orderUserLogin = await User.findOne({
           where: {
             email: email
@@ -100,18 +100,53 @@ function initialize(passport) {
     })
   }
 
+
+
+
+
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passReqToCallback: true
   }, authenticateUser))
 
   passport.serializeUser(function (user, done) {
-    done(null, user.idUser)
+    console.log('serializing user:', user);
+    done(null, user.dataValues.idUser);
   });
 
   passport.deserializeUser(function (id, done) {
-    done(null, getUserId(id));
+    console.log('deserializing user:')
+    User.findOne({
+      where: {
+        idUser: id
+      }
+    }).then(user => {
+      // console.log('thisUser', user.dataValues)
+      done(null, user.dataValues);
+    }).catch(done)
   });
+
+
+
+  // passport.serializeUser(function (user, done) {
+  //   console.log(user)
+  //   done(null, user.idUser)
+  // });
+
+  // passport.deserializeUser(function(id, done) {
+  //   User.findById(id).then(function(user) {
+  //     console.log('deserializing user:',user);
+  //     done(null, user);
+  //   }).catch(function(err) {
+  //     if (err) {
+  //       throw err;
+  //     }
+  //  });
+  // });
+
+  // passport.deserializeUser(function (id, done) {
+  //   done(null, getUserId(id));
+  // });
 
 }
 
