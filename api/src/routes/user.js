@@ -46,7 +46,7 @@ function isUserOrAdmin(req, res, next) {
 
 /////////////////////////////////////////////////////////////////GET
 
-server.get('/:idUser/orders', (req, res, next) => {
+server.get('/:idUser/orders', isUserOrAdmin, (req, res, next) => {
     Order.findAll({
         where: {
             idUser: req.params.idUser
@@ -55,7 +55,7 @@ server.get('/:idUser/orders', (req, res, next) => {
         res.send(orders)
     }).catch(next);
 })
-server.get('/:idUser/cart', (req, res, next) => {
+server.get('/:idUser/cart',  (req, res, next) => {
     Order.findOne({
         where: {
             idUser: req.params.idUser,
@@ -83,7 +83,7 @@ server.get('/:idUser/cart', (req, res, next) => {
     }).catch(next);
 })
 
-server.get('/:idUser', (req, res, next) => {
+server.get('/:idUser', isUserOrAdmin, (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.params.idUser
@@ -97,13 +97,13 @@ server.get('/:idUser', (req, res, next) => {
     })
 })
 
-server.get('/', (req, res, next) => {
+server.get('/', isAdmin, (req, res, next) => {
     User.findAll().then((users) => {
         res.send(users)
     });
 })
 //////////////////////////////////////////////////////////////////POST
-server.post('/:idUser/cart', (req, res, next) => {
+server.post('/:idUser/cart', isAdmin, (req, res, next) => {
     // body: { idProduct, quantity }
     let respuesta = {}
     Order.findOne({
@@ -163,7 +163,7 @@ server.post('/:idUser/cart', (req, res, next) => {
 })
 
 //////// register 
-server.post('/', async (req, res, next) => {
+server.post('/', isAdmin, async (req, res, next) => {
 
     const {
         idUser,
@@ -174,17 +174,21 @@ server.post('/', async (req, res, next) => {
     } = req.body
 
     const hashedPassword = await bcrypt.hash(password, 10)
-    User.findOne({
-        where: {
-            idUser: idUser
-        }
-    }).then((user) => {
-        user.update({
-            ...user,
+    // User.findOne({
+    //     where: {
+    //         idUser: idUser
+    //     }
+    // }).then((user) => {
+        
+    User.create({
             name: name,
             email: email,
             password: hashedPassword,
             level: 'user'
+    }).then( user => {
+        return Order.create({
+            idUser: user.idUser,
+            status: 'CREADA'
         })
     }).then(() => {
         res.redirect('http://localhost:3000/auth/login')
@@ -193,7 +197,7 @@ server.post('/', async (req, res, next) => {
 });
 
 ///////////////////////////////////////////////////////////////PUT
-server.put('/:idUser/cart', (req, res, next) => {
+server.put('/:idUser/cart', isAdmin, (req, res, next) => {
     const {
         idProduct,
         quantity
@@ -220,7 +224,8 @@ server.put('/:idUser/cart', (req, res, next) => {
         res.send(order)
     }).catch(next);
 })
-server.put('/:idUser', (req, res, next) => {
+
+server.put('/:idUser', isUserOrAdmin, (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.body.idUser
@@ -237,7 +242,7 @@ server.put('/:idUser', (req, res, next) => {
     }).catch(next);
 });
 ///////////////////////////////////////////////////////////DELETE
-server.delete('/:idUser/cart', (req, res, next) => {
+server.delete('/:idUser/cart', isUserOrAdmin, (req, res, next) => {
     Order.findOne({
         where: {
             idUser: req.params.idUser,
@@ -258,7 +263,8 @@ server.delete('/:idUser/cart', (req, res, next) => {
         })
     }).catch(next);
 })
-server.delete('/:idUser', (req, res, next) => {
+
+server.delete('/:idUser', isUserOrAdmin, (req, res, next) => {
     User.destroy({
         where: {
             idUser: req.body.idUser

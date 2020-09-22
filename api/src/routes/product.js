@@ -105,7 +105,7 @@ server.post('/product/:idProduct/review', isUserOrAdmin, (req, res, next) => {
 		})
 	}).catch(next)
 })
-server.post('/create', isAdmin,(req, res, next) => {
+server.post('/create', isAdmin, (req, res, next) => {
 	const {
 		name,
 		description,
@@ -147,7 +147,7 @@ server.post('/:idProducto/category/:idCategoria', isAdmin, (req, res, next) => {
 
 
 ///////////////////////////// RUTA PARA DELETE REVIEW
-server.delete('/product/:id/review/:idReview', isAdmin, (req, res, next) => {
+server.delete('/product/:id/review/:idReview', isUserOrAdmin, (req, res, next) => {
 	Review.destroy({
 		where: {
 			idReview: req.params.idReview

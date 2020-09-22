@@ -12,11 +12,12 @@ const aleatoryNumber = () => {
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 
 function isAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
-        } console.log('this user DOESNT ADMIN')
+        }
+        console.log('this user DOESNT ADMIN')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
@@ -24,11 +25,12 @@ function isAdmin(req, res, next) {
 }
 
 function isUserOrAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'user' || req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
-        } console.log('this user is GUEST')
+        }
+        console.log('this user is GUEST')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
@@ -41,18 +43,12 @@ server.get('/testAuth', isUserOrAdmin, (req, res, next) => {
     res.send('funciona')
 })
 
-<<<<<<< HEAD
-/////s65 devuelve el usuario logeado ----> me parece que esta muy mal esto jaja y
-//no se si aca debe ser lo de la cookie?
-server.get('/me', (req, res) => {
-=======
-server.get('/', isUserOrAdmin, (req,res) => {
+server.get('/', isUserOrAdmin, (req, res) => {
     res.send('funcionnnaaaaa!!')
 })
 
 
 server.get('/me', isUserOrAdmin, (req, res) => {
->>>>>>> f8538ad31830bc98b330574b460d3e9d233a3098
     User.findOne({
         where: {
             idUser: req.body.idUser
@@ -66,7 +62,7 @@ server.get('/me', isUserOrAdmin, (req, res) => {
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
 
 server.post('/login', passport.authenticate('local', {
-    session:true,
+    session: true,
     successRedirect: 'http://localhost:3000/auth/',
     failureRedirect: 'http://localhost:3000/auth/login',
     failureFlash: true,
@@ -134,22 +130,15 @@ server.post('/promote/:id', isAdmin, (req, res) => {
 })
 
 server.post('/cookie', async (req, res) => {
-<<<<<<< HEAD
-
-    const { idUser, level } = req.body
-    console.log(req.body)
-=======
-    const { idUser } = req.body
->>>>>>> f8538ad31830bc98b330574b460d3e9d233a3098
+    const {
+        idUser
+    } = req.body
     let aleatoryEmail = aleatoryNumber();
     const hashedPassword = await bcrypt.hash('guest', 10)
+    let carrito = null;
+    let userAux = null;
     // Llega info del front, si idUser no existe o es 0 se cre el usuario GUEST con su Orden
-<<<<<<< HEAD
-    if (idUser === 0) {
-
-=======
-    if (idUser == 0) {
->>>>>>> f8538ad31830bc98b330574b460d3e9d233a3098
+    if (idUser == 0 || !idUser) {
         User.create({
             name: 'guest',
             email: aleatoryEmail + '@gmail.com',
@@ -159,6 +148,8 @@ server.post('/cookie', async (req, res) => {
             Order.create({
                 idUser: newUser.idUser,
                 status: 'CREADA'
+            }).then(order => {
+                carrito = order;
             })
             return newUser
         }).then((newUser) => {
@@ -168,22 +159,30 @@ server.post('/cookie', async (req, res) => {
                 name: newUser.name,
                 email: newUser.email,
                 level: newUser.level,
-                verified: true
+                verified: true,
+                order: carrito
             })
         })
-    }
-    else {
+    } else {
         console.log('yup')
         User.findOne({
             where: {
                 idUser: idUser
             }
         }).then((user) => {
-            res.send({
-                idUser: user.idUser,
-                name: user.name,
-                email: user.email,
-                level: user.level
+            userAux = user;
+            Order.findOne({
+                where: {
+                    idUser: user.idUser
+                }
+            }).then(order => {
+                res.send({
+                    idUser: userAux.idUser,
+                    name: userAux.name,
+                    email: userAux.email,
+                    level: userAux.level,
+                    order
+                })
             })
         })
     }

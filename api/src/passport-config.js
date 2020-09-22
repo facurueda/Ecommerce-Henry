@@ -61,6 +61,7 @@ function initialize(passport) {
             }
           })
         }).then(inters => {
+          
           inters.map(e => {
             return Inter_Prod_Order.create({
               ...e.dataValues,
@@ -92,16 +93,6 @@ function initialize(passport) {
       return done(e)
     }
   }
-
-  const getUserId = async (id) => {
-    await User.findOne({
-      where: {
-        idUser: id
-      }
-    })
-  }
-
-
 
 
 
