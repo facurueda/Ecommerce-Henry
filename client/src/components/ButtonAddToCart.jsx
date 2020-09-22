@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { actionAddToCart, actionGetOrder } from '../redux/ordersActions'
+import { actionAddToCart, actionGetOrder, actionSetQuantity } from '../redux/ordersActions'
 import './ButtonAddToCart.css'
 import { useCookies } from 'react-cookie';
 
@@ -9,6 +9,7 @@ const ButtonAddToCart = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.usersReducer.idUser)
+    const orders = useSelector(state => state.ordersReducer.order);
 
     const [cookies, setCookie] = useCookies(['cart'])
 
@@ -16,6 +17,13 @@ const ButtonAddToCart = (props) => {
         if (user) {
             dispatch(actionAddToCart({ idUser: user, idProduct: props.datos.idProduct, quantity: 1, price: props.datos.price }))
             dispatch(actionGetOrder(user))
+            console.log('ping')
+            const reducedValue = orders.products.reduce((acum, product) => {
+                return acum + product.Inter_Prod_Order.quantity
+            }, 0)
+            console.log('reducedValue',reducedValue)
+            console.log('order',orders.products.length)
+            dispatch(actionSetQuantity(reducedValue))
         } else {
             if (typeof cookies.carrito !== 'object') {
                 setCookie('carrito', [])

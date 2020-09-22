@@ -18,7 +18,6 @@ const UserLogged = () => {
                 <i class="fa fa-user" aria-hidden="true"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <Cart />
                 <a class="dropdown-item" href="/Admin">My Account</a>
                 <a class="dropdown-item" href="/" onClick={e => handleChange()}>Log out</a>
             </div>

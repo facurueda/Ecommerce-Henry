@@ -6,7 +6,7 @@ import video from './video.gif';
 
 const NotFound = () => (
     <div class = 'contenedorNotFound'>
-        <h1 class = 'textNotFound'> 404- Not Found!</h1>        
+        <h1 class = 'textNotFound'> <strong>404 </strong>- Oops! Not Found!</h1>        
 {/*        <button class="btn btn-primary"><Link to = '/' class='textGoHome'>
             Go Home 
         </Link></button>  */}

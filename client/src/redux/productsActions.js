@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_SEARCH_TERM, PRODUCT_PUT, PRODUCT_POST, DELETE_PRODUCT, GET_PRODUCTS, PRODUCTS_ERROR, PRODUCTS_LOADING, GET_PRODUCTS_BY_CATEGORY } from "./constants";
+import { SET_PRODUCT, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_SEARCH_TERM, PRODUCT_PUT, PRODUCT_POST, DELETE_PRODUCT, GET_PRODUCTS, PRODUCTS_ERROR, PRODUCTS_LOADING, GET_PRODUCTS_BY_CATEGORY } from "./constants";
 
 
 const url = "http://localhost:3000/";
@@ -53,6 +53,11 @@ export const actionGetProducts = () => {
         }).catch(error => {
             dispatch({ type: PRODUCTS_ERROR, payload: error })
         })
+    }
+}
+export const actionSetProduct = (product) => {
+    return (dispatch) => {
+        dispatch({type: SET_PRODUCT, payload: product})
     }
 }
 export const actionDeleteProduct = (id) => {

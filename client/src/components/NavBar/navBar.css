@@ -73,12 +73,13 @@
     margin-left: 30px;
     color: white;
     font-weight: bolder;
-
 }
 .searchBar{
     margin-right: 50px;
 }
-
+.userLogged{
+    display: flex;
+}
 
 /* ------------------- Register Space ------------------- */
 

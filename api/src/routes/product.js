@@ -5,7 +5,8 @@ const {
 	Categories,
 	Inter_Cat_Prod,
 	Inter_Prod_Order,
-	Review
+	Review,
+	User
 } = require('../db.js');
 // const Review = require('../models/Review.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS  

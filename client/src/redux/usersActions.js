@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT } from "./constants";
+import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED } from "./constants";
 const url = "http://localhost:3000/";
 
 
@@ -16,7 +16,7 @@ export const actionVerifyCookies = (cookie) => {
             if (res.status === 401){
                 dispatch({ type: AUTH_FAILED, payload: res.data })
             } else {
-                dispatch({type: USER_LOGGED_IN, payload: cookie })
+                dispatch({type: USER_LOGGED_IN, payload: res.data })
             }
         })
     }
@@ -52,4 +52,7 @@ export const actionLogOut = (user) => {
             })
         }
     )
+}
+export const actionSetVerified = (bool) => {
+    return (dispatch) =>  { dispatch({ type: SET_VERIFIED , payload: bool }) }   
 }

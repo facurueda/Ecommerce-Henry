@@ -3,7 +3,7 @@ import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import './Login.css'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { actionLogin } from '../../redux/usersActions'
 
 const Login = (props) => {
@@ -12,9 +12,10 @@ const Login = (props) => {
     const dispatch = useDispatch()
     const { modalLoginClose, ChangeModal } = props;
     const [inputs, setInputs] = useState({})
+    const idUser = useSelector(store => store.usersReducer.idUser)
 
     const handleChancla = () => {
-        dispatch(actionLogin(inputs))
+        dispatch(actionLogin({ ...inputs, idUser }))
     }
     const handleInput = (e) => {
         const { type, value } = e.target

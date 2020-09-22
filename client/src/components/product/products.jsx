@@ -13,17 +13,20 @@ function Products(props) {
     function test() {
         return { __html: description }
     }
+    
+
 
     const dispatch = useDispatch();
     const reviewFinder = () => {
-        // dispatch(actionGetReviews(idProduct))
+        dispatch(actionGetReviews(idProduct))
         return <Review />
     }
 
     return (
         <div>
             <body>
-                <div className='prodCard'>
+                <div className='prodCard'>       
+                
                     <div id='hover-img'>
                         <img className="img-fluid" src={images} alt="..." />
                     </div>
@@ -45,6 +48,9 @@ function Products(props) {
                             <div className='buttons'>
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />
                                 <button className='buyProd'>Comprar</button>
+                                <div className = 'conteiner-star'>
+                                <StarRating rating={rating}/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -53,6 +59,7 @@ function Products(props) {
         </div>
     )
 }
+
 
 
 export default Products;
