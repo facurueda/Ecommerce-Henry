@@ -270,6 +270,7 @@ server.delete('/:idUser', (req, res, next) => {
         })
     }).catch(next);
 });
+
 /////////////////////////////////////////////DEV
 server.post('/aaa', (req, res, next) => {
     User.create({

@@ -54,9 +54,6 @@ server.post('/create', isAdmin, (req, res, next) => {
         .catch(next);
 })
 
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
 server.delete('/:id', isAdmin, (req, res, next) => {
     console.log(req.params)

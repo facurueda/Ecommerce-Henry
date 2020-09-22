@@ -131,7 +131,6 @@ server.post('/cookie', async (req, res) => {
     const { idUser } = req.body
     let aleatoryEmail = aleatoryNumber();
     const hashedPassword = await bcrypt.hash('guest', 10)
-
     // Llega info del front, si idUser no existe o es 0 se cre el usuario GUEST con su Orden
     if (idUser == 0) {
         User.create({

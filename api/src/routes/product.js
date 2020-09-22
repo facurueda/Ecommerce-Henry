@@ -5,8 +5,7 @@ const {
 	Categories,
 	Inter_Cat_Prod,
 	Inter_Prod_Order,
-	Review,
-	User
+	Review
 } = require('../db.js');
 // const Review = require('../models/Review.js');
 
@@ -33,7 +32,6 @@ function isUserOrAdmin(req, res, next) {
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
 }
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS  
@@ -91,6 +89,7 @@ server.get('/', (req, res, next) => {
 });
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
 // POST /product/:id/review
+
 
 ///////////////////////////// RUTA PARA CREAR REVIEW
 
