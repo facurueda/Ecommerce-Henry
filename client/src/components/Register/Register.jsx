@@ -37,7 +37,7 @@ const Register = (props) => {
     }
     const VerificarYRegistrar = () => {
         if (secondPassword === registerInputs.password) {
-            dispatch(actionUserCreate({...registerInputs, idUser: idUser, level: level}))
+            dispatch(actionUserCreate({...registerInputs}))
             console.log('Usuario registrado.')
             modalRegisterClose()
         } else {

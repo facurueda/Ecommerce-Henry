@@ -1,7 +1,16 @@
 import axios from "axios";
-import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED } from "./constants";
+import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED, SET_COOKIE_TO_STORE, GET_ORDER_BY_ID } from "./constants";
 const url = "http://localhost:3000/";
 
+export const actionSetCookieToStore = (cookie) => {
+
+    return (dispatch) => {
+        dispatch({
+            type: SET_COOKIE_TO_STORE,
+            payload: cookie
+        })
+    }
+}
 
 export const actionGetUserById = (idUser) => {
     return (dispatch) => {
@@ -11,14 +20,17 @@ export const actionGetUserById = (idUser) => {
     }
 }
 export const actionVerifyCookies = (cookie) => {
+    console.log('cookieInDispatchToSendBack', cookie)
     return (dispatch) => {
         axios.post(url + 'auth/cookie', cookie).then((res) => {
             console.log('res',res)
             if (res.verified){
                 dispatch({ type: AUTH_FAILED, payload: res.data })
+                dispatch({ type: GET_ORDER_BY_ID, payload: res.data.order })
             } else {
                 dispatch({type: USER_LOGGED_IN, payload: res.data })
-            }
+                dispatch({ type: GET_ORDER_BY_ID, payload: res.data.order })
+            } 
         })
     }
 }

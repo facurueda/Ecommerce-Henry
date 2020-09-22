@@ -11,7 +11,7 @@ import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
-import { actionSetVerified, actionVerifyCookies } from '../../redux/usersActions'
+import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore } from '../../redux/usersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
@@ -23,15 +23,16 @@ const NavBar = () => {
     const idUser = useSelector(state => state.usersReducer.idUser)
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
-    console.log(cookie)
+
     if (verified) {
-        console.log("ping")
         setCookie('idUser', idUser)
         setCookie('level', level)
         dispatch(actionSetVerified(false))
     }
     useEffect(() => {
+        dispatch(actionSetCookieToStore(cookie))
         dispatch(actionGetOrder(idUser));
+        handleChancha();
     },[])
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
@@ -43,7 +44,7 @@ const NavBar = () => {
     const modalRegisterClose = () => setModalRegister(false);
 
     const handleChancha = () => {
-        dispatch(actionVerifyCookies({ ...cookie, idUser: idUser, level: level }))
+        dispatch(actionVerifyCookies({ ...cookie }))
     }
     const ChangeModal = () => {
         modalLoginView()
@@ -52,7 +53,7 @@ const NavBar = () => {
     return (
 
         <div >
-            <div className='navContainer' onClick={handleChancha}>
+            <div className='navContainer'>
                 <div className='logoContainer'>
                     <a href="/">
                         <img className='imageLogo' src={Logo} alt='Logo' />

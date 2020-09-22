@@ -1,4 +1,4 @@
-import { GET_USER_BY_ID, SET_VERIFIED, USER_CREATED, USER_LOGGED_IN, POST_LOGIN, AUTH_FAILED, USER_LOGGED_OUT } from './constants'
+import { GET_USER_BY_ID, SET_VERIFIED, USER_CREATED, USER_LOGGED_IN, POST_LOGIN, AUTH_FAILED, USER_LOGGED_OUT, SET_COOKIE_TO_STORE } from './constants'
 var initialState = {
     idUser: 0,
     name: 'Guest',
@@ -51,6 +51,12 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 verified: action.payload
+            }
+        case SET_COOKIE_TO_STORE:
+            return {
+                ...state,
+                idUser: action.payload.idUser,
+                level: action.payload.level
             }
 
         default:
