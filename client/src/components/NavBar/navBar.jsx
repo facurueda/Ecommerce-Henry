@@ -35,14 +35,10 @@ const NavBar = () => {
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
-
     // ----- To Close Modals ----- //
     const modalLoginClose = () => setModalLogin(false);
     const modalRegisterClose = () => setModalRegister(false);
 
-    const handleChancha = () => {
-
-    }
     const ChangeModal = () => {
         modalLoginView()
         modalRegisterView()
@@ -65,7 +61,7 @@ const NavBar = () => {
                             <button className='buttonProducts'>Products</button>
                         </form>
                         {level === 'USER' ? (
-                            <button className='buttonProducts' onClick={handleChancha} >My Account</button>
+                            <button className='buttonProducts'>My Account</button>
                         ) : (<div></div>)}
                     </div>
                     <div className='searchBar'>

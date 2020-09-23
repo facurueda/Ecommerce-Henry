@@ -11,14 +11,6 @@ const {
 // const Review = require('../models/Review.js');
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 
-///////////////////////////// RUTA PARA OBTENER TODAS REVIEW DE UN PRODUCTO
-
-server.get('/:id/review/', (req, res, next) => {
-	Product.findOne({where: {idProduct: req.params.id},include: [{model: Review, as: 'reviews'}]})
-		.then((rev) => {
-			res.send(rev.reviews)
-		}).catch(next)
-});
 
 server.get('/search', (req, res, next) => {
 	Product.findAll({
@@ -41,8 +33,6 @@ server.get('/search', (req, res, next) => {
 		}).catch(next)
 });
 server.get('/:id', (req, res, next) => {
-	// GET /products/:id
-	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
 	Product.findOne({
 		where: {
 			idProduct: req.params.id
