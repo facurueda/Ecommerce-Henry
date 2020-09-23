@@ -31,8 +31,10 @@ const NavBar = () => {
     }
     useEffect(() => {
         dispatch(actionSetCookieToStore(cookie))
-        dispatch(actionGetOrder(idUser));
-        handleChancha();
+        dispatch(actionVerifyCookies(cookie))
+        if (cookie.idUser){
+            dispatch(actionGetOrder(cookie.idUser));
+        }
     },[])
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //

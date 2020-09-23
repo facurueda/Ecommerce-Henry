@@ -26,11 +26,9 @@ export const actionVerifyCookies = (cookie) => {
             console.log('res',res)
             if (res.verified){
                 dispatch({ type: AUTH_FAILED, payload: res.data })
-                dispatch({ type: GET_ORDER_BY_ID, payload: res.data.order })
             } else {
                 dispatch({type: USER_LOGGED_IN, payload: res.data })
-                dispatch({ type: GET_ORDER_BY_ID, payload: res.data.order })
-            } 
+            }
         })
     }
 }
@@ -65,5 +63,5 @@ export const actionLogOut = (user) => {
     )
 }
 export const actionSetVerified = (bool) => {
-    return (dispatch) =>  { dispatch({ type: SET_VERIFIED , payload: bool }) }   
+    return (dispatch) =>  { dispatch({ type: SET_VERIFIED , payload: bool }) }
 }

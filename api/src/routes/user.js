@@ -12,17 +12,17 @@ const passport = require('passport');
 const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
     passport,
-    email => User.findOne({
-        where: {
-            email: email
-        }
-    })
+        email => User.findOne({
+            where: {
+                email: email
+            }
+        })
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
         } console.log('this user DOESNT ADMIN')
@@ -33,8 +33,8 @@ function isAdmin(req, res, next) {
 }
 
 function isUserOrAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'user' || req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
         } console.log('this user is GUEST')
@@ -55,7 +55,7 @@ server.get('/:idUser/orders', isUserOrAdmin, (req, res, next) => {
         res.send(orders)
     }).catch(next);
 })
-server.get('/:idUser/cart',  (req, res, next) => {
+server.get('/:idUser/cart', (req, res, next) => {
     Order.findOne({
         where: {
             idUser: req.params.idUser,
@@ -103,7 +103,7 @@ server.get('/', isAdmin, (req, res, next) => {
     });
 })
 //////////////////////////////////////////////////////////////////POST
-server.post('/:idUser/cart', isAdmin, (req, res, next) => {
+server.post('/:idUser/cart', (req, res, next) => {
     // body: { idProduct, quantity }
     let respuesta = {}
     Order.findOne({
@@ -179,13 +179,13 @@ server.post('/', isAdmin, async (req, res, next) => {
     //         idUser: idUser
     //     }
     // }).then((user) => {
-        
+
     User.create({
-            name: name,
-            email: email,
-            password: hashedPassword,
-            level: 'user'
-    }).then( user => {
+        name: name,
+        email: email,
+        password: hashedPassword,
+        level: 'user'
+    }).then(user => {
         return Order.create({
             idUser: user.idUser,
             status: 'CREADA'
@@ -208,16 +208,16 @@ server.put('/:idUser/cart', isAdmin, (req, res, next) => {
             status: 'CARRITO'
         }
     }).then(order => {
-        return (Inter_Prod_Order.findOne({
+        Inter_Prod_Order.findOne({
             where: {
                 idOrder: order.idOrder,
                 idProduct: idProduct
             }
-        }), order)
-    }).then((relacion, order) => {
-        relacion.update({
-            ...relacion,
-            quantity: quantity
+        }).then((relacion) => {
+            return relacion.update({
+                ...relacion,
+                quantity: quantity
+            })
         })
         return order
     }).then((order) => {
