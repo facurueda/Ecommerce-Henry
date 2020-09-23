@@ -16,11 +16,10 @@ function isAdmin(req, res, next) {
         if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
-        }
-        console.log('this user DOESNT ADMIN')
+        } console.log('this user DOESNT ADMIN')
     }
     console.log('THIS USER NOT AUTHENTICATED')
-    // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
+    // -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO -- //
     res.redirect('/')
 }
 
@@ -29,8 +28,7 @@ function isUserOrAdmin(req, res, next) {
         if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
-        }
-        console.log('this user is GUEST')
+        } console.log('this user is GUEST')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
@@ -48,14 +46,18 @@ server.get('/', isUserOrAdmin, (req, res) => {
 })
 
 
-server.get('/me', isUserOrAdmin, (req, res) => {
-    User.findOne({
-        where: {
-            idUser: req.body.idUser
-        }
-    }).then(user => {
-        res.send(user)
-    })
+server.get('/me', (req, res) => {
+    console.log(req)
+    console.log("res: ", res)
+    // User.findOne({
+    //     where: {
+    //         idUser: req.session.cookie.passport.user
+    //     }
+    // }).then(user => {
+    //     res.send(user)
+    // }).catch(() => {
+    //     res.send({ response: "Sesion no existe "})
+    // })
 })
 
 
@@ -63,8 +65,8 @@ server.get('/me', isUserOrAdmin, (req, res) => {
 
 server.post('/login', passport.authenticate('local', {
     session: true,
-    successRedirect: 'http://localhost:3000/auth/',
-    failureRedirect: 'http://localhost:3000/auth/login',
+    successRedirect: 'http://localhost:3000/auth/me',
+    failureRedirect: 'http://localhost:3000/auth/testAuth',
     failureFlash: true,
 }))
 
@@ -138,6 +140,7 @@ server.post('/cookie', async (req, res) => {
     let carrito = null;
     let userAux = null;
     // Llega info del front, si idUser no existe o es 0 se cre el usuario GUEST con su Orden
+
     if (idUser == 0 || !idUser) {
         User.create({
             name: 'guest',
@@ -145,13 +148,14 @@ server.post('/cookie', async (req, res) => {
             password: hashedPassword,
             level: 'GUEST'
         }).then((newUser) => {
-            Order.create({
+            return Order.create({
                 idUser: newUser.idUser,
                 status: 'CREADA'
             }).then(order => {
                 carrito = order;
+            }).then(() => {
+                return newUser
             })
-            return newUser
         }).then((newUser) => {
             // status(401)
             res.send({
@@ -171,18 +175,18 @@ server.post('/cookie', async (req, res) => {
             }
         }).then((user) => {
             userAux = user;
-            Order.findOne({
+            return Order.findOne({
                 where: {
                     idUser: user.idUser
                 }
-            }).then(order => {
-                res.send({
-                    idUser: userAux.idUser,
-                    name: userAux.name,
-                    email: userAux.email,
-                    level: userAux.level,
-                    order
-                })
+            })
+        }).then(order => {
+            res.send({
+                idUser: userAux.idUser,
+                name: userAux.name,
+                email: userAux.email,
+                level: userAux.level,
+                order
             })
         })
     }

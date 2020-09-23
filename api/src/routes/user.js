@@ -163,7 +163,7 @@ server.post('/:idUser/cart', (req, res, next) => {
 })
 
 //////// register 
-server.post('/', isAdmin, async (req, res, next) => {
+server.post('/', async (req, res, next) => {
 
     const {
         idUser,

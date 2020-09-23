@@ -6,7 +6,6 @@ const {
   Inter_Prod_Order
 } = require('./db');
 
-
 function initialize(passport) {
 
   const authenticateUser = async (req, email, password, done) => {
@@ -61,10 +60,9 @@ function initialize(passport) {
             }
           })
         }).then(inters => {
-          
           inters.map(e => {
             return Inter_Prod_Order.create({
-              ...e.dataValues,
+              ...e,
               idOrder: orderUserLogin.idOrder
             })
           })
@@ -96,14 +94,18 @@ function initialize(passport) {
 
 
 
+
+
+
+
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passReqToCallback: true
   }, authenticateUser))
 
   passport.serializeUser(function (user, done) {
-    console.log('serializing user:', user);
-    done(null, user.dataValues.idUser);
+    console.log('serializing user:', user.idUser);
+    done(null, user.idUser);
   });
 
   passport.deserializeUser(function (id, done) {
@@ -114,7 +116,7 @@ function initialize(passport) {
       }
     }).then(user => {
       // console.log('thisUser', user.dataValues)
-      done(null, user.dataValues);
+      done(null, user);
     }).catch(done)
   });
 
