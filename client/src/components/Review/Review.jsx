@@ -21,6 +21,10 @@ const Review = () => {
         console.log(product)
         return dispatch(actionSetReview(reviews[getRandom(reviews.length)]))
     }, [])
+    const toDate = (string) => {
+        const time = new Date(string)
+        return time.getDate() + '/' + time.getMonth() + '/' + time.getFullYear() + ' ' + time.getHours() + 'hs'
+    }
     const changeRand = (rand) => {
             const rand2 = reviews[getRandom(reviews.length)]
             if (rand !== rand2){
@@ -44,7 +48,7 @@ const Review = () => {
     return (
         (reviews.length > 0) ? (<div>
             <div className='dateAndButtonContainer'>
-                <div>{review.updatedAt} </div>
+                <div>{toDate(review.updatedAt)} </div>
                 <button className='viewMoreButton'>Ver mas reseñas</button>
             </div>
             <div className='reviewContainer'>

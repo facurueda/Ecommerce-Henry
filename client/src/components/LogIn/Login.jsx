@@ -16,6 +16,7 @@ const Login = (props) => {
 
     const handleChancla = () => {
         dispatch(actionLogin({ ...inputs, idUser: idUser }))
+        modalLoginClose()
     }
     const handleInput = (e) => {
         const { type, value } = e.target

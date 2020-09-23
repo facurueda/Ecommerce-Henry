@@ -11,7 +11,7 @@ const Cart = () => {
                 <i class="fa fa-shopping-cart fa_custom fa-1x"></i>
             </a>
             <div className='quantityProducts'>
-                {quantity}
+                {quantity ? quantity : ''}
             </div>
         </div>
     )

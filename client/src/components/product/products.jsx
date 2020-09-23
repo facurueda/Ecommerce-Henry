@@ -25,8 +25,7 @@ function Products(props) {
     return (
         <div>
             <body>
-                <div className='prodCard'>       
-                
+                <div className='prodCard'>
                     <div id='hover-img'>
                         <img className="img-fluid" src={images} alt="..." />
                     </div>
