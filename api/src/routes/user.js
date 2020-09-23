@@ -6,10 +6,47 @@ const {
     Product
 } = require('../db.js');
 const Sequelize = require("sequelize");
+const bcrypt = require('bcrypt')
+
+const passport = require('passport');
+const initializePassport = require('../passport-config');
+initializePassport(passport, email => {
+    passport,
+        email => User.findOne({
+            where: {
+                email: email
+            }
+        })
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'admin') {
+            console.log('this user is ADMIN')
+            return next()
+        } console.log('this user DOESNT ADMIN')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
+    res.redirect('/')
+}
+
+function isUserOrAdmin(req, res, next) {
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'user' || req.user.level === 'admin') {
+            console.log('el usuario esta logeado')
+            return next()
+        } console.log('this user is GUEST')
+    }
+    console.log('THIS USER NOT AUTHENTICATED')
+    res.redirect('htpp://localhost:3000/auth/login')
+}
+
 
 /////////////////////////////////////////////////////////////////GET
 
-server.get('/:idUser/orders', (req, res, next) => {
+server.get('/:idUser/orders', isUserOrAdmin, (req, res, next) => {
     Order.findAll({
         where: {
             idUser: req.params.idUser
@@ -46,7 +83,7 @@ server.get('/:idUser/cart', (req, res, next) => {
     }).catch(next);
 })
 
-server.get('/:idUser', (req, res, next) => {
+server.get('/:idUser', isUserOrAdmin, (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.params.idUser
@@ -59,7 +96,8 @@ server.get('/:idUser', (req, res, next) => {
         res.send(user)
     })
 })
-server.get('/', (req, res, next) => {
+
+server.get('/', isAdmin, (req, res, next) => {
     User.findAll().then((users) => {
         res.send(users)
     });
@@ -123,31 +161,43 @@ server.post('/:idUser/cart', (req, res, next) => {
         res.send(respuesta)
     }).catch(next)
 })
-server.post('/', (req, res, next) => {
+
+//////// register 
+server.post('/', async (req, res, next) => {
+
     const {
+        idUser,
         name,
         email,
         password,
         level
     } = req.body
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+    // User.findOne({
+    //     where: {
+    //         idUser: idUser
+    //     }
+    // }).then((user) => {
+
     User.create({
-        name,
-        email,
-        password,
-        level
-    }).then((newUser) => {
+        name: name,
+        email: email,
+        password: hashedPassword,
+        level: 'user'
+    }).then(user => {
         return Order.create({
-            idUser: newUser.idUser,
+            idUser: user.idUser,
             status: 'CREADA'
         })
     }).then(() => {
-        res.send({
-            result: 'Usuario creado'
-        })
-    }).catch(next);
+        res.redirect('http://localhost:3000/auth/login')
+    })
+
 });
+
 ///////////////////////////////////////////////////////////////PUT
-server.put('/:idUser/cart', (req, res, next) => {
+server.put('/:idUser/cart', isAdmin, (req, res, next) => {
     const {
         idProduct,
         quantity
@@ -158,23 +208,24 @@ server.put('/:idUser/cart', (req, res, next) => {
             status: 'CARRITO'
         }
     }).then(order => {
-        return (Inter_Prod_Order.findOne({
+        Inter_Prod_Order.findOne({
             where: {
                 idOrder: order.idOrder,
                 idProduct: idProduct
             }
-        }), order)
-    }).then((relacion, order) => {
-        relacion.update({
-            ...relacion,
-            quantity: quantity
+        }).then((relacion) => {
+            return relacion.update({
+                ...relacion,
+                quantity: quantity
+            })
         })
         return order
     }).then((order) => {
         res.send(order)
     }).catch(next);
 })
-server.put('/:idUser', (req, res, next) => {
+
+server.put('/:idUser', isUserOrAdmin, (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.body.idUser
@@ -191,7 +242,7 @@ server.put('/:idUser', (req, res, next) => {
     }).catch(next);
 });
 ///////////////////////////////////////////////////////////DELETE
-server.delete('/:idUser/cart', (req, res, next) => {
+server.delete('/:idUser/cart', isUserOrAdmin, (req, res, next) => {
     Order.findOne({
         where: {
             idUser: req.params.idUser,
@@ -212,7 +263,8 @@ server.delete('/:idUser/cart', (req, res, next) => {
         })
     }).catch(next);
 })
-server.delete('/:idUser', (req, res, next) => {
+
+server.delete('/:idUser', isUserOrAdmin, (req, res, next) => {
     User.destroy({
         where: {
             idUser: req.body.idUser
@@ -223,6 +275,7 @@ server.delete('/:idUser', (req, res, next) => {
         })
     }).catch(next);
 });
+
 /////////////////////////////////////////////DEV
 server.post('/aaa', (req, res, next) => {
     User.create({

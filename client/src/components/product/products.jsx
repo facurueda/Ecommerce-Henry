@@ -30,6 +30,8 @@ function Products() {
     function test() {
         return { __html: description }
     }
+    
+
 
     const reviewFinder = () => {
         return <Review />
@@ -77,6 +79,8 @@ function Products() {
                             <div className='buttons'>
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />
                                 <button className='buyProd'>Comprar</button>
+                                <div className = 'conteiner-star'>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,6 +89,7 @@ function Products() {
         </div>
     )
 }
+
 
 
 export default Products;

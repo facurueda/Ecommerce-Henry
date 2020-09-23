@@ -1,58 +1,76 @@
 import axios from "axios";
-import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED } from "./constants";
+import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED, SET_COOKIE_TO_STORE, GET_ORDER_BY_ID } from "./constants";
 const url = "http://localhost:3000/";
 
+export const actionSetCookieToStore = (cookie) => {
+
+    return (dispatch) => {
+        dispatch({
+            type: SET_COOKIE_TO_STORE,
+            payload: cookie
+        })
+    }
+}
 
 export const actionGetUserById = (idUser) => {
     return (dispatch) => {
         axios.get(url + 'user/' + idUser).then(res => {
+            console.log(res.data)
             dispatch({ type: GET_USER_BY_ID, payload: res.data })
+            return res
+        }).then((res) => {
+            axios.get(url + 'user/me').then(()=> {
+                dispatch({type: USER_LOGGED_IN, payload: res.data})
+            })
         })
     }
 }
 export const actionVerifyCookies = (cookie) => {
     return (dispatch) => {
         axios.post(url + 'auth/cookie', cookie).then((res) => {
-            if (res.status === 401){
+            console.log('resVerifyCookie',res.data)
+            if (res.verified) {
                 dispatch({ type: AUTH_FAILED, payload: res.data })
             } else {
-                dispatch({type: USER_LOGGED_IN, payload: res.data })
+                dispatch({ type: USER_LOGGED_IN, payload: res.data })
             }
+            return res
+        }).catch(res => {
+            console.log('resVerifyCookie',res)
         })
     }
 }
 export const actionUserCreate = (props) => {
-    const { name, email, password, level } = props
     return (dispatch) => {
-        axios.post(url + 'user', { name, email, password, level }).then(() => {
+        axios.post(url + 'user', props).then(() => {
             dispatch({ type: USER_CREATED })
         })
     }
 }
 export const actionLogin = (inputs) => {
-    const { email, password } = inputs
-    return (
-        (dispatch) => {
-            axios.post(url + 'auth/login', { email, password }).then(() => {
-                return dispatch({ type: POST_LOGIN })
-            }).then((res) => {
-                axios.get(url + 'auth/me').then((res) => {
-                    if (res.status === 401) return dispatch({ type: AUTH_FAILED, payload: res.data })
-                    return dispatch({ type: USER_LOGGED_IN, payload: res.data })
-                })
-            })
-        })
+    return (dispatch) => {
+        axios.post(url + 'auth/login', inputs).then((res) => {
+            console.log('userData', res.data)
+            return dispatch({ type: POST_LOGIN, payload: res.data })
+        }).catch()
+        // .then((res) => {
+        //     axios.get(url + 'auth/me').then((res) => {
+        //         if (res.status === 401) return dispatch({ type: AUTH_FAILED, payload: res.data })
+        //         return dispatch({ type: USER_LOGGED_IN, payload: res.data })
+        //     })
+        // })
+    }
 }
 export const actionLogOut = (user) => {
     return (
         (dispatch) => {
             axios.post(url + 'auth/logout', user).then((res) => {
                 localStorage.removeItem("user");
-                return dispatch({ type: USER_LOGGED_OUT , payload: res.data})
+                return dispatch({ type: USER_LOGGED_OUT, payload: res.data })
             })
         }
     )
 }
 export const actionSetVerified = (bool) => {
-    return (dispatch) =>  { dispatch({ type: SET_VERIFIED , payload: bool }) }   
+    return (dispatch) => { dispatch({ type: SET_VERIFIED, payload: bool }) }
 }

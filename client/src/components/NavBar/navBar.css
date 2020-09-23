@@ -47,6 +47,9 @@
     font-weight:300;
     color: #ffffff;
 }
+.nomematen {
+    display: none;
+}
 
 .cartContainer{
     display:flex;
@@ -95,7 +98,7 @@
     width: 100px;
     font-family:'Poppins', sans-serif;
     font-weight:300;
-    font-size: 12px;   
+    font-size: 12px;
 }
 .signup,
 .login{

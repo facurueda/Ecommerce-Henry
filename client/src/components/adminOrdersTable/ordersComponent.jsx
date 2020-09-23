@@ -1,17 +1,16 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { actionGetUserById } from '../../redux/usersActions'
 import OrderByIdComponent from './orderByIdComponent'
 import { useState } from 'react'
 
 const Orders = (props) => {
-
+    const dispatch = useDispatch()
     useEffect(() => {
-        props.actionGetUserById(props.order.idUser)
+        dispatch(actionGetUserById(props.order.idUser))
     }, [])
     // RECIBO PROP.USER
-    console.log(props)
     //     createdAt: "2020-09-07T21:03:29.137Z"
     // idOrder: 2
     // idUser: 3
@@ -38,12 +37,6 @@ const Orders = (props) => {
         </div>
     )
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actionGetUserById: (idUser) => {
-            dispatch(actionGetUserById(idUser));
-        }
-    }
-}
 
-export default connect(() => { }, mapDispatchToProps)(Orders);
+
+export default Orders;

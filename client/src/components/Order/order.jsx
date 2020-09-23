@@ -6,12 +6,6 @@ import { actionGetOrder } from '../../redux/ordersActions';
 import { useDispatch, useSelector } from 'react-redux'
 
 const Order = (props) => {
-
-    const user = useSelector(state => state.usersReducer.idUser);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(actionGetOrder(user));
-    }, [])
     const order = useSelector(state => state.ordersReducer.order)
 
     if (Object.keys(order).length < 1) {

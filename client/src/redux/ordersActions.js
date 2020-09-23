@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ORDER_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from "./constants";
+import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from "./constants";
 const url = "http://localhost:3000/";
 
 export const actionUpdateOrder = (idUser) => {
@@ -10,23 +10,24 @@ export const actionUpdateOrder = (idUser) => {
     }
 }
 export const actionGetOrder = (idUser) => {
-    return async (dispatch) => {
-        await axios.get(url + 'order/' + idUser).then(res => {
-            console.log('res.data: ', res.data)
-            if(res.data.products !== undefined) {
-                dispatch({
-                    type: GET_ORDER_QUANTITY, payload: res.data.products.reduce((acum, product) => {
-                        return acum + product.Inter_Prod_Order.quantity
-                    }, 0)
-                })
-            } else {
-                dispatch({
-                    type: GET_ORDER_QUANTITY, payload: 0
-                })
-            }
-             
+    return (dispatch) => {
+        axios.get(url + 'order/' + idUser).then(res => {
             dispatch({ type: GET_ORDER_BY_ID, payload: res.data })
+            return res.data
+        }).then((data) => {
+            if (data.products) {
+                const acum = data.products.reduce((acum, product) => {
+                    return acum + product.Inter_Prod_Order.quantity
+                }, 0)
+                setTimeout(() => { return dispatch({ type: SET_QUANTITY, payload: acum }) }, 200)
+            }
         })
+    }
+}
+
+export const actionSetQuantity = (quantity) => {
+    return (dispatch) => {
+        dispatch({ type: SET_QUANTITY, payload: quantity })
     }
 }
 
@@ -39,9 +40,10 @@ export const actionGetAllOrders = () => {
 }
 export const actionAddToCart = (props) => {
     return (dispatch) => {
-        axios.post(url + 'user/' + props.idUser + '/cart', props)
-            .then(() => {
-                dispatch({ type: ADD_TO_CART })
-            })
+        axios.post(url + 'user/' + props.idUser + '/cart', props).then(() => {
+            return dispatch({ type: ADD_TO_CART })
+        }).then(() => {
+            return dispatch(actionGetOrder(props.idUser))
+        })
     }
 }

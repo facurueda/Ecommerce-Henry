@@ -1,6 +1,6 @@
 import React from 'react'
 import { actionUserCreate } from '../../redux/usersActions'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
@@ -11,10 +11,13 @@ import FacebookLogin from 'react-facebook-login'
 
 const Register = (props) => {
     const history = useHistory()
-    const { modalRegisterClose, actionUserCreate, ChangeModal } = props;
+    const { modalRegisterClose, ChangeModal } = props;
     // ---------------------------- States ---------------------------- //
     const [registerInputs, setRegisterInputs] = useState({ name: 'null', email: 'null', password: 'null', level: 'USER' })
     const [secondPassword, setSecondPassword] = useState('')
+    const idUser = useSelector(store => store.usersReducer.idUser)
+    const level = useSelector(store => store.usersReducer.level)
+    const dispatch = useDispatch();
 
     // ---------------------------- Functions ---------------------------- //
 
@@ -34,7 +37,7 @@ const Register = (props) => {
     }
     const VerificarYRegistrar = () => {
         if (secondPassword === registerInputs.password) {
-            actionUserCreate(registerInputs)
+            dispatch(actionUserCreate({...registerInputs}))
             console.log('Usuario registrado.')
             modalRegisterClose()
         } else {

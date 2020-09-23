@@ -13,6 +13,18 @@
     display: flex;
     color: white;
 }
+.prodName {
+    display: flex;
+    margin: 0px;
+}
+.prodComp1 {
+    display: flex;
+    padding: 50px;
+}
+.prodComp2 {
+    display: flex;
+    margin:0px
+}
 .dateAndButtonContainer{
     display: flex;
     align-items: center;

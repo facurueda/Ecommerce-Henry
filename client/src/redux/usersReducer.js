@@ -1,9 +1,9 @@
-import { GET_USER_BY_ID, SET_VERIFIED, USER_CREATED, USER_LOGGED_IN, POST_LOGIN, AUTH_FAILED, USER_LOGGED_OUT } from './constants'
+import { GET_USER_BY_ID, SET_VERIFIED, USER_CREATED, USER_LOGGED_IN, POST_LOGIN, AUTH_FAILED, USER_LOGGED_OUT, SET_COOKIE_TO_STORE } from './constants'
 var initialState = {
-    idUser: 3,
+    idUser: 0,
     name: 'Guest',
     email: 'no-email',
-    level: 'USER',
+    level: 'GUEST',
     verified: false
 }
 
@@ -28,16 +28,6 @@ const usersReducer = (state = initialState, action) => {
                 idUser: action.payload.idUser,
                 verified: action.payload.verified
             }
-        case USER_LOGGED_OUT:
-            return {
-                ...state,
-                name: action.payload.name,
-                email: action.payload.email,
-                level: action.payload.level,
-                idUser: action.payload.idUser
-            };
-        case POST_LOGIN:
-            return state;
         case AUTH_FAILED:
             return {
                 ...state,
@@ -47,10 +37,33 @@ const usersReducer = (state = initialState, action) => {
                 idUser: action.payload.idUser,
                 verified: action.payload.verified
             };
+        case USER_LOGGED_OUT:
+            return {
+                ...state,
+                name: action.payload.name,
+                email: action.payload.email,
+                level: action.payload.level,
+                idUser: action.payload.idUser
+            };
+        case POST_LOGIN:
+            return {
+                ...state,
+                name: action.payload.name,
+                email: action.payload.email,
+                level: action.payload.level,
+                idUser: action.payload.idUser,
+                verified: action.payload.verified
+            }
         case SET_VERIFIED:
             return {
                 ...state,
                 verified: action.payload
+            }
+        case SET_COOKIE_TO_STORE:
+            return {
+                ...state,
+                idUser: action.payload.idUser,
+                level: action.payload.level
             }
 
         default:

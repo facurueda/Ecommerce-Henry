@@ -21,7 +21,7 @@ export const SET_PRODUCT = 'SET_PRODUCT'
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
-export const GET_ORDER_QUANTITY = 'GET_ORDER_QUANTITY'
+export const SET_QUANTITY = 'SET_QUANTITY'
 
 export const GET_USER_BY_ID = 'GET_USER_BY_ID'
 export const USER_CREATED = 'USER_CREATED'
@@ -30,6 +30,7 @@ export const POST_LOGIN = 'POST_LOGIN'
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 export const SET_VERIFIED = 'SET_VERIFIED'
+export const SET_COOKIE_TO_STORE = 'SET_COOKIE_TO_STORE'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 
