@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -6,7 +7,7 @@ const routes = require('./routes/index.js');
 var cookieSession = require('cookie-session');
 const cors = require('cors')
 require('./db.js');
-
+const nodemailer = require("nodemailer"); 
 const flash = require('express-flash')
 const session = require('express-session');
 const passport = require('passport');
@@ -27,8 +28,14 @@ server.use((req, res, next) => {
   next();
 });
 
+
+//////////// ---------- reset psw
+/* server.use(nodemailer()) */
+
 ////////////  --------------------
 
+server.use(express.urlencoded({ extended: false }))
+server.use(flash())
 server.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -36,7 +43,6 @@ server.use(session({
 }))
 server.use(passport.initialize())
 server.use(passport.session())
-server.use(flash())
 
  
 

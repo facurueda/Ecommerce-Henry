@@ -8,6 +8,10 @@ const bcrypt = require('bcrypt')
 const aleatoryNumber = () => {
     return Date.now() + Math.random()
 }
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+const async = require("async");
+const { token } = require('morgan');
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 
@@ -188,5 +192,157 @@ server.post('/cookie', async (req, res) => {
     }
 })
 
+
+
+
+//////////////////////////////// password resset
+
+server.post('/forgot',(req,res) => {   // funciona bien
+    console.log(req.body)
+   
+    async.waterfall([   // creo un token 
+         function(done) {
+         crypto.randomBytes(20,function(err,buf){
+         var token = buf.toString('hex');
+         done(err,token)
+            })
+        },
+
+        function(token,done){ // busco el usuario 
+            User.findOne({
+                where : {
+                    email : req.body.email
+                }
+            }).then((user) => { 
+                if(!user){  //404 enviarrr
+                    req.flash('error', 'Not acount with that email adress exists.'); // so no existe tiro error
+                    return res.redirect('/forgot')
+                } 
+                user.update({   //si el usuario existe actualizo las propiedades del modelo
+                    ...user,
+                    resetPasswordToken : token,  // le doy la contraseña 
+                    resetPasswordExpires : Date.now() + 3600000 // y un tiempo de expiracion
+                })                   
+            })
+        
+        },
+
+        function (token, user, done){
+        const smtpTransport = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        secure: false,
+        auth: {
+        user: 'wellington.lindgren@ethereal.email',
+        pass: 'K3Cy7ESQvGsUq58WFa'
+        }
+        });
+            
+            var mailOption = {
+                to: user.email,
+                from: 'Lacoseria',
+                subject : 'Reset Password',
+                text: 'You are reiciving this because you (or someone else) have requested the reset of the password. Please click on the following link, o blabla' +
+               /*  'http://' + req.header.host + '/reset/' + token + '\n\n' +  */
+                'If you didn´t requested this please ignore this email'
+            };
+            
+            smtpTransport.sendMail(mailOption, function(err){
+                console.log('mail send');
+                req.flash('success', 'An e-mail has been send to ' + user.email + 'Whit further instructions');
+                done(err, 'done');
+            });
+        }
+    ], function(err){
+        if(err) return next(err);
+        res.redirect('/forgot');
+    });
+});
+
+
+
+/* { Date.now() + 3600000 < new Date().getTime()/1000)} */
+///////////////////////////////////Hasta aca-----> confirmo usuario le doy un token, date expire y le mando el mail
+/* 
+  server.get('reset', (req,res) => {  // busco el usuario segun los datos que le pase anteriormente
+   console.log('token', req.query.token)
+    User.findOne({
+        where: {
+            resetPasswordExpires : {$gt: Date.now()},
+            resetPasswordToken : req.params.token
+        }
+    }).then((user) => {
+        if(!user){
+            req.flash('error','Password token resset is invalid has expired');
+            return res.redirect('/forgot');
+        }
+        res.send({token : req.body.token})//esto iria?
+    }).catch( req => { console.log('error')});
+})  */
+
+
+// escribo mi password and my confirm password
+//async waterfall es una funcion que contiene un array de funciones secuenciales
+
+server.post('reset', (req,res) => { // no lee el token
+    console.log("token", req.params.token);
+    async.waterfall([ 
+        function(done){
+            User.findOne({
+                where: {
+                    resetPasswordExpires : { $gt: Date.now()}, // facuu --->como se remplaza aca para sql?
+                    resetPasswordToken : req.params.token
+                }
+            }), function(err,user){
+                if(!user){
+                    req.flash('error','Password token resset is invalid has expired');
+                    return res.redirect('/forgot');
+                }
+                 else {
+                    user.update({...user,
+                        password : req.body.password,   //seteo la password
+                        resetPasswordExpires : undefined,
+                        resetPasswordToken : undefined 
+                    }) /// savee-----
+                    
+                }
+            }, function(err){
+                req.flash('error', 'Password do not match');
+                res.send.status(404);
+                return res.redirect('/forgot');
+                
+            }
+        } 
+        
+    ])
+})
+
+
+//despues tengo que volver a hacer un transport email y mandar que ya se cambio su contraseña
+
+/* function(user, done) {
+    var smtpTransport = nodemailer.createTransport({
+      service: 'Gmail', 
+      auth: {
+        user: 'learntocodeinfo@gmail.com',
+        pass: process.env.GMAILPW
+      }
+    });
+    var mailOptions = {
+      to: user.email,
+      from: 'Lacoseria@mail.com',
+      subject: 'Your password has been changed',
+      text: 'Hello,\n\n' +
+        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+    };
+    smtpTransport.sendMail(mailOptions, function(err) {
+      req.flash('success', 'Success! Your password has been changed.');
+      done(err);
+    });
+  }
+], function(err) {
+  res.redirect('/home');
+});
+}); */
 
 module.exports = server;
