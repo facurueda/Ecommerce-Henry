@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -5,7 +6,7 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors')
 require('./db.js');
-
+const nodemailer = require("nodemailer"); 
 const flash = require('express-flash')
 const session = require('express-session');
 const passport = require('passport');
@@ -27,21 +28,23 @@ server.use((req, res, next) => {
   next();
 });
 
-////////////  -------------------- PARA HABILITAR PASSPORT.JS
 
-// server.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: false
-// }))
-// server.use(passport.initialize())
-// server.use(passport.session())
-// server.use(flash())
-
-
+//////////// ---------- reset psw
+/* server.use(nodemailer()) */
 
 ////////////  --------------------
 
+server.use(express.urlencoded({ extended: false }))
+server.use(flash())
+server.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
+server.use(passport.initialize())
+server.use(passport.session())
+
+////////////  --------------------
 
 server.use('/', routes);
 // Error catching endware.

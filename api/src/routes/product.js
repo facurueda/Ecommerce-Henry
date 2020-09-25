@@ -91,7 +91,7 @@ server.get('/', (req, res, next) => {
 
 ///////////////////////////// RUTA PARA CREAR REVIEW
 
-server.post('/product/:idProduct/review', isUserOrAdmin, (req, res, next) => {
+server.post('product/:idProduct/review', isUserOrAdmin, (req, res, next) => {
 	Review.create({
 		description: req.body.description,
 		rating: req.body.rating,

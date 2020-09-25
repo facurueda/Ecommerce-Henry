@@ -9,6 +9,12 @@ const aleatoryNumber = () => {
     return Date.now() + Math.random()
 }
 
+const crypto = require('crypto');
+const async = require("async");
+const sendEmail = require('./createemail.js').sendEmail;
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 
 function isAdmin(req, res, next) {
@@ -210,6 +216,75 @@ server.post('/cookie', async (req, res) => {
             })
         })
     }
+})
+
+//////////////////////////////// password resset
+
+server.post('/forgot', (req, res) => {   // funciona bien
+    console.log(req.body);
+
+    async.waterfall([   // creo un token 
+        function (done) {
+            crypto.randomBytes(20, function (err, buf) {
+                var token = buf.toString('hex');
+                done(err, token)
+            })
+        },
+
+        function (token, done) { // busco el usuario 
+            User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            }).then((user) => {
+                if (!user) {  //404 enviarrr
+                    req.flash('error', 'Not acount with that email adress exists.');
+                    res.status.send(404); // so no existe tiro error
+                    return res.redirect('/forgot')
+                }
+                user.update({   //si el usuario existe actualizo las propiedades del modelo
+                    ...user,
+                    resetPasswordToken: token,  // le doy la contraseña 
+                    resetPasswordExpires: Date.now() + 3600000 // y un tiempo de expiracion
+                })
+            })
+        }
+    ]);
+});
+
+
+
+server.post('/reset/:token', (req, res) => {
+    //2020-09-24 22:17:40 ---> date from database 
+    //24 2020 22:14:07 GMT-0300 to string
+    //http://localhost:3000/auth/reset/470f2082ddc414d51db94c686833c6e17b737d22
+    console.log("token", req.params.token);
+    User.findOne({
+        where: {
+            resetPasswordToken: req.params.token
+        }
+    }).then((user) => {
+        console.log('1')
+        if (!user) {
+            req.flash('error', 'Sorry, we can´t find you?');
+            res.redirect('/forgot');
+        } else {
+            console.log(user);
+            if (user.resetPasswordExpires > Date.now()) {
+                console.log('entro')
+                user.update({
+                    ...user,
+                    password: req.body.password,
+                    resetPasswordExpires: null,
+                    resetPasswordToken: null,
+                })
+            }
+        }
+    }).catch((err) => {
+        console.log('3');
+        req.flash('Password token reset has expired');
+        res.status(404);
+    })
 })
 
 

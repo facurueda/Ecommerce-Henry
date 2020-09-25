@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+
 module.exports = (sequelize) => {
   sequelize.define('user', {
     idUser: {
@@ -15,9 +16,16 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+      required: true,
       validate: {
-        isEmail: true,
+        isEmail: true,        
       }
+    },
+    resetPasswordToken: {
+      type: DataTypes.STRING,
+    },
+    resetPasswordExpires: {
+      type: DataTypes.BIGINT,
     },
     password: {
       type: DataTypes.STRING,

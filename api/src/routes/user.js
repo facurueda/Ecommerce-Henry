@@ -12,11 +12,11 @@ const passport = require('passport');
 const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
     passport,
-        email => User.findOne({
-            where: {
-                email: email
-            }
-        })
+    email => User.findOne({
+        where: {
+            email: email
+        }
+    })
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
@@ -25,7 +25,8 @@ function isAdmin(req, res, next) {
         if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
-        } console.log('this user DOESNT ADMIN')
+        }
+        console.log('this user DOESNT ADMIN')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
@@ -37,7 +38,8 @@ function isUserOrAdmin(req, res, next) {
         if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
-        } console.log('this user is GUEST')
+        }
+        console.log('this user is GUEST')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
@@ -166,33 +168,39 @@ server.post('/:idUser/cart', (req, res, next) => {
 server.post('/', async (req, res, next) => {
 
     const {
-        idUser,
         name,
         email,
         password,
-        level
     } = req.body
 
     const hashedPassword = await bcrypt.hash(password, 10)
-    // User.findOne({
-    //     where: {
-    //         idUser: idUser
-    //     }
-    // }).then((user) => {
 
-    User.create({
-        name: name,
-        email: email,
-        password: hashedPassword,
-        level: 'user'
-    }).then(user => {
-        return Order.create({
-            idUser: user.idUser,
-            status: 'CREADA'
+    User.findOne({
+            where: {
+                email: email
+            }
         })
-    }).then(() => {
-        res.redirect('http://localhost:3000/auth/login')
-    })
+        .then((user) => {
+            if (!user) {
+                User.create({
+                    name: name,
+                    email: email,
+                    password: hashedPassword,
+                    level: 'user'
+                })
+            } else {
+                res.status(404).send({
+                    result: "El usuario ya existe"
+                })
+            }
+        }).then(user => {
+            return Order.create({
+                idUser: user.idUser,
+                status: 'CREADA'
+            })
+        }).then(() => {
+            res.redirect('http://localhost:3000/auth/login')
+        })
 
 });
 
