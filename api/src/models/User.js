@@ -18,15 +18,14 @@ module.exports = (sequelize) => {
       allowNull: false,
       required: true,
       validate: {
-        isEmail: true,
-        
+        isEmail: true,        
       }
     },
     resetPasswordToken: {
       type: DataTypes.STRING,
     },
     resetPasswordExpires: {
-      type: DataTypes.DATE,
+      type: DataTypes.BIGINT,
     },
     password: {
       type: DataTypes.STRING,
