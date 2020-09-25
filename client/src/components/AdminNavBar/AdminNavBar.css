@@ -15,7 +15,10 @@
     text-align: center;
     transition: all 0.15s;
 }
-
+.buttonCloseModalOrdersTable{
+    color: black;
+    background-color: red;
+}
 .buttonStyle:hover {
     text-shadow: 0 0 0.5px #DFA06E;
     color: #DFA06E;

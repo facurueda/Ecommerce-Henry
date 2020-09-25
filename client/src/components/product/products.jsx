@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ButtonAddToCart from '../ButtonAddToCart';
 import './products.css';
 import { Modal } from 'reactstrap'
 import Review from '../Review/Review'
 import { actionGetReviews } from '../../redux/reviewsAction';
 import EditReview from '../Review/EditReview'
 import PostReview from '../Review/PostReview'
+import ButtonAddToCart from '../ButtonAddToCart/ButtonAddToCart';
 
 function Products() {
     const dispatch = useDispatch()

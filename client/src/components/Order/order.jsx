@@ -28,7 +28,7 @@ return storeOrder
             </div>
         )
     } else {
-
+        console.log('or: ',or);
         return (
             <div className="orderContainer">
                 {or.products.map(product => {

@@ -6,3 +6,6 @@
     flex-wrap: wrap;
     color: white;
 }
+.buttonRestar{
+    display: none;
+}
