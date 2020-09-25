@@ -12,17 +12,17 @@ const passport = require('passport');
 const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
     passport,
-    email => User.findOne({
-        where: {
-            email: email
-        }
-    })
+        email => User.findOne({
+            where: {
+                email: email
+            }
+        })
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
         } console.log('this user DOESNT ADMIN')
@@ -33,8 +33,8 @@ function isAdmin(req, res, next) {
 }
 
 function isUserOrAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'user' || req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
         } console.log('this user is GUEST')
@@ -55,7 +55,7 @@ server.get('/:idUser/orders', isUserOrAdmin, (req, res, next) => {
         res.send(orders)
     }).catch(next);
 })
-server.get('/:idUser/cart',  (req, res, next) => {
+server.get('/:idUser/cart', (req, res, next) => {
     Order.findOne({
         where: {
             idUser: req.params.idUser,
@@ -163,36 +163,37 @@ server.post('/:idUser/cart', isAdmin, (req, res, next) => {
 })
 
 //////// register 
-server.post('/', isAdmin, async (req, res, next) => {
+server.post('/', async (req, res, next) => {
 
-    const {
-        idUser,
+    const {        
         name,
         email,
         password,
-        level
     } = req.body
 
     const hashedPassword = await bcrypt.hash(password, 10)
-    // User.findOne({
-    //     where: {
-    //         idUser: idUser
-    //     }
-    // }).then((user) => {
-        
-    User.create({
-            name: name,
-            email: email,
-            password: hashedPassword,
-            level: 'user'
-    }).then( user => {
-        return Order.create({
-            idUser: user.idUser,
-            status: 'CREADA'
+    User.findOne({ where: { email: email } })
+        .then((user) => {
+            if (!user) {
+                User.create({
+                    name: name,
+                    email: email,
+                    password: hashedPassword,
+                    level: 'user'
+                })
+            } else {
+                res.status(404).send({result: "El usuario ya existe"})
+            }
         })
-    }).then(() => {
-        res.redirect('http://localhost:3000/auth/login')
-    })
+
+        .then(user => {
+            return Order.create({
+                idUser: user.idUser,
+                status: 'CREADA'
+            })
+        }).then(() => {
+            res.redirect('http://localhost:3000/auth/login')
+        })
 
 });
 
