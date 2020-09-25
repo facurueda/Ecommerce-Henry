@@ -37,18 +37,19 @@ function isUserOrAdmin(req, res, next) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
 
-server.get('/testAuth', isUserOrAdmin, (req, res, next) => {
+server.get('/testAuth', (req, res, next) => {
     res.send('funciona')
 })
 
-server.get('/', isUserOrAdmin, (req, res) => {
+server.get('/', (req, res) => {
     res.send('funcionnnaaaaa!!')
 })
 
 
 server.get('/me', (req, res) => {
+    // console.log(JSON.stringify(req.headers))
+    // console.log(req.cookies)
     console.log(req)
-    console.log("res: ", res)
     // User.findOne({
     //     where: {
     //         idUser: req.session.cookie.passport.user
@@ -63,58 +64,71 @@ server.get('/me', (req, res) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
 
-server.post('/login', passport.authenticate('local', {
-    session: true,
-    successRedirect: 'http://localhost:3000/auth/me',
-    failureRedirect: 'http://localhost:3000/auth/testAuth',
-    failureFlash: true,
-}))
+//-------------------------------------------------------------- ESTE HABILITA EL LOGIN DEL PASSPORT.JS
+// server.post('/login', passport.authenticate('local', {
+//     session: true,
+//     successRedirect: 'http://localhost:3000/auth/me',
+//     failureRedirect: 'http://localhost:3000/auth/testAuth',
+//     failureFlash: true,
+// }))
 
+server.post('/login', (req, res, next) => {
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(user => {
+        const userValues = {...user.dataValues,verified: true}
+        console.log(userValues)
+        res.send(userValues)
+    })
+})
 server.post('/logout', (req, res) => {
-    const {
-        idUser,
-        level
-    } = req.body
+    // const {
+    //     idUser,
+    //     level
+    // } = req.body
 
-    if (level === 'user' || level === 'admin') {
-        res.status(200).clearCookie('connect.sid', {
-            path: '/'
-        });
-        req.session.destroy(err => {
-            res.redirect('/')
-        });
-    } else {
-        Order.findOne({
-            where: {
-                idUser: idUser,
-                status: 'CARRITO'
-            }
-        }).then(order => {
-            return order.update({
-                ...order,
-                status: 'CANCELADA'
-            })
-        }).then(() => {
-            res.send({
-                result: 'Carrito vaciado'
-            })
-        })
-        User.destroy({
-            where: {
-                idUser: idUser
-            }
-        }).then(() => {
-            res.send({
-                result: 'User eliminado'
-            })
-        })
-        res.status(200).clearCookie('connect.sid', {
-            path: '/'
-        });
-        req.session.destroy(err => {
-            res.redirect('/')
-        });
-    }
+    // if (level === 'user' || level === 'admin') {
+    //     res.status(200).clearCookie('connect.sid', {
+    //         path: '/'
+    //     });
+    //     req.session.destroy(err => {
+    //         res.redirect('/')
+    //     });
+    // } else {
+    //     Order.findOne({
+    //         where: {
+    //             idUser: idUser,
+    //             status: 'CARRITO'
+    //         }
+    //     }).then(order => {
+    //         return order.update({
+    //             ...order,
+    //             status: 'CANCELADA'
+    //         })
+    //     }).then(() => {
+    //         res.send({
+    //             result: 'Carrito vaciado'
+    //         })
+    //     })
+    //     User.destroy({
+    //         where: {
+    //             idUser: idUser
+    //         }
+    //     }).then(() => {
+    //         res.send({
+    //             result: 'User eliminado'
+    //         })
+    //     })
+    //     res.status(200).clearCookie('connect.sid', {
+    //         path: '/'
+    //     });
+    //     req.session.destroy(err => {
+    //         res.redirect('/')
+    //     });
+    // }
+    res.sendStatus(200)
 });
 
 /////s67 cambio el perfil a admin
@@ -130,8 +144,14 @@ server.post('/promote/:id', isAdmin, (req, res) => {
         })
     })
 })
-
+const toLog = ((type, cmd) => {
+    console.log('\n' + type + ': \n', cmd)
+})
 server.post('/cookie', async (req, res) => {
+
+    toLog('header', req.headers)
+    toLog('body', req.body)
+    toLog('cookies', req.cookies)
     const {
         idUser
     } = req.body

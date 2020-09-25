@@ -1,4 +1,5 @@
 import React from 'react'
+import './ordersComponent.css'
 import { useEffect } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { actionGetUserById } from '../../redux/usersActions'
@@ -7,9 +8,6 @@ import { useState } from 'react'
 
 const Orders = (props) => {
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(actionGetUserById(props.order.idUser))
-    }, [])
     // RECIBO PROP.USER
     //     createdAt: "2020-09-07T21:03:29.137Z"
     // idOrder: 2
@@ -21,7 +19,7 @@ const Orders = (props) => {
     const [display, setDisplay] = useState('none');
     console.log(user, level)
     return (
-        <div className='userDisplay' onClick={() => {
+        <div className='AdminOrdersTableComponentsContainer' onClick={() => {
             if (display === "none"){
                 setDisplay("flex");
             }else {
@@ -32,7 +30,7 @@ const Orders = (props) => {
             <h4>Level: <b>{level}</b></h4>
             <h5>Order: <b>{props.order.idOrder}</b></h5>
             <div style={{display: display }}>
-            <OrderByIdComponent idOrder={props.order.idOrder }/>
+            <OrderByIdComponent order={props.order }/>
             </div>
         </div>
     )

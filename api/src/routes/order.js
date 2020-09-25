@@ -1,11 +1,12 @@
 const server = require('express').Router();
+const passport = require('passport');
 const Sequelize = require("sequelize");
 const { Order, Product, Inter_Prod_Order } = require('../db.js');
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
         } console.log('this user DOESNT ADMIN')
@@ -16,8 +17,8 @@ function isAdmin(req, res, next) {
 }
 
 function isUserOrAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'user' || req.user.level === 'admin'){
+    if (req.isAuthenticated()) {
+        if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
         } console.log('this user is GUEST')
@@ -32,7 +33,7 @@ server.get('/:idUser', (req, res, next) => {
     Order.findOne({
         where: {
             idUser: req.params.idUser,
-            [Sequelize.Op.or] : [{status : "CREADA"} , {status : 'CARRITO' }]
+            [Sequelize.Op.or]: [{ status: "CREADA" }, { status: 'CARRITO' }]
         },
         include: [{
             model: Product,
@@ -43,6 +44,20 @@ server.get('/:idUser', (req, res, next) => {
     }).catch(next);
 })
 
+server.get('/history/:idUser', (req, res, next) => {
+    Order.findAll({
+        where: {
+            idUser: req.params.idUser
+        },
+        include: [{model: Product,as: 'products'}]
+    }).then(orders => {
+        console.log('orders:\n',orders)
+        res.send(orders)
+    }).catch((error) => {
+        console.log('error: \n',error)
+        next()
+    })
+})
 server.get('/search', isAdmin, (req, res, next) => {
     Order.findAll({
         where: {
@@ -53,13 +68,13 @@ server.get('/search', isAdmin, (req, res, next) => {
     }).catch(next);
 })
 
-server.get('/', isAdmin, (req, res, next) => {
+server.get('/', (req, res, next) => {
     Order.findAll().then(orders => {
         res.send(orders)
     }).catch(next)
 })
 /////////////////////////////////////////POST
-server.post('/', isAdmin, (req, res, next) => {
+server.post('/', (req, res, next) => {
     const { idUser, idProduct } = req.body;
     Order.create({
         idUser,

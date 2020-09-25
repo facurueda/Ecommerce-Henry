@@ -16,6 +16,8 @@ import Login from './components/LogIn/Login';
 import Register from './components/Register/Register';
 import ProductsBySearchTerm from './components/ProductsBySearchTerm/ProductsBySearchTerm';
 import Reviews from './components/Review/Review'
+import {withCookies} from 'react-cookie';
+import MyAccount from './components/MyAccount/myAccount';
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
             <Route path='/productDetail' component={Product} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path='/categories' component={Categories} />
+            <Route path='/myAccount' component={MyAccount} />
             <Route path="/menuCrud" component={MenuCrud} />
             <Route path='/order' component={Order} />
             <Route path='/login' component={Login} />
@@ -44,4 +47,4 @@ function App() {
     </React.Fragment>
   );
 }
-export default App;
+export default withCookies(App);

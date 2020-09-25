@@ -46,7 +46,7 @@ function isUserOrAdmin(req, res, next) {
 
 /////////////////////////////////////////////////////////////////GET
 
-server.get('/:idUser/orders', isUserOrAdmin, (req, res, next) => {
+server.get('/:idUser/orders', (req, res, next) => {
     Order.findAll({
         where: {
             idUser: req.params.idUser
@@ -83,7 +83,7 @@ server.get('/:idUser/cart', (req, res, next) => {
     }).catch(next);
 })
 
-server.get('/:idUser', isUserOrAdmin, (req, res, next) => {
+server.get('/:idUser', (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.params.idUser
@@ -97,7 +97,7 @@ server.get('/:idUser', isUserOrAdmin, (req, res, next) => {
     })
 })
 
-server.get('/', isAdmin, (req, res, next) => {
+server.get('/', (req, res, next) => {
     User.findAll().then((users) => {
         res.send(users)
     });
@@ -197,7 +197,7 @@ server.post('/', async (req, res, next) => {
 });
 
 ///////////////////////////////////////////////////////////////PUT
-server.put('/:idUser/cart', isAdmin, (req, res, next) => {
+server.put('/:idUser/cart', (req, res, next) => {
     const {
         idProduct,
         quantity
@@ -225,7 +225,7 @@ server.put('/:idUser/cart', isAdmin, (req, res, next) => {
     }).catch(next);
 })
 
-server.put('/:idUser', isUserOrAdmin, (req, res, next) => {
+server.put('/:idUser', (req, res, next) => {
     User.findOne({
         where: {
             idUser: req.body.idUser
@@ -242,7 +242,7 @@ server.put('/:idUser', isUserOrAdmin, (req, res, next) => {
     }).catch(next);
 });
 ///////////////////////////////////////////////////////////DELETE
-server.delete('/:idUser/cart', isUserOrAdmin, (req, res, next) => {
+server.delete('/:idUser/cart', (req, res, next) => {
     Order.findOne({
         where: {
             idUser: req.params.idUser,
@@ -264,7 +264,7 @@ server.delete('/:idUser/cart', isUserOrAdmin, (req, res, next) => {
     }).catch(next);
 })
 
-server.delete('/:idUser', isUserOrAdmin, (req, res, next) => {
+server.delete('/:idUser', (req, res, next) => {
     User.destroy({
         where: {
             idUser: req.body.idUser

@@ -24,13 +24,13 @@ export const actionGetOrder = (idUser) => {
         })
     }
 }
-
-export const actionSetQuantity = (quantity) => {
+export const actionGetOrdersByUser = (idUser) => {
     return (dispatch) => {
-        dispatch({ type: SET_QUANTITY, payload: quantity })
+        axios.get(url + 'order/history/' + idUser).then(res => {
+            dispatch({ type: GET_ALL_ORDERS, payload: res.data })
+        })
     }
 }
-
 export const actionGetAllOrders = () => {
     return (dispatch) => {
         axios.get(url + 'order').then(res => {
@@ -38,6 +38,12 @@ export const actionGetAllOrders = () => {
         })
     }
 }
+export const actionSetQuantity = (quantity) => {
+    return (dispatch) => {
+        dispatch({ type: SET_QUANTITY, payload: quantity })
+    }
+}
+
 export const actionAddToCart = (props) => {
     return (dispatch) => {
         axios.post(url + 'user/' + props.idUser + '/cart', props).then(() => {

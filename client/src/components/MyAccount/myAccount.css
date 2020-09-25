@@ -1,0 +1,15 @@
+.ComponentContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    color: white;
+}
+.userDataContainer {
+    display: flex;
+    color: white;
+    position: absolute;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-left: 0px;
+}

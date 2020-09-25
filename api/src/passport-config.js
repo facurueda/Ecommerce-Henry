@@ -9,7 +9,6 @@ const {
 function initialize(passport) {
 
   const authenticateUser = async (req, email, password, done) => {
-
     const {
       idUser
     } = req.body
@@ -104,7 +103,6 @@ function initialize(passport) {
   }, authenticateUser))
 
   passport.serializeUser(function (user, done) {
-    console.log('serializing user:', user.idUser);
     done(null, user.idUser);
   });
 

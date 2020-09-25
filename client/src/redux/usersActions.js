@@ -3,7 +3,6 @@ import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, 
 const url = "http://localhost:3000/";
 
 export const actionSetCookieToStore = (cookie) => {
-
     return (dispatch) => {
         dispatch({
             type: SET_COOKIE_TO_STORE,
@@ -17,18 +16,13 @@ export const actionGetUserById = (idUser) => {
         axios.get(url + 'user/' + idUser).then(res => {
             console.log(res.data)
             dispatch({ type: GET_USER_BY_ID, payload: res.data })
-            return res
-        }).then((res) => {
-            axios.get(url + 'user/me').then(()=> {
-                dispatch({type: USER_LOGGED_IN, payload: res.data})
-            })
         })
     }
 }
 export const actionVerifyCookies = (cookie) => {
     return (dispatch) => {
         axios.post(url + 'auth/cookie', cookie).then((res) => {
-            console.log('resVerifyCookie',res.data)
+            console.log('resVerifyCookie', res.data)
             if (res.verified) {
                 dispatch({ type: AUTH_FAILED, payload: res.data })
             } else {
@@ -36,10 +30,11 @@ export const actionVerifyCookies = (cookie) => {
             }
             return res
         }).catch(res => {
-            console.log('resVerifyCookie',res)
+            console.log('resVerifyCookie', res)
         })
     }
 }
+
 export const actionUserCreate = (props) => {
     return (dispatch) => {
         axios.post(url + 'user', props).then(() => {
@@ -47,30 +42,38 @@ export const actionUserCreate = (props) => {
         })
     }
 }
+
 export const actionLogin = (inputs) => {
     return (dispatch) => {
         axios.post(url + 'auth/login', inputs).then((res) => {
             console.log('userData', res.data)
             return dispatch({ type: POST_LOGIN, payload: res.data })
-        }).catch()
+        })
+        // .then(() => {
+        //     axios.get(url + 'auth/me').then(res => {
+        //         return dispatch({ type: POST_LOGIN, payload: res.data })
+        //     })
+        // }).catch()
         // .then((res) => {
         //     axios.get(url + 'auth/me').then((res) => {
         //         if (res.status === 401) return dispatch({ type: AUTH_FAILED, payload: res.data })
         //         return dispatch({ type: USER_LOGGED_IN, payload: res.data })
         //     })
-        // })
+        // })-
     }
 }
-export const actionLogOut = (user) => {
+
+export const actionLogOut = (cookie) => {
     return (
         (dispatch) => {
-            axios.post(url + 'auth/logout', user).then((res) => {
-                localStorage.removeItem("user");
-                return dispatch({ type: USER_LOGGED_OUT, payload: res.data })
-            })
+            axios.post(url + 'auth/logout',cookie).then((res) => {
+                console.log(res)
+                return dispatch({ type: USER_LOGGED_OUT})
+            }).catch(error => {console.log(error)})
         }
     )
 }
+
 export const actionSetVerified = (bool) => {
     return (dispatch) => { dispatch({ type: SET_VERIFIED, payload: bool }) }
 }

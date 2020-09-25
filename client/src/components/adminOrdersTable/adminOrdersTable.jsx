@@ -19,7 +19,7 @@ const AdminOrdersTable = (props) => {
         <h3><b>No se encontraron ordenes disponibles.</b></h3></div>
     }
     return (
-        <div>
+        <div className='AdminOrdersTableComponentsContainer'>
             {orders.map(order => {
                 return <Orders key={order.idOrder} order={order} />
             })}
