@@ -5,9 +5,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 500px;
     color: white;
     border: 2px groove whitesmoke;
     padding: 10px;
+    background-color: rgba(37, 37, 37, 0,25);
+    /* backdrop-filter: blur(7px); */
+}
+.reviewContainerModal{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    color: white;
+    border: 2px groove whitesmoke;
+    padding: 10px;
+    background-color: rgba(37, 37, 37, 0,25);
+    backdrop-filter: blur(7px);
 }
 .fa, .fa-star, .checked  {
     display: flex;

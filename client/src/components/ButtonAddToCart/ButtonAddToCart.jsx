@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { actionAddToCart, actionGetOrder, actionSetQuantity } from '../redux/ordersActions'
+import { actionAddToCart, actionGetOrder, actionSetQuantity } from '../../redux/ordersActions'
 import './ButtonAddToCart.css'
 import { useCookies } from 'react-cookie';
 

@@ -1,15 +1,16 @@
 import './adminOrdersTable.css'
 import React, { useEffect } from 'react'
 import Orders from './ordersComponent'
-import { useSelector, connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { actionGetAllOrders } from '../../redux/ordersActions'
+import { Modal } from 'reactstrap'
 
 
 
 const AdminOrdersTable = (props) => {
-
+    const dispatch = useDispatch()
     useEffect(() => {
-        props.actionGetAllOrders();
+        dispatch(actionGetAllOrders());
     }, [])
 
     const orders = useSelector(state => state.ordersReducer.orders)
@@ -21,17 +22,9 @@ const AdminOrdersTable = (props) => {
     return (
         <div >
             {orders.map(order => {
-                return <Orders key={order.idOrder} order={order} />
+                return (<div className='divContainerOrders'><Orders key={order.idOrder} order={order} /></div>)
             })}
         </div>
     )
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actionGetAllOrders: () => {
-            dispatch(actionGetAllOrders())
-        }
-    }
-}
-export default connect(() => { }, mapDispatchToProps)(AdminOrdersTable);
+export default AdminOrdersTable;

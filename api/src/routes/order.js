@@ -69,7 +69,11 @@ server.get('/search', isAdmin, (req, res, next) => {
 })
 
 server.get('/', (req, res, next) => {
-    Order.findAll().then(orders => {
+    Order.findAll({
+        include: [{
+            model: Product,
+            as: 'products',
+        }]}).then(orders => {
         res.send(orders)
     }).catch(next)
 })

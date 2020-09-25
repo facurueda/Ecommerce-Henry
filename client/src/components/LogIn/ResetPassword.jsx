@@ -8,7 +8,7 @@ const ResetPassword = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState({})
     const [loading, setLoading] = useState(false)
-    
+
     const loadingView = () => setLoading(!loading)
     const loadingClose = () => setLoading(false)
 

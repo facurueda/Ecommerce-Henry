@@ -3,12 +3,12 @@ import './ProductCard.css'
 import {
     Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
-import ButtonAddToCart from '../ButtonAddToCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router'
 import { actionGetProduct, actionSetProduct } from '../../redux/productsActions';
 import renderHTML from 'react-render-html';
 import { actionGetReviews, actionSetReview } from '../../redux/reviewsAction';
+import ButtonAddToCart from '../ButtonAddToCart/ButtonAddToCart';
 
 const ProductCard = (props) => {
 
@@ -41,7 +41,7 @@ const ProductCard = (props) => {
                             </div>
                         </div>
                         {((window.location.pathname) !== '/order' && (window.location.pathname) !== '/adminOrdersTable')?
-                            (< ButtonAddToCart className='buttonAddToCart' datos={{ idProduct: idProduct, quantity: 1, price: price }} />)
+                            (<ButtonAddToCart className='buttonAddToCart' datos={{ idProduct: idProduct, quantity: 1, price: price }} />)
                         :(<div></div>)
                         }
                         </div>
