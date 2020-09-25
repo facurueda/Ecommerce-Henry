@@ -46,7 +46,14 @@ const usersReducer = (state = initialState, action) => {
                 idUser: action.payload.idUser
             };
         case POST_LOGIN:
-            return state;
+            return {
+                ...state,
+                name: action.payload.name,
+                email: action.payload.email,
+                level: action.payload.level,
+                idUser: action.payload.idUser,
+                verified: action.payload.verified
+            };
         case SET_VERIFIED:
             return {
                 ...state,

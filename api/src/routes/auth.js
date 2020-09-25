@@ -63,7 +63,10 @@ server.get('/me', isUserOrAdmin, (req, res) => {
             idUser: req.user.idUser
         }
     }).then(user => {
-        res.send(user)
+        res.send({
+            ...user,
+            verified: true
+        })
     }).catch(() => {
         res.send({ response: "Sesion no existe "})
     })

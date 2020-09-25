@@ -47,7 +47,7 @@ export const actionUserCreate = (props) => {
 export const actionLogin = (inputs) => {
     return (dispatch) => {
         
-        var data = qs.stringify(inputs);
+        var data = inputs;
         var config = {
             withCredentials: true,
             method: 'post',
