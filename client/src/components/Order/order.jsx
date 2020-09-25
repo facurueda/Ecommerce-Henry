@@ -18,7 +18,6 @@ return storeOrder
         }
     }
     const or = order()
-    console.log('funcionOrder()',order())
     if (Object.keys(or).length < 1) {
         return (
             <div className='orderContainer'>

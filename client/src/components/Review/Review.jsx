@@ -54,14 +54,15 @@ const Review = () => {
                     <div>{toDate(review.updatedAt)} </div>
                     <button className='viewMoreButton' onClick={modalReviewView}>Ver mas reseñas</button>
                     <Modal isOpen={modalReviews}>
+                        <button className='viewMoreButton' onClick={modalReviewView}>Close</button>
                         {reviews.map((review => {
-                            return (<div className='reviewContainer'>
+                            return (<div className='reviewContainerModal'>
                                 <div>{stars(review.rating)}</div>
                                 <div>"{review.description}"</div>
                             </div>)
                         }))
-                    }
-                    <button className='viewMoreButton' onClick={modalReviewView}>x</button>
+                        }
+
                     </Modal>
                 </div>
                 <div className='reviewContainer'>

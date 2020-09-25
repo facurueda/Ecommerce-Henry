@@ -9,3 +9,10 @@
 .buttonRestar{
     display: none;
 }
+.divContainerOrders{
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(74, 74, 74, 0.25);
+    backdrop-filter: blur(7px);
+}

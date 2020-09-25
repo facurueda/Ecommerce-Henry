@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import Orders from './ordersComponent'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionGetAllOrders } from '../../redux/ordersActions'
+import { Modal } from 'reactstrap'
 
 
 
@@ -21,7 +22,7 @@ const AdminOrdersTable = (props) => {
     return (
         <div >
             {orders.map(order => {
-                return <Orders key={order.idOrder} order={order} />
+                return (<div className='divContainerOrders'><Orders key={order.idOrder} order={order} /></div>)
             })}
         </div>
     )
