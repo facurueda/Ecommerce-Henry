@@ -45,22 +45,27 @@ function isUserOrAdmin(req, res, next) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
 
-server.get('/testAuth', isUserOrAdmin, (req, res, next) => {
+server.get('/testAuth', (req, res, next) => {
+    console.log(req.user)
     res.send('funciona')
 })
 
-server.get('/', isUserOrAdmin, (req, res) => {
+server.get('/', (req, res) => {
     res.send('funcionnnaaaaa!!')
 })
 
 
 server.get('/me', isUserOrAdmin, (req, res) => {
+    console.log(req.user)
+    console.log('ruta /ME')
     User.findOne({
         where: {
-            idUser: req.body.idUser
+            idUser: req.user.idUser
         }
     }).then(user => {
         res.send(user)
+    }).catch(() => {
+        res.send({ response: "Sesion no existe "})
     })
 })
 
@@ -69,8 +74,8 @@ server.get('/me', isUserOrAdmin, (req, res) => {
 
 server.post('/login', passport.authenticate('local', {
     session: true,
-    successRedirect: 'http://localhost:3000/auth/',
-    failureRedirect: 'http://localhost:3000/auth/login',
+    successRedirect: 'http://localhost:3000/auth/me',
+    failureRedirect: 'http://localhost:3000/auth/testAuth',
     failureFlash: true,
 }))
 
