@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { actionResetPassword } from '../../redux/usersActions'
+import Loading from '../LoadingMiddleware/LoadingMiddleware'
 import './ResetPassword.css'
 
 const ResetPassword = () => {
     const dispatch = useDispatch()
-    const [email, setEmail ] = useState({})
+    const [email, setEmail] = useState({})
+    const [loading, setLoading] = useState(false)
+    
+    const loadingView = () => setLoading(!loading)
+    const loadingClose = () => setLoading(false)
 
     const handleReset = () => {
         dispatch(actionResetPassword(email))
+        loadingView()
     }
 
     const handleChange = (e) => {
@@ -25,7 +31,9 @@ const ResetPassword = () => {
             <p>Put the email with which you registered in La Cosería here:</p>
             <input className='resetInput' type="email" required placeholder='youremail@lacoseria.com' onChange = {handleChange} />
             <button className = 'buttonLoginAndRegister' onClick={handleReset}>Send</button>
-        </div>
+            { loading ? 
+            (<Loading loadingClose = 'loadingClose'></Loading>):('')} 
+            </div>
     )
 }
 
