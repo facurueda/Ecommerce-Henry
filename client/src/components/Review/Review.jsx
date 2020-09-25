@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionSetProduct } from '../../redux/productsActions';
+import UserReview from './EditReview'
 import { actionGetReviews, actionSetReview } from '../../redux/reviewsAction';
 import './Review.css'
 import stars from './StarsSwitch.jsx'
@@ -10,8 +10,6 @@ const Review = () => {
     const review = useSelector(state => state.reviewsReducer.review)
     const reviews = useSelector(state => state.reviewsReducer.reviews)
     const product = useSelector(state => state.productsReducer.product)
-    const [star, setStar] = useState()
-    const [review1, setReview1] = useState({})
     const getRandom = (max) => {
         return Math.floor(Math.random() * (max - 0) + 0);
     }
@@ -46,7 +44,8 @@ const Review = () => {
         }, 5000)
     }
     return (
-        (reviews.length > 0) ? (<div>
+        <div> 
+        {(reviews.length > 0) ? (<div>
             <div className='dateAndButtonContainer'>
                 <div>{toDate(review.updatedAt)} </div>
                 <button className='viewMoreButton'>Ver mas reseñas</button>
@@ -56,7 +55,8 @@ const Review = () => {
                 <div>{stars(review.rating)}</div>
                 <div>"{review.description}"</div>
             </div>
-        </div>) : (<div onLoadStart={handleReview} className='reviewContainer'>No hay reseñas todavia.</div>)
+        </div>) : (<div onLoadStart={handleReview} className='reviewContainer'>No hay reseñas todavia.</div>)}
+        </div>
     )
 }
 

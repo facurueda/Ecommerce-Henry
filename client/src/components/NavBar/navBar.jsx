@@ -52,14 +52,10 @@ const NavBar = () => {
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
-
     // ----- To Close Modals ----- //
     const modalLoginClose = () => setModalLogin(false);
     const modalRegisterClose = () => setModalRegister(false);
 
-    const handleChancha = () => {
-        dispatch(actionVerifyCookies({ ...cookie }))
-    }
     const ChangeModal = () => {
         modalLoginView()
         modalRegisterView()

@@ -1,10 +1,18 @@
 import axios from "axios";
-import { SET_REVIEW ,GET_REVIEWS_BY_PRODUCT, REVIEW_POST } from './constants';
+import { SET_REVIEW ,GET_REVIEWS_BY_PRODUCT, REVIEW_POST, REVIEW_EDITED } from './constants';
 
 export const actionPostReview = (reviewData) => {
     return (dispatch) => {
         axios.post(url + '/products/' + reviewData.idProduct + '/review', reviewData).then((res) => {
             dispatch ({ type: REVIEW_POST , payload: res.data })
+        })
+    }
+}
+
+export const actionEditReview = (reviewData) => {
+    return(dispatch) => {
+        axios.put(url + reviewData.idProduct + '/review/' + reviewData.idReview).then((res) => {
+            dispatch ({ type: REVIEW_EDITED , payload: res.data })
         })
     }
 }

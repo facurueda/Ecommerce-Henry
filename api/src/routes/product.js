@@ -9,6 +9,8 @@ const {
 } = require('../db.js');
 // const Review = require('../models/Review.js');
 
+<<<<<<< HEAD
+=======
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
     if(req.isAuthenticated()){
@@ -43,6 +45,7 @@ server.get('/:id/review/', (req, res, next) => {
 		res.send(rev.reviews)
 	  }).catch(next)
   });
+>>>>>>> 852a65721540167de91b3109835112c37a514f2e
 
 server.get('/search', (req, res, next) => {
 	Product.findAll({
@@ -65,8 +68,6 @@ server.get('/search', (req, res, next) => {
 		}).catch(next)
 });
 server.get('/:id', (req, res, next) => {
-	// GET /products/:id
-	// Retorna un objeto de tipo producto con todos sus datos. (Incluidas las categorías e imagenes).
 	Product.findOne({
 		where: {
 			idProduct: req.params.id
