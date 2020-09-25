@@ -6,10 +6,9 @@
     width: 100%;
     height: 150px;
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: #ffffff;
     border-radius: 15px;
     margin-bottom: 15px;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 /* ---------------- Image ---------------- */
@@ -69,28 +68,27 @@
 
 /* ---------------- Buttons ---------------- */
 
-.buttonEdit,
-.buttonDelete {
+.buttonStyler{
+    display: wrap;
     display:inline-block;
     padding:0.46em 1.6em;
-    border:0.1em solid #ffffff;
+    border:0.1em solid  rgba(47, 54, 64);
     margin:10px 0.2em 0.2em 0;
     border-radius:0.12em;
     box-sizing: border-box;
     text-decoration:none;
     font-family:'Roboto', sans-serif;
     font-weight:300;
-    color:#ffffff;
+    color: rgb(38, 55, 78);
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    background-color: rgba(47, 54, 64, 0.57);
+    background-color: white;
     text-align:center;
     transition: all 0.15s;
  }
-.buttonEdit:hover,
-.buttonDelete:hover{
-    text-shadow: 0 0 0.5px #DFA06E;
-    color:#DFA06E;
-    border-color:#DFA06E;
+.buttonStyler:hover{
+    text-shadow: 0 0 0.5px white;
+    background-color: rgb(38, 55, 78);
+    color: white
 }
 .buttonContainer{
     width: 15%;
@@ -100,31 +98,31 @@
     align-items: center;
 }
 
-.editProduct:before,
-.editProduct:after {
+.buttonStyler:before,
+.buttonStyler:after {
   width: 0%; height: 0%;
   opacity: 0;
 }
-.editProduct:before {
+.buttonStyler:before {
   top: 0; right: 0;
   border-top: 1px solid rgb(28, 31, 30);
   border-left: 1px solid rgb(28, 31, 30);
   transition: width 0.2s 0.5s ease-out, height 0.15s 0.35s linear, opacity 0s 0.7s;
 }
-.editProduct:after {
+.buttonStyler:after {
   bottom: 0; left: 0px;
   border-bottom: 1px solid rgb(28, 31, 30);
   border-right: 1px solid rgb(28, 31, 30);
   transition: width 0.2s 0.15s linear, height 0.15s ease-in, opacity 0s 0.35s;
 }
-.editProduct:before,
-.editProduct:after {
+.buttonStyler:before,
+.buttonStyler:after {
   width: 100%; height: 96%;
   opacity: 1;
 }
-.editProduct:before {
+.buttonStyler:before {
   transition: width 0.2s ease-in, height 0.15s 0.2s linear, opacity 0s;   /* 1,2 */
 }
-.editProduct:hover:after {
+.buttonStyler:hover:after {
   transition: width 0.2s 0.35s linear, height 0.15s 0.5s ease-out, opacity 0s 0.3s; 
 } 

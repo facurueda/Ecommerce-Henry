@@ -1,4 +1,4 @@
-import { GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_SEARCH_TERM, PRODUCT_PUT, PRODUCT_POST, DELETE_PRODUCT, PRODUCTS_ERROR, GET_PRODUCTS, PRODUCTS_LOADING, GET_PRODUCTS_BY_CATEGORY } from './constants'
+import { SET_PRODUCT, GET_PRODUCT_BY_ID, GET_PRODUCTS_BY_SEARCH_TERM, PRODUCT_PUT, PRODUCT_POST, DELETE_PRODUCT, PRODUCTS_ERROR, GET_PRODUCTS, PRODUCTS_LOADING, GET_PRODUCTS_BY_CATEGORY } from './constants'
 
 var initialState = {
     loading: false,
@@ -10,13 +10,21 @@ var initialState = {
 
 const productsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_PRODUCT:
+        return {
+            ...state,
+            product: action.payload
+        }
         case GET_PRODUCT_BY_ID:
             return {
                 ...state,
                 product: action.payload
             }
         case PRODUCT_PUT:
-            return state;
+            return {
+                ...state,
+                product: action.payload
+            };
         case PRODUCT_POST:
             return state;
         case DELETE_PRODUCT:

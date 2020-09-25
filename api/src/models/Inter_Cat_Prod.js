@@ -1,6 +1,5 @@
 const {
     DataTypes,
-    INTEGER
 } = require('sequelize');
 module.exports = (sequelize) => {
     sequelize.define('Inter_Cat_Prod', {

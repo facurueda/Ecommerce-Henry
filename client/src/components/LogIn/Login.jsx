@@ -1,31 +1,56 @@
-import React from 'react'
-import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import React, { useState } from 'react'
+import { ModalHeader, ModalBody, ModalFooter, Modal } from 'reactstrap'
 import './Login.css'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
+import { useDispatch, useSelector } from 'react-redux'
+import { actionLogin } from '../../redux/usersActions'
+import ResetPassword from './ResetPassword'
 
 const Login = (props) => {
+
+
+    const dispatch = useDispatch()
     const { modalLoginClose, ChangeModal } = props;
+    const [inputs, setInputs] = useState({})
+    const idUser = useSelector(store => store.usersReducer.idUser)
+
+    const handleChancla = () => {
+        dispatch(actionLogin({ ...inputs, idUser: idUser }))
+        modalLoginClose()
+    }
+
+    const handleInput = (e) => {
+        const { type, value } = e.target
+        setInputs({
+            ...inputs,
+            [type]: value
+        })
+    }
+
     const responseGoogle = (response) => {
         console.log(response);
         console.log(response.profileObj)
     }
-
     const responseFacebook = (response) => console.log(response);
     const componentClicked = () => console.log('clicked')
     return (
         <div className='loginContainer'>
             <button className='closeButton' onClick={modalLoginClose}>x</button>
             <ModalHeader id='loginHeaderContainer'>
-                <div className="addProductTitle">Login with</div>
+                <div className="addProductTitle">Login </div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
-                <div>
-                    {/* Buttons GitHub, Google, Facebook? */}
-                </div>
-                <input className='standardInput' type='email' placeholder='laCoseria@gmail.com' />
-                <input className='standardInput' type="password" placeholder='··············' />
-                <button className='logginButton' onClick={e => modalLoginClose()}>LOGIN</button>
+                <input className='standardInput' id='email' type='email' placeholder='info@lacoseria.com' onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                        document.getElementById('password').focus()
+                    }
+                }} onChange={handleInput} />
+                <input className='standardInput' id='password' type="password" placeholder='··············' onKeyPress={e => {
+                    if (e.key === 'Enter') { handleChancla(e) }
+                }} onChange={handleInput} />
+                <button className='buttonLoginAndRegister' onClick={handleChancla}>LOGIN</button>
+                <div> Or do you <a className = 'createAccount' href = '/forgot'>forgot your password?</a> </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
                 <div className='LoginAccount'>

@@ -1,27 +1,35 @@
-import React, {useState} from 'react';
-import {FaStar} from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 
-const StarRating = () => {
-  const [rating, setRating] = useState(null);
-  const [hover,setHover] = useState(null);
-
+const StarRating = (props) => {
+  const { rat, setRat } = props
+  const [hover, setHover] = useState(null);
+  const [rating,setRating] = useState(rat)
+  /*  const rating = props; */
   return <div>
-    {[...Array(5)].map((star,i) =>{
+    {[...Array(5)].map((star, i) => {
       const ratingValue = i + 1;
-        return <label>
-        <input type="radio" 
-        name="rating"
-        value={ratingValue} 
-        onClick={()=> setRating(ratingValue)}
+      return <label>
+        <input type="radio"
+          name="rating"
+          value={ratingValue}
+          onClick={() => {
+            setRat({
+              target: {
+                name: "rating",
+                value: ratingValue
+              }
+            })
+            setRating(ratingValue)
+          }}
         />
-        <FaStar className= "Star" size={50} color={ ratingValue < (hover || rating) || ratingValue === (hover || rating) /* ratingValue < reting || ratingValue === reting  */ ? "#858b94" : "#b8c1cf"}
-        onMouseEnter={ () => setHover(ratingValue)}
-        onMouseLeave={()=> setHover(null)}/> 
-        </label>
+        <FaStar className="Star" size={30} color={ratingValue < (hover || rating) || ratingValue === (hover || rating) /* ratingValue < reting || ratingValue === reting  */ ? "#5ca180" : "F5F3BB"}
+          onMouseEnter={() => setHover(ratingValue)}
+          onMouseLeave={() => setHover(null)} />
+      </label>
     })}
-    <p><strong>The rating is {rating}</strong></p>
-    </div>
+  </div>
 };
 
-export default StarRating; 
-// aca cambiamos los colores 
+export default StarRating;
+// aca cambiamos los colores

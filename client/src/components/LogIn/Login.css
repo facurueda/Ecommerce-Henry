@@ -4,14 +4,14 @@
     color: #ffffff;
     width: 500px;
     height: 500px;
-    background-color: rgba(222, 245, 209, 0.25);
+    background-color: rgba(74, 74, 74, 0.25);
     backdrop-filter: blur(7px);
     border-radius: 15px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
 
-.logginButton {
+.buttonLoginAndRegister {
     display: inline-block;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
@@ -28,14 +28,16 @@
     transition: all 0.15s;
 }
 
-.logginButton:hover {
-    text-shadow: 0 0 0.5px #DFA06E;
-    color: #DFA06E;
-    border-color: #DFA06E;
+.buttonLoginAndRegister:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(7px);
 }
 
 @media all and (max-width:30em) {
-    .logginButton {
+    .buttonLoginAndRegister {
         display: block;
         margin: 0.4em auto;
     }
@@ -137,9 +139,8 @@
 
 .createAccount,
 .createAccount:hover {
-    color: #DFA06E
+    color: cyan
 }
-
 .GoogleLogin {
     border: 0px;
 }

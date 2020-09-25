@@ -1,10 +1,12 @@
-import React from 'react'
+import Axios from 'axios'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Order from '../Order/order'
 
 const OrderByIdComponent = (props) => {
     return (
         <div>
-            <Order origin='none' idOrder={props.idOrder}/>
+            <Order origin='none' order={props.order}/>
         </div>
     )
 }

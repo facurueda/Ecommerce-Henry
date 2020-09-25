@@ -1,40 +1,64 @@
 import React, { useEffect, useState } from 'react'
 import Logo from './Images/Logo.png'
-import Cart from './Images/Cart.png'
 import './navBar.css'
 import SearchBar from '../SearchBar/SearchBar'
-import { Modal, Button } from 'reactstrap'
+import { Form, Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
+import gatito from './Images/gatito.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { actionGetOrder } from '../../redux/ordersActions'
+import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions'
+import UserLogged from '../UserLogged/UserLogged'
+import { useCookies } from 'react-cookie';
+import Cart from '../UserLogged/Cart'
+import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionLogOut } from '../../redux/usersActions'
 
 const NavBar = () => {
-
+    //// ---------------------------- DEV ---------------------------- //
+    const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
+    const dispatch = useDispatch()
     // ---------------------------- States ---------------------------- //
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
-    const user = useSelector(state => state.usersReducer.idUser)
-    console.log(user)
-    const dispatch = useDispatch();
+    const idUser = useSelector(state => state.usersReducer.idUser)
+    const level = useSelector(state => state.usersReducer.level)
+    const verified = useSelector(state => state.usersReducer.verified)
+    const loggedOut = useSelector(state => state.usersReducer.loggedOut)
+    if (loggedOut) {
+        if (cookie.idUser || cookie.level) {
+            removeCookie('idUser')
+            removeCookie('level')
+        } else {
+            dispatch(actionSetCookieToStore(cookie))
+            // dispatch(actionVerifyCookies(cookie))
+            actionLogOut(cookie)
+        }
+    }
+    if (verified) {
+        setCookie('idUser', idUser, { path: '/' })
+        setCookie('level', level, { path: '/' })
+        dispatch(actionSetVerified(false))
+    }
     useEffect(() => {
-        dispatch(actionGetOrder(user));
+        console.log(cookie)
+        dispatch(actionGetOrder(cookie.idUser));
+        setTimeout(() => {
+            return dispatch(actionGetOrdersByUser(cookie.idUser))
+        }, 200);
+        dispatch(actionSetCookieToStore(cookie))
+        dispatch(actionVerifyCookies(cookie))
     }, [])
-    const order = useSelector(state => state.ordersReducer.order)
-    console.log(order) // ---------------------------- Functions ---------------------------- //
-
+    // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
-
     // ----- To Close Modals ----- //
     const modalLoginClose = () => setModalLogin(false);
     const modalRegisterClose = () => setModalRegister(false);
 
-
-    const ChangeModal = async () => {
-        await modalLoginView()
-        await modalRegisterView()
+    const ChangeModal = () => {
+        modalLoginView()
+        modalRegisterView()
     }
     return (
 
@@ -43,45 +67,47 @@ const NavBar = () => {
                 <div className='logoContainer'>
                     <a href="/">
                         <img className='imageLogo' src={Logo} alt='Logo' />
+
                     </a>
                 </div>
+                <div> <img className='nomematen' src={gatito} /></div>
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
                         <form action="/">
-                            <button className='buttonHome'>Home</button>
+                            <div><button className='buttonHome'><p className='textnav'>Home</p></button></div>
+
                         </form>
                         <form action="/catalogue">
-                            <button className='buttonProducts'>Products</button>
+                            <button className='buttonProducts'><p className='textnav'>Products</p></button>
                         </form>
-                        {user ? (
-                            <form action="/Admin">
-                                <button className='buttonProducts'>My Account</button>
+                        {level === 'user' ? (
+                            <form action="/myAccount">
+                                <button className='buttonProducts' >My Account</button>
                             </form>
                         ) : (<div></div>)}
                     </div>
                     <div className='searchBar'>
                         <SearchBar />
                     </div>
-                    {user ?
+                    {level === 'user' ?
                         (
-                            <div className='cartContainer'>
-                                <a href='/order'>
-                                    <img className='buttonCart' src={Cart} alt='Cart' />
-                                </a>
-                                <div className='quantityProducts'>
-                                    {(order.products) ?
-                                        (order.products.reduce((acum, product) => {
-                                            return acum + product.Inter_Prod_Order.quantity
-                                        }, 0)) : (<div> </div>)
-                                    }
-                        </div>
+                            <div className='userLogged' >
+                                <UserLogged />
+                                <div className='cartContainer'>
+                                    <Cart />
+                                </div>
                             </div>
                         )
                         :
                         (
-                            <div className='registerContainer'>
-                                <button className='signup' onClick={e => modalLoginView()}>Login</button>
-                                <button className='login' onClick={e => modalRegisterView()}>Register</button>
+                            <div className='SessionContainer'>
+                                <div className='registerContainer'>
+                                    <button className='signup' onClick={e => modalLoginView()}>Login</button>
+                                    <button className='login' onClick={e => modalRegisterView()}>Register</button>
+                                </div>
+                                <div className='cartContainer'>
+                                    <Cart />
+                                </div>
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>

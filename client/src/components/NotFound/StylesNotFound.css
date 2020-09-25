@@ -8,6 +8,7 @@
 
 .contenedorNotFound {
     display: flex;
+    margin-top: 200px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -20,6 +21,8 @@
 .dino{
     width: 300px;
     height: 300px;
+    border-radius: 50px;
+    margin-top: 50px;
 }
 
 .textGoHome{

@@ -5,23 +5,25 @@ import Category from './Category'
 import { actionGetProducts, actionGetProductsByCategory } from '../../redux/productsActions'
 import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
-import { connect } from 'react-redux'
-const Catalogue = (props) => {
+import { useDispatch, useSelector } from 'react-redux'
+const Catalogue = () => {
+    const dispatch = useDispatch()
     useEffect(() => {
-        props.actionGetCategories()
-        props.actionGetProducts()
+        dispatch(actionGetCategories())
+        return dispatch(actionGetProducts())
     }, [])
-
+    const categories = useSelector(state => state.categoriesReducer.categories)
+    const loading = useSelector(state => state.productsReducer.loading)
+    const products = useSelector(store => store.productsReducer.products)
     const productsFilter = (e) => {
         if (e !== 'All categories') {
-            props.actionGetProductsByCategory(e)
+            dispatch(actionGetProductsByCategory(e))
         } else {
-            props.actionGetProducts()
+            dispatch(actionGetProducts())
         }
     }
 
-    const { categories } = props
-    if (props.categories.length === 0) {
+    if (categories.length === 0) {
         return (
             <div>
                 <div className='categories'>
@@ -30,7 +32,6 @@ const Catalogue = (props) => {
             </div>
         )
     }
-
     return (
         <div>
             <div className='categories_menu'>
@@ -40,15 +41,16 @@ const Catalogue = (props) => {
                 }
                 <Category className='categoryImage' name={"All categories"} productsFilter={productsFilter} />
             </div>
-            <div className='products'> {
-                props.products.map(product => {
+            <div className='products' > {
+                products.map(product => {
                     if (product.stock > 0) {
                         return <ProductCard className='productCard'
                             name={product.name}
                             description={product.description}
                             price={product.precio}
                             images={product.images}
-                            idProduct={product.idProduct} />
+                            idProduct={product.idProduct}
+                            stock={product.stock} />
                     }
                 })
             }
@@ -56,25 +58,4 @@ const Catalogue = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => {
-    return {
-        products: state.productsReducer.products,
-        categories: state.categoriesReducer.categories,
-        loading: state.productsReducer.loading,
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actionGetProducts: () => {
-            dispatch(actionGetProducts())
-        },
-        actionGetCategories: () => {
-            dispatch(actionGetCategories())
-        },
-        actionGetProductsByCategory: (categoryName) => {
-            dispatch(actionGetProductsByCategory(categoryName))
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Catalogue);
+export default Catalogue;

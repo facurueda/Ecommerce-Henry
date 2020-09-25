@@ -15,6 +15,10 @@ import adminOrdersTable from './components/adminOrdersTable/adminOrdersTable';
 import Login from './components/LogIn/Login';
 import Register from './components/Register/Register';
 import ProductsBySearchTerm from './components/ProductsBySearchTerm/ProductsBySearchTerm';
+import Reviews from './components/Review/Review'
+import {withCookies} from 'react-cookie';
+import MyAccount from './components/MyAccount/myAccount';
+import ResetPassword from './components/LogIn/ResetPassword'
 
 function App() {
   return (
@@ -28,17 +32,21 @@ function App() {
             <Route path='/productDetail' component={Product} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path='/categories' component={Categories} />
+            <Route path='/myAccount' component={MyAccount} />
             <Route path="/menuCrud" component={MenuCrud} />
             <Route path='/order' component={Order} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
+            <Route path='/reviews' component={Reviews}/>
+            <Route path='/forgot' component={ResetPassword} />
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
+            {/* <Router history={BrowserHistory}></Router> */}
           </Switch>
         </Router>
       </div>
     </React.Fragment>
   );
 }
-export default App;
+export default withCookies(App);
