@@ -42,9 +42,7 @@ server.use(passport.session())
 server.use(flash())
 
 
-
 ////////////  --------------------
-
 
 server.use('/', routes);
 // Error catching endware.

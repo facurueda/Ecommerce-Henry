@@ -22,11 +22,10 @@ function isAdmin(req, res, next) {
         if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
-        }
-        console.log('this user DOESNT ADMIN')
+        } console.log('this user DOESNT ADMIN')
     }
     console.log('THIS USER NOT AUTHENTICATED')
-    // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
+    // -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO -- //
     res.redirect('/')
 }
 
@@ -35,8 +34,7 @@ function isUserOrAdmin(req, res, next) {
         if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
-        }
-        console.log('this user is GUEST')
+        } console.log('this user is GUEST')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
@@ -70,6 +68,7 @@ server.get('/me', isUserOrAdmin, (req, res) => {
     }).catch(() => {
         res.send({ response: "Sesion no existe "})
     })
+
 })
 
 
@@ -82,51 +81,64 @@ server.post('/login', passport.authenticate('local', {
     failureFlash: true,
 }))
 
-server.post('/logout', (req, res) => {
-    const {
-        idUser,
-        level
-    } = req.body
 
-    if (level === 'user' || level === 'admin') {
-        res.status(200).clearCookie('connect.sid', {
-            path: '/'
-        });
-        req.session.destroy(err => {
-            res.redirect('/')
-        });
-    } else {
-        Order.findOne({
-            where: {
-                idUser: idUser,
-                status: 'CARRITO'
-            }
-        }).then(order => {
-            return order.update({
-                ...order,
-                status: 'CANCELADA'
-            })
-        }).then(() => {
-            res.send({
-                result: 'Carrito vaciado'
-            })
-        })
-        User.destroy({
-            where: {
-                idUser: idUser
-            }
-        }).then(() => {
-            res.send({
-                result: 'User eliminado'
-            })
-        })
-        res.status(200).clearCookie('connect.sid', {
-            path: '/'
-        });
-        req.session.destroy(err => {
-            res.redirect('/')
-        });
-    }
+server.post('/login', (req, res, next) => {
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(user => {
+        const userValues = {...user.dataValues,verified: true}
+        console.log(userValues)
+        res.send(userValues)
+    })
+})
+server.post('/logout', (req, res) => {
+    // const {
+    //     idUser,
+    //     level
+    // } = req.body
+
+    // if (level === 'user' || level === 'admin') {
+    //     res.status(200).clearCookie('connect.sid', {
+    //         path: '/'
+    //     });
+    //     req.session.destroy(err => {
+    //         res.redirect('/')
+    //     });
+    // } else {
+    //     Order.findOne({
+    //         where: {
+    //             idUser: idUser,
+    //             status: 'CARRITO'
+    //         }
+    //     }).then(order => {
+    //         return order.update({
+    //             ...order,
+    //             status: 'CANCELADA'
+    //         })
+    //     }).then(() => {
+    //         res.send({
+    //             result: 'Carrito vaciado'
+    //         })
+    //     })
+    //     User.destroy({
+    //         where: {
+    //             idUser: idUser
+    //         }
+    //     }).then(() => {
+    //         res.send({
+    //             result: 'User eliminado'
+    //         })
+    //     })
+    //     res.status(200).clearCookie('connect.sid', {
+    //         path: '/'
+    //     });
+    //     req.session.destroy(err => {
+    //         res.redirect('/')
+    //     });
+    // }
+    res.sendStatus(200)
 });
 
 /////s67 cambio el perfil a admin
@@ -142,8 +154,14 @@ server.post('/promote/:id', isAdmin, (req, res) => {
         })
     })
 })
-
+const toLog = ((type, cmd) => {
+    console.log('\n' + type + ': \n', cmd)
+})
 server.post('/cookie', async (req, res) => {
+
+    toLog('header', req.headers)
+    toLog('body', req.body)
+    toLog('cookies', req.cookies)
     const {
         idUser
     } = req.body
@@ -152,6 +170,7 @@ server.post('/cookie', async (req, res) => {
     let carrito = null;
     let userAux = null;
     // Llega info del front, si idUser no existe o es 0 se cre el usuario GUEST con su Orden
+
     if (idUser == 0 || !idUser) {
         User.create({
             name: 'guest',
@@ -159,13 +178,14 @@ server.post('/cookie', async (req, res) => {
             password: hashedPassword,
             level: 'GUEST'
         }).then((newUser) => {
-            Order.create({
+            return Order.create({
                 idUser: newUser.idUser,
                 status: 'CREADA'
             }).then(order => {
                 carrito = order;
+            }).then(() => {
+                return newUser
             })
-            return newUser
         }).then((newUser) => {
             // status(401)
             res.send({
@@ -185,18 +205,18 @@ server.post('/cookie', async (req, res) => {
             }
         }).then((user) => {
             userAux = user;
-            Order.findOne({
+            return Order.findOne({
                 where: {
                     idUser: user.idUser
                 }
-            }).then(order => {
-                res.send({
-                    idUser: userAux.idUser,
-                    name: userAux.name,
-                    email: userAux.email,
-                    level: userAux.level,
-                    order
-                })
+            })
+        }).then(order => {
+            res.send({
+                idUser: userAux.idUser,
+                name: userAux.name,
+                email: userAux.email,
+                level: userAux.level,
+                order
             })
         })
     }

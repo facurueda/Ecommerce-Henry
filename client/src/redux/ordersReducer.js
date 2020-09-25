@@ -4,7 +4,7 @@ var initialState = {
     loading: false,
     order: [],
     orders: [],
-    quantity: Infinity
+    quantity: 0
 };
 
 const ordersReducer = (state = initialState, action) => {

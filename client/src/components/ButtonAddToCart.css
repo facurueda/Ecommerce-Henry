@@ -1,9 +1,0 @@
-.buttonAddToCart {
-    display: flex;
-    margin-left: 20px;
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    justify-self: flex-end;
-}
-.fa {  
-    display: flex;
-}
