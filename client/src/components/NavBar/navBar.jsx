@@ -108,7 +108,6 @@ const NavBar = () => {
                                 <div className='cartContainer'>
                                     <Cart />
                                 </div>
-
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>

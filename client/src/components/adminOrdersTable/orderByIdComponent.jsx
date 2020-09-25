@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import Order from '../Order/order'
 
 const OrderByIdComponent = (props) => {
-    console.log('OrderByIdComponent',props.order)
     return (
         <div>
             <Order origin='none' order={props.order}/>

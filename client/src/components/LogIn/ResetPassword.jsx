@@ -4,7 +4,6 @@ import { actionResetPassword } from '../../redux/usersActions'
 import './ResetPassword.css'
 
 const ResetPassword = () => {
-    
     const dispatch = useDispatch()
     const [email, setEmail ] = useState({})
 

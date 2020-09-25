@@ -17,8 +17,15 @@ const MyAccount = () => {
     return (
         <div>
             <div className='userDataContainer'>
-                <div> Nombre: {name}</div>
-                <div> Email: {email}</div>
+                <div className='dataContainer'>
+                    <div className='nameeContainer'>
+                        <span className='valueData'>{name}</span>
+                    </div>
+
+                    <div className='emaillContainer'>
+                        <span className='valueData'>{email}</span>
+                    </div>
+                </div>
             </div>
             <div className='ComponentContainer'>
                 <div className='ordersContainer'>

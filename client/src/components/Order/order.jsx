@@ -13,12 +13,13 @@ const Order = (props) => {
         if (props.order) {
             console.log('entro al if')
             return propsOrder
+        }else{
+return storeOrder
         }
-        return storeOrder
     }
     const or = order()
     console.log('funcionOrder()',order())
-    if (Object.keys(order()).length < 1) {
+    if (Object.keys(or).length < 1) {
         return (
             <div className='orderContainer'>
                 <h3 style={{ display: 'flex', justifyContent: 'center' }}>

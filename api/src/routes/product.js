@@ -190,13 +190,13 @@ server.delete('/:idProducto', isAdmin, (req, res, next) => {
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 
 ///////////////////////////// RUTA PARA MODIFICAR REVIEW
-server.put('/:idProduct/review/:idReview', isUserOrAdmin, (req, res, next) => {
+server.put('/:idProduct/review/:idReview', (req, res, next) => {
 	Review.findOne({
 		where: {
 			idReview: req.params.idReview
 		}
 	}).then(rev => {
-		return rev.update({	
+		return rev.update({
 			...rev,
 			description: req.body.description,
 			rating: req.body.rating
@@ -233,7 +233,6 @@ server.put('/:idProduct', isAdmin, (req, res, next) => {
 						...inter,
 						idCategory: req.body.categories
 					})
-				
 	}).then((interUpdated) => {
 		console.log('responding', productUpdated, interUpdated)
 		res.send({product : productUpdated, category: interUpdated })

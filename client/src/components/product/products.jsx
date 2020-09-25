@@ -8,11 +8,11 @@ import { actionGetReviews } from '../../redux/reviewsAction';
 import EditReview from '../Review/EditReview'
 import PostReview from '../Review/PostReview'
 
-function Products() {   
+function Products() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(actionGetReviews(idProduct))
-    })
+    }, [])
     const { idProduct, name, description, precio, images, stock } = useSelector(store => store.productsReducer.product)
 
     const [modalEditReview, setModalEditReview] = useState(false)
@@ -30,15 +30,8 @@ function Products() {
     function test() {
         return { __html: description }
     }
-    
-
-
-    const reviewFinder = () => {
-        return <Review />
-    }
-
     const reviewCreateorEdit = () => {
-        if(review) {
+        if (review) {
             return <button className='EditReview' onClick={e => modalEditReviewView()}>Editar Review</button>
         }
         else {
@@ -60,15 +53,15 @@ function Products() {
                                 <h1 className='prodName'>{name}</h1>
                                 <div className='prodDescription' dangerouslySetInnerHTML={test()} />
                             </div>
-                            <div>{reviewFinder()}</div>
+                            <Review />
                             <div>
                                 {reviewCreateorEdit()}
                             </div>
                             <Modal isOpen={modalEditReview}>
-                                    <EditReview modalEditReviewClose = {modalEditReviewClose} review = {review} />
+                                <EditReview modalEditReviewClose={modalEditReviewClose} review={review} idProduct={idProduct} />
                             </Modal>
                             <Modal isOpen={modalPostReview}>
-                                    <PostReview modalPostReviewClose = {modalPostReviewClose} idProduct = {idProduct} />
+                                <PostReview modalPostReviewClose={modalPostReviewClose} idProduct={idProduct} />
                             </Modal>
                         </div>
                         <div className='prodComp3'>
@@ -79,7 +72,7 @@ function Products() {
                             <div className='buttons'>
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />
                                 <button className='buyProd'>Comprar</button>
-                                <div className = 'conteiner-star'>
+                                <div className='conteiner-star'>
                                 </div>
                             </div>
                         </div>

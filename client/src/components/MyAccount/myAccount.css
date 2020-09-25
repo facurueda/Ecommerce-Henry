@@ -13,3 +13,53 @@
     align-self: flex-start;
     margin-left: 0px;
 }
+.ordersContainer{
+    color: white;
+}
+.buttonDetails{
+    color: black;
+    background-color: white;
+    padding: 3px 5px 3px 5px;
+    border-radius: 3px;
+}
+.dataContainer{
+    flex-direction: column;
+     align-items: center;
+}
+.nameeContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 0px 20px 20px 0px;
+    margin-top: 5px;
+    padding: 5px 20px 5px 10px;
+    background-color: white;
+}
+.emaillContainer {
+    display: flex;
+    border-radius: 0px 20px 20px 0px;
+    margin-top: 5px;
+    padding: 5px 20px 5px 10px;
+    background-color: white;
+}
+.typeData{
+    font-size: 15px;
+    color: black;
+    text-align: center;
+}
+.valueData{
+    font-size: 20px;
+    color: black;
+
+    text-align: center;
+}
+.DeleteProd{
+    display: none;
+}
+.ProductContainer{
+    display: flex;
+    border-radius: 30px;
+    padding: 0px 90px;
+    background-color: rgb(41, 41, 41);
+}
