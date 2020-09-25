@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { ModalHeader, ModalBody, ModalFooter, Modal } from 'reactstrap'
 import './Login.css'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionLogin } from '../../redux/usersActions'
+import ResetPassword from './ResetPassword'
 
 const Login = (props) => {
 
@@ -18,6 +19,7 @@ const Login = (props) => {
         dispatch(actionLogin({ ...inputs, idUser: idUser }))
         modalLoginClose()
     }
+
     const handleInput = (e) => {
         const { type, value } = e.target
         setInputs({
@@ -25,6 +27,7 @@ const Login = (props) => {
             [type]: value
         })
     }
+
     const responseGoogle = (response) => {
         console.log(response);
         console.log(response.profileObj)
@@ -47,6 +50,7 @@ const Login = (props) => {
                     if (e.key === 'Enter') { handleChancla(e) }
                 }} onChange={handleInput} />
                 <button className='buttonLoginAndRegister' onClick={handleChancla}>LOGIN</button>
+                <div> Or do you <a className = 'createAccount' href = '/forgot'>forgot your password?</a> </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
                 <div className='LoginAccount'>

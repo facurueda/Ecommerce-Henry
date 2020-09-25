@@ -31,6 +31,7 @@ export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 export const SET_VERIFIED = 'SET_VERIFIED'
 export const SET_COOKIE_TO_STORE = 'SET_COOKIE_TO_STORE'
+export const RESET_PASSWORD = 'RESET_PASSWORD'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 

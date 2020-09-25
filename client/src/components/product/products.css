@@ -90,7 +90,6 @@ p {
 }
 .buyProd,
 .cart {
-<<<<<<< HEAD
     display: inline-block;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
@@ -100,19 +99,6 @@ p {
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-size: 13px;
-=======
-     color: white;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #212529;
-    height: 50px;
-    width: 170px;
-    box-shadow:0px 13px 21px -5px rgba(0, 0, 0, 0.3);
-    margin: 5px;
-    font-family: 'Poppins', sans-serif;
->>>>>>> 852a65721540167de91b3109835112c37a514f2e
     font-weight: 300;
     color: #ffffff;
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
@@ -188,7 +174,6 @@ button {
   }
 
 
-<<<<<<< HEAD
 .EditReview,
 .CreateReview {
     display: inline-block;
@@ -224,14 +209,3 @@ button {
         margin: 0.4em auto;
     }
 }
-=======
-  .conteiner-star {
-      margin-top: 100px;
-      margin-left: 35px;
-  }
-
-  .prodName {
-      margin-bottom: 20px;
-      margin-left: 20px;
-  }
->>>>>>> 852a65721540167de91b3109835112c37a514f2e

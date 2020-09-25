@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED, SET_COOKIE_TO_STORE, GET_ORDER_BY_ID } from "./constants";
+import { RESET_PASSWORD, GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED, SET_COOKIE_TO_STORE, GET_ORDER_BY_ID } from "./constants";
 const url = "http://localhost:3000/";
 
 export const actionSetCookieToStore = (cookie) => {
@@ -49,17 +49,6 @@ export const actionLogin = (inputs) => {
             console.log('userData', res.data)
             return dispatch({ type: POST_LOGIN, payload: res.data })
         })
-        // .then(() => {
-        //     axios.get(url + 'auth/me').then(res => {
-        //         return dispatch({ type: POST_LOGIN, payload: res.data })
-        //     })
-        // }).catch()
-        // .then((res) => {
-        //     axios.get(url + 'auth/me').then((res) => {
-        //         if (res.status === 401) return dispatch({ type: AUTH_FAILED, payload: res.data })
-        //         return dispatch({ type: USER_LOGGED_IN, payload: res.data })
-        //     })
-        // })-
     }
 }
 
@@ -76,4 +65,14 @@ export const actionLogOut = (cookie) => {
 
 export const actionSetVerified = (bool) => {
     return (dispatch) => { dispatch({ type: SET_VERIFIED, payload: bool }) }
+}
+
+export const actionResetPassword = (email) => {
+    return (
+        (dispatch) => {
+            axios.get(url + 'forgot', email).then((res => {
+                return dispatch({ type: RESET_PASSWORD })
+            }))
+        }
+    )
 }

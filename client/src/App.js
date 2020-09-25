@@ -18,6 +18,7 @@ import ProductsBySearchTerm from './components/ProductsBySearchTerm/ProductsBySe
 import Reviews from './components/Review/Review'
 import {withCookies} from 'react-cookie';
 import MyAccount from './components/MyAccount/myAccount';
+import ResetPassword from './components/LogIn/ResetPassword'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path='/register' component={Register} />
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route path='/reviews' component={Reviews}/>
+            <Route path='/forgot' component={ResetPassword} />
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
             {/* <Router history={BrowserHistory}></Router> */}
