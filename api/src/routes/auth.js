@@ -44,6 +44,7 @@ function isUserOrAdmin(req, res, next) {
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
 
 server.get('/testAuth', (req, res, next) => {
+    console.log(req.user)
     res.send('funciona')
 })
 
@@ -52,31 +53,34 @@ server.get('/', (req, res) => {
 })
 
 
-server.get('/me', (req, res) => {
-    // console.log(JSON.stringify(req.headers))
-    // console.log(req.cookies)
-    console.log(req)
-    // User.findOne({
-    //     where: {
-    //         idUser: req.session.cookie.passport.user
-    //     }
-    // }).then(user => {
-    //     res.send(user)
-    // }).catch(() => {
-    //     res.send({ response: "Sesion no existe "})
-    // })
+server.get('/me', isUserOrAdmin, (req, res) => {
+    console.log(req.user)
+    console.log('ruta /ME')
+    User.findOne({
+        where: {
+            idUser: req.user.idUser
+        }
+    }).then(user => {
+        res.send({
+            ...user,
+            verified: true
+        })
+    }).catch(() => {
+        res.send({ response: "Sesion no existe "})
+    })
+
 })
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
 
-//-------------------------------------------------------------- ESTE HABILITA EL LOGIN DEL PASSPORT.JS
-// server.post('/login', passport.authenticate('local', {
-//     session: true,
-//     successRedirect: 'http://localhost:3000/auth/me',
-//     failureRedirect: 'http://localhost:3000/auth/testAuth',
-//     failureFlash: true,
-// }))
+server.post('/login', passport.authenticate('local', {
+    session: true,
+    successRedirect: 'http://localhost:3000/auth/me',
+    failureRedirect: 'http://localhost:3000/auth/testAuth',
+    failureFlash: true,
+}))
+
 
 server.post('/login', (req, res, next) => {
     User.findOne({

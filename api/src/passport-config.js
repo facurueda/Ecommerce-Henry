@@ -1,4 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy
+
+
 const bcrypt = require('bcrypt');
 const {
   User,
@@ -92,11 +94,6 @@ function initialize(passport) {
   }
 
 
-
-
-
-
-
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passReqToCallback: true
@@ -117,28 +114,6 @@ function initialize(passport) {
       done(null, user);
     }).catch(done)
   });
-
-
-
-  // passport.serializeUser(function (user, done) {
-  //   console.log(user)
-  //   done(null, user.idUser)
-  // });
-
-  // passport.deserializeUser(function(id, done) {
-  //   User.findById(id).then(function(user) {
-  //     console.log('deserializing user:',user);
-  //     done(null, user);
-  //   }).catch(function(err) {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //  });
-  // });
-
-  // passport.deserializeUser(function (id, done) {
-  //   done(null, getUserId(id));
-  // });
 
 }
 
