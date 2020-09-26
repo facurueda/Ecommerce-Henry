@@ -22,7 +22,7 @@ function SearchBarr(props) {
             <div className='search-box'>
                 <input className="search-text" type="text" placeholder="¿Que estas buscando?" onKeyPress={e => {
                     if (e.key === 'Enter') {
-                        searchFunction(e.target.value.toLowerCase())
+                        searchFunction(e.target.value)
                     }
                 }}/>
                 <a href="/Search" className="search-btn">
