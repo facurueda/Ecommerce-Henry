@@ -13,13 +13,12 @@ import ButtonAddToCart from '../ButtonAddToCart/ButtonAddToCart';
 const ProductCard = (props) => {
 
     const { name, price, description, idProduct, images, stock } = props;
-    console.log(images)
     const history = useHistory()
     const dispatch = useDispatch()
     const handleChancla = async () => {
-        await dispatch(actionGetProduct(idProduct))
-        await dispatch(actionGetReviews(idProduct))
-        await dispatch(actionSetProduct({ name, price, description, idProduct, images, stock }))
+        dispatch(actionGetProduct(idProduct))
+        dispatch(actionGetReviews(idProduct))
+        dispatch(actionSetProduct({ name, price, description, idProduct, images, stock }))
         setTimeout(()=>{
             return history.push('/productDetail')
         },200)
