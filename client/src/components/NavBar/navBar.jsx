@@ -39,7 +39,6 @@ const NavBar = () => {
         dispatch(actionSetVerified(false))
     }
     useEffect(() => {
-        console.log(cookie)
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {
             return dispatch(actionGetOrdersByUser(cookie.idUser))

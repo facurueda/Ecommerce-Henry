@@ -167,42 +167,39 @@ server.post('/:idUser/cart', (req, res, next) => {
 
 //////// register 
 server.post('/', async (req, res, next) => {
-
     const {
         name,
         email,
         password,
     } = req.body
-
-    
     const hashedPassword = await bcrypt.hash(password, 10)
 
     User.findOne({
-            where: {
-                email: email
-            }
-        })
-        .then((user) => {
-            if (!user) {
-                User.create({
-                    name: name,
-                    email: email,
-                    password: hashedPassword,
-                    level: 'user'
-                }).then(user => {
-                    return Order.create({
-                        idUser: user.idUser,
-                        status: 'CREADA'
-                    })
-                }).then(() => {
-                    res.redirect('http://localhost:3000/auth/login')
+        where: {
+            email: email
+        }
+    }).then((user) => {
+        if (!user) {
+            User.create({
+                name: name,
+                email: email,
+                password: hashedPassword,
+                level: 'user'
+            }).then(user => {
+
+                return Order.create({
+                    idUser: user.idUser,
+                    status: 'CREADA'
                 })
-            } else {
-                res.status(404).send({
-                    result: "El usuario ya existe"
-                })
-            }
-        })
+            })
+        } else {
+            res.status(404).send({
+                result: "El usuario ya existe"
+            })
+        }
+    }).then(() => {
+        res.redirect('http://localhost:3000/auth/login')
+    })
 
 });
 

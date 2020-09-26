@@ -48,18 +48,19 @@ server.get('/search', (req, res, next) => {
 		where: {
 			[Sequelize.Op.or]: [{
 				name: {
-					[Sequelize.Op.like]: "%$" + req.query.query + "$%"
+					[Sequelize.Op.iLike]: "%" + req.query.query + "%"
 				}
 			},
 			{
 				description: {
-					[Sequelize.Op.like]: "%$" + req.query.query + "$%"
+					[Sequelize.Op.iLike]: "%" + req.query.query + "%"
 				}
 			}
 			]
 		}
 	})
 		.then((products) => {
+			console.log('productsByTerm: ',products)
 			res.send(products);
 		}).catch(next)
 });
