@@ -1,6 +1,8 @@
-
-.buttonStyle {
-    display: inline-block;
+.buttonAddToCart {
+    display: flex;
+    margin-left: 20px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    justify-self: flex-end;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
     margin: 10px 0.2em 0.2em 0;
@@ -8,6 +10,7 @@
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
+    font-size: 13px;
     font-weight: 300;
     color: #ffffff;
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
@@ -15,24 +18,20 @@
     text-align: center;
     transition: all 0.15s;
 }
-.buttonCloseModalOrdersTable{
-    color: black;
-    background-color: red;
+.fa {  
+    display: flex;
 }
-.buttonStyle:hover {
-    text-shadow: 0 0 0.5px #DFA06E;
-    color: #DFA06E;
-    border-color: #DFA06E;
+.buttonAddToCart:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(7px);
 }
 
 @media all and (max-width:30em) {
-    .buttonStyle {
+    .buttonAddToCart {
         display: block;
         margin: 0.4em auto;
     }
-}
-
-.admincontainer {
-    display: flex;
-    justify-content: center;
 }

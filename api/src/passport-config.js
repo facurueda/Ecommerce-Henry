@@ -1,4 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy
+
+
 const bcrypt = require('bcrypt');
 const {
   User,
@@ -6,12 +8,15 @@ const {
   Inter_Prod_Order
 } = require('./db');
 
-
 function initialize(passport) {
 
   const authenticateUser = async (req, email, password, done) => {
+<<<<<<< HEAD
 
      const {
+=======
+    const {
+>>>>>>> a138ce1b60ff8f3e9814b6901b025dd8f84f9260
       idUser
     } = req.body 
 
@@ -61,10 +66,9 @@ function initialize(passport) {
             }
           })
         }).then(inters => {
-          
           inters.map(e => {
             return Inter_Prod_Order.create({
-              ...e.dataValues,
+              ...e,
               idOrder: orderUserLogin.idOrder
             })
           })
@@ -95,15 +99,13 @@ function initialize(passport) {
   }
 
 
-
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passReqToCallback: true
   }, authenticateUser))
 
   passport.serializeUser(function (user, done) {
-    console.log('serializing user:', user);
-    done(null, user.dataValues.idUser);
+    done(null, user.idUser);
   });
 
   passport.deserializeUser(function (id, done) {
@@ -114,31 +116,9 @@ function initialize(passport) {
       }
     }).then(user => {
       // console.log('thisUser', user.dataValues)
-      done(null, user.dataValues);
+      done(null, user);
     }).catch(done)
   });
-
-
-
-  // passport.serializeUser(function (user, done) {
-  //   console.log(user)
-  //   done(null, user.idUser)
-  // });
-
-  // passport.deserializeUser(function(id, done) {
-  //   User.findById(id).then(function(user) {
-  //     console.log('deserializing user:',user);
-  //     done(null, user);
-  //   }).catch(function(err) {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //  });
-  // });
-
-  // passport.deserializeUser(function (id, done) {
-  //   done(null, getUserId(id));
-  // });
 
 }
 

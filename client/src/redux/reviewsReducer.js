@@ -1,16 +1,17 @@
-import { SET_REVIEW, REVIEW_POST, GET_REVIEWS_BY_PRODUCT } from './constants';
+import {
+    SET_REVIEW,
+    REVIEW_POST,
+    GET_REVIEWS_BY_PRODUCT,
+    REVIEW_EDITED
+} from './constants';
 
-// <div>Ultima reseña: {review.updatedAt} </div>
-// <div>Usuario:  {review.usuario}</div>
-// <div>Calificacion:  {review.calificacion}</div>
-// <div>Descripcion:  {review.descripcion}</div>
 const initialState = {
-    review : {},
+    review: {},
     reviews: []
 }
 
-const reviewsReducer = ( state = initialState, action) => {
-    switch(action.type) {
+const reviewsReducer = (state = initialState, action) => {
+    switch (action.type) {
         case SET_REVIEW:
             return {
                 ...state,
@@ -22,12 +23,17 @@ const reviewsReducer = ( state = initialState, action) => {
                 review: action.payload
             }
         case GET_REVIEWS_BY_PRODUCT:
-        return {
-            ...state,
-            reviews: action.payload
-        }
+            return {
+                ...state,
+                reviews: action.payload
+            }
+        case REVIEW_EDITED:
+            return {
+                ...state,
+                review: action.payload
+            }
         default:
-        return state;
+            return state;
     }
 }
 

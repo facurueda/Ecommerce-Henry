@@ -1,13 +1,11 @@
-
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
-var cookieSession = require('cookie-session');
 const cors = require('cors')
 require('./db.js');
-const nodemailer = require("nodemailer"); 
+
 const flash = require('express-flash')
 const session = require('express-session');
 const passport = require('passport');
@@ -18,24 +16,22 @@ server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
-server.use(cors());
+
+
+
+// server.use(cors());
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3001'); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Content-Type', 'application/x-www-form-urlencoded',)
   if (req.methods === 'OPTIONS') return res.send('ok');
   next();
 });
 
+////////////  -------------------- PARA HABILITAR PASSPORT.JS
 
-//////////// ---------- reset psw
-/* server.use(nodemailer()) */
-
-////////////  --------------------
-
-server.use(express.urlencoded({ extended: false }))
-server.use(flash())
 server.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -43,11 +39,10 @@ server.use(session({
 }))
 server.use(passport.initialize())
 server.use(passport.session())
+server.use(flash())
 
- 
 
 ////////////  --------------------
-
 
 server.use('/', routes);
 // Error catching endware.
