@@ -16,7 +16,7 @@ export const actionSetCookieToStore = (cookie) => {
 
 export const actionGetUserById = (idUser) => {
     return (dispatch) => {
-        axios.get(url + 'user/' + idUser).then(res => {
+        axios.get(url + 'user/' + idUser, {withCredentials: true}).then(res => {
             console.log(res.data)
             dispatch({ type: GET_USER_BY_ID, payload: res.data })
         })
@@ -24,7 +24,7 @@ export const actionGetUserById = (idUser) => {
 }
 export const actionVerifyCookies = (cookie) => {
     return (dispatch) => {
-        axios.post(url + 'auth/cookie', cookie).then((res) => {
+        axios.post(url + 'auth/cookie', cookie, {withCredentials: true}).then((res) => {
             console.log('resVerifyCookie', res.data)
             if (res.verified) {
                 dispatch({ type: AUTH_FAILED, payload: res.data })
@@ -40,7 +40,7 @@ export const actionVerifyCookies = (cookie) => {
 
 export const actionUserCreate = (props) => {
     return (dispatch) => {
-        axios.post(url + 'user', props).then(() => {
+        axios.post(url + 'user', props, {withCredentials: true}).then(() => {
             dispatch({ type: USER_CREATED })
         })
     }
@@ -48,7 +48,7 @@ export const actionUserCreate = (props) => {
 
 export const actionLogin = (inputs) => {
     return (dispatch) => {
-        var data = inputs;
+        var data = qs.stringify(inputs);
         var config = {
             withCredentials: true,
             method: 'post',
@@ -60,23 +60,14 @@ export const actionLogin = (inputs) => {
         };
 
         axios(config)
-            .then(function (res) {
-                console.log(res)
-                dispatch({
-                    type: POST_LOGIN,
-                    payload: res.data
+            .then(() => {
+                axios.get(url + 'auth/me', {withCredentials: true})
+                .then( res => {
+                    console.log(res.data)
+                    return dispatch({ type: POST_LOGIN, payload: res.data.dataValues })
                 })
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        
-        
-        // axios.post(url + 'auth/login', inputs).then((res) => {
-        //     console.log('userData', res.data)
-        //     return dispatch({ type: POST_LOGIN, payload: res.data })
-        // })
-
+            }
+        )
     }
 }
 
@@ -98,7 +89,7 @@ export const actionSetVerified = (bool) => {
 export const actionResetPassword = (email) => {
     return (
         (dispatch) => {
-            axios.get(url + 'forgot', email).then((res => {
+            axios.get(url + 'forgot', email, {withCredentials: true}).then((res => {
                 return dispatch({ type: RESET_PASSWORD })
             }))
         }

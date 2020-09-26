@@ -21,6 +21,7 @@ const NavBar = () => {
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const idUser = useSelector(state => state.usersReducer.idUser)
+    console.log('idUser useselector', idUser)
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
@@ -73,10 +74,10 @@ const NavBar = () => {
                 <div> <img className='nomematen' src={gatito} /></div>
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
-                        <form action="/">
-                            <div><button className='buttonHome'><p className='textnav'>Home</p></button></div>
+                        {/* <form action="/"> */}
+                            <div><button className='buttonHome'><a href= '/' className='textnav'>Home</a></button></div>
 
-                        </form>
+                        {/* </form> */}
                         <form action="/catalogue">
                             <button className='buttonProducts'><p className='textnav'>Products</p></button>
                         </form>
@@ -89,7 +90,7 @@ const NavBar = () => {
                     <div className='searchBar'>
                         <SearchBar />
                     </div>
-                    {level === 'user' ?
+                    {level === 'user' || level === 'admin' ?
                         (
                             <div className='userLogged' >
                                 <UserLogged />

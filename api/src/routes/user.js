@@ -118,6 +118,7 @@ server.post('/:idUser/cart', (req, res, next) => {
             }]
         }
     }).then(order => {
+        console.log(order)
         if (order.status === 'CREADA') {
             order.update({
                 ...order,

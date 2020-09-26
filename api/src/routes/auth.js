@@ -11,8 +11,6 @@ const aleatoryNumber = () => {
 
 const crypto = require('crypto');
 const async = require("async");
-const router = require('./index.js');
-const sendEmail = require('./createemail.js').sendEmail;
 
 
 
@@ -31,6 +29,9 @@ function isAdmin(req, res, next) {
 }
 
 function isUserOrAdmin(req, res, next) {
+
+    console.log('1234', req.isAuthenticated())
+
     if (req.isAuthenticated()) {
         if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
@@ -55,21 +56,31 @@ server.get('/', (req, res) => {
 
 
 server.get('/me', isUserOrAdmin, (req, res) => {
-    console.log(req.user)
-    console.log('ruta /ME')
+
     User.findOne({
         where: {
             idUser: req.user.idUser
         }
     }).then(user => {
-        res.send({
-            ...user,
-            verified: true
-        })
-    }).catch(() => {
-        res.send({ response: "Sesion no existe "})
-    })
+        // console.log('USER TO SEND FRONT', user)
 
+    //     return user.update({
+    //         ...user,
+    //         verified: true
+    //     }) 
+    // }).then((response) => {
+    //     console.log('asdasdasdasd', response)
+    //     res.send( response )
+    // })   
+        const cualquiercosa = {
+            ...user,
+            dataValues: {
+                ...user.dataValues,
+                verified: true
+            }
+        }
+        res.send( cualquiercosa )
+    })
 })
 
 
@@ -159,10 +170,6 @@ const toLog = ((type, cmd) => {
     console.log('\n' + type + ': \n', cmd)
 })
 server.post('/cookie', async (req, res) => {
-
-    toLog('header', req.headers)
-    toLog('body', req.body)
-    toLog('cookies', req.cookies)
     const {
         idUser
     } = req.body
@@ -199,7 +206,6 @@ server.post('/cookie', async (req, res) => {
             })
         })
     } else {
-        console.log('yup')
         User.findOne({
             where: {
                 idUser: idUser
