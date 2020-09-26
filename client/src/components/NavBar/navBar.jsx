@@ -21,7 +21,6 @@ const NavBar = () => {
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const idUser = useSelector(state => state.usersReducer.idUser)
-    console.log('idUser useselector', idUser)
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
@@ -31,7 +30,6 @@ const NavBar = () => {
             removeCookie('level')
         } else {
             dispatch(actionSetCookieToStore(cookie))
-            // dispatch(actionVerifyCookies(cookie))
             actionLogOut(cookie)
         }
     }

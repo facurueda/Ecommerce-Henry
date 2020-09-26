@@ -32,8 +32,6 @@ function isAdmin(req, res, next) {
 
 function isUserOrAdmin(req, res, next) {
 
-    console.log('1234', req.isAuthenticated())
-
     if (req.isAuthenticated()) {
         if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
@@ -45,47 +43,24 @@ function isUserOrAdmin(req, res, next) {
     res.redirect('htpp://localhost:3000/auth/login')
 }
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
 
-server.get('/testAuth', (req, res, next) => {
-    console.log(req.user)
-    res.send('funciona')
-})
-
-server.get('/', (req, res) => {
-    res.send('funcionnnaaaaa!!')
-})
-
-
 server.get('/me', isUserOrAdmin, (req, res) => {
-
     User.findOne({
         where: {
             idUser: req.user.idUser
         }
-    }).then(user => {
-        // console.log('USER TO SEND FRONT', user)
-
-        //     return user.update({
-        //         ...user,
-        //         verified: true
-        //     }) 
-        // }).then((response) => {
-        //     console.log('asdasdasdasd', response)
-        //     res.send( response )
-        // })   
-        const cualquiercosa = {
+    }).then(user => { 
+        const response = {
             ...user,
             dataValues: {
                 ...user.dataValues,
                 verified: true
             }
         }
-        res.send(cualquiercosa)
+        res.send(response)
     })
 })
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
 
@@ -95,7 +70,6 @@ server.post('/login', passport.authenticate('local', {
     failureRedirect: 'http://localhost:3000/auth/testAuth',
     failureFlash: true,
 }))
-
 
 server.post('/login', (req, res, next) => {
     User.findOne({
@@ -112,51 +86,10 @@ server.post('/login', (req, res, next) => {
     })
 })
 server.post('/logout', (req, res) => {
-    // const {
-    //     idUser,
-    //     level
-    // } = req.body
-
-    // if (level === 'user' || level === 'admin') {
-    //     res.status(200).clearCookie('connect.sid', {
-    //         path: '/'
-    //     });
-    //     req.session.destroy(err => {
-    //         res.redirect('/')
-    //     });
-    // } else {
-    //     Order.findOne({
-    //         where: {
-    //             idUser: idUser,
-    //             status: 'CARRITO'
-    //         }
-    //     }).then(order => {
-    //         return order.update({
-    //             ...order,
-    //             status: 'CANCELADA'
-    //         })
-    //     }).then(() => {
-    //         res.send({
-    //             result: 'Carrito vaciado'
-    //         })
-    //     })
-    //     User.destroy({
-    //         where: {
-    //             idUser: idUser
-    //         }
-    //     }).then(() => {
-    //         res.send({
-    //             result: 'User eliminado'
-    //         })
-    //     })
-    //     res.status(200).clearCookie('connect.sid', {
-    //         path: '/'
-    //     });
-    //     req.session.destroy(err => {
-    //         res.redirect('/')
-    //     });
-    // }
-    res.sendStatus(200)
+    req.logout()
+    res.send({
+        loggedOut: true
+    })
 });
 
 /////s67 cambio el perfil a admin
@@ -291,42 +224,6 @@ server.post('/forgot', (req, res) => { // funciona bien
 })
 
 
-        // {
-        //     const email = req.body.email
-        //     process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-
-        //     const transporter = nodemailer.createTransport({
-        //         service: 'gmail',
-        //         auth: {
-        //             user: 'noreplylacoseria@gmail.com',
-        //             pass: 'ohqrgkrmeqhcamil',
-        //         }
-        //     })
-
-        //     const mailOptions = {
-        //         from: 'noreplylacoseria@gmail.com',
-        //         to: email,
-        //         subject: 'Nodemailer Test',
-        //         text: 'message'
-        //     }
-
-        //     transporter.sendEmail(mailOptions, (err, info) => {
-        //         if (err) {
-        //             return console.log(err)
-        //         } else {
-        //             res.json({
-        //                 message: 'Email send'
-        //             })
-        //         }
-        //     })
-        // })
-        // return res.status(200)
-    
-    // }
-    // ]);
-// });
-
-
 
 server.post('/reset/:token', (req, res) => {
     //2020-09-24 22:17:40 ---> date from database 
@@ -360,42 +257,6 @@ server.post('/reset/:token', (req, res) => {
         res.status(404);
     })
 })
-
-// server.get('/sendemail', (req, res) => {
-//     const email = req.body.email
-//     console.log('email', email)
-//     process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-
-//     const transporter = nodemailer.createTransport({
-//         service: 'gmail',
-//         auth: {
-//             user: process.env.EMAIL,
-//             pass: process.env.PASSWORD,
-//         }
-//     })
-
-//     function sendEmail(email, res) {
-//         const mailOptions = {
-//             from: 'noreplylacoseria@gmail.com',
-//             to: email,
-//             subject: 'Nodemailer Test',
-//             text: 'message'
-//         }
-//     }
-
-//     transporter.sendEmail(mailOptions, (err, info) => {
-//         if (err) {
-//             return console.log(err)
-//         } else {
-//             res.json({
-//                 message: 'Email send'
-//             })
-//         }
-//     })
-
-//     sendEmail(email)
-
-// })
 
 
 module.exports = server;
