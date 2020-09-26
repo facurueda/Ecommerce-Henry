@@ -24,8 +24,7 @@ export const actionGetUserById = (idUser) => {
 }
 export const actionVerifyCookies = (cookie) => {
     return (dispatch) => {
-        axios.post(url + 'auth/cookie', cookie, { withCredentials: true }).then((res) => {
-            console.log('resVerifyCookie', res.data)
+        axios.post(url + 'auth/cookie', cookie, {withCredentials: true}).then((res) => {
             if (res.verified) {
                 dispatch({ type: AUTH_FAILED, payload: res.data })
             } else {
