@@ -8,12 +8,7 @@ const bcrypt = require('bcrypt')
 const aleatoryNumber = () => {
     return Date.now() + Math.random()
 }
-
-const crypto = require('crypto');
-const async = require("async");
 const nodemailer = require('nodemailer')
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 
@@ -85,6 +80,7 @@ server.post('/login', (req, res, next) => {
         res.send(userValues)
     })
 })
+
 server.post('/logout', (req, res) => {
     req.logout()
     res.send({
@@ -92,7 +88,6 @@ server.post('/logout', (req, res) => {
     })
 });
 
-/////s67 cambio el perfil a admin
 server.post('/promote/:id', isAdmin, (req, res) => {
     User.findOne({
         where: {
@@ -105,9 +100,7 @@ server.post('/promote/:id', isAdmin, (req, res) => {
         })
     })
 })
-const toLog = ((type, cmd) => {
-    console.log('\n' + type + ': \n', cmd)
-})
+
 server.post('/cookie', async (req, res) => {
     const {
         idUser
@@ -116,7 +109,6 @@ server.post('/cookie', async (req, res) => {
     const hashedPassword = await bcrypt.hash('guest', 10)
     let carrito = null;
     let userAux = null;
-    // Llega info del front, si idUser no existe o es 0 se cre el usuario GUEST con su Orden
 
     if (idUser == 0 || !idUser) {
         User.create({
@@ -134,7 +126,6 @@ server.post('/cookie', async (req, res) => {
                 return newUser
             })
         }).then((newUser) => {
-            // status(401)
             res.send({
                 idUser: newUser.idUser,
                 name: newUser.name,
@@ -172,8 +163,7 @@ server.post('/cookie', async (req, res) => {
 
 let token = Math.floor((Math.random() * 1000000) + 1);
 
-
-server.post('/forgot', (req, res) => { // funciona bien
+server.post('/forgot', (req, res) => { 
 
     console.log(req.body);
 
@@ -182,22 +172,22 @@ server.post('/forgot', (req, res) => { // funciona bien
             email: req.body.email
         }
     }).then((user) => {
-        if (!user) { //404 enviarrr
+        if (!user) { 
             req.flash('error', 'Not acount with that email adress exists.');
-            res.status(404); // so no existe tiro error
+            res.status(404); 
             return res.redirect('/forgot')
         }
-        user.update({ //si el usuario existe actualizo las propiedades del modelo
+        user.update({
             ...user,
-            resetPasswordToken: token, // le doy la contraseña 
-            resetPasswordExpires: Date.now() + 3600000 // y un tiempo de expiracion
+            resetPasswordToken: token, 
+            resetPasswordExpires: Date.now() + 3600000 
         }).then(() => 
         {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
                   user: 'noreplylacoseria@gmail.com',
-                  pass: 'ohqrgkrmeqhcamil' // naturally, replace both with your real credentials or an application-specific password
+                  pass: 'ohqrgkrmeqhcamil' 
                 }
               });
 
@@ -207,7 +197,6 @@ server.post('/forgot', (req, res) => { // funciona bien
                 from: 'noreplylacoseria@gmail.com',
                 to: req.body.email,
                 subject: 'Invoices due',
-                // text: 'El link para resetear tu constraseña es ' + token,
                 html: `El link para resetear tu constraseña es: <a href= ${linkReset}> LINK </a>`
               };
               
@@ -226,9 +215,6 @@ server.post('/forgot', (req, res) => { // funciona bien
 
 
 server.post('/reset/:token', (req, res) => {
-    //2020-09-24 22:17:40 ---> date from database 
-    //24 2020 22:14:07 GMT-0300 to string
-    //http://localhost:3000/auth/reset/470f2082ddc414d51db94c686833c6e17b737d22
     console.log("token", req.params.token);
     User.findOne({
         where: {
