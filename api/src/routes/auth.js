@@ -11,6 +11,7 @@ const aleatoryNumber = () => {
 
 const crypto = require('crypto');
 const async = require("async");
+const nodemailer = require('nodemailer')
 
 
 
@@ -296,6 +297,41 @@ server.post('/reset/:token', (req, res) => {
         req.flash('Password token reset has expired');
         res.status(404);
     })
+})
+
+server.get('/sendemail', (req, res) => {
+    const email = req.body.email
+    process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD,
+        }
+    })
+
+    function sendEmail(email, res) {
+        const mailOptions = {
+            from: 'noreplylacoseria@gmail.com',
+            to: email,
+            subject: 'Nodemailer Test',
+            text: 'message'
+        }
+    }
+
+    transporter.sendEmail(mailOptions, (err, info) => {
+        if (err){
+            return console.log(err)
+        } else {
+            res.json({
+                message: 'Email send'
+            })
+        }
+    })
+
+    sendEmail(email)
+
 })
 
 

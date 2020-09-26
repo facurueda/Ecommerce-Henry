@@ -1,15 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router'
-import { actionAddToCart, actionGetOrder, actionSetQuantity } from '../../redux/ordersActions'
+import { actionAddToCart } from '../../redux/ordersActions'
 import './ButtonAddToCart.css'
-import { useCookies } from 'react-cookie';
 
 const ButtonAddToCart = (props) => {
     const dispatch = useDispatch()
-    const history = useHistory()
     const user = useSelector(state => state.usersReducer.idUser)
-    const orders = useSelector(state => state.ordersReducer.order);
 
 
     const handleChancla = () => {
