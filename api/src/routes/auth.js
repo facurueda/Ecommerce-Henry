@@ -11,7 +11,6 @@ const aleatoryNumber = () => {
 
 const crypto = require('crypto');
 const async = require("async");
-const sendEmail = require('./createemail.js').sendEmail;
 
 
 
@@ -61,14 +60,18 @@ server.get('/me', isUserOrAdmin, (req, res) => {
             idUser: req.user.idUser
         }
     }).then(user => {
-        res.send({
+        // console.log('USER TO SEND FRONT', user)
+        const cualquiercosa = {
             ...user,
-            verified: true
-        })
-    }).catch(() => {
-        res.send({ response: "Sesion no existe "})
+            dataValues: {
+                ...user.dataValues,
+                verified: true
+            }
+        }
+        console.log('asdasdasdasd', cualquiercosa)
+        res.send( cualquiercosa )
+    
     })
-
 })
 
 
@@ -76,7 +79,7 @@ server.get('/me', isUserOrAdmin, (req, res) => {
 
 server.post('/login', passport.authenticate('local', {
     session: true,
-    successRedirect: 'http://localhost:3000/auth/me',
+    // successRedirect: 'http://localhost:3000/auth/me',
     failureRedirect: 'http://localhost:3000/auth/testAuth',
     failureFlash: true,
 }))

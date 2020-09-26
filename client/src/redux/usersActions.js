@@ -48,7 +48,7 @@ export const actionUserCreate = (props) => {
 
 export const actionLogin = (inputs) => {
     return (dispatch) => {
-        var data = inputs;
+        var data = qs.stringify(inputs);
         var config = {
             withCredentials: true,
             method: 'post',
@@ -60,16 +60,24 @@ export const actionLogin = (inputs) => {
         };
 
         axios(config)
-            .then(function (res) {
-                console.log(res)
-                dispatch({
-                    type: POST_LOGIN,
-                    payload: res.data
-                })
+            .then(() => {
+                axios.get('http://localhost:3000/auth/me')
+                .then( res => {
+                    console.log(res.data.idUser)
+                    return dispatch({ type: POST_LOGIN, payload: res.data })
+                }
+                    
+                )
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+
+
+            // function (res) {
+                
+            // }
+
+            // .catch(function (error) {
+            //     console.log(error);
+            // });
         
         
         // axios.post(url + 'auth/login', inputs).then((res) => {
