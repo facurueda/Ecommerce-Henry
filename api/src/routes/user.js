@@ -165,7 +165,7 @@ server.post('/:idUser/cart', isAdmin, (req, res, next) => {
 //////// register 
 server.post('/', async (req, res, next) => {
 
-    const {        
+    const {              
         name,
         email,
         password,
@@ -193,9 +193,9 @@ server.post('/', async (req, res, next) => {
             })
         }).then(() => {
             res.redirect('http://localhost:3000/auth/login')
-        })
+        })/* .catch(next); */ 
 
-});
+})
 
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', isAdmin, (req, res, next) => {

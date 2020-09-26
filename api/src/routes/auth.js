@@ -11,6 +11,7 @@ const aleatoryNumber = () => {
 
 const crypto = require('crypto');
 const async = require("async");
+const router = require('./index.js');
 const sendEmail = require('./createemail.js').sendEmail;
 
 
@@ -224,8 +225,8 @@ server.post('/forgot', (req, res) => {   // funciona bien
                     resetPasswordExpires: Date.now() + 3600000 // y un tiempo de expiracion
                 })
             })
-        }
-    ]);
+        }        
+    ])
 });
 
 
@@ -254,14 +255,56 @@ server.post('/reset/:token', (req, res) => {
                     resetPasswordExpires: null,
                     resetPasswordToken: null,
                 })
+                res.status(200);
             }
         }
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log('3');
         req.flash('Password token reset has expired');
         res.status(404);
     })
 })
 
+
+server.get('/sendemail', (req,res) =>{
+    const email = req.body.email;
+    /* const message = req.body.message; */
+    console.log(req.body.email)
+    sendEmail(email);
+   
+    
+const transporter = nodemailer.createTransport({
+  /*   host: 'smtp.ethereal.email', */
+ /*    port: 587,
+    secure: false, */
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+    }
+});
+//we create JSON object which will define the email structure
+function sendEmail(email, message, res, next) {
+    const mailOptions = {
+      from: `noreplylacoseria@gmail.com`,
+      to: email,
+      subject: `Nodemailer test`,
+      text: /* n\n' +
+             req.body.me req.body.name + '\n' +
+             req.body.email + '\ssage,   */   
+             'that is simply'
+    };
+   
+   transporter.sendMail(mailOptions, (err, info) => {
+      if (err){
+          return console.log(err)
+      } else {   
+      res.status(200).json({
+        message: 'Email sent'
+      })};
+   });
+   }
+})
 
 module.exports = server;
