@@ -21,7 +21,6 @@ const NavBar = () => {
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const idUser = useSelector(state => state.usersReducer.idUser)
-    console.log('idUser useselector', idUser)
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
@@ -41,7 +40,6 @@ const NavBar = () => {
         dispatch(actionSetVerified(false))
     }
     useEffect(() => {
-        console.log(cookie)
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {
             return dispatch(actionGetOrdersByUser(cookie.idUser))

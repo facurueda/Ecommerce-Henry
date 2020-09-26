@@ -13,7 +13,6 @@ export const actionGetOrder = (idUser) => {
     return async (dispatch) => {
         await axios.get(url + 'order/' + idUser, {withCredentials: true}).then(res => {
             dispatch({ type: GET_ORDER_BY_ID, payload: res.data })
-            console.log('respuesta', res)
             return res.data
         }).then((data) => {
             if (data.products) {
