@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     resetPasswordExpires: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.DECIMAL(38,0),
     },
     password: {
       type: DataTypes.STRING,

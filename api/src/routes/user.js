@@ -189,19 +189,19 @@ server.post('/', async (req, res, next) => {
                     email: email,
                     password: hashedPassword,
                     level: 'user'
+                }).then(user => {
+                    return Order.create({
+                        idUser: user.idUser,
+                        status: 'CREADA'
+                    })
+                }).then(() => {
+                    res.redirect('http://localhost:3000/auth/login')
                 })
             } else {
                 res.status(404).send({
                     result: "El usuario ya existe"
                 })
             }
-        }).then(user => {
-            return Order.create({
-                idUser: user.idUser,
-                status: 'CREADA'
-            })
-        }).then(() => {
-            res.redirect('http://localhost:3000/auth/login')
         })
 
 });

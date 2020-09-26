@@ -22,7 +22,8 @@ function isAdmin(req, res, next) {
         if (req.user.level === 'admin') {
             console.log('this user is ADMIN')
             return next()
-        } console.log('this user DOESNT ADMIN')
+        }
+        console.log('this user DOESNT ADMIN')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     // -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO -- //
@@ -37,7 +38,8 @@ function isUserOrAdmin(req, res, next) {
         if (req.user.level === 'user' || req.user.level === 'admin') {
             console.log('el usuario esta logeado')
             return next()
-        } console.log('this user is GUEST')
+        }
+        console.log('this user is GUEST')
     }
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
@@ -65,14 +67,14 @@ server.get('/me', isUserOrAdmin, (req, res) => {
     }).then(user => {
         // console.log('USER TO SEND FRONT', user)
 
-    //     return user.update({
-    //         ...user,
-    //         verified: true
-    //     }) 
-    // }).then((response) => {
-    //     console.log('asdasdasdasd', response)
-    //     res.send( response )
-    // })   
+        //     return user.update({
+        //         ...user,
+        //         verified: true
+        //     }) 
+        // }).then((response) => {
+        //     console.log('asdasdasdasd', response)
+        //     res.send( response )
+        // })   
         const cualquiercosa = {
             ...user,
             dataValues: {
@@ -80,7 +82,7 @@ server.get('/me', isUserOrAdmin, (req, res) => {
                 verified: true
             }
         }
-        res.send( cualquiercosa )
+        res.send(cualquiercosa)
     })
 })
 
@@ -101,7 +103,10 @@ server.post('/login', (req, res, next) => {
             email: req.body.email
         }
     }).then(user => {
-        const userValues = {...user.dataValues,verified: true}
+        const userValues = {
+            ...user.dataValues,
+            verified: true
+        }
         console.log(userValues)
         res.send(userValues)
     })
@@ -232,38 +237,94 @@ server.post('/cookie', async (req, res) => {
 
 //////////////////////////////// password resset
 
-server.post('/forgot', (req, res) => {   // funciona bien
+let token = Math.floor((Math.random() * 1000000) + 1);
+
+
+server.post('/forgot', (req, res) => { // funciona bien
+
     console.log(req.body);
 
-    async.waterfall([   // creo un token 
-        function (done) {
-            crypto.randomBytes(20, function (err, buf) {
-                var token = buf.toString('hex');
-                done(err, token)
-            })
-        },
-
-        function (token, done) { // busco el usuario 
-            User.findOne({
-                where: {
-                    email: req.body.email
-                }
-            }).then((user) => {
-                if (!user) {  //404 enviarrr
-                    req.flash('error', 'Not acount with that email adress exists.');
-                    res.status(404); // so no existe tiro error
-                    return res.redirect('/forgot')
-                }
-                user.update({   //si el usuario existe actualizo las propiedades del modelo
-                    ...user,
-                    resetPasswordToken: token,  // le doy la contraseña 
-                    resetPasswordExpires: Date.now() + 3600000 // y un tiempo de expiracion
-                })
-                return res.status(200)
-            })
+    User.findOne({
+        where: {
+            email: req.body.email
         }
-    ]);
-});
+    }).then((user) => {
+        if (!user) { //404 enviarrr
+            req.flash('error', 'Not acount with that email adress exists.');
+            res.status(404); // so no existe tiro error
+            return res.redirect('/forgot')
+        }
+        user.update({ //si el usuario existe actualizo las propiedades del modelo
+            ...user,
+            resetPasswordToken: token, // le doy la contraseña 
+            resetPasswordExpires: Date.now() + 3600000 // y un tiempo de expiracion
+        }).then(() => 
+        {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'noreplylacoseria@gmail.com',
+                  pass: 'ohqrgkrmeqhcamil' // naturally, replace both with your real credentials or an application-specific password
+                }
+              });
+
+              const linkReset = 'http://localhost:3001/auth/reset/' + token
+              
+              const mailOptions = {
+                from: 'noreplylacoseria@gmail.com',
+                to: req.body.email,
+                subject: 'Invoices due',
+                // text: 'El link para resetear tu constraseña es ' + token,
+                html: `El link para resetear tu constraseña es: <a href= ${linkReset}> LINK </a>`
+              };
+              
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+              });
+        })
+    })
+
+})
+
+
+        // {
+        //     const email = req.body.email
+        //     process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
+        //     const transporter = nodemailer.createTransport({
+        //         service: 'gmail',
+        //         auth: {
+        //             user: 'noreplylacoseria@gmail.com',
+        //             pass: 'ohqrgkrmeqhcamil',
+        //         }
+        //     })
+
+        //     const mailOptions = {
+        //         from: 'noreplylacoseria@gmail.com',
+        //         to: email,
+        //         subject: 'Nodemailer Test',
+        //         text: 'message'
+        //     }
+
+        //     transporter.sendEmail(mailOptions, (err, info) => {
+        //         if (err) {
+        //             return console.log(err)
+        //         } else {
+        //             res.json({
+        //                 message: 'Email send'
+        //             })
+        //         }
+        //     })
+        // })
+        // return res.status(200)
+    
+    // }
+    // ]);
+// });
 
 
 
@@ -300,41 +361,41 @@ server.post('/reset/:token', (req, res) => {
     })
 })
 
-server.get('/sendemail', (req, res) => {
-    const email = req.body.email
-    console.log('email', email)
-    process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+// server.get('/sendemail', (req, res) => {
+//     const email = req.body.email
+//     console.log('email', email)
+//     process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD,
-        }
-    })
+//     const transporter = nodemailer.createTransport({
+//         service: 'gmail',
+//         auth: {
+//             user: process.env.EMAIL,
+//             pass: process.env.PASSWORD,
+//         }
+//     })
 
-    function sendEmail(email, res) {
-        const mailOptions = {
-            from: 'noreplylacoseria@gmail.com',
-            to: email,
-            subject: 'Nodemailer Test',
-            text: 'message'
-        }
-    }
+//     function sendEmail(email, res) {
+//         const mailOptions = {
+//             from: 'noreplylacoseria@gmail.com',
+//             to: email,
+//             subject: 'Nodemailer Test',
+//             text: 'message'
+//         }
+//     }
 
-    transporter.sendEmail(mailOptions, (err, info) => {
-        if (err){
-            return console.log(err)
-        } else {
-            res.json({
-                message: 'Email send'
-            })
-        }
-    })
+//     transporter.sendEmail(mailOptions, (err, info) => {
+//         if (err) {
+//             return console.log(err)
+//         } else {
+//             res.json({
+//                 message: 'Email send'
+//             })
+//         }
+//     })
 
-    sendEmail(email)
+//     sendEmail(email)
 
-})
+// })
 
 
 module.exports = server;

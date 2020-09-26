@@ -84,12 +84,21 @@ export const actionSetVerified = (bool) => {
     return (dispatch) => { dispatch({ type: SET_VERIFIED, payload: bool }) }
 }
 
+// export const actionResetPassword = (email) => {
+//     return (
+//         (dispatch) => {
+//             axios.post(url + 'auth/forgot', email, { withCredentials: true }).then((res)=> {
+//                 return dispatch({ type: RESET_PASSWORD, payload: res.data})
+//             })
+//         }
+//     )
+// }
+
 export const actionResetPassword = (email) => {
     return (
         (dispatch) => {
-            axios.post(url + 'auth/forgot', email, { withCredentials: true }).then((res)=> {
-                console.log('rere', res.data)
-                return dispatch({ type: RESET_PASSWORD, payload: res.data})
+            axios.post(url + 'auth/forgot', email, { withCredentials: true }).then((res) => {
+                return dispatch({ type: RESET_PASSWORD , payload: res.data })
             })
         }
     )
