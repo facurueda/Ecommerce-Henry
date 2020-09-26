@@ -11,16 +11,11 @@ const {
 function initialize(passport) {
 
   const authenticateUser = async (req, email, password, done) => {
-<<<<<<< HEAD
-
-     const {
-=======
     const {
->>>>>>> a138ce1b60ff8f3e9814b6901b025dd8f84f9260
       idUser
-    } = req.body 
+    } = req.body
 
-    User.findOne({
+    const user = await User.findOne({
       where: {
         email: email
       }

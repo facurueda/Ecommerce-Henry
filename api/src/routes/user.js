@@ -168,11 +168,7 @@ server.post('/:idUser/cart', (req, res, next) => {
 //////// register 
 server.post('/', async (req, res, next) => {
 
-<<<<<<< HEAD
-    const {              
-=======
     const {
->>>>>>> a138ce1b60ff8f3e9814b6901b025dd8f84f9260
         name,
         email,
         password,
@@ -206,9 +202,9 @@ server.post('/', async (req, res, next) => {
             })
         }).then(() => {
             res.redirect('http://localhost:3000/auth/login')
-        })/* .catch(next); */ 
+        })
 
-})
+});
 
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
