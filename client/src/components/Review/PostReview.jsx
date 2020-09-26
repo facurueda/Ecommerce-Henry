@@ -3,10 +3,12 @@ import { actionPostReview } from '../../redux/reviewsAction';
 import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useDispatch } from 'react-redux';
 import './Review.css'
+import StarRating from '../starRating/starRating';
 
 const PostReview = (props) => {
     const { modalPostReviewClose, idProduct } = props;
-    const [rev, setReview] = useState();
+    const [rating,setRating] = useState(0)
+    const [rev, setReview] = useState({});
     const dispatch = useDispatch();
 
     const handlePostReview = () => {
@@ -15,9 +17,11 @@ const PostReview = (props) => {
     }
 
     const handleChangePost = (e) => {
+        const {name, value} = e.target
         setReview({
+            ...rev,
             idProduct,
-            [e.target.name]: e.target.value
+            [name]: value
         })
     }
     return (
@@ -27,8 +31,9 @@ const PostReview = (props) => {
                 <div className="addProductTitle">Add your Review</div>
             </ModalHeader>
             <ModalBody id='ModalBodyContainer'>
-                <input className = 'descriptionReview' type="text" name='description' onClick={handleChangePost} placeholder='Your Review' ></input>
-                <button className ='createOrEdit' onClick={handlePostReview} >Crear review</button>
+            <StarRating rat={rating} setRat={handleChangePost} />
+                <input className='descriptionReview' type="text" name='description' onChange={handleChangePost} placeholder='Your Review' ></input>
+                <button className='createOrEdit' onClick={handlePostReview} >Crear review</button>
             </ModalBody>
             <ModalFooter id='ModalFooterContainer'>
             </ModalFooter>

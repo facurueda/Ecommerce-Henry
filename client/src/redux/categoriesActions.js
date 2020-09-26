@@ -20,7 +20,7 @@ export const actionCategoriesFailure = (error) => {
 }
 export const actionGetCategories = () => {
   return (dispatch) => {
-    axios.get('http://localhost:3000/category/').then(res => {
+    axios.get('http://localhost:3000/category/',{withCredentials: true}).then(res => {
       dispatch(actionGetCategoriesSuccess(res.data))
     }).catch(error => {
       dispatch(actionCategoriesFailure('Hubo un error al buscar las categorias'))
@@ -29,7 +29,7 @@ export const actionGetCategories = () => {
 }
 export const actionPostCategory = (category) => {
   return (dispatch) => {
-    axios.post(url + 'category/create', category).then(() => {
+    axios.post(url + 'category/create', category,{withCredentials: true}).then(() => {
       actionGetCategories()
     }).catch(error => {
       dispatch({ type: POST_CATEGORY_ERROR })
@@ -38,14 +38,14 @@ export const actionPostCategory = (category) => {
 }
 export const actionDeleteCategory = (category) => {
   return (dispatch) => {
-    axios.delete(url + 'category/' + category.idCategory).then(() => {
+    axios.delete(url + 'category/' + category.idCategory,{withCredentials: true}).then(() => {
       dispatch(actionGetCategories())
     }).catch(actionCategoriesFailure('Hubo un error al eliminar la categoria.'))
   }
 }
 export const actionUpdateCategory = (category) => {
   return (dispatch) => {
-    axios.put(url + 'category/' + category.idCategory, category).then(() => {
+    axios.put(url + 'category/' + category.idCategory, category,{withCredentials: true}).then(() => {
       dispatch({ type: PUT_CATEGORY })
       dispatch(actionGetCategories())
     })

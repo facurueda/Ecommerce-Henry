@@ -66,20 +66,16 @@ export const actionLogin = (inputs) => {
                     console.log(res.data)
                     return dispatch({ type: POST_LOGIN, payload: res.data.dataValues })
                 }
-                    
                 )
             })
 
 
             // function (res) {
-                
             // }
 
             // .catch(function (error) {
             //     console.log(error);
             // });
-        
-        
         // axios.post(url + 'auth/login', inputs).then((res) => {
         //     console.log('userData', res.data)
         //     return dispatch({ type: POST_LOGIN, payload: res.data })
