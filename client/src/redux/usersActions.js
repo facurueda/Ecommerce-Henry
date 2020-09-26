@@ -61,10 +61,10 @@ export const actionLogin = (inputs) => {
 
         axios(config)
             .then(() => {
-                axios.get('http://localhost:3000/auth/me')
+                axios.get(url + 'auth/me', {withCredentials: true})
                 .then( res => {
-                    console.log(res.data.idUser)
-                    return dispatch({ type: POST_LOGIN, payload: res.data })
+                    console.log(res.data)
+                    return dispatch({ type: POST_LOGIN, payload: res.data.dataValues })
                 }
                     
                 )
