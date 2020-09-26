@@ -251,7 +251,7 @@ server.post('/forgot', (req, res) => {   // funciona bien
             }).then((user) => {
                 if (!user) {  //404 enviarrr
                     req.flash('error', 'Not acount with that email adress exists.');
-                    res.status.send(404); // so no existe tiro error
+                    res.status(404); // so no existe tiro error
                     return res.redirect('/forgot')
                 }
                 user.update({   //si el usuario existe actualizo las propiedades del modelo
@@ -259,6 +259,7 @@ server.post('/forgot', (req, res) => {   // funciona bien
                     resetPasswordToken: token,  // le doy la contraseña 
                     resetPasswordExpires: Date.now() + 3600000 // y un tiempo de expiracion
                 })
+                return res.status(200)
             })
         }
     ]);
@@ -301,6 +302,7 @@ server.post('/reset/:token', (req, res) => {
 
 server.get('/sendemail', (req, res) => {
     const email = req.body.email
+    console.log('email', email)
     process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
     const transporter = nodemailer.createTransport({

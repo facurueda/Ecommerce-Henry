@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RESET_PASSWORD, GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED, SET_COOKIE_TO_STORE, GET_ORDER_BY_ID } from "./constants";
+import { RESET_PASSWORD, SEND_EMAIL, GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED, SET_COOKIE_TO_STORE, GET_ORDER_BY_ID } from "./constants";
 const url = "http://localhost:3000/";
 // const cors = require('cors')
 var qs = require('qs');
@@ -87,9 +87,11 @@ export const actionSetVerified = (bool) => {
 export const actionResetPassword = (email) => {
     return (
         (dispatch) => {
-            axios.get(url + 'forgot', email, { withCredentials: true }).then((res => {
-                return dispatch({ type: RESET_PASSWORD })
-            }))
+            axios.post(url + 'auth/forgot', email, { withCredentials: true }).then((res)=> {
+                console.log('rere', res.data)
+                return dispatch({ type: RESET_PASSWORD, payload: res.data})
+            })
         }
     )
 }
+
