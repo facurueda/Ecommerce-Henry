@@ -38,7 +38,7 @@ export const actionPostCategory = (category) => {
 }
 export const actionDeleteCategory = (category) => {
   return (dispatch) => {
-    axios.delete(url + 'category/' + category.idCategory).then(() => {
+    axios.delete(url + 'category/' + category.idCategory,{withCredentials: true}).then(() => {
       dispatch(actionGetCategories())
     }).catch(actionCategoriesFailure('Hubo un error al eliminar la categoria.'))
   }

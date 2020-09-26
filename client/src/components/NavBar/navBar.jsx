@@ -73,13 +73,13 @@ const NavBar = () => {
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
                         {/* <form action="/"> */}
-                            <div><button className='buttonHome'><a href= '/' className='textnav'>Home</a></button></div>
+                        <div><button className='buttonHome'><a href='/' className='textnav'>Home</a></button></div>
 
                         {/* </form> */}
                         <form action="/catalogue">
                             <button className='buttonProducts'><p className='textnav'>Products</p></button>
                         </form>
-                        {level === 'user' ? (
+                        {level === 'user' || level === 'admin' ? (
                             <form action="/myAccount">
                                 <button className='buttonProducts' >My Account</button>
                             </form>

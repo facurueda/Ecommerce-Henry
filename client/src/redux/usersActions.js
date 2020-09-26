@@ -16,7 +16,7 @@ export const actionSetCookieToStore = (cookie) => {
 
 export const actionGetUserById = (idUser) => {
     return (dispatch) => {
-        axios.get(url + 'user/' + idUser, {withCredentials: true}).then(res => {
+        axios.get(url + 'user/' + idUser, { withCredentials: true }).then(res => {
             console.log(res.data)
             dispatch({ type: GET_USER_BY_ID, payload: res.data })
         })
@@ -39,7 +39,7 @@ export const actionVerifyCookies = (cookie) => {
 
 export const actionUserCreate = (props) => {
     return (dispatch) => {
-        axios.post(url + 'user', props, {withCredentials: true}).then(() => {
+        axios.post(url + 'user', props, { withCredentials: true }).then(() => {
             dispatch({ type: USER_CREATED })
         })
     }
@@ -60,23 +60,21 @@ export const actionLogin = (inputs) => {
 
         axios(config)
             .then(() => {
-                axios.get(url + 'auth/me', {withCredentials: true})
-                .then( res => {
+                axios.get(url + 'auth/me', { withCredentials: true }).then(res => {
                     console.log(res.data)
                     return dispatch({ type: POST_LOGIN, payload: res.data.dataValues })
                 })
-            }
-        )
+            })
     }
 }
 
 export const actionLogOut = (cookie) => {
     return (
         (dispatch) => {
-            axios.post(url + 'auth/logout',cookie).then((res) => {
+            axios.post(url + 'auth/logout', cookie).then((res) => {
                 console.log(res)
-                return dispatch({ type: USER_LOGGED_OUT})
-            }).catch(error => {console.log(error)})
+                return dispatch({ type: USER_LOGGED_OUT })
+            }).catch(error => { console.log(error) })
         }
     )
 }
@@ -88,7 +86,7 @@ export const actionSetVerified = (bool) => {
 export const actionResetPassword = (email) => {
     return (
         (dispatch) => {
-            axios.get(url + 'forgot', email, {withCredentials: true}).then((res => {
+            axios.get(url + 'forgot', email, { withCredentials: true }).then((res => {
                 return dispatch({ type: RESET_PASSWORD })
             }))
         }

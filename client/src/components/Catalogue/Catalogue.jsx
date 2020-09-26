@@ -10,7 +10,7 @@ const Catalogue = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(actionGetCategories())
-        return dispatch(actionGetProducts())
+        dispatch(actionGetProducts())
     }, [])
     const categories = useSelector(state => state.categoriesReducer.categories)
     const loading = useSelector(state => state.productsReducer.loading)
