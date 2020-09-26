@@ -20,11 +20,7 @@ export const actionCategoriesFailure = (error) => {
 }
 export const actionGetCategories = () => {
   return (dispatch) => {
-<<<<<<< HEAD
-    axios.get('http://localhost:3000/category/',{withCredentials: true}).then(res => {
-=======
     axios.get('http://localhost:3000/category/', {withCredentials: true}).then(res => {
->>>>>>> 4df65f0bbb8e8b51299ac6a57a8e9975d783c92f
       dispatch(actionGetCategoriesSuccess(res.data))
     }).catch(error => {
       dispatch(actionCategoriesFailure('Hubo un error al buscar las categorias'))
