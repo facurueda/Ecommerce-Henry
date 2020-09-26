@@ -90,7 +90,7 @@ const NavBar = () => {
                     <div className='searchBar'>
                         <SearchBar />
                     </div>
-                    {level === 'user' ?
+                    {level === 'user' || level === 'admin' ?
                         (
                             <div className='userLogged' >
                                 <UserLogged />
