@@ -13,14 +13,17 @@ const AdminNavBar = (props) => {
             <form action="/Categories">
                 <button className='buttonLoginAndRegister'>Modificar categorias</button>
             </form>
-                <button className='buttonLoginAndRegister' onClick={modalOrdersTableView}>Lista de ordenes</button>
-                <Modal isOpen={ModalOrdersTable} toggle={ModalOrdersTable}>
-                    <button className='buttonLoginAndRegister' onClick={() => {
-                        modalOrdersTableView()
-                        window.location.reload()
-                    }}>Close</button>
-                    <AdminOrdersTable />
-                </Modal>
+            <button className='buttonLoginAndRegister' onClick={() => {
+                document.getElementById("orden").hidden =true
+                modalOrdersTableView()
+            }}>Todas las ordenes</button>
+            <Modal isOpen={ModalOrdersTable} toggle={ModalOrdersTable}>
+                <button className='buttonLoginAndRegister' onClick={() => {
+                    modalOrdersTableView()
+                    window.location.reload()
+                }}>Close</button>
+                <AdminOrdersTable />
+            </Modal>
         </div>
     )
 }

@@ -31,7 +31,7 @@ const MyAccount = () => {
             </div>
             <div className='ComponentContainer'>
                 {level === 'admin' ? (<div><AdminNavBar /></div>): (<div></div>)}
-                <div className='ordersContainer'>
+                <div id='orden' className='ordersContainer'>
                     <div>
                         {orders.map(order => {
                             return <Orders key={order.idOrder} order={order} />
