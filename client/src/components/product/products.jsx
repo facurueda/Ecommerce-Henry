@@ -21,8 +21,14 @@ function Products() {
     const modalEditReviewView = () => setModalEditReview(!modalEditReview);
     const modalPostReviewView = () => setModalPostReview(!modalPostReview);
 
-    const modalEditReviewClose = () => setModalEditReview(false);
-    const modalPostReviewClose = () => setModalPostReview(false);
+    const modalEditReviewClose = () => {
+        setModalEditReview(false)
+        dispatch(actionGetReviews(idProduct))
+    };
+    const modalPostReviewClose = () => {
+        setModalPostReview(false)
+        dispatch(actionGetReviews(idProduct))
+    };
     const user = useSelector(state => state.usersReducer.idUser)
     const reviews = useSelector(state => state.reviewsReducer.reviews)
     const review = reviews.find(rev => rev.idUser === user)
@@ -67,7 +73,7 @@ function Products() {
                         <div className='prodComp3'>
                             <div className='priceAndStockContainer'>
                                 <span className='prodPrice'>${precio} </span>
-                                <p className='prodStock'>Stock: {stock}</p>
+                                <p className='prodStock'>Stock: {stock} unidades</p>
                             </div>
                             <div className='buttons'>
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />

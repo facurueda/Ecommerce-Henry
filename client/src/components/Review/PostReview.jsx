@@ -7,7 +7,7 @@ import StarRating from '../starRating/starRating';
 
 const PostReview = (props) => {
     const { modalPostReviewClose, idProduct } = props;
-    const [rating,setRating] = useState(0)
+    const [rating] = useState(0)
     const [rev, setReview] = useState({});
     const dispatch = useDispatch();
     const handlePostReview = () => {
