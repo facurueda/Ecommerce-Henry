@@ -1,11 +1,8 @@
-
 @import url('https://fonts.googleapis.com/css?family=Mukta:700');
-
 .componentsContainer {
     margin-top: 100px;
     color: white;
 }
-
 tr,
 .categories {
   display: flex;

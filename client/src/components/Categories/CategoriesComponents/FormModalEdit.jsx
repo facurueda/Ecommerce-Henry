@@ -10,23 +10,18 @@ import './FormModalEdit.css'
 
 const FormModalEdit = (props) => {
   const { currentCategory, modalEditViewFalse, updateCategory, categories } = props;
-
   const [category, setCategory] = useState(currentCategory);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setCategory({ ...category, [name]: value });
   };
-
   return (
-    <div className= 'editCategory'>
+    <div className='editCategory'>
       <ModalHeader>
         <div>
           <h3>Edit Category</h3>
         </div>
       </ModalHeader>
-
       <ModalBody>
         <FormGroup>
           <label>Category Name:</label>
@@ -38,7 +33,6 @@ const FormModalEdit = (props) => {
             value={category.name}
           />
         </FormGroup>
-
         <FormGroup>
           <label>Description:</label>
           <input
@@ -52,16 +46,17 @@ const FormModalEdit = (props) => {
       </ModalBody>
       <ModalFooter>
         <Button
-          className='submitButton' 
+          className='submitButton'
           onClick={(event) => {
             event.preventDefault();
             if (!category.name || !category.description) return window.alert('Empty Inputs')
-            if(categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
+            if (categories.find(
+              categories => categories.name.toUpperCase() === category.name.toUpperCase()
+            )) return window.alert('This name already been used')
             updateCategory(category);
             modalEditViewFalse();
           }}
-        >
-          Submit{" "}
+        > Submit{" "}
         </Button>
         <Button className='exitButton' onClick={(e) => modalEditViewFalse()}>
           Exit

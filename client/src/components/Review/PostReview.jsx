@@ -10,12 +10,10 @@ const PostReview = (props) => {
     const [rating,setRating] = useState(0)
     const [rev, setReview] = useState({});
     const dispatch = useDispatch();
-
     const handlePostReview = () => {
         dispatch(actionPostReview(rev))
         modalPostReviewClose()
     }
-
     const handleChangePost = (e) => {
         const {name, value} = e.target
         setReview({

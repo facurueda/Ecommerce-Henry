@@ -10,12 +10,10 @@ const EditReview = (props) => {
     const dispatch = useDispatch()
     const [rev, setReview] = useState(review)
     const [rating,setRating] = useState(review.rating)
-
     const handleChange = () => {
          dispatch(actionEditReview(rev))
          modalEditReviewClose()
     }
-
     const handleChangeEdit = (e) => {
         const { name, value } = e.target
         setReview({
@@ -28,7 +26,6 @@ const EditReview = (props) => {
             setRating(value)
         }
     }
-
     return (
         <div className='createOrEditContainer'>
             <button className='closeButton' onClick={modalEditReviewClose}>x</button>

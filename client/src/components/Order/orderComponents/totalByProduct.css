@@ -1,12 +1,8 @@
-
 .productContainer{
-    flex: wrap;
     color: white;
     display: flex;
-    height: 130px;
     border-radius: 5px;
-    margin: 10px;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.15), rgba(47, 54, 64, 0.27));
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     width: 50%;
@@ -14,15 +10,11 @@
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    color: black;
-    padding: 20px;
+    padding: 5px;
     border-radius: 10px;
-    /* height: 130px; */
-    margin: 10px 0px 10px 0px;
-    background-color: rgba(255, 255, 255, 0.57);
-    font-family: 'Roboto', sans-serif;
+    margin: 20px;
+    margin-bottom: 5px;
 }
-
 .imgContainer {
      flex: wrap;
     display: flex;
@@ -38,7 +30,6 @@
 }
 .card{
     width: 100%;
-    max-width: 750px;
     height: auto;
     align-items: center;
     backdrop-filter: blur(7px);
@@ -80,18 +71,13 @@
     flex-direction: column;
     justify-content: center;
 }
-.productInfo,
 .productInfoName {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 15px;
     margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 300;
 }
-.productInfoName {
-    font-size: 20px;
-    font-weight: 400;
-}
-
 .buttonContainer{
     display: flex;
     margin-right:10px;
@@ -103,15 +89,13 @@
     margin-right: 5px;
     margin-bottom: 0px;
     margin-left: 0px; 
-    border: 0.1em solid #ffffff;
-    border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: #ffffff;
     width: 25px;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
     justify-content: center;
     align-self: center;
@@ -120,23 +104,18 @@
     text-align: center;
     transition: all 0.15s;
 }
-
 .deleteButton:hover {
     text-shadow: rgb(74, 74, 74);
     color:white;
     background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid #ffffff;
     flex: wrap;
 }
-
 @media all and (max-width:30em) {
     .deleteButton {
         display: block;
         margin: 0.4em auto;
     }
 }
-
-
 @media all and (max-width:30em) {
     .deleteButton {
         display: block;

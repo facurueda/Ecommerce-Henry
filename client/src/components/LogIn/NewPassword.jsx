@@ -45,8 +45,10 @@ const NewPassword = (props) => {
         <div className='generalContainerReset'>
             <h3>Escribí tu nueva contraseña aquí:</h3>
             <div className='formContainerReset'>
-                <input className='inputs1' name='password' type="password" placeholder='Password' onChange={handleChange}></input>
-                <input className='inputs2' name='secondPassword' type="password" placeholder='Repeat your password' onChange={handleChange}></input>
+                <input className='inputs1' name='password' 
+                type="password" placeholder='Password' onChange={handleChange}></input>
+                <input className='inputs2' name='secondPassword' 
+                type="password" placeholder='Repeat your password' onChange={handleChange}></input>
                 <button className='buttonLoginAndRegister' onClick={Verificar}>Verificar</button>
             </div>
         </div>

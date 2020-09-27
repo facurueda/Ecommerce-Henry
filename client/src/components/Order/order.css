@@ -1,21 +1,31 @@
 .orderContainer{
     color: white;
     display: flex;
-    margin-top: 10px;
+    margin-top: 0px;
     flex-direction: column;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    background-color: rgba(47, 54, 64, 0.57);
+}
+.orderVacia{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
 }
 .footerContent{
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
+    justify-content: flex-end;
 }
 .footerOrder{
     margin: 20px;
-    /* display: flex; */
-    /* justify-content: flex-end; */
+    display: flex;
+    flex-direction: column;
 }
 .textAmount{
     margin-left: 20px;
@@ -32,7 +42,6 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
-
 .buttonEndOrden {
     display: flex;
     justify-self: center;
@@ -50,7 +59,6 @@
     text-align: center;
     transition: all 0.15s;
 }
-
 .buttonEndOrden:hover {
     text-shadow: rgb(74, 74, 74);
     color:white;
@@ -58,15 +66,12 @@
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(7px);
 }
-
 @media all and (max-width:30em) {
     .buttonEndOrden {
         display: block;
         margin: 0.4em auto;
     }
 }
-
-
 @media all and (max-width:30em) {
     .buttonEndOrden {
         display: block;

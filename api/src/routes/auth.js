@@ -21,7 +21,6 @@ function isAdmin(req, res, next) {
         console.log('this user DOESNT ADMIN')
     }
     console.log('THIS USER NOT AUTHENTICATED')
-    // -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO -- //
     res.redirect('/')
 }
 
@@ -76,7 +75,6 @@ server.post('/login', (req, res, next) => {
             ...user.dataValues,
             verified: true
         }
-        console.log(userValues)
         res.send(userValues)
     })
 })
@@ -186,44 +184,28 @@ server.post('/forgot', (req, res) => {
                     pass: 'ohqrgkrmeqhcamil'
                 }
             });
-
             const linkReset = 'http://localhost:3001/auth/reset/?token=' + token
             const mailOptions = {
                 from: 'noreplylacoseria@gmail.com',
                 to: req.body.email,
-                subject: 'Invoices due',
+                subject: 'Cambio de contraseña',
                 html: `El link para resetear tu constraseña es: <a href= ${linkReset}> LINK </a>`
             };
-            transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Email sent: ' + info.response);
-                }
-            });
+            transporter.sendMail(mailOptions);
         })
     })
 
 })
-
-
-
 server.post('/reset', (req, res) => {
-    console.log("token", req.query.token);
     User.findOne({
         where: {
             resetPasswordToken: req.query.token
         }
     }).then(async (user) => {
-        console.log('1')
         if (!user) {
             req.flash('error', 'Sorry, we can´t find you?');
             res.redirect('/auth/forgot');
         } else {
-            console.log(user);
-            console.log('resetExp: ', user.resetPasswordExpires);
-            console.log('Now: ', Date.now());
-            console.log(req.body);
             const hasshed = await bcrypt.hash(req.body.password, 10)
             if (user.resetPasswordExpires > Date.now()) {
                 user.update({
@@ -231,11 +213,14 @@ server.post('/reset', (req, res) => {
                     password: hasshed,
                     resetPasswordExpires: null,
                     resetPasswordToken: null,
-                }).then(() => { res.send({ result: 'usuario actualizado' }) })
+                }).then(() => {
+                    res.send({
+                        result: 'usuario actualizado'
+                    })
+                })
             }
         }
     }).catch((err) => {
-        console.log('3');
         req.flash('Password token reset has expired');
         res.status(404);
     })

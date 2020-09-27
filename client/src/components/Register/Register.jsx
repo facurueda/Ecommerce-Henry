@@ -10,16 +10,12 @@ import FacebookLogin from 'react-facebook-login'
 
 
 const Register = (props) => {
-    const history = useHistory()
+
     const { modalRegisterClose, ChangeModal } = props;
-    // ---------------------------- States ---------------------------- //
     const [registerInputs, setRegisterInputs] = useState({ name: 'null', email: 'null', password: 'null', level: 'USER' })
     const [secondPassword, setSecondPassword] = useState('')
-    const idUser = useSelector(store => store.usersReducer.idUser)
-    const level = useSelector(store => store.usersReducer.level)
-    const dispatch = useDispatch();
 
-    // ---------------------------- Functions ---------------------------- //
+    const dispatch = useDispatch();
 
     const responseGoogle = (response) => {
         console.log(response);
@@ -37,15 +33,9 @@ const Register = (props) => {
     }
     const VerificarYRegistrar = () => {
         if (secondPassword === registerInputs.password) {
-            dispatch(actionUserCreate({...registerInputs}))
-            console.log('Usuario registrado.')
+            dispatch(actionUserCreate({ ...registerInputs }))
             modalRegisterClose()
-        } else {
-            console.log("Credenciales Incorrectas")
-        }
-    }
-    const tologin = () => {
-        history.push('/login')
+        } 
     }
 
     return (
@@ -55,9 +45,6 @@ const Register = (props) => {
                 <div className="registerTitle">Register</div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
-                <div>
-                    {/* Buttons GitHub, Google, Facebook? */}
-                </div>
                 <div className='FormRegisterContainer'>
                     <input className='inputRegister' id='nameRegister' name='name' type='text' placeholder='Name' onKeyPress={(e) => {
                         if (e.key === 'Enter') {
@@ -75,9 +62,10 @@ const Register = (props) => {
                         }
                     }} onChange={handleChange} />
                     <input className='inputRegister' id='secondPasswordRegister' name='secondPassword' type="password" placeholder='Repeat Password' onKeyPress={e => {
-                        if (e.key === 'Enter') { VerificarYRegistrar() }
-                    }} onChange={handleChange}/>
-
+                        if (e.key === 'Enter') {
+                            VerificarYRegistrar() 
+                        }
+                    }} onChange={handleChange} />
                     <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
                 </div>
             </ModalBody>
@@ -108,7 +96,6 @@ const Register = (props) => {
             </ModalFooter>
         </div>
     )
-
 }
 
 const mapDispatchToProps = (dispatch) => {

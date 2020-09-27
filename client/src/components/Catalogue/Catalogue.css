@@ -21,7 +21,7 @@ div.productCard.card {
     margin-top: 50px;
     margin-bottom: 50px;
     padding-bottom: 10px;
-    border-style:'none';
+    border: 0;
     justify-content: center;
 }
 button{

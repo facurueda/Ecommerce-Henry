@@ -32,7 +32,6 @@ export const actionGetUserById = (idUser) => {
         axios.get(url + 'user/' + idUser, {
             withCredentials: true
         }).then(res => {
-            console.log(res.data)
             dispatch({
                 type: GET_USER_BY_ID,
                 payload: res.data
@@ -55,8 +54,6 @@ export const actionVerifyCookies = (cookie) => {
                 })
             }
             return res
-        }).catch(res => {
-            console.log('resVerifyCookie', res)
         })
     }
 }
@@ -67,9 +64,9 @@ export const actionResetStatusReset = () => {
 }
 export const actionPasswordUpdate = (obj) => {
     return (dispatch) => {
-        axios.post(url + 'auth/reset?token=' + obj.token, { password: obj.password }, { withCredentials: true }).then((res) => {
+        axios.post(url + 'auth/reset?token=' + obj.token, { password: obj.password }, { withCredentials: true }).then(() => {
             dispatch({ type: RESET_OK, payload: ["Contraseña aplicada con éxito"] })
-        }).catch((res) => {
+        }).catch(() => {
             dispatch({ type: RESET_FAILED, payload: ["Algo falló al intentar cambiar la contraseña, intentelo denuevo."] })
         })
     }
@@ -85,7 +82,6 @@ export const actionUserCreate = (props) => {
         })
     }
 }
-
 export const actionLogin = (inputs) => {
     return (dispatch) => {
         var data = qs.stringify(inputs);
@@ -103,7 +99,6 @@ export const actionLogin = (inputs) => {
                 axios.get(url + 'auth/me', {
                     withCredentials: true
                 }).then(res => {
-                    console.log(res.data)
                     return dispatch({
                         type: POST_LOGIN,
                         payload: res.data.dataValues
@@ -123,8 +118,6 @@ export const actionLogOut = () => {
                     type: USER_LOGGED_OUT,
                     payload: res.data
                 })
-            }).catch(error => {
-                console.log(error)
             })
         }
     )

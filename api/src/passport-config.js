@@ -1,6 +1,4 @@
 const LocalStrategy = require('passport-local').Strategy
-
-
 const bcrypt = require('bcrypt');
 const {
   User,
@@ -11,27 +9,21 @@ const {
 function initialize(passport) {
 
   const authenticateUser = async (req, email, password, done) => {
-    const {
-      idUser
-    } = req.body
-
+    const { idUser } = req.body
     const user = await User.findOne({
       where: {
         email: email
       }
     })
-
     ///////////////////////////////// In case the user doesnt exist
     if (user == null) {
       return done(null, false, {
         message: 'No user with that email'
       })
     }
-
     ///////////////////////////////// In case the user exist and test the password
     try {
       if (await bcrypt.compare(password, user.password)) {
-
         const orderUserLogin = await User.findOne({
           where: {
             email: email
@@ -43,13 +35,11 @@ function initialize(passport) {
               }
             })
           })
-
         const orderGuest = await Order.findOne({
           where: {
             idUser: idUser
           }
         })
-
         Order.findOne({
           where: {
             idUser: idUser
@@ -74,8 +64,6 @@ function initialize(passport) {
                 quantity: inter.quantity + interQuantity
               })
             }).catch(() => {
-              // console.log('interInCatch:\n',inter)
-              // console.log('interQuantityInCatch:\n',interQuantity);
               return Inter_Prod_Order.create({
                 idProduct: inter.idProduct,
                 price: inter.price,
@@ -97,8 +85,6 @@ function initialize(passport) {
             }
           })
         }).catch()
-
-
         return done(null, user)
       } else {
         return done(null, false, {
@@ -110,28 +96,18 @@ function initialize(passport) {
     }
   }
 
-
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passReqToCallback: true
   }, authenticateUser))
 
   passport.serializeUser(function (user, done) {
-    done(null, user.idUser);
+    done(null, user);
   });
 
-  passport.deserializeUser(function (id, done) {
-    console.log('deserializing user:')
-    User.findOne({
-      where: {
-        idUser: id
-      }
-    }).then(user => {
-      // console.log('thisUser', user.dataValues)
-      done(null, user);
-    }).catch(done)
+  passport.deserializeUser(function (user, done) {
+    done(null, user);
   });
-
 }
 
 module.exports = initialize

@@ -47,7 +47,6 @@ export const actionSetQuantity = (quantity) => {
 export const actionAddToCart = (props) => {
     return (dispatch) => {
         axios.post(url + 'user/' + props.idUser + '/cart', props, {withCredentials: true}).then(() => {
-            console.log('respuesta')
             return dispatch({ type: ADD_TO_CART })
         }).then(() => {
             return dispatch(actionGetOrder(props.idUser))

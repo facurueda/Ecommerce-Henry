@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './myAccount.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { actionGetAllOrders, actionGetOrdersByUser } from '../../redux/ordersActions';
+import { actionGetOrdersByUser } from '../../redux/ordersActions';
 import Orders from '../adminOrdersTable/ordersComponent';
 import AdminNavBar from '../AdminNavBar/AdminNavBar'
 
@@ -15,7 +15,6 @@ const MyAccount = () => {
     useEffect(() => {
         dispatch(actionGetOrdersByUser(user))
     }, [])
-    console.log('ororororor', orders)
     return (
         <div>
             <div className='userDataContainer'>

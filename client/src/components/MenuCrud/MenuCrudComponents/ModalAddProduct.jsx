@@ -16,7 +16,6 @@ import './ModalAddProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
 
 const ModalAddProduct = (props) => {
-
     const { products, addProduct, modalCloseAdd, categories } = props
     const initialState = {
         name: '',
@@ -27,9 +26,7 @@ const ModalAddProduct = (props) => {
         categories: 'Choose Category',
         rating: 1
     };
-
     const [product, setProduct] = useState(initialState);
-
     const handleChange = e => {
         const { name, value } = e.target;
         setProduct({
@@ -39,24 +36,19 @@ const ModalAddProduct = (props) => {
             [name]: value
         })
     }
-    
     const [category, setCategory] = useState('')
     const [content, setContent] = useState('');
-    // Functions
     const handleChangeDescription = (content, editor) => {
-        if(content.length > 255){
+        if (content.length > 255) {
             window.alert('Maximo 255 caracteres. Si lo bueno es breve, es doblemente bueno.')
         }
         content = content.replace('<p>', "")
-        content = content.replace('</p>','')
-        content = '<p>' + content.slice(0,250) + "</p>"
-        console.log(content)
+        content = content.replace('</p>', '')
+        content = '<p>' + content.slice(0, 250) + "</p>"
         setContent(content)
     }
-    // States Upload Image
     const [loading, setLoading] = useState(false)
     const [imagesUpload, setImagesUpload] = useState('')
-    // Funciones Upload Image
     const uploadImage = async e => {
         const files = e
         const data = new FormData()
@@ -84,23 +76,23 @@ const ModalAddProduct = (props) => {
                 <div>Add product</div>
             </ModalHeader>
             <ModalBody>
-                <FormGroup className = 'uploadImage' style={{ display: "flex", justifyContent: 'center' }}>
+                <FormGroup className='uploadImage' style={{ display: "flex", justifyContent: 'center' }}>
                     <ListGroup horizontal className="inputContainer">
                         <SelectImage uploadImage={uploadImage} />
                     </ListGroup>
                 </FormGroup>
-                <FormGroup className = 'productName'>
-                    <label className = 'productDetail'>Product name: </label>
-                    <input className = 'inputName'
+                <FormGroup className='productName'>
+                    <label className='productDetail'>Product name: </label>
+                    <input className='inputName'
                         name='name'
                         type='text'
                         onChange={handleChange}
                     />
                 </FormGroup>
                 <FormGroup>
-                    <label className = 'productDetail'>Description: </label>
+                    <label className='productDetail'>Description: </label>
                     <form>
-                        <Editor id = 'productEditor'
+                        <Editor id='productEditor'
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
                             value={content}
                             init={{
@@ -113,7 +105,7 @@ const ModalAddProduct = (props) => {
                 </FormGroup>
                 <ListGroup horizontal className="propertyContainer">
                     <FormGroup className="priceContainer">
-                        <label className = 'productDetail'>Price: </label>
+                        <label className='productDetail'>Price: </label>
                         <input
                             className='form-control'
                             name='precio'
@@ -122,7 +114,7 @@ const ModalAddProduct = (props) => {
                         />
                     </FormGroup>
                     <FormGroup className="stockContainer">
-                        <label className = 'productDetail' >Stock: </label>
+                        <label className='productDetail' >Stock: </label>
                         <input
                             className='form-control'
                             name='stock'
@@ -132,12 +124,12 @@ const ModalAddProduct = (props) => {
                         />
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
-                        <label className = 'productDetail'>Categories: </label>
-                        <Dropdown className = 'dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
-                            <DropdownToggle className = 'dropdownCat' caret>
+                        <label className='productDetail'>Categories: </label>
+                        <Dropdown className='dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
+                            <DropdownToggle className='dropdownCat' caret>
                                 {product.categories}
                             </DropdownToggle>
-                            <DropdownMenu className = 'dropdownCat' >
+                            <DropdownMenu className='dropdownCat' >
                                 {categories.map(c => {
                                     return (
                                         <DropdownItem name='categories' value={c.name} onClick={handleChange}>{c.name}</DropdownItem>
@@ -150,7 +142,7 @@ const ModalAddProduct = (props) => {
                 </ListGroup>
             </ModalBody>
             <ModalFooter>
-                <Button className = 'buttonAdd'
+                <Button className='buttonAdd'
                     onClick={e => {
                         e.preventDefault();
                         if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
@@ -160,7 +152,7 @@ const ModalAddProduct = (props) => {
                         modalCloseAdd();
                     }}
                 > Submit</Button>
-                <Button className = 'buttonExit' onClick={e => modalCloseAdd()}>Exit</Button>
+                <Button className='buttonExit' onClick={e => modalCloseAdd()}>Exit</Button>
             </ModalFooter>
         </div>
     )

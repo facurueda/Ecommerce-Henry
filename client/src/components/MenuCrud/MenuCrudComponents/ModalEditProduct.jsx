@@ -17,15 +17,12 @@ const ModalEditProduct = (props) => {
     const { modalCloseEdit } = props
     const categories = useSelector(state => state.categoriesReducer.categories)
     const currentProduct = useSelector(store => store.productsReducer.product)
-    console.log("edited: ", currentProduct)
     const updateProduct = (product) => {
         dispatch(actionUpdateProduct(product))
         window.location.reload();
     }
-    // States Upload Image
     const [loading, setLoading] = useState(false)
     const [imagesUpload, setImagesUpload] = useState('')
-    // Funciones Upload Image
     const uploadImage = async e => {
         const files = e
         const data = new FormData()
@@ -42,7 +39,6 @@ const ModalEditProduct = (props) => {
         setImagesUpload(file.secure_url)
         setLoading(false)
     }
-    // ESTADOS DESCRIPTION
     const handleChange = (event) => {
         const { name, value } = event.target
         dispatch(actionUpdateProductLocalStore({
@@ -50,16 +46,12 @@ const ModalEditProduct = (props) => {
             [name]: value
         }))
     }
-
     const descriptionChange = (event) => {
         dispatch(actionUpdateProductLocalStore({
             ...currentProduct,
             description: event
         }))
     }
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const toggle = () => setDropdownOpen(prevState => !prevState);
-    console.log(currentProduct)
     return (
         <div className='editProdContainer'>
             <ModalHeader>
