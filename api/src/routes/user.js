@@ -7,7 +7,6 @@ const {
 } = require('../db.js');
 const Sequelize = require("sequelize");
 const bcrypt = require('bcrypt')
-
 const passport = require('passport');
 const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
@@ -44,7 +43,6 @@ function isUserOrAdmin(req, res, next) {
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
 }
-
 
 /////////////////////////////////////////////////////////////////GET
 
@@ -98,7 +96,6 @@ server.get('/:idUser', (req, res, next) => {
         res.send(user)
     })
 })
-
 server.get('/', (req, res, next) => {
     User.findAll().then((users) => {
         res.send(users)
@@ -106,7 +103,6 @@ server.get('/', (req, res, next) => {
 })
 //////////////////////////////////////////////////////////////////POST
 server.post('/:idUser/cart', (req, res, next) => {
-    // body: { idProduct, quantity }
     let respuesta = {}
     Order.findOne({
         where: {
@@ -118,7 +114,6 @@ server.post('/:idUser/cart', (req, res, next) => {
             }]
         }
     }).then(order => {
-        console.log(order)
         if (order.status === 'CREADA') {
             order.update({
                 ...order,
@@ -152,7 +147,6 @@ server.post('/:idUser/cart', (req, res, next) => {
                 })
             }
         }).catch(() => {
-            console.log(req.body);
             return Inter_Prod_Order.create({
                 idOrder: order.idOrder,
                 idProduct: req.body.idProduct,
@@ -164,7 +158,6 @@ server.post('/:idUser/cart', (req, res, next) => {
         res.send(respuesta)
     }).catch(next)
 })
-
 //////// register 
 server.post('/', async (req, res, next) => {
     const {
@@ -202,7 +195,6 @@ server.post('/', async (req, res, next) => {
     })
 
 });
-
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
     const {
@@ -283,39 +275,4 @@ server.delete('/:idUser', (req, res, next) => {
     }).catch(next);
 });
 
-/////////////////////////////////////////////DEV
-server.post('/aaa', (req, res, next) => {
-    User.create({
-        name: 'Michael',
-        email: 'michael@live.com',
-        password: 'aosidj',
-        level: 'admin'
-    }).then(() => {
-        return User.create({
-            name: 'Lili',
-            email: 'lili@gmail.com',
-            password: 'jasjdjsjd',
-            level: "user"
-        }).then((newUser) => {
-            Order.create({
-                idUser: newUser.idUser,
-            })
-        })
-    }).then(() => {
-        return User.create({
-            name: 'Sophie',
-            email: 'sophie@gmail.com',
-            password: 'jasjdjsjd',
-            level: 'user'
-        }).then((newUser) => {
-            Order.create({
-                idUser: newUser.idUser,
-            })
-        })
-    }).then(() => {
-        res.send({
-            result: 'user creados'
-        })
-    }).catch(next)
-})
 module.exports = server;

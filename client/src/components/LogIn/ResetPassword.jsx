@@ -8,15 +8,12 @@ const ResetPassword = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState({})
     const [loading, setLoading] = useState(false)
-
     const loadingView = () => setLoading(!loading)
     const loadingClose = () => setLoading(false)
-
     const handleReset = () => {
         dispatch(actionResetPassword(email))
         loadingView()
     }
-
     const handleChange = (e) => {
         const { type, value } = e.target
         setEmail({
@@ -24,12 +21,12 @@ const ResetPassword = () => {
             [type]: value
         })
     }
-
     return (
         <div className='resetContainer'>
-            <h3>We will send you an email with a link, please check your inbox</h3>
-            <p>Put the email with which you registered in La Cosería here:</p>
-            <input className='resetInput' type="email" required placeholder='youremail@lacoseria.com' onChange = {handleChange} />
+            <h3>Te enviaremos un mail a tu correo, por favor chequea la bandeja de entrada:</h3>
+            <p>Pone el email con el que te registraste en la Cosería aquí:</p>
+            <input className='resetInput' type="email" 
+            required placeholder='youremail@lacoseria.com' onChange = {handleChange} />
             <button className = 'buttonLoginAndRegister' onClick={handleReset}>Send</button>
             { loading ?
             (<Loading loadingClose = 'loadingClose'></Loading>):('')} 

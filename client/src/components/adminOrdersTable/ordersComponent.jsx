@@ -1,19 +1,10 @@
 import React from 'react'
 import './ordersComponent.css'
-import { useEffect } from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { actionGetUserById } from '../../redux/usersActions'
+import { useSelector } from 'react-redux'
 import OrderByIdComponent from './orderByIdComponent'
 import { useState } from 'react'
 
 const Orders = (props) => {
-    const dispatch = useDispatch()
-    // RECIBO PROP.USER
-    //     createdAt: "2020-09-07T21:03:29.137Z"
-    // idOrder: 2
-    // idUser: 3
-    // status: "CREADA"
-    // updatedAt: "2020-09-07T21:03:29.137Z"
     const user = useSelector(state => state.usersReducer.name)
     const [display, setDisplay] = useState('none');
     return (
@@ -33,6 +24,4 @@ const Orders = (props) => {
         </div>
     )
 }
-
-
 export default Orders;

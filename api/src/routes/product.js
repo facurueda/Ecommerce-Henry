@@ -7,8 +7,6 @@ const {
 	Inter_Prod_Order,
 	Review
 } = require('../db.js');
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
 	if (req.isAuthenticated()) {
@@ -60,10 +58,10 @@ server.get('/search', (req, res, next) => {
 		}
 	})
 		.then((products) => {
-			console.log('productsByTerm: ',products)
 			res.send(products);
 		}).catch(next)
 });
+
 server.get('/:id', (req, res, next) => {
 	Product.findOne({
 		where: {
@@ -85,10 +83,7 @@ server.get('/', (req, res, next) => {
 		}).catch(next)
 });
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
-// POST /product/:id/review
-
 ///////////////////////////// RUTA PARA CREAR REVIEW
-///////////////////////////// POR FAVOR DEJEN DE PONER PRODUCT AL PRINCIPIO DEL LINK
 
 server.post('/:idProduct/review', isUserOrAdmin, (req, res, next) => {
 	Review.create({
@@ -204,7 +199,6 @@ server.put('/:idProduct/review/:idReview', (req, res, next) => {
 		}).catch(next)
 })
 
-
 server.put('/:idProduct', isAdmin, (req, res, next) => {
 	let productUpdated = null
 	Product.findOne({
@@ -231,57 +225,9 @@ server.put('/:idProduct', isAdmin, (req, res, next) => {
 			idCategory: req.body.categories
 		})
 	}).then((interUpdated) => {
-		console.log('responding', productUpdated, interUpdated)
 		res.send({ product: productUpdated, category: interUpdated })
 	}).catch(next);
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// DEV
-server.post('/aaa', (req, res, next) => {
-	Product.create({
-		name: "Dragon",
-		description: "Escupe Fuego",
-		precio: 10,
-		rating: 5,
-		stock: 10,
-		images: 'http://www.google.com/'
-	}).then(() => {
-		return Categories.create({
-			name: "animales",
-			description: "Todo tipo de animales"
-		})
-	}).then(() => {
-		return Categories.create({
-			name: "Objetos",
-			description: "Todo tipo de objetos"
-		})
-	}).then(() => {
-		return Categories.create({
-			name: "Perros",
-			description: "la recontra descripcion"
-		})
-	}).then(() => {
-		return Product.create({
-			name: "Perro",
-			description: "Hace afuera",
-			precio: 10,
-			rating: 5,
-			stock: 10,
-			images: 'http://www.google.com'
-		})
-	}).then(() => {
-		return Inter_Cat_Prod.create({
-			idCategory: 2,
-			idProduct: 1
-		})
-	}).then(() => {
-		return Inter_Cat_Prod.create({
-			idCategory: 1,
-			idProduct: 2
-		})
-	}).then(() => {
-		return res.send({
-			result: "Elementos creados."
-		})
-	}).catch(next)
-})
+
 module.exports = server;

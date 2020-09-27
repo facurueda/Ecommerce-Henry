@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Modal } from 'reactstrap';
+import { Modal } from 'reactstrap';
 import AdminOrdersTable from '../adminOrdersTable/adminOrdersTable';
 import './AdminNavBar.css'
-const AdminNavBar = (props) => {
+const AdminNavBar = () => {
     const [ModalOrdersTable, setModalOrdersTable] = useState(false)
     const modalOrdersTableView = () => setModalOrdersTable(!ModalOrdersTable);
     return (

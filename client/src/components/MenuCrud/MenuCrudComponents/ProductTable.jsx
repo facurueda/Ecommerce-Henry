@@ -4,10 +4,8 @@ import { actionGetProduct } from '../../../redux/productsActions';
 import './ProductTable.css'
 
 const ProductTable = (props) => {
-
-    const { products, editProduct, deleteProduct, categories } = props;
+    const { products, editProduct, deleteProduct } = props;
     const dispatch = useDispatch()
-
     return (
         products.length > 0 ? (
             products.map(product => (
@@ -25,11 +23,11 @@ const ProductTable = (props) => {
                         <span>{product.stock} u.</span>
                     </div>
                     <div className="buttonContainer">
-                        <button className='buttonStyler' onClick={ e => {
+                        <button className='buttonEdit' onClick={e => {
                             dispatch(actionGetProduct(product.idProduct))
                             editProduct()
                         }}>Edit</button> {'  '}
-                        <button className='buttonStyler' onClick={e => deleteProduct(product.idProduct)}>Delete</button>
+                        <button className='buttonEdit' onClick={e => deleteProduct(product.idProduct)}>Delete</button>
                     </div>
                 </div>
             ))

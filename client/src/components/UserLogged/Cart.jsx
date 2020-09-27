@@ -4,7 +4,6 @@ import './Cart.css'
 
 const Cart = () => {
     const quantity = useSelector(store => store.ordersReducer.quantity)
-
     return (
         <div className='Cart'>
             <a href='/order'>

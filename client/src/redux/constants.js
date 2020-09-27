@@ -16,8 +16,6 @@ export const PRODUCT_POST = 'PRODUCT_POST'
 export const PRODUCT_PUT = 'PRODUCT_PUT'
 export const SET_PRODUCT = 'SET_PRODUCT'
 
-
-
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 export const UPDATE_ORDER = 'UPDATE_ORDER'

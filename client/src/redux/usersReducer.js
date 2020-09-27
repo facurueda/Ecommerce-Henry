@@ -13,7 +13,7 @@ import {
     USER_LOGGED_OUT,
     SET_COOKIE_TO_STORE
 } from './constants'
-import { actionResetStatusReset } from './usersActions'
+
 const initialState = {
     idUser: 0,
     name: 'Guest',

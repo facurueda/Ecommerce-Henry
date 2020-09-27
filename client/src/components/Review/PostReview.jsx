@@ -14,7 +14,6 @@ const PostReview = (props) => {
         dispatch(actionPostReview(rev))
         modalPostReviewClose()
     }
-
     const handleChangePost = (e) => {
         const {name, value} = e.target
         setReview({

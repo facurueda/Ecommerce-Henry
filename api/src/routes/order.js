@@ -51,10 +51,8 @@ server.get('/history/:idUser', (req, res, next) => {
         },
         include: [{model: Product,as: 'products'}]
     }).then(orders => {
-        console.log('orders:\n',orders)
         res.send(orders)
     }).catch((error) => {
-        console.log('error: \n',error)
         next()
     })
 })
@@ -90,24 +88,5 @@ server.post('/', (req, res, next) => {
 ///////////////////////////////////////////////////////////////////////////PUT
 
 /////////////////////////////////DEV
-
-
-server.post('/aaa', (req, res, next) => {
-    Inter_Prod_Order.create({
-        idProduct: 1,
-        idOrder: 1,
-        price: 2222.0,
-        quantity: 3
-    }).then(() => {
-        return Inter_Prod_Order.create({
-            idProduct: 2,
-            idOrder: 1,
-            price: 22.0,
-            quantity: 5
-        })
-    }).then((order) => {
-        res.send(order)
-    }).catch(next);
-})
 
 module.exports = server;
