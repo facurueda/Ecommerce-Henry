@@ -77,7 +77,7 @@ const NavBar = () => {
                         <div>
                             {/* <img className= 'casa'></img> */}
                            
-                            <button className='buttonHome'><a href='/' className='textnav'> <i class="fa fa-home"></i> Home</a></button></div>
+                            <button className='buttonHome'><a href='/' className='textnav'> <i class="fa fa-home" class='fafa'></i> Home</a></button></div>
 
                         {/* </form> */}
                         <form action="/catalogue">

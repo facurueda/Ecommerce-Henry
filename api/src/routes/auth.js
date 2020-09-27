@@ -163,31 +163,28 @@ server.post('/cookie', async (req, res) => {
 
 let token = Math.floor((Math.random() * 1000000) + 1);
 
-server.post('/forgot', (req, res) => { 
-
-    console.log(req.body);
-
+server.post('/forgot', (req, res) => {
     User.findOne({
         where: {
             email: req.body.email
         }
     }).then((user) => {
-        if (!user) { 
+        if (!user) {
             req.flash('error', 'Not acount with that email adress exists.');
-            res.status(404); 
+            res.status(404);
             return res.redirect('/forgot')
         }
         user.update({
             ...user,
-            resetPasswordToken: token, 
-            resetPasswordExpires: Date.now() + 3600000 
-        }).then(() => 
+            resetPasswordToken: token,
+            resetPasswordExpires: Date.now() + 3600000
+        }).then(() =>
         {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
                   user: 'noreplylacoseria@gmail.com',
-                  pass: 'ohqrgkrmeqhcamil' 
+                  pass: 'ohqrgkrmeqhcamil'
                 }
               });
 
@@ -218,20 +215,24 @@ server.post('/reset', (req, res) => {
         where: {
             resetPasswordToken: req.query.token
         }
-    }).then((user) => {
+    }).then(async (user) => {
         console.log('1')
         if (!user) {
             req.flash('error', 'Sorry, we can´t find you?');
             res.redirect('/auth/forgot');
         } else {
             console.log(user);
+            console.log('resetExp: ',user.resetPasswordExpires);
+            console.log('Now: ',Date.now());
+            console.log(req.body);
+            const hasshed = await bcrypt.hash(req.body.password, 10)
             if (user.resetPasswordExpires > Date.now()) {
                 user.update({
                     ...user,
-                    password: req.body.password,
+                    password: hasshed,
                     resetPasswordExpires: null,
                     resetPasswordToken: null,
-                }).then(() => {res.send()})
+                }).then(() => {res.send({result: 'usuario actualizado'})})
             }
         }
     }).catch((err) => {
