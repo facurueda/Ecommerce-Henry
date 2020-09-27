@@ -3,11 +3,15 @@ import './UserLogged.css'
 import { useDispatch, useSelector } from 'react-redux'
 import Cart from './Cart';
 import { actionLogOut } from '../../redux/usersActions';
+import { useCookies } from 'react-cookie';
 
 
 const UserLogged = () => {
     const dispatch = useDispatch()
+    const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
     const handleChange = () => {
+        removeCookie('idUser')
+        removeCookie('level')
         dispatch(actionLogOut());
     }
     return (

@@ -25,13 +25,12 @@ const NavBar = () => {
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
     if (loggedOut) {
-        if (cookie.idUser || cookie.level) {
             removeCookie('idUser')
             removeCookie('level')
-        } else {
-            dispatch(actionSetCookieToStore(cookie))
-            actionLogOut(cookie)
-        }
+            console.log('borro cookies')
+            setTimeout(() => {
+                window.location.reload()
+            }, 200);
     }
     if (verified) {
         setCookie('idUser', idUser, { path: '/' })
