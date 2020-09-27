@@ -69,19 +69,16 @@ const NavBar = () => {
                     </a>
                 </div>
                 <div> <img className='nomematen' src={dino} /></div>
-            
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
-                        {/* <form action="/"> */}
-                        <img className= 'casa'></img>
-                        <div>
-                            {/* <img className= 'casa'></img> */}
-                           
-                            <button className='buttonHome'><a href='/' className='textnav'> <i class="fa fa-home" class='fafa'></i> Home</a></button></div>
-
-                        {/* </form> */}
+                        <img className='casa'></img>
+                        <form action="/">
+                            <div>
+                                <button className='buttonProducts'>Home</button>
+                            </div>
+                        </form>
                         <form action="/catalogue">
-                            <button className='buttonProducts'><p className='textnav'>Products</p></button>
+                            <button className='buttonProducts'>Products</button>
                         </form>
                         {level === 'user' || level === 'admin' ? (
                             <form action="/myAccount">

@@ -37,12 +37,12 @@ function initialize(passport) {
             email: email
           }
         }).then(user => {
-          return Order.findOne({
-            where: {
-              idUser: user.idUser
-            }
+            return Order.findOne({
+              where: {
+                idUser: user.idUser
+              }
+            })
           })
-        })
 
         const orderGuest = await Order.findOne({
           where: {
@@ -61,14 +61,31 @@ function initialize(passport) {
             }
           })
         }).then(inters => {
-          inters.map(e => {
-            return Inter_Prod_Order.create({
-              ...e,
-              idOrder: orderUserLogin.idOrder
+          inters.map(inter => {
+            const interQuantity = inter.quantity
+            Inter_Prod_Order.findOne({
+              where: {
+                idProduct: inter.idProduct,
+                idOrder: orderUserLogin.idOrder
+              }
+            }).then(inter => {
+              return inter.update({
+                ...inter,
+                quantity: inter.quantity + interQuantity
+              })
+            }).catch(() => {
+              // console.log('interInCatch:\n',inter)
+              // console.log('interQuantityInCatch:\n',interQuantity);
+              return Inter_Prod_Order.create({
+                idProduct: inter.idProduct,
+                price: inter.price,
+                quantity: inter.quantity,
+                idOrder: orderUserLogin.idOrder
+              })
             })
           })
         }).then(() => {
-          Inter_Prod_Order.destroy({
+          Order.destroy({
             where: {
               idOrder: orderGuest.idOrder
             }

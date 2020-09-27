@@ -45,7 +45,7 @@ server.get('/me', isUserOrAdmin, (req, res) => {
         where: {
             idUser: req.user.idUser
         }
-    }).then(user => { 
+    }).then(user => {
         const response = {
             ...user,
             dataValues: {
@@ -178,30 +178,29 @@ server.post('/forgot', (req, res) => {
             ...user,
             resetPasswordToken: token,
             resetPasswordExpires: Date.now() + 3600000
-        }).then(() =>
-        {
+        }).then(() => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                  user: 'noreplylacoseria@gmail.com',
-                  pass: 'ohqrgkrmeqhcamil'
+                    user: 'noreplylacoseria@gmail.com',
+                    pass: 'ohqrgkrmeqhcamil'
                 }
-              });
+            });
 
-              const linkReset = 'http://localhost:3001/auth/reset/?token=' + token
-              const mailOptions = {
+            const linkReset = 'http://localhost:3001/auth/reset/?token=' + token
+            const mailOptions = {
                 from: 'noreplylacoseria@gmail.com',
                 to: req.body.email,
                 subject: 'Invoices due',
                 html: `El link para resetear tu constraseña es: <a href= ${linkReset}> LINK </a>`
-              };
-              transporter.sendMail(mailOptions, function(error, info){
+            };
+            transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
-                  console.log(error);
+                    console.log(error);
                 } else {
-                  console.log('Email sent: ' + info.response);
+                    console.log('Email sent: ' + info.response);
                 }
-              });
+            });
         })
     })
 
@@ -222,8 +221,8 @@ server.post('/reset', (req, res) => {
             res.redirect('/auth/forgot');
         } else {
             console.log(user);
-            console.log('resetExp: ',user.resetPasswordExpires);
-            console.log('Now: ',Date.now());
+            console.log('resetExp: ', user.resetPasswordExpires);
+            console.log('Now: ', Date.now());
             console.log(req.body);
             const hasshed = await bcrypt.hash(req.body.password, 10)
             if (user.resetPasswordExpires > Date.now()) {
@@ -232,7 +231,7 @@ server.post('/reset', (req, res) => {
                     password: hasshed,
                     resetPasswordExpires: null,
                     resetPasswordToken: null,
-                }).then(() => {res.send({result: 'usuario actualizado'})})
+                }).then(() => { res.send({ result: 'usuario actualizado' }) })
             }
         }
     }).catch((err) => {
