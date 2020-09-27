@@ -4,7 +4,7 @@ import { SET_REVIEW, GET_REVIEWS_BY_PRODUCT, REVIEW_POST, REVIEW_EDITED } from '
 export const actionPostReview = (reviewData) => {
     return (dispatch) => {
         axios.post(url + 'products/' + reviewData.idProduct + '/review', reviewData, { withCredentials: true }).then((res) => {
-            console.log("reviewData: \n",reviewData)
+            actionGetReviews(reviewData.idProduct)
         })
     }
 }

@@ -44,7 +44,6 @@ function App() {
             <Route path='/forgot' component={ResetPassword} />
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
-            {/* <Router history={BrowserHistory}></Router> */}
           </Switch>
         </Router>
       </div>
