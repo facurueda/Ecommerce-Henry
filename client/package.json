@@ -31,7 +31,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.3.5",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "webpack": "^4.44.2"
   },
   "scripts": {
     "start": "react-scripts start",
