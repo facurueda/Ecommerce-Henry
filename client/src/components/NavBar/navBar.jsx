@@ -5,7 +5,7 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Form, Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
-import gatito from './Images/gatito.png'
+import dino from './Images/dino.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
@@ -30,7 +30,6 @@ const NavBar = () => {
             removeCookie('level')
         } else {
             dispatch(actionSetCookieToStore(cookie))
-            // dispatch(actionVerifyCookies(cookie))
             actionLogOut(cookie)
         }
     }
@@ -69,11 +68,16 @@ const NavBar = () => {
 
                     </a>
                 </div>
-                <div> <img className='nomematen' src={gatito} /></div>
+                <div> <img className='nomematen' src={dino} /></div>
+            
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
                         {/* <form action="/"> */}
-                        <div><button className='buttonHome'><a href='/' className='textnav'>Home</a></button></div>
+                        <img className= 'casa'></img>
+                        <div>
+                            {/* <img className= 'casa'></img> */}
+                           
+                            <button className='buttonHome'><a href='/' className='textnav'> <i class="fa fa-home" class='fafa'></i> Home</a></button></div>
 
                         {/* </form> */}
                         <form action="/catalogue">

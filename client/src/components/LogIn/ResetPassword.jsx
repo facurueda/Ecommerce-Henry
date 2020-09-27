@@ -26,12 +26,12 @@ const ResetPassword = () => {
     }
 
     return (
-        <div className='resetContainer'> 
+        <div className='resetContainer'>
             <h3>We will send you an email with a link, please check your inbox</h3>
             <p>Put the email with which you registered in La Cosería here:</p>
             <input className='resetInput' type="email" required placeholder='youremail@lacoseria.com' onChange = {handleChange} />
             <button className = 'buttonLoginAndRegister' onClick={handleReset}>Send</button>
-            { loading ? 
+            { loading ?
             (<Loading loadingClose = 'loadingClose'></Loading>):('')} 
             </div>
     )
