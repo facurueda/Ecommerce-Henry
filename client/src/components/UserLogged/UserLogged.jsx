@@ -3,13 +3,16 @@ import './UserLogged.css'
 import { useDispatch, useSelector } from 'react-redux'
 import Cart from './Cart';
 import { actionLogOut } from '../../redux/usersActions';
+import { useCookies } from 'react-cookie';
 
 
 const UserLogged = () => {
-    const user = useSelector(state => state.usersReducer.user);
     const dispatch = useDispatch()
+    const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
     const handleChange = () => {
-        dispatch(actionLogOut(user));
+        removeCookie('idUser')
+        removeCookie('level')
+        dispatch(actionLogOut());
     }
     return (
         <div class="dropdown">

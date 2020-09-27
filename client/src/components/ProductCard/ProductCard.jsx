@@ -28,12 +28,11 @@ const ProductCard = (props) => {
 
     return (
         <div className='ProductCard_Container'>
-                <div className='content'>
                     <img className='imageCard' src={images} alt="Card image cap" onClick={handleChancla} />
+                    <div className='ProductDescription'>{renderHTML(description.slice(0,15)+"...")}</div>
                     <div className='contentCard'>
                         <h3 className='productName'>{name}</h3>
                         <div className='ProductDataContainer'>
-                            <div className='ProductDescription'>{renderHTML(description.slice(0,10))}</div>
                             <div className= 'productDiv'>
                                 <b className='productPrice'>${price}</b>
                                 <p className = 'productStock'>U: {stock}</p>
@@ -44,7 +43,6 @@ const ProductCard = (props) => {
                         :(<div></div>)
                         }
                         </div>
-                </div>
         </div>
     )
 }

@@ -12,9 +12,7 @@ function SearchBarr(props) {
     const history = useHistory()
     const searchFunction = (value) => {
         dispatch(actionGetProductsBySearchTerm(value))
-        setTimeout(() => {
-            return history.push('/search')
-        }, 200);
+        history.push('/search')
     }
     return (
         <div>

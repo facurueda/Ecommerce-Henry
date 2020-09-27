@@ -1,3 +1,4 @@
+
 .productContainer{
     flex: wrap;
     color: white;
@@ -9,9 +10,19 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     width: 50%;
-    box-shadow:0px 13px 21px -5px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(7px);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    /* height: 130px; */
+    margin: 10px 0px 10px 0px;
+    background-color: rgba(255, 255, 255, 0.57);
+    font-family: 'Roboto', sans-serif;
 }
+
 .imgContainer {
      flex: wrap;
     display: flex;
@@ -23,9 +34,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+    padding: 0px 10px;
 }
 .card{
-     flex: wrap;
     width: 100%;
     max-width: 750px;
     height: auto;
@@ -35,7 +46,6 @@
 .textContent{
     flex: wrap;
     display: flex;
-    width: 50%;
     flex-direction: column;
     justify-content: center;
     text-align-last: right;
@@ -46,6 +56,11 @@
 .textAmount {
     align-self: flex-end;
     font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 10px;
 }
 .productImage {
     height: 100px;

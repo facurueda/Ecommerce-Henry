@@ -1,7 +1,7 @@
 .ComponentContainer{
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     color: white;
 }
@@ -56,10 +56,4 @@
 }
 .DeleteProd{
     display: none;
-}
-.ProductContainer{
-    display: flex;
-    border-radius: 30px;
-    padding: 0px 90px;
-    background-color: rgb(41, 41, 41);
 }

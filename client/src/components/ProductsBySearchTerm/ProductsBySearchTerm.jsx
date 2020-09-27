@@ -7,7 +7,7 @@ import ProductCard from '../ProductCard/ProductCard';
 const ProductsBySearchTerm = (props) => {
     const products = useSelector(state =>  state.productsReducer.term)
 
-    if (products.length === 0) {
+    if (products.length < 1) {
         return (
             <div className='notFoundTerm'>
                 <h3> No se encontraron resultados. </h3>
@@ -27,6 +27,8 @@ const ProductsBySearchTerm = (props) => {
                             description={product.description}
                             price={product.precio}
                             images = {product.images}
+                            stock={product.stock}
+                            idProduct={product.idProduct}
                         />
                     }
                 })
