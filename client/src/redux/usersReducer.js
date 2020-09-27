@@ -13,6 +13,7 @@ import {
     USER_LOGGED_OUT,
     SET_COOKIE_TO_STORE
 } from './constants'
+import { actionResetStatusReset } from './usersActions'
 const initialState = {
     idUser: 0,
     name: 'Guest',
@@ -75,7 +76,8 @@ const usersReducer = (state = initialState, action) => {
                 email: 'no-email',
                 level: 'GUEST',
                 loggedOut: true,
-                verified: true
+                verified: true,
+                loggedOut: action.payload
             };
         case POST_LOGIN:
             return {

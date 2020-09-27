@@ -24,6 +24,12 @@ const NewPassword = (props) => {
             })
         }
     }
+    if (resetStatus.length > 0) {
+        window.alert(resetStatus[0])
+        setTimeout(() => {
+            handleClose()
+        }, 200);
+    }
     const Verificar = () => {
         if (secondPassword === passwordInputs.password) {
             dispatch(actionPasswordUpdate(passwordInputs))
@@ -38,15 +44,6 @@ const NewPassword = (props) => {
     return (
         <div className='generalContainerReset'>
             <h3>Escribí tu nueva contraseña aquí:</h3>
-            <div>
-                {resetStatus.length > 0 ? (
-                    <div>{() => {
-                        window.alert(resetStatus[0])
-                        handleClose()
-                    }
-                    }</div>
-                ) : (<div></div>)}
-            </div>
             <div className='formContainerReset'>
                 <input className='inputs1' name='password' type="password" placeholder='Password' onChange={handleChange}></input>
                 <input className='inputs2' name='secondPassword' type="password" placeholder='Repeat your password' onChange={handleChange}></input>

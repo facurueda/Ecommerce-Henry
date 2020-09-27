@@ -108,6 +108,8 @@
 .signup{
     margin-bottom: 5px;
 }
+.fa.fa-shopping-cart.fa_custom.fa-1x:hover,
+.buttonProducts:hover,
 .login:hover,
 .signup:hover {
     /* text-decoration: underline; */

@@ -62,12 +62,12 @@ export const actionVerifyCookies = (cookie) => {
 }
 export const actionResetStatusReset = () => {
     return (dispatch) => {
-        dispatch({type: RESET_STATUS_RESET})
+        dispatch({ type: RESET_STATUS_RESET })
     }
 }
 export const actionPasswordUpdate = (obj) => {
     return (dispatch) => {
-        axios.post(url+'auth/reset?token=' + obj.token, obj.password, { withCredentials: true }, { withCredentials: true }).then((res) => {
+        axios.post(url + 'auth/reset?token=' + obj.token, { password: obj.password }, { withCredentials: true }).then((res) => {
             dispatch({ type: RESET_OK, payload: ["Contraseña aplicada con éxito"] })
         }).catch((res) => {
             dispatch({ type: RESET_FAILED, payload: ["Algo falló al intentar cambiar la contraseña, intentelo denuevo."] })
@@ -121,7 +121,7 @@ export const actionLogOut = () => {
             }).then((res) => {
                 return dispatch({
                     type: USER_LOGGED_OUT,
-                    payload: res.body
+                    payload: res.data
                 })
             }).catch(error => {
                 console.log(error)

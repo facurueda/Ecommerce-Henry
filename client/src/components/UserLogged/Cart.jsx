@@ -10,9 +10,9 @@ const Cart = () => {
             <a href='/order'>
                 <i class="fa fa-shopping-cart fa_custom fa-1x"></i>
             </a>
-            <div className='quantityProducts'>
-                {quantity ? quantity : ''}
-            </div>
+            {quantity ? (<div className='quantityProducts'>
+                {quantity}
+            </div>):(<div></div>)}
         </div>
     )
 }
