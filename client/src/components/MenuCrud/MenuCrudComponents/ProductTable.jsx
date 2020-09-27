@@ -25,11 +25,11 @@ const ProductTable = (props) => {
                         <span>{product.stock} u.</span>
                     </div>
                     <div className="buttonContainer">
-                        <button className='buttonStyler' onClick={ e => {
+                        <button className='buttonEdit' onClick={ e => {
                             dispatch(actionGetProduct(product.idProduct))
                             editProduct()
                         }}>Edit</button> {'  '}
-                        <button className='buttonStyler' onClick={e => deleteProduct(product.idProduct)}>Delete</button>
+                        <button className='buttonEdit' onClick={e => deleteProduct(product.idProduct)}>Delete</button>
                     </div>
                 </div>
             ))

@@ -2,62 +2,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 .table {
-    color: white;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 13px
 }
+
 .table thead th,
-.table th{
+.table th {
     border: 0px;
     display: flex;
     flex-direction: row;
-    display: flex;
+    align-items: center;
     width: -webkit-fill-available;
+    font-weight: 400;
+    height: 40px;
 }
+
 .NameAndDesc,
 .categories {
     border-top: 1px solid black;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
     width: -webkit-fill-available;
     align-items: center;
     display: flex;
     font-family: 'Roboto', sans-serif;
 }
-.table thead th{
-    font-weight: 600;
-}
-.table th{
-    font-weight: 400;
-}
 
-/* ////////////////////////////////////////////////////////////////////BOTONES */
-
-.btn-circle.btn-xl {
-    width: 70px;
-    height: 70px;
-    padding: 10px 16px;
-    border-radius: 35px;
-    font-size: 24px;
-    line-height: 1.33;
-}
-
-.btn-circle {
-    box-shadow:0px 13px 21px -5px rgba(0, 0, 0, 0.3);
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
+.categoryInfo{
+    font-family: 'Poppins', sans-serif;
     font-size: 12px;
-    line-height: 1.42857;
+}
+/* ////////////////////////////////////////////////////////////////////BOTONES */
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
 }
 
-.btn-warning.btn-circle.btn-lg {
-background-color: rgb(209, 88, 88);
-border: 0px;
+.buttonEdit {
+    display: inline-block;
+    padding: 0.2em 1.4em;
+    border: 0.1em solid #ffffff;
+    border-radius: 0.30em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: #212529;
+    text-align: center;
+    transition: all 0.15s;
 }
-.btn-primary.btn-circle{
-    background-color: #DFA06E;
-    color: #2f3640;
-    border: 0px;
-    font-size: medium;
-    display: flex;
-    justify-content: center;
+
+.buttonEdit:hover {
+    text-shadow: rgb(74, 74, 74);
+    color: #212529;
+    border-color: rgb(74, 74, 74);
+    background-color: white;
+    backdrop-filter: blur(7px);
+}
+
+@media all and (max-width:30em) {
+    .buttonEdit {
+        display: block;
+        margin: 0.4em auto;
+    }
 }

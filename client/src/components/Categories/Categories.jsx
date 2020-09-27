@@ -77,7 +77,7 @@ const Categories = (props) => {
         <CategoryTable categories={props.categories} deleteCategory={deleteCategory} editCategory={editCategory} />
       </Container>
       <Modal isOpen={modalAdd}>
-        <FormModalAdd addCategory={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories} />
+        <FormModalAdd  addCategory={addCategory} modalAddViewFalse={modalAddViewFalse} categories={categories} />
       </Modal>
       <Modal isOpen={modalEdit}>
         <FormModalEdit currentCategory={currentCategory} modalEditViewFalse={modalEditViewFalse} updateCategory={updateCategory} categories={categories} />

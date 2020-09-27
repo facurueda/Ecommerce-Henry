@@ -10,11 +10,11 @@ const CategoryTable = (props) => {
     const {categories, editCategory, deleteCategory} = props;
 
     return (
-            <Table>
+            <Table className = 'categoryTable'>
                 <thead>
                     <tr className = 'NameAndDesc'>
-                        <th className = 'Name'>Name</th>
-                        <th className = 'Desc'>Description</th>
+                        <th className = 'Name'>Nombre</th>
+                        <th className = 'Desc'>Descripción</th>
                         <th className = 'buttons'/>
                     </tr>
                 </thead>
@@ -26,13 +26,13 @@ const CategoryTable = (props) => {
 
                     categories.map(category => (
                             <tr  className='categories' key={category.idCategory}>
-                                <th>{category.name}</th>
-                                <th>{category.description}</th>
-                                <th> 
+                                <th className = 'categoryInfo'>{category.name}</th>
+                                <th className = 'categoryInfo'>{category.description}</th>
+                                <th className = 'buttonContainer'> 
                                     <button type="button" className = 'buttonEdit'
                                     onClick={() => editCategory(category)}>Edit
                                     </button>{" "}
-                                    <button type="button" className = 'buttonDelete'
+                                    <button type="button" className = 'buttonEdit'
                                     onClick={() => deleteCategory(category)}>Delete
                                     </button>
                                 </th>

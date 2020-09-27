@@ -20,21 +20,24 @@ const TotalByProduct = (props) => {
     }
 
     return (
-        <div className = "ProductContainer">
-            <button className = 'DeleteProd' onClick = { e => btnRestar(product.Inter_Prod_Order.quantity) }>x</button>
+        <div className = "productContainer">
+        
             <div className = 'cardContainer' >
-                <div className = 'imgContainer' >
-                    <img className = 'ProductImage' src = {product.images} />
+                <div className ='buttonContainer'>
+                    <button  className = 'deleteButton' onClick = { e => btnRestar(product.Inter_Prod_Order.quantity)} >x</button>
                 </div>
-                <div className = 'descriptionContainer' >
-                    <h3 className = 'productInfoName' >{product.name} </h3>
-                    <h3 className = 'productInfo' >{renderHTML(product.description)} </h3>
-                    <h3 className = 'productInfo' >{product.price} </h3>
+                <div className = 'imgContainer'>
+                    <img className = 'productImage' src = {product.images} />
+                </div>
+                <div className = 'descriptionContainer'>
+                    <h3 className = 'productInfoName'>{product.name}</h3>
+                    <h3 className = 'productInfo'>{renderHTML(product.description)} </h3>
+                    <h3 className = 'productInfo'>{product.price} </h3>
                 </div>
             </div>
             <div className="textContent">
                 <span className="textQuantity">Cantidad: {quantity}<span><button className='buttonRestar' onClick={e => btnRestar(-1)}>-</button></span> </span>
-                <span className="textAmount">Monto: ${price}</span>
+                <span className="textAmount">Total: ${price}</span>
             </div>
         </div>
     )

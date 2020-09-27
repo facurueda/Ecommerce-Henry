@@ -1,45 +1,60 @@
-.ProductContainer{
-    align-items: center;
+.productContainer{
+    flex: wrap;
+    color: white;
     display: flex;
     height: 130px;
+    border-radius: 5px;
     margin: 10px;
-    padding: 5px;
-    background-color: rgba(255, 255, 255, 0.57);
+    background-color: rgba(255, 255, 255, 0.25);
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    width: 700px;
+    width: 50%;
     box-shadow:0px 13px 21px -5px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(7px);
 }
-
+.imgContainer {
+     flex: wrap;
+    display: flex;
+    align-items: center;
+}
 .textQuantity {
+     flex: wrap;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
 }
 .card{
-    width: 600px;
+     flex: wrap;
+    width: 100%;
     max-width: 750px;
     height: auto;
     align-items: center;
+    backdrop-filter: blur(7px);
 }
 .textContent{
+    flex: wrap;
     display: flex;
     width: 50%;
     flex-direction: column;
     justify-content: center;
     text-align-last: right;
+    padding: 0px 15px;
+    text-shadow: rgb(74, 74, 74);
 }
-.textQuantity{
+.textQuantity,
+.textAmount {
+    align-self: flex-end;
     font-size: 15px;
 }
-.textAmount{
-    font-size: 15px;
-}
-.ProductImage {
+.productImage {
     height: 100px;
+    display:flex;
+    justify-content: center;
+    align-content:center;
 }
 .cardContainer {
+    width: 50%;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -58,15 +73,60 @@
     margin-bottom: 0;
 }
 .productInfoName {
-    font-size: 17px;
+    font-size: 20px;
+    font-weight: 400;
 }
 
-.DeleteProd {
-    align-self: center;
-    justify-self: center;
-    background-color: rgb(128, 63, 63);
-    width: 25px;
-    border-radius: 15px;
-    text-align: center;
-    color: white
+.buttonContainer{
+    display: flex;
+    margin-right:10px;
+    justify-self: flex-start;
+    align-items: center;
 }
+.deleteButton {
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 0px; 
+    border: 0.1em solid #ffffff;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    width: 25px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.deleteButton:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ffffff;
+    flex: wrap;
+}
+
+@media all and (max-width:30em) {
+    .deleteButton {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+
+@media all and (max-width:30em) {
+    .deleteButton {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+
