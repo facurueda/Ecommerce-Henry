@@ -16,6 +16,12 @@
     /* display: flex; */
     /* justify-content: flex-end; */
 }
+.textAmount{
+    margin-left: 20px;
+}
+.textQuantity {
+    margin-left: 20px;
+}
 .textPrice{
     display: flex;
     justify-content: center;

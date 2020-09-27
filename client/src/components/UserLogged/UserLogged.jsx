@@ -6,10 +6,9 @@ import { actionLogOut } from '../../redux/usersActions';
 
 
 const UserLogged = () => {
-    const user = useSelector(state => state.usersReducer.user);
     const dispatch = useDispatch()
     const handleChange = () => {
-        dispatch(actionLogOut(user));
+        dispatch(actionLogOut());
     }
     return (
         <div class="dropdown">

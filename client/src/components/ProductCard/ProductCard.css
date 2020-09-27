@@ -1,29 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 .ProductCard_Container {
     display: flex;
+    flex-direction: row;
     align-items: center;
     background-color: #ffffff;
-    justify-content: space-between;
+    justify-content: space-around;
     border-radius: 20px;
-    padding: 5px 50px;
-    /* width: 600px;
-    height: 200px; */
+    width: 600px;
+    height: 200px;
     display: flex;
     flex-wrap: wrap;
     margin: 5px;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.50);
 }
-.content {
-    background-color: #ffffff;
+.ProductDescription{
     display: flex;
-    padding: 5px;
-    /* width: 90%; */
-    justify-content: center;
-    flex-direction: row;
-    border-radius: 20px;
-    /* width: 95%; */
-    justify-content: space-around;
-    font-family: 'Poppins', sans-serif;
 }
 .ProductDataContainer {
     display: flex;
@@ -56,12 +47,8 @@
 .contentCard {
     display: flex;
     flex-direction: column;
-}
-.ProductDescription{
-    /* width: 50%; */
-    align-self: center;
-    display: flex;
-    font-size: 12px;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .productStock {

@@ -8,14 +8,17 @@ const AdminNavBar = (props) => {
     return (
         <div className='admincontainer'>
             <form action="/MenuCrud">
-                <button className='buttonStyle'>Lista de productos</button>
+                <button className='buttonLoginAndRegister'>Lista de productos</button>
             </form>
             <form action="/Categories">
-                <button className='buttonStyle'>Modificar categorias</button>
+                <button className='buttonLoginAndRegister'>Modificar categorias</button>
             </form>
-                <button className='buttonStyle' onClick={modalOrdersTableView}>Lista de ordenes</button>
+                <button className='buttonLoginAndRegister' onClick={modalOrdersTableView}>Lista de ordenes</button>
                 <Modal isOpen={ModalOrdersTable} toggle={ModalOrdersTable}>
-                    <button className='buttonLoginAndRegister' onClick={modalOrdersTableView}>Close</button>
+                    <button className='buttonLoginAndRegister' onClick={() => {
+                        modalOrdersTableView()
+                        window.location.reload()
+                    }}>Close</button>
                     <AdminOrdersTable />
                 </Modal>
         </div>

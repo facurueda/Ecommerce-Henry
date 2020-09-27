@@ -34,7 +34,7 @@ const TotalByProduct = (props) => {
             </div>
             <div className="textContent">
                 <span className="textQuantity">Cantidad: {quantity}<span><button className='buttonRestar' onClick={e => btnRestar(-1)}>-</button></span> </span>
-                <span className="textAmount">Monto: ${price}</span>
+                <span className="textAmount">Total: ${price}</span>
             </div>
         </div>
     )

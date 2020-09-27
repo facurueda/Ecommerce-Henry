@@ -80,11 +80,6 @@ const NavBar = () => {
                         <form action="/catalogue">
                             <button className='buttonProducts'>Products</button>
                         </form>
-                        {level === 'user' || level === 'admin' ? (
-                            <form action="/myAccount">
-                                <button className='buttonProducts' >My Account</button>
-                            </form>
-                        ) : (<div></div>)}
                     </div>
                     <div className='searchBar'>
                         <SearchBar />

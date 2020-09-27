@@ -2,9 +2,10 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content: center;
-    color: white;
-    /* padding: 2px; */
+    justify-content: space-between;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
     /* height: 130px; */
     margin: 10px 0px 10px 0px;
     background-color: rgba(255, 255, 255, 0.57);
