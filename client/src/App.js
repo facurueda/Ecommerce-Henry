@@ -19,6 +19,7 @@ import Reviews from './components/Review/Review'
 import {withCookies} from 'react-cookie';
 import MyAccount from './components/MyAccount/myAccount';
 import ResetPassword from './components/LogIn/ResetPassword'
+import NewPassword from './components/LogIn/NewPassword';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <NavBar />
           <Switch>
             <Route path='/Search' component={ProductsBySearchTerm}/>
+            <Route path='/auth/reset/' component={NewPassword}/>
             <Route exact path="/" component={Home} />
             <Route path='/productDetail' component={Product} />
             <Route path="/catalogue" component={Catalogue} />

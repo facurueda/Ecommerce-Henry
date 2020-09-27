@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+    RESET_STATUS_RESET,
+    RESET_OK,
+    RESET_FAILED,
     RESET_PASSWORD,
     GET_USER_BY_ID,
     USER_CREATED,
@@ -39,7 +42,7 @@ export const actionGetUserById = (idUser) => {
 }
 export const actionVerifyCookies = (cookie) => {
     return (dispatch) => {
-        axios.post(url + 'auth/cookie', cookie, {withCredentials: true}).then((res) => {
+        axios.post(url + 'auth/cookie', cookie, { withCredentials: true }).then((res) => {
             if (res.verified) {
                 dispatch({
                     type: AUTH_FAILED,
@@ -57,7 +60,20 @@ export const actionVerifyCookies = (cookie) => {
         })
     }
 }
-
+export const actionResetStatusReset = () => {
+    return (dispatch) => {
+        dispatch({type: RESET_STATUS_RESET})
+    }
+}
+export const actionPasswordUpdate = (obj) => {
+    return (dispatch) => {
+        axios.post(url+'auth/reset?token=' + obj.token, obj.password, { withCredentials: true }, { withCredentials: true }).then((res) => {
+            dispatch({ type: RESET_OK, payload: ["Contraseña aplicada con éxito"] })
+        }).catch((res) => {
+            dispatch({ type: RESET_FAILED, payload: ["Algo falló al intentar cambiar la contraseña, intentelo denuevo."] })
+        })
+    }
+}
 export const actionUserCreate = (props) => {
     return (dispatch) => {
         axios.post(url + 'user', props, {

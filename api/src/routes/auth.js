@@ -191,15 +191,13 @@ server.post('/forgot', (req, res) => {
                 }
               });
 
-              const linkReset = 'http://localhost:3001/auth/reset/' + token
-              
+              const linkReset = 'http://localhost:3001/auth/reset/?token=' + token
               const mailOptions = {
                 from: 'noreplylacoseria@gmail.com',
                 to: req.body.email,
                 subject: 'Invoices due',
                 html: `El link para resetear tu constraseña es: <a href= ${linkReset}> LINK </a>`
               };
-              
               transporter.sendMail(mailOptions, function(error, info){
                 if (error) {
                   console.log(error);
@@ -214,27 +212,26 @@ server.post('/forgot', (req, res) => {
 
 
 
-server.post('/reset/:token', (req, res) => {
-    console.log("token", req.params.token);
+server.post('/reset', (req, res) => {
+    console.log("token", req.query.token);
     User.findOne({
         where: {
-            resetPasswordToken: req.params.token
+            resetPasswordToken: req.query.token
         }
     }).then((user) => {
         console.log('1')
         if (!user) {
             req.flash('error', 'Sorry, we can´t find you?');
-            res.redirect('/forgot');
+            res.redirect('/auth/forgot');
         } else {
             console.log(user);
             if (user.resetPasswordExpires > Date.now()) {
-                console.log('entro')
                 user.update({
                     ...user,
                     password: req.body.password,
                     resetPasswordExpires: null,
                     resetPasswordToken: null,
-                })
+                }).then(() => {res.send()})
             }
         }
     }).catch((err) => {

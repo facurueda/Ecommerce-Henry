@@ -1,28 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import './NewPassword.css'
+import { actionPasswordUpdate, actionResetStatusReset } from '../../redux/usersActions'
 
-const NewPassword = () => {
+const NewPassword = (props) => {
+    const qs = require('qs')
+    const dispatch = useDispatch()
     const [secondPassword, setSecondPassword] = useState('')
-    const [passwordInputs, setpasswordInputs] = useState({password: 'null'})
+    const [passwordInputs, setpasswordInputs] = useState({ password: 'null' })
+    const resetStatus = useSelector(store => store.usersReducer.resetStatus)
+    const token = qs.parse(props.location.search, { ignoreQueryPrefix: true }).token
+    useEffect(() => {
+        handleChange({ target: { name: 'token', value: token } })
+    }, [])
     const handleChange = event => {
         const { name, value } = event.target
         if (name === 'secondPassword') {
             setSecondPassword(value);
+        } else {
+            setpasswordInputs({
+                ...passwordInputs,
+                [name]: value
+            })
         }
-        setpasswordInputs        
     }
     const Verificar = () => {
-        if (secondPassword === setpasswordInputs.password) {
-            dispatch(actionPasswordUpdate({...passwordInputs}))
-            console.log('Su contraseña fue modificada')
+        if (secondPassword === passwordInputs.password) {
+            dispatch(actionPasswordUpdate(passwordInputs))
         } else {
-            console.log('Las contraseñas no coinciden')
+            window.alert('Las contraseñas no coinciden, intentelo denuevo.')
         }
     }
-    return(
-        <div>
+    const handleClose = () => {
+        dispatch(actionResetStatusReset())
+        window.location.href = '/'
+    }
+    return (
+        <div className='generalContainerReset'>
             <h3>Escribí tu nueva contraseña aquí:</h3>
-            <input name='password' type="password" placeholder='Password' onChange = {handleChange}></input>
-            <input name='password' type="password" placeholder='Repeat your password'  onChange = {handleChange}>{Verificar()}</input>
+            <div>
+                {resetStatus.length > 0 ? (
+                    <div>{() => {
+                        window.alert(resetStatus[0])
+                        handleClose()
+                    }
+                    }</div>
+                ) : (<div></div>)}
+            </div>
+            <div className='formContainerReset'>
+                <input className='inputs1' name='password' type="password" placeholder='Password' onChange={handleChange}></input>
+                <input className='inputs2' name='secondPassword' type="password" placeholder='Repeat your password' onChange={handleChange}></input>
+                <button className='buttonLoginAndRegister' onClick={Verificar}>Verificar</button>
+            </div>
         </div>
     )
 

@@ -1,15 +1,45 @@
-import { RESET_PASSWORD, SEND_EMAIL , GET_USER_BY_ID, SET_VERIFIED, USER_CREATED, USER_LOGGED_IN, POST_LOGIN, AUTH_FAILED, USER_LOGGED_OUT, SET_COOKIE_TO_STORE } from './constants'
+import {
+    RESET_STATUS_RESET,
+    RESET_OK,
+    RESET_FAILED,
+    RESET_PASSWORD,
+    SEND_EMAIL,
+    GET_USER_BY_ID,
+    SET_VERIFIED,
+    USER_CREATED,
+    USER_LOGGED_IN,
+    POST_LOGIN,
+    AUTH_FAILED,
+    USER_LOGGED_OUT,
+    SET_COOKIE_TO_STORE
+} from './constants'
 const initialState = {
     idUser: 0,
     name: 'Guest',
     email: 'no-email',
     level: 'GUEST',
     verified: false,
-    loggedOut: false
+    loggedOut: false,
+    resetStatus: []
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case RESET_STATUS_RESET:
+            return {
+                ...state,
+                resetStatus: []
+            }
+        case RESET_OK:
+            return {
+                ...state,
+                resetStatus: action.payload
+            }
+        case RESET_FAILED:
+            return {
+                ...state,
+                resetStatus: action.payload
+            }
         case GET_USER_BY_ID:
             return {
                 ...state,
@@ -68,12 +98,12 @@ const usersReducer = (state = initialState, action) => {
                 idUser: action.payload.idUser,
                 level: action.payload.level
             }
-        case RESET_PASSWORD :
+        case RESET_PASSWORD:
             return {
                 ...state,
                 email: action.payload.email
             }
-        case SEND_EMAIL :
+        case SEND_EMAIL:
             return {
                 ...state,
                 email: action.payload.email
