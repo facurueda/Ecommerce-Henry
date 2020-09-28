@@ -242,4 +242,23 @@ server.post('/reset', (req, res) => {
 })
 
 
+// GOOGLE STRATEGY
+
+server.get('/google',
+    passport.authenticate('google', {
+        scope: ['profile', 'email']
+    }));
+
+server.get('/google/callback',
+    passport.authenticate('google', {
+        successRedirect: 'http://localhost:3001/',
+        failureRedirect: '/login'
+        // Ver como hacer para que el FRONT ejecute la un dipatch /me y modifique los datos de su cookie
+    }),
+);
+
+
+
+
+
 module.exports = server;

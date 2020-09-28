@@ -207,6 +207,26 @@ export const actionLogin = (inputs) => {
     }
 }
 
+export const actionGetMe = () => {
+    return (dispatch) => {
+        var config = {
+            withCredentials: true,
+            method: 'get',
+            url: 'http://localhost:3000/auth/me',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        };
+        axios(config)
+            .then( res => {
+                return dispatch({
+                    type: POST_LOGIN,
+                    payload: res.data.dataValues
+                })
+            })
+    }
+}
+
 export const actionLogOut = () => {
     return (
         (dispatch) => {
