@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
-import { actionPostReview } from '../../redux/reviewsAction';
+import { actionGetReviews, actionPostReview } from '../../redux/reviewsAction';
 import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { useDispatch } from 'react-redux';
 import './Review.css'
 import StarRating from '../starRating/starRating';
+import { actionGetProduct, actionSetProduct } from '../../redux/productsActions';
+import { useHistory } from 'react-router';
 
 const PostReview = (props) => {
-    const { modalPostReviewClose, idProduct } = props;
+    const { modalPostReviewClose, idProduct, reload} = props;
+    const history = useHistory()
     const [rating] = useState(0)
     const [rev, setReview] = useState({});
     const dispatch = useDispatch();
     const handlePostReview = () => {
         dispatch(actionPostReview(rev))
         modalPostReviewClose()
+        reload()
     }
     const handleChangePost = (e) => {
         const {name, value} = e.target

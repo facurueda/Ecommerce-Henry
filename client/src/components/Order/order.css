@@ -6,6 +6,8 @@
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    align-self: center;
+    justify-self: center;
     background-color: rgba(47, 54, 64, 0.57);
 }
 .orderVacia{
@@ -20,12 +22,14 @@
 }
 .footerContent{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .footerOrder{
     margin: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .textAmount{
     margin-left: 20px;

@@ -137,19 +137,15 @@ server.post('/:idProducto/category/:idCategoria', isAdmin, (req, res, next) => {
 
 
 ///////////////////////////// RUTA PARA DELETE REVIEW
-server.delete('/product/:id/review/:idReview', isUserOrAdmin, (req, res, next) => {
+server.delete('/:id/review/:idReview', isUserOrAdmin, (req, res, next) => {
 	Review.destroy({
 		where: {
 			idReview: req.params.idReview
 		}
 	}).then((rev) => {
-		if (rev) {
 			res.status(200).send('Success')
-		} else {
-			res.status(400).send('Error, this review doesnt exist')
-		}
 	}).catch(() => {
-		res.status(400)
+		res.status(400).send('error')
 	})
 })
 

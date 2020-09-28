@@ -38,9 +38,8 @@ const Order = (props) => {
                     <div className="footerOrder">
                         <span className="textPrice"> Total: ${
                             or.products.reduce((acum, product) => {
-                                return acum +
-                                    (product.Inter_Prod_Order.price * product.Inter_Prod_Order.quantity)
-                            }, 0)}
+                                return acum + (product.Inter_Prod_Order.price * product.Inter_Prod_Order.quantity)
+                            }, 0).toFixed(2)}
                         </span>
                         <div style={{ display: props.origin }}><button className="buttonEndOrden">Finalizar Orden</button></div>
                     </div>
