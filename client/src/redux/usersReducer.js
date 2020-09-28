@@ -11,7 +11,8 @@ import {
     POST_LOGIN,
     AUTH_FAILED,
     USER_LOGGED_OUT,
-    SET_COOKIE_TO_STORE
+    SET_COOKIE_TO_STORE,
+    GET_ALL_USERS
 } from './constants'
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
     level: 'GUEST',
     verified: false,
     loggedOut: false,
-    resetStatus: []
+    resetStatus: [],
+    users: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -109,6 +111,11 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 email: action.payload.email
+            }
+        case GET_ALL_USERS:
+            return {
+                ...state,
+                users: action.payload
             }
         default:
             return state;

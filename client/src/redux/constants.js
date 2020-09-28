@@ -34,6 +34,7 @@ export const SEND_EMAIL = 'SEND_EMAIL'
 export const RESET_OK = 'RESET_OK'
 export const RESET_FAILED = 'RESET_FAILED'
 export const RESET_STATUS_RESET = 'RESET_STATUS_RESET'
+export const GET_ALL_USERS = 'GET_ALL_USERS'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 

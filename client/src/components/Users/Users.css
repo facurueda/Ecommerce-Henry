@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+.table {
+    background-color: #fff;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 13px
+}
+
+.table thead th,
+.table th {
+    border: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: -webkit-fill-available;
+    font-weight: 400;
+    height: 40px;
+}
+
+.NameAndDesc,
+.categories {
+    border-top: 1px solid black;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    width: -webkit-fill-available;
+    align-items: center;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+}
+
+.categoryInfo{
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+}
+/* ////////////////////////////////////////////////////////////////////BOTONES */
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonEdit {
+    display: inline-block;
+    padding: 0.2em 1.4em;
+    border: 0.1em solid #ffffff;
+    border-radius: 0.30em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: #212529;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.buttonEdit:hover {
+    text-shadow: rgb(74, 74, 74);
+    color: #212529;
+    border-color: rgb(74, 74, 74);
+    background-color: white;
+    backdrop-filter: blur(7px);
+}
+
+@media all and (max-width:30em) {
+    .buttonEdit {
+        display: block;
+        margin: 0.4em auto;
+    }
+}

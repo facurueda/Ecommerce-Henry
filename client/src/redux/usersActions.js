@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
     RESET_STATUS_RESET,
+    GET_ALL_USERS,
     RESET_OK,
     RESET_FAILED,
     RESET_PASSWORD,
@@ -23,6 +24,14 @@ export const actionSetCookieToStore = (cookie) => {
         dispatch({
             type: SET_COOKIE_TO_STORE,
             payload: cookie
+        })
+    }
+}
+
+export const actionGetAllUsers = () => {
+    return (dispatch) => {
+        axios.get(url + 'user/', { withCredentials: true }).then(res => {
+            dispatch({ type: GET_ALL_USERS , payload: res.data})
         })
     }
 }

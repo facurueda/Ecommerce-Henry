@@ -100,13 +100,21 @@ function initialize(passport) {
     usernameField: 'email',
     passReqToCallback: true
   }, authenticateUser))
-
+  
   passport.serializeUser(function (user, done) {
-    done(null, user);
+    done(null, user.idUser);
   });
 
-  passport.deserializeUser(function (user, done) {
-    done(null, user);
+  passport.deserializeUser(function (id, done) {
+    console.log('deserializing user:')
+    User.findOne({
+      where: {
+        idUser: id
+      }
+    }).then(user => {
+      // console.log('thisUser', user.dataValues)
+      done(null, user);
+    }).catch(done)
   });
 }
 
