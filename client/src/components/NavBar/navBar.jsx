@@ -11,7 +11,7 @@ import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
-import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionLogOut } from '../../redux/usersActions'
+import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionLogOut, actionGetMe } from '../../redux/usersActions'
 
 const NavBar = () => {
     //// ---------------------------- DEV ---------------------------- //
@@ -24,10 +24,10 @@ const NavBar = () => {
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
+    const [google, setGoogle] = useState(true)
     if (loggedOut) {
             removeCookie('idUser')
             removeCookie('level')
-            console.log('borro cookies')
             setTimeout(() => {
                 window.location.reload()
             }, 200);
@@ -37,6 +37,10 @@ const NavBar = () => {
         setCookie('level', level, { path: '/' })
         dispatch(actionSetVerified(false))
     }
+    if (google) {
+        window.location.reload()
+        return setGoogle(false)
+    }
     useEffect(() => {
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {
@@ -44,6 +48,7 @@ const NavBar = () => {
         }, 200);
         dispatch(actionSetCookieToStore(cookie))
         dispatch(actionVerifyCookies(cookie))
+        dispatch(actionGetMe())
     }, [])
     // ---------------------------- Functions ---------------------------- //
     // ----- To Open Modals ----- //
@@ -105,7 +110,7 @@ const NavBar = () => {
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>
-                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} />
+                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} />
                     </Modal>
 
                     <Modal isOpen={modalRegister}>

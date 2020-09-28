@@ -32,7 +32,8 @@ const Login = (props) => {
     }
 
     const ClicktoSign = () => {
-        window.open("http://localhost:3000/auth/google", "_self");
+        props.setGoogle(true)
+        window.open("http://localhost:3000/auth/google");
     }
 
     const responseGoogle = (response) => {

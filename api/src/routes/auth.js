@@ -76,7 +76,6 @@ server.post('/login', (req, res, next) => {
             ...user.dataValues,
             verified: true
         }
-        console.log(userValues)
         res.send(userValues)
     })
 })
