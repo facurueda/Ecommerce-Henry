@@ -148,6 +148,7 @@ server.post('/cookie', async (req, res) => {
             })
         })
     } else {
+        console.log('idUserTHIS', idUser)
         User.findOne({
             where: {
                 idUser: idUser
