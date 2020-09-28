@@ -11,7 +11,11 @@ import {
     POST_LOGIN,
     AUTH_FAILED,
     USER_LOGGED_OUT,
-    SET_COOKIE_TO_STORE
+    GET_ALL_USERS,
+    SET_COOKIE_TO_STORE,
+    USER_TO_ADMIN,
+    ADMIN_TO_USER,
+    DELETE_USER
 } from './constants'
 
 const initialState = {
@@ -21,11 +25,32 @@ const initialState = {
     level: 'GUEST',
     verified: false,
     loggedOut: false,
-    resetStatus: []
+    resetStatus: [],
+    users: []
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_ALL_USERS:
+            return {
+                ...state,
+                users: action.payload
+            }
+        case USER_TO_ADMIN:
+            return {
+                ...state,
+                users: [...state.users]
+            }
+        case ADMIN_TO_USER:
+            return {
+                ...state,
+                users: [...state.users]
+            }
+        case DELETE_USER:
+            return {
+                ...state,
+                users: [...state.users]
+            }
         case RESET_STATUS_RESET:
             return {
                 ...state,

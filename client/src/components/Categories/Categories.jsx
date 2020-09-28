@@ -31,8 +31,8 @@ const Categories = (props) => {
     modalEditView()
   }
   const addCategory = async (category) => {
-    await props.actionPostCategory(category);
-    await window.location.reload()
+    props.actionPostCategory(category);
+    window.location.reload()
   }
   const updateCategory = (updatedCategory) => {
     props.actionUpdateCategory(updatedCategory)

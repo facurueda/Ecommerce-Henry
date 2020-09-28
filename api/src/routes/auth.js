@@ -86,7 +86,8 @@ server.post('/logout', (req, res) => {
     })
 });
 
-server.post('/promote/:id', isAdmin, (req, res) => {
+// To set user to Admin
+server.put('/promote/:id', (req, res) => {
     User.findOne({
         where: {
             idUser: req.params.id,
@@ -94,7 +95,20 @@ server.post('/promote/:id', isAdmin, (req, res) => {
     }).then(user => {
         user.update({
             ...user,
-            level: 'Admin',
+            level: 'admin',
+        })
+    })
+})
+// To set user to Admin
+server.put('/degrade/:id', (req, res) => {
+    User.findOne({
+        where: {
+            idUser: req.params.id,
+        }
+    }).then(user => {
+        user.update({
+            ...user,
+            level: 'user',
         })
     })
 })

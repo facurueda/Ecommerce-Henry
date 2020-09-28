@@ -13,6 +13,9 @@ const AdminNavBar = () => {
             <form action="/Categories">
                 <button className='buttonLoginAndRegister'>Modificar categorias</button>
             </form>
+            <form action="/Usuarios">
+                <button className='buttonLoginAndRegister'>Usuarios</button>
+            </form>
             <button className='buttonLoginAndRegister' onClick={() => {
                 document.getElementById("orden").hidden =true
                 modalOrdersTableView()

@@ -12,11 +12,95 @@ import {
     USER_LOGGED_OUT,
     SET_VERIFIED,
     SET_COOKIE_TO_STORE,
-    GET_ORDER_BY_ID
+    GET_ORDER_BY_ID,
+    GET_ALL_USERS,
+    USER_TO_ADMIN,
+    ADMIN_TO_USER,
+    DELETE_USER
+
 } from "./constants";
 const url = "http://localhost:3000/";
 var qs = require('qs');
 axios.defaults.withCrendentails = true;
+
+export const actionGetUsers = () => {
+    return (dispatch) => {
+        axios.get(url + 'user/', {
+            withCredentials: true
+        }).then(res => {
+            dispatch({
+                type: GET_ALL_USERS,
+                payload: res.data
+            })
+        })
+    }
+}
+
+export const actionSetAdminUser = (user) => {
+    return (dispatch) => {
+        var data = qs.stringify(user);
+        var config = {
+            withCredentials: true,
+            method: 'PUT',
+            url: 'http://localhost:3000/auth/promote/' + user.idUser,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        };
+        axios(config)
+            .then(() => {
+                dispatch({
+                    type: USER_TO_ADMIN,
+                })
+                return dispatch(actionGetUsers())
+            })
+    }
+}
+
+export const actionSetUser = (user) => {
+    return (dispatch) => {
+        var data = qs.stringify(user);
+        var config = {
+            withCredentials: true,
+            method: 'PUT',
+            url: 'http://localhost:3000/auth/degrade/' + user.idUser,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        };
+        axios(config)
+            .then(() => {
+                dispatch({
+                    type: ADMIN_TO_USER,
+                })
+                return dispatch(actionGetUsers())
+            })
+    }
+}
+
+export const actionDeleteUser = (user) => {
+    return (dispatch) => {
+        var data = qs.stringify(user);
+        var config = {
+            withCredentials: true,
+            method: 'DELETE',
+            url: 'http://localhost:3000/user/' + user.idUser,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        };
+        axios(config)
+            .then(() => {
+                dispatch({
+                    type: DELETE_USER,
+                })
+                return dispatch(actionGetUsers())
+            })
+    }
+}
 
 export const actionSetCookieToStore = (cookie) => {
     return (dispatch) => {
@@ -41,7 +125,9 @@ export const actionGetUserById = (idUser) => {
 }
 export const actionVerifyCookies = (cookie) => {
     return (dispatch) => {
-        axios.post(url + 'auth/cookie', cookie, { withCredentials: true }).then((res) => {
+        axios.post(url + 'auth/cookie', cookie, {
+            withCredentials: true
+        }).then((res) => {
             if (res.verified) {
                 dispatch({
                     type: AUTH_FAILED,
@@ -59,15 +145,27 @@ export const actionVerifyCookies = (cookie) => {
 }
 export const actionResetStatusReset = () => {
     return (dispatch) => {
-        dispatch({ type: RESET_STATUS_RESET })
+        dispatch({
+            type: RESET_STATUS_RESET
+        })
     }
 }
 export const actionPasswordUpdate = (obj) => {
     return (dispatch) => {
-        axios.post(url + 'auth/reset?token=' + obj.token, { password: obj.password }, { withCredentials: true }).then(() => {
-            dispatch({ type: RESET_OK, payload: ["Contraseña aplicada con éxito"] })
+        axios.post(url + 'auth/reset?token=' + obj.token, {
+            password: obj.password
+        }, {
+            withCredentials: true
+        }).then(() => {
+            dispatch({
+                type: RESET_OK,
+                payload: ["Contraseña aplicada con éxito"]
+            })
         }).catch(() => {
-            dispatch({ type: RESET_FAILED, payload: ["Algo falló al intentar cambiar la contraseña, intentelo denuevo."] })
+            dispatch({
+                type: RESET_FAILED,
+                payload: ["Algo falló al intentar cambiar la contraseña, intentelo denuevo."]
+            })
         })
     }
 }
