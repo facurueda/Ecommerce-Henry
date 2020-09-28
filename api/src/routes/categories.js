@@ -45,7 +45,7 @@ server.get('/', (req, res, next) => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
-server.post('/create', (req, res, next) => {
+server.post('/create', isAdmin, (req, res, next) => {
     const { name, description } = req.body;
     Categories.create({
         name,

@@ -1,5 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy
 
+const GoogleStrategy = require('passport-google-oauth20').Strategy
+
 
 const bcrypt = require('bcrypt');
 const {
@@ -11,16 +13,11 @@ const {
 function initialize(passport) {
 
   const authenticateUser = async (req, email, password, done) => {
-<<<<<<< HEAD
-
-     const {
-=======
     const {
->>>>>>> a138ce1b60ff8f3e9814b6901b025dd8f84f9260
       idUser
-    } = req.body 
+    } = req.body
 
-    User.findOne({
+    const user = await User.findOne({
       where: {
         email: email
       }
@@ -66,14 +63,31 @@ function initialize(passport) {
             }
           })
         }).then(inters => {
-          inters.map(e => {
-            return Inter_Prod_Order.create({
-              ...e,
-              idOrder: orderUserLogin.idOrder
+          inters.map(inter => {
+            const interQuantity = inter.quantity
+            Inter_Prod_Order.findOne({
+              where: {
+                idProduct: inter.idProduct,
+                idOrder: orderUserLogin.idOrder
+              }
+            }).then(inter => {
+              return inter.update({
+                ...inter,
+                quantity: inter.quantity + interQuantity
+              })
+            }).catch(() => {
+              // console.log('interInCatch:\n',inter)
+              // console.log('interQuantityInCatch:\n',interQuantity);
+              return Inter_Prod_Order.create({
+                idProduct: inter.idProduct,
+                price: inter.price,
+                quantity: inter.quantity,
+                idOrder: orderUserLogin.idOrder
+              })
             })
           })
         }).then(() => {
-          Inter_Prod_Order.destroy({
+          Order.destroy({
             where: {
               idOrder: orderGuest.idOrder
             }
@@ -97,6 +111,88 @@ function initialize(passport) {
       return done(e)
     }
   }
+
+
+  // Google Strategy
+
+  const authenticateUserGoogle = async (accessToken, refreshToken, profile, done) => {
+
+    // profile {
+    //   id: '115475068932257464817',
+    //   displayName: 'Facundo Rueda',
+    //   name: { familyName: 'Rueda', givenName: 'Facundo' },
+    //   emails: [ { value: 'facu9685@gmail.com', verified: true } ],
+    //   photos: [
+    //     {
+    //       value: 'https://lh3.googleusercontent.com/a-/AOh14Gg7EjythtUhJeb1D83WtsBDNhFygm9XLt6JnSMu'
+    //     }
+    //   ],
+
+
+    const hashedPassword = await bcrypt.hash('passwordGoogleAcount', 10)
+
+    // buscar si existe el usuario con el mail
+    User.findOne({
+      where: {
+        email: profile.emails[0].value
+      }
+    }).then(user => {
+      // NO existe
+      if (!user) {
+        // Crear usuario, crear orden, logearse
+        User.create({
+          name: profile.displayName,
+          email: profile.emails[0].value,
+          password: hashedPassword,
+          level: 'user'
+        }).then(user => {
+          console.log(user)
+          Order.create({
+            idUser: user.idUser,
+            status: 'CREADA'
+          }).then(order => {
+            console.log(order)
+            User.findOne({
+              where: {
+                idUser: order.idUser
+              }
+            }).then(user => {
+              return done(null, user)
+            })
+          })
+        })
+      } else {
+
+        User.findOne({
+          where: {
+            email: profile.emails[0].value
+          }
+        }).then(user => {
+          return done(null, user)
+        })
+      }
+    })
+  }
+
+
+
+  passport.use(new GoogleStrategy({
+      clientID: process.env.googleClientID,
+      clientSecret: process.env.googleClientSecret,
+      callbackURL: "http://localhost:3000/auth/google/callback"
+    },
+    authenticateUserGoogle
+    // function (accessToken, refreshToken, profile, cb) {
+    //   User.findOrCreate({
+    //     googleId: profile.id
+    //   }, function (err, user) {
+    //     return cb(err, user);
+    //   });
+    // }
+  ));
+
+
+
 
 
   passport.use(new LocalStrategy({

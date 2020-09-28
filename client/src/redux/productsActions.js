@@ -30,7 +30,7 @@ export const actionGetProductsByCategory = (name) => {
 }
 export const actionUpdateProductLocalStore = (product) => {
     return (dispatch) => {
-        dispatch({type: PRODUCT_PUT, payload: product})
+        dispatch({ type: PRODUCT_PUT, payload: product })
     }
 }
 export const actionUpdateProduct = (product) => {
@@ -59,7 +59,7 @@ export const actionGetProducts = () => {
 }
 export const actionSetProduct = (product) => {
     return (dispatch) => {
-        dispatch({type: SET_PRODUCT, payload: product})
+        dispatch({ type: SET_PRODUCT, payload: product })
     }
 }
 export const actionDeleteProduct = (id) => {

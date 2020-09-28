@@ -18,6 +18,9 @@ const Login = (props) => {
     const handleChancla = () => {
         dispatch(actionLogin({ ...inputs, idUser: idUser }))
         modalLoginClose()
+        setTimeout(() => {
+            window.location.reload()
+        }, 200);
     }
 
     const handleInput = (e) => {
@@ -28,9 +31,16 @@ const Login = (props) => {
         })
     }
 
+    const ClicktoSign = () => {
+        window.open("http://localhost:3000/auth/google", "_self");
+    }
+
     const responseGoogle = (response) => {
         console.log(response);
         console.log(response.profileObj)
+        const email = response.profileObj.email;
+        
+        dispatch(actionLogin({email: email , password: 'passwordGoogle', idUser: idUser}))
     }
     const responseFacebook = (response) => console.log(response);
     const componentClicked = () => console.log('clicked')
@@ -49,7 +59,11 @@ const Login = (props) => {
                 <input className='standardInput' id='password' type="password" placeholder='··············' onKeyPress={e => {
                     if (e.key === 'Enter') { handleChancla(e) }
                 }} onChange={handleInput} />
-                <button className='buttonLoginAndRegister' onClick={handleChancla}>LOGIN</button>
+                <button className='buttonLoginAndRegister' onClick={(e) => {
+                    handleChancla(e)
+                }}>LOGIN</button>
+
+                <button onClick={ClicktoSign}>LOGIN GOOGLE</button>
                 <div> Or do you <a className = 'createAccount' href = '/forgot'>forgot your password?</a> </div>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>

@@ -1,7 +1,20 @@
 import axios from "axios";
-import { RESET_PASSWORD, GET_USER_BY_ID, USER_CREATED, POST_LOGIN, USER_LOGGED_IN, AUTH_FAILED, USER_LOGGED_OUT, SET_VERIFIED, SET_COOKIE_TO_STORE, GET_ORDER_BY_ID } from "./constants";
+import {
+    RESET_STATUS_RESET,
+    RESET_OK,
+    RESET_FAILED,
+    RESET_PASSWORD,
+    GET_USER_BY_ID,
+    USER_CREATED,
+    POST_LOGIN,
+    USER_LOGGED_IN,
+    AUTH_FAILED,
+    USER_LOGGED_OUT,
+    SET_VERIFIED,
+    SET_COOKIE_TO_STORE,
+    GET_ORDER_BY_ID
+} from "./constants";
 const url = "http://localhost:3000/";
-// const cors = require('cors')
 var qs = require('qs');
 axios.defaults.withCrendentails = true;
 
@@ -16,20 +29,30 @@ export const actionSetCookieToStore = (cookie) => {
 
 export const actionGetUserById = (idUser) => {
     return (dispatch) => {
-        axios.get(url + 'user/' + idUser, {withCredentials: true}).then(res => {
+        axios.get(url + 'user/' + idUser, {
+            withCredentials: true
+        }).then(res => {
             console.log(res.data)
-            dispatch({ type: GET_USER_BY_ID, payload: res.data })
+            dispatch({
+                type: GET_USER_BY_ID,
+                payload: res.data
+            })
         })
     }
 }
 export const actionVerifyCookies = (cookie) => {
     return (dispatch) => {
-        axios.post(url + 'auth/cookie', cookie, {withCredentials: true}).then((res) => {
-            console.log('resVerifyCookie', res.data)
+        axios.post(url + 'auth/cookie', cookie, { withCredentials: true }).then((res) => {
             if (res.verified) {
-                dispatch({ type: AUTH_FAILED, payload: res.data })
+                dispatch({
+                    type: AUTH_FAILED,
+                    payload: res.data
+                })
             } else {
-                dispatch({ type: USER_LOGGED_IN, payload: res.data })
+                dispatch({
+                    type: USER_LOGGED_IN,
+                    payload: res.data
+                })
             }
             return res
         }).catch(res => {
@@ -37,16 +60,34 @@ export const actionVerifyCookies = (cookie) => {
         })
     }
 }
-
+export const actionResetStatusReset = () => {
+    return (dispatch) => {
+        dispatch({ type: RESET_STATUS_RESET })
+    }
+}
+export const actionPasswordUpdate = (obj) => {
+    return (dispatch) => {
+        axios.post(url + 'auth/reset?token=' + obj.token, { password: obj.password }, { withCredentials: true }).then((res) => {
+            dispatch({ type: RESET_OK, payload: ["Contraseña aplicada con éxito"] })
+        }).catch((res) => {
+            dispatch({ type: RESET_FAILED, payload: ["Algo falló al intentar cambiar la contraseña, intentelo denuevo."] })
+        })
+    }
+}
 export const actionUserCreate = (props) => {
     return (dispatch) => {
-        axios.post(url + 'user', props, {withCredentials: true}).then(() => {
-            dispatch({ type: USER_CREATED })
+        axios.post(url + 'user', props, {
+            withCredentials: true
+        }).then(() => {
+            dispatch({
+                type: USER_CREATED
+            })
         })
     }
 }
 
 export const actionLogin = (inputs) => {
+    console.log('GOOGLELOGIIINNN', inputs)
     return (dispatch) => {
         var data = qs.stringify(inputs);
         var config = {
@@ -58,40 +99,58 @@ export const actionLogin = (inputs) => {
             },
             data: data
         };
-
         axios(config)
             .then(() => {
-                axios.get(url + 'auth/me', {withCredentials: true})
-                .then( res => {
+                axios.get(url + 'auth/me', {
+                    withCredentials: true
+                }).then(res => {
                     console.log(res.data)
-                    return dispatch({ type: POST_LOGIN, payload: res.data.dataValues })
+                    return dispatch({
+                        type: POST_LOGIN,
+                        payload: res.data.dataValues
+                    })
                 })
-            }
-        )
+            })
     }
 }
 
-export const actionLogOut = (cookie) => {
+export const actionLogOut = () => {
     return (
         (dispatch) => {
-            axios.post(url + 'auth/logout',cookie).then((res) => {
-                console.log(res)
-                return dispatch({ type: USER_LOGGED_OUT})
-            }).catch(error => {console.log(error)})
+            axios.post(url + 'auth/logout', {
+                withCredentials: true
+            }).then((res) => {
+                return dispatch({
+                    type: USER_LOGGED_OUT,
+                    payload: res.data
+                })
+            }).catch(error => {
+                console.log(error)
+            })
         }
     )
 }
 
 export const actionSetVerified = (bool) => {
-    return (dispatch) => { dispatch({ type: SET_VERIFIED, payload: bool }) }
+    return (dispatch) => {
+        dispatch({
+            type: SET_VERIFIED,
+            payload: bool
+        })
+    }
 }
 
 export const actionResetPassword = (email) => {
     return (
         (dispatch) => {
-            axios.get(url + 'forgot', email, {withCredentials: true}).then((res => {
-                return dispatch({ type: RESET_PASSWORD })
-            }))
+            axios.post(url + 'auth/forgot', email, {
+                withCredentials: true
+            }).then((res) => {
+                return dispatch({
+                    type: RESET_PASSWORD,
+                    payload: res.data
+                })
+            })
         }
     )
 }

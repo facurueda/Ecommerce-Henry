@@ -13,13 +13,12 @@ import ButtonAddToCart from '../ButtonAddToCart/ButtonAddToCart';
 const ProductCard = (props) => {
 
     const { name, price, description, idProduct, images, stock } = props;
-    console.log(images)
     const history = useHistory()
     const dispatch = useDispatch()
     const handleChancla = async () => {
-        await dispatch(actionGetProduct(idProduct))
-        await dispatch(actionGetReviews(idProduct))
-        await dispatch(actionSetProduct({ name, price, description, idProduct, images, stock }))
+        dispatch(actionGetProduct(idProduct))
+        dispatch(actionGetReviews(idProduct))
+        dispatch(actionSetProduct({ name, price, description, idProduct, images, stock }))
         setTimeout(()=>{
             return history.push('/productDetail')
         },200)
@@ -29,12 +28,11 @@ const ProductCard = (props) => {
 
     return (
         <div className='ProductCard_Container'>
-                <div className='content'>
                     <img className='imageCard' src={images} alt="Card image cap" onClick={handleChancla} />
+                    <div className='ProductDescription'>{renderHTML(description.slice(0,15)+"...")}</div>
                     <div className='contentCard'>
                         <h3 className='productName'>{name}</h3>
                         <div className='ProductDataContainer'>
-                            <div className='ProductDescription'>{renderHTML(description.slice(0,10))}</div>
                             <div className= 'productDiv'>
                                 <b className='productPrice'>${price}</b>
                                 <p className = 'productStock'>U: {stock}</p>
@@ -45,7 +43,6 @@ const ProductCard = (props) => {
                         :(<div></div>)
                         }
                         </div>
-                </div>
         </div>
     )
 }

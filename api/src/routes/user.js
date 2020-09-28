@@ -167,48 +167,41 @@ server.post('/:idUser/cart', (req, res, next) => {
 
 //////// register 
 server.post('/', async (req, res, next) => {
-
-<<<<<<< HEAD
-    const {              
-=======
     const {
->>>>>>> a138ce1b60ff8f3e9814b6901b025dd8f84f9260
         name,
         email,
         password,
     } = req.body
-
-    
     const hashedPassword = await bcrypt.hash(password, 10)
 
     User.findOne({
-            where: {
-                email: email
-            }
-        })
-        .then((user) => {
-            if (!user) {
-                User.create({
-                    name: name,
-                    email: email,
-                    password: hashedPassword,
-                    level: 'user'
-                })
-            } else {
-                res.status(404).send({
-                    result: "El usuario ya existe"
-                })
-            }
-        }).then(user => {
-            return Order.create({
-                idUser: user.idUser,
-                status: 'CREADA'
-            })
-        }).then(() => {
-            res.redirect('http://localhost:3000/auth/login')
-        })/* .catch(next); */ 
+        where: {
+            email: email
+        }
+    }).then((user) => {
+        if (!user) {
+            User.create({
+                name: name,
+                email: email,
+                password: hashedPassword,
+                level: 'user'
+            }).then(user => {
 
-})
+                return Order.create({
+                    idUser: user.idUser,
+                    status: 'CREADA'
+                })
+            })
+        } else {
+            res.status(404).send({
+                result: "El usuario ya existe"
+            })
+        }
+    }).then(() => {
+        res.redirect('http://localhost:3000/auth/login')
+    })
+
+});
 
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {

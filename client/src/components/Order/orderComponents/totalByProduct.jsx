@@ -6,7 +6,6 @@ import { actionAddToCart, actionGetOrder } from '../../../redux/ordersActions';
 
 const TotalByProduct = (props) => {
     const user = useSelector(store => store.usersReducer.idUser)
-    console.log(props.product)
     const [product,setProduct] = useState(props.product)
     const [quantity, setQuantity] = useState(product.Inter_Prod_Order.quantity)
     const [price, setPrice] = useState(product.Inter_Prod_Order.price * product.Inter_Prod_Order.quantity)
@@ -35,7 +34,7 @@ const TotalByProduct = (props) => {
             </div>
             <div className="textContent">
                 <span className="textQuantity">Cantidad: {quantity}<span><button className='buttonRestar' onClick={e => btnRestar(-1)}>-</button></span> </span>
-                <span className="textAmount">Monto: ${price}</span>
+                <span className="textAmount">Total: ${price}</span>
             </div>
         </div>
     )

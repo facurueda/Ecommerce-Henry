@@ -12,9 +12,7 @@ function SearchBarr(props) {
     const history = useHistory()
     const searchFunction = (value) => {
         dispatch(actionGetProductsBySearchTerm(value))
-        setTimeout(() => {
-            return history.push('/search')
-        }, 200);
+        history.push('/search')
     }
     return (
         <div>
@@ -22,7 +20,7 @@ function SearchBarr(props) {
             <div className='search-box'>
                 <input className="search-text" type="text" placeholder="¿Que estas buscando?" onKeyPress={e => {
                     if (e.key === 'Enter') {
-                        searchFunction(e.target.value.toLowerCase())
+                        searchFunction(e.target.value)
                     }
                 }}/>
                 <a href="/Search" className="search-btn">

@@ -5,7 +5,7 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Form, Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
-import gatito from './Images/gatito.png'
+import dino from './Images/dino.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
@@ -21,19 +21,16 @@ const NavBar = () => {
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const idUser = useSelector(state => state.usersReducer.idUser)
-    console.log('idUser useselector', idUser)
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
     if (loggedOut) {
-        if (cookie.idUser || cookie.level) {
             removeCookie('idUser')
             removeCookie('level')
-        } else {
-            dispatch(actionSetCookieToStore(cookie))
-            // dispatch(actionVerifyCookies(cookie))
-            actionLogOut(cookie)
-        }
+            console.log('borro cookies')
+            setTimeout(() => {
+                window.location.reload()
+            }, 200);
     }
     if (verified) {
         setCookie('idUser', idUser, { path: '/' })
@@ -41,7 +38,6 @@ const NavBar = () => {
         dispatch(actionSetVerified(false))
     }
     useEffect(() => {
-        console.log(cookie)
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {
             return dispatch(actionGetOrdersByUser(cookie.idUser))
@@ -71,21 +67,18 @@ const NavBar = () => {
 
                     </a>
                 </div>
-                <div> <img className='nomematen' src={gatito} /></div>
+                <div> <img className='nomematen' src={dino} /></div>
                 <div className='routerContainer'>
                     <div className='buttonsContainer'>
-                        {/* <form action="/"> */}
-                            <div><button className='buttonHome'><a href= '/' className='textnav'>Home</a></button></div>
-
-                        {/* </form> */}
-                        <form action="/catalogue">
-                            <button className='buttonProducts'><p className='textnav'>Products</p></button>
+                        <img className='casa'></img>
+                        <form action="/">
+                            <div>
+                                <button className='buttonProducts'>Home</button>
+                            </div>
                         </form>
-                        {level === 'user' ? (
-                            <form action="/myAccount">
-                                <button className='buttonProducts' >My Account</button>
-                            </form>
-                        ) : (<div></div>)}
+                        <form action="/catalogue">
+                            <button className='buttonProducts'>Products</button>
+                        </form>
                     </div>
                     <div className='searchBar'>
                         <SearchBar />

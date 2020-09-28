@@ -11,56 +11,56 @@ const {
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'admin'){
-            console.log('this user is ADMIN')
-            return next()
-        } console.log('this user DOESNT ADMIN')
-    }
-    console.log('THIS USER NOT AUTHENTICATED')
-    // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
-    res.redirect('/')
+	if (req.isAuthenticated()) {
+		if (req.user.level === 'admin') {
+			console.log('this user is ADMIN')
+			return next()
+		} console.log('this user DOESNT ADMIN')
+	}
+	console.log('THIS USER NOT AUTHENTICATED')
+	// ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
+	res.redirect('/')
 }
 
 function isUserOrAdmin(req, res, next) {
-    if(req.isAuthenticated()){
-        if(req.user.level === 'user' || req.user.level === 'admin'){
-            console.log('el usuario esta logeado')
-            return next()
-        } console.log('this user is GUEST')
-    }
-    console.log('THIS USER NOT AUTHENTICATED')
-    res.redirect('htpp://localhost:3000/auth/login')
+	if (req.isAuthenticated()) {
+		if (req.user.level === 'user' || req.user.level === 'admin') {
+			console.log('el usuario esta logeado')
+			return next()
+		} console.log('this user is GUEST')
+	}
+	console.log('THIS USER NOT AUTHENTICATED')
+	res.redirect('htpp://localhost:3000/auth/login')
 }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////// GETS
 ///////////////////////////// RUTA PARA OBTENER TODAS REVIEW DE UN PRODUCTO
 
 server.get('/:id/review/', (req, res, next) => {
-	Product.findOne({where: {idProduct: req.params.id},include: [{model: Review, as: 'reviews'}]})
-	  .then((rev) => {
-		res.send(rev.reviews)
-	  }).catch(next)
-  });
+	Product.findOne({ where: { idProduct: req.params.id }, include: [{ model: Review, as: 'reviews' }] })
+		.then((rev) => {
+			res.send(rev.reviews)
+		}).catch(next)
+});
 
 server.get('/search', (req, res, next) => {
 	Product.findAll({
-			where: {
-				[Sequelize.Op.or]: [{
-						name: {
-							[Sequelize.Op.like]: "%$" + req.query.query + "$%"
-						}
-					},
-					{
-						description: {
-							[Sequelize.Op.like]: "%$" + req.query.query + "$%"
-						}
-					}
-				]
+		where: {
+			[Sequelize.Op.or]: [{
+				name: {
+					[Sequelize.Op.iLike]: "%" + req.query.query + "%"
+				}
+			},
+			{
+				description: {
+					[Sequelize.Op.iLike]: "%" + req.query.query + "%"
+				}
 			}
-		})
+			]
+		}
+	})
 		.then((products) => {
+			console.log('productsByTerm: ',products)
 			res.send(products);
 		}).catch(next)
 });
@@ -78,7 +78,6 @@ server.get('/:id', (req, res, next) => {
 	}).catch(next)
 });
 
-
 server.get('/', (req, res, next) => {
 	Product.findAll()
 		.then((products) => {
@@ -88,19 +87,17 @@ server.get('/', (req, res, next) => {
 /////////////////////////////////////////////////////////////////////////////////////////////// POSTS
 // POST /product/:id/review
 
-
 ///////////////////////////// RUTA PARA CREAR REVIEW
+///////////////////////////// POR FAVOR DEJEN DE PONER PRODUCT AL PRINCIPIO DEL LINK
 
-server.post('product/:idProduct/review', isUserOrAdmin, (req, res, next) => {
+server.post('/:idProduct/review', isUserOrAdmin, (req, res, next) => {
 	Review.create({
 		description: req.body.description,
 		rating: req.body.rating,
-		idUser: req.body.idUser,
+		idUser: req.user.idUser,
 		idProduct: req.params.idProduct
 	}).then((result) => {
-		res.send({
-			result
-		})
+		res.send(result)
 	}).catch(next)
 })
 server.post('/create', isAdmin, (req, res, next) => {
@@ -151,7 +148,7 @@ server.delete('/product/:id/review/:idReview', isUserOrAdmin, (req, res, next) =
 			idReview: req.params.idReview
 		}
 	}).then((rev) => {
-		if(rev) {
+		if (rev) {
 			res.status(200).send('Success')
 		} else {
 			res.status(400).send('Error, this review doesnt exist')
@@ -202,9 +199,9 @@ server.put('/:idProduct/review/:idReview', (req, res, next) => {
 			rating: req.body.rating
 		})
 	})
-	.then((rev) => {
-		res.send(rev)
-	}).catch(next)
+		.then((rev) => {
+			res.send(rev)
+		}).catch(next)
 })
 
 
@@ -225,17 +222,17 @@ server.put('/:idProduct', isAdmin, (req, res, next) => {
 		})
 	}).then((product) => {
 		productUpdated = product;
-			return Inter_Cat_Prod.findOne({
-				where: { idProduct: product.idProduct }
-			})
+		return Inter_Cat_Prod.findOne({
+			where: { idProduct: product.idProduct }
+		})
 	}).then((inter) => {
-			return inter.update({
-						...inter,
-						idCategory: req.body.categories
-					})
+		return inter.update({
+			...inter,
+			idCategory: req.body.categories
+		})
 	}).then((interUpdated) => {
 		console.log('responding', productUpdated, interUpdated)
-		res.send({product : productUpdated, category: interUpdated })
+		res.send({ product: productUpdated, category: interUpdated })
 	}).catch(next);
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// DEV
