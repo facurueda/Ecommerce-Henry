@@ -1,10 +1,8 @@
 import React from 'react'
 import './UserLogged.css'
-import { useDispatch, useSelector } from 'react-redux'
-import Cart from './Cart';
+import { useDispatch } from 'react-redux'
 import { actionLogOut } from '../../redux/usersActions';
 import { useCookies } from 'react-cookie';
-
 
 const UserLogged = () => {
     const dispatch = useDispatch()
@@ -20,7 +18,7 @@ const UserLogged = () => {
                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user" aria-hidden="true"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/MyAccount">My Account</a>
                 <a class="dropdown-item" href="/" onClick={e => handleChange()}>Log out</a>
             </div>

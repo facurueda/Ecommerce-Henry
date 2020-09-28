@@ -9,32 +9,25 @@ import {
 import './FormModalAdd.css'
 
 const FormModalAdd = (props) => {
-
     const { addCategory, modalAddViewFalse, categories } = props;
-
     const [category, setCategory] = useState(categories)
-
     const handleChange = event => {
         const { name, value } = event.target
         setCategory({ ...category, [name]: value })
-        console.log(category)
     }
-
     return (
         <div className='addCategory'>
             <ModalHeader>
                 <div><h3>Add Category</h3></div>
             </ModalHeader>
-
-            <ModalBody className = 'addCatBody'>
+            <ModalBody className='addCatBody'>
                 <FormGroup className='categoryName'>
                     <label className="categoryDetail"> Category Name: </label>
-                    <input className="inputName" name="name" type="text" onChange={handleChange} />
+                    <input className="inputName" name="name" type="text" onChange={handleChange}/>
                 </FormGroup>
-
                 <FormGroup className='categoryDescription'>
                     <label className="categoryDetail">Description:</label>
-                    <input className="inputName" name="description" type="text" onChange={handleChange} />
+                    <input className="inputName" name="description" type="text" onChange={handleChange}/>
                 </FormGroup>
             </ModalBody>
             <ModalFooter>
@@ -42,12 +35,13 @@ const FormModalAdd = (props) => {
                     onClick={event => {
                         event.preventDefault()
                         if (!category.name || !category.description) return window.alert('Empty Inputs')
-                        if (categories.find(categories => categories.name.toUpperCase() === category.name.toUpperCase())) return window.alert('This name already been used')
+                        if (categories.find(
+                            categories => categories.name.toUpperCase() === category.name.toUpperCase()
+                        )) return window.alert('This name already been used')
                         addCategory(category)
                         modalAddViewFalse()
                     }}
-                >
-                    Submit </Button>
+                > Submit </Button>
                 <Button className='buttonExit' onClick={e => modalAddViewFalse()}>Exit</Button>
             </ModalFooter>
         </div>

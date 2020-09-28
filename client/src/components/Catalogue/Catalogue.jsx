@@ -13,7 +13,6 @@ const Catalogue = () => {
         dispatch(actionGetProducts())
     }, [])
     const categories = useSelector(state => state.categoriesReducer.categories)
-    const loading = useSelector(state => state.productsReducer.loading)
     const products = useSelector(store => store.productsReducer.products)
     const productsFilter = (e) => {
         if (e !== 'All categories') {
@@ -22,7 +21,6 @@ const Catalogue = () => {
             dispatch(actionGetProducts())
         }
     }
-
     if (categories.length === 0) {
         return (
             <div>
@@ -36,10 +34,14 @@ const Catalogue = () => {
         <div>
             <div className='categories_menu'>
                 {categories.map(category => {
-                    return <Category className='categoryImage' name={category.name} productsFilter={productsFilter} />
+                    return <Category
+                        className='categoryImage'
+                        name={category.name}
+                        productsFilter={productsFilter} />
                 })
                 }
-                <Category className='categoryImage' name={"All categories"} productsFilter={productsFilter} />
+                <Category className='categoryImage'
+                    name={"All categories"} productsFilter={productsFilter} />
             </div>
             <div className='products' > {
                 products.map(product => {

@@ -1,9 +1,6 @@
 import React from 'react'
 import './ProductCard.css'
-import {
-    Card, CardImg, CardText, CardBody,
-} from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router'
 import { actionGetProduct, actionSetProduct } from '../../redux/productsActions';
 import renderHTML from 'react-render-html';
@@ -19,30 +16,28 @@ const ProductCard = (props) => {
         dispatch(actionGetProduct(idProduct))
         dispatch(actionGetReviews(idProduct))
         dispatch(actionSetProduct({ name, price, description, idProduct, images, stock }))
-        setTimeout(()=>{
+        setTimeout(() => {
             return history.push('/productDetail')
-        },200)
+        }, 200)
     }
-
-
 
     return (
         <div className='ProductCard_Container'>
-                    <img className='imageCard' src={images} alt="Card image cap" onClick={handleChancla} />
-                    <div className='ProductDescription'>{renderHTML(description.slice(0,15)+"...")}</div>
-                    <div className='contentCard'>
-                        <h3 className='productName'>{name}</h3>
-                        <div className='ProductDataContainer'>
-                            <div className= 'productDiv'>
-                                <b className='productPrice'>${price}</b>
-                                <p className = 'productStock'>U: {stock}</p>
-                            </div>
-                        </div>
-                        {((window.location.pathname) !== '/order' && (window.location.pathname) !== '/adminOrdersTable')?
-                            (<ButtonAddToCart className='buttonAddToCart' datos={{ idProduct: idProduct, quantity: 1, price: price }} />)
-                        :(<div></div>)
-                        }
-                        </div>
+            <img className='imageCard' src={images} alt="Card image cap" onClick={handleChancla} />
+            <div className='ProductDescription'>{renderHTML(description.slice(0, 15) + "...")}</div>
+            <div className='contentCard'>
+                <h3 className='productName'>{name}</h3>
+                <div className='ProductDataContainer'>
+                    <div className='productDiv'>
+                        <b className='productPrice'>${price}</b>
+                        <p className='productStock'>U: {stock}</p>
+                    </div>
+                </div>
+                {((window.location.pathname) !== '/order' && (window.location.pathname) !== '/adminOrdersTable') ?
+                    (<ButtonAddToCart className='buttonAddToCart' datos={{ idProduct: idProduct, quantity: 1, price: price }} />)
+                    : (<div></div>)
+                }
+            </div>
         </div>
     )
 }

@@ -20,6 +20,7 @@ import {withCookies} from 'react-cookie';
 import MyAccount from './components/MyAccount/myAccount';
 import ResetPassword from './components/LogIn/ResetPassword'
 import NewPassword from './components/LogIn/NewPassword';
+import Users from './components/Users/Users';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path='/productDetail' component={Product} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path='/categories' component={Categories} />
+            <Route path='/usuarios' component={Users}/>
             <Route path='/myAccount' component={MyAccount} />
             <Route path="/menuCrud" component={MenuCrud} />
             <Route path='/order' component={Order} />
@@ -44,7 +46,6 @@ function App() {
             <Route path='/forgot' component={ResetPassword} />
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
-            {/* <Router history={BrowserHistory}></Router> */}
           </Switch>
         </Router>
       </div>

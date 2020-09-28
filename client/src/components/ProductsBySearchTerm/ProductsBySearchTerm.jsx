@@ -3,10 +3,9 @@ import './ProductsBySearchTerm.css'
 import { useSelector } from 'react-redux';
 import ProductCard from '../ProductCard/ProductCard';
 
-
-const ProductsBySearchTerm = (props) => {
-    const products = useSelector(state =>  state.productsReducer.term)
-
+const ProductsBySearchTerm = () => {
+    
+    const products = useSelector(state => state.productsReducer.term)
     if (products.length < 1) {
         return (
             <div className='notFoundTerm'>
@@ -14,8 +13,6 @@ const ProductsBySearchTerm = (props) => {
             </div>
         )
     }
-    console.log('term: ',products)
-
     return (
         <div>
             <div className='products'> {
@@ -26,7 +23,7 @@ const ProductsBySearchTerm = (props) => {
                             name={product.name}
                             description={product.description}
                             price={product.precio}
-                            images = {product.images}
+                            images={product.images}
                             stock={product.stock}
                             idProduct={product.idProduct}
                         />

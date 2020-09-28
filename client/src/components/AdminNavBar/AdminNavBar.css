@@ -10,14 +10,12 @@
     color: #DFA06E;
     border-color: #DFA06E;
 }
-
 @media all and (max-width:30em) {
     .buttonStyle {
         display: block;
         margin: 0.4em auto;
     }
 }
-
 .admincontainer {
     display: flex;
     justify-content: center;

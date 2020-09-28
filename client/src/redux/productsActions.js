@@ -15,8 +15,6 @@ export const actionGetProductsBySearchTerm = (term) => {
     return (dispatch) => {
         axios.get(url + 'products/search?query=' + term, {withCredentials: true}).then(res => {
             dispatch({ type: GET_PRODUCTS_BY_SEARCH_TERM, payload: res.data })
-        }).catch((error) => {
-            console.log(error);
         })
     }
 }

@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
-import { ModalHeader, ModalBody, ModalFooter, Modal } from 'reactstrap'
+import { ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import './Login.css'
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionLogin } from '../../redux/usersActions'
-import ResetPassword from './ResetPassword'
 
 const Login = (props) => {
-
-
     const dispatch = useDispatch()
     const { modalLoginClose, ChangeModal } = props;
     const [inputs, setInputs] = useState({})
     const idUser = useSelector(store => store.usersReducer.idUser)
-
     const handleChancla = () => {
         dispatch(actionLogin({ ...inputs, idUser: idUser }))
         modalLoginClose()
@@ -22,7 +18,6 @@ const Login = (props) => {
             window.location.reload()
         }, 200);
     }
-
     const handleInput = (e) => {
         const { type, value } = e.target
         setInputs({
@@ -35,7 +30,6 @@ const Login = (props) => {
         props.setGoogle(true)
         window.open("http://localhost:3000/auth/google");
     }
-
     const responseGoogle = (response) => {
         console.log(response);
         console.log(response.profileObj)

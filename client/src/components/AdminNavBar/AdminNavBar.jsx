@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Modal } from 'reactstrap';
+import { Modal } from 'reactstrap';
 import AdminOrdersTable from '../adminOrdersTable/adminOrdersTable';
 import './AdminNavBar.css'
-const AdminNavBar = (props) => {
+const AdminNavBar = () => {
     const [ModalOrdersTable, setModalOrdersTable] = useState(false)
     const modalOrdersTableView = () => setModalOrdersTable(!ModalOrdersTable);
     return (
@@ -12,6 +12,9 @@ const AdminNavBar = (props) => {
             </form>
             <form action="/Categories">
                 <button className='buttonLoginAndRegister'>Modificar categorias</button>
+            </form>
+            <form action="/Usuarios">
+                <button className='buttonLoginAndRegister'>Usuarios</button>
             </form>
             <button className='buttonLoginAndRegister' onClick={() => {
                 document.getElementById("orden").hidden =true

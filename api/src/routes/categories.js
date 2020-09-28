@@ -14,7 +14,6 @@ function isAdmin(req, res, next) {
     // ** -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO ** -- //
     res.redirect('/')
 }
-
 function isUserOrAdmin(req, res, next) {
     if(req.isAuthenticated()){
         if(req.user.level === 'user' || req.user.level === 'admin'){
@@ -25,7 +24,6 @@ function isUserOrAdmin(req, res, next) {
     console.log('THIS USER NOT AUTHENTICATED')
     res.redirect('htpp://localhost:3000/auth/login')
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////////// GET
 server.get('/:nombreCat', (req, res, next) => {
     Categories.findOne({
@@ -42,8 +40,6 @@ server.get('/', (req, res, next) => {
         res.send(categories)
     }).catch(next)
 })
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// POST
 server.post('/create', isAdmin, (req, res, next) => {
     const { name, description } = req.body;
@@ -53,10 +49,8 @@ server.post('/create', isAdmin, (req, res, next) => {
     }).then(res.send(req.body))
         .catch(next);
 })
-
 /////////////////////////////////////////////////////////////////////////////////////////////// DELETE
 server.delete('/:id', isAdmin, (req, res, next) => {
-    console.log(req.params)
     Categories.destroy({
         where: { idCategory: req.params.id }
     }).then(() => {
@@ -65,10 +59,6 @@ server.delete('/:id', isAdmin, (req, res, next) => {
         })
     }).catch(next)
 })
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT
 server.put('/:id', isAdmin, (req, res, next) => {
     Categories.findOne({
