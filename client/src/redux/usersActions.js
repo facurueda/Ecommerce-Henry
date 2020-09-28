@@ -28,13 +28,13 @@ export const actionSetCookieToStore = (cookie) => {
     }
 }
 
-export const actionGetAllUsers = () => {
-    return (dispatch) => {
-        axios.get(url + 'user/', { withCredentials: true }).then(res => {
-            dispatch({ type: GET_ALL_USERS , payload: res.data})
-        })
-    }
-}
+// export const actionGetAllUsers = () => {
+//     return (dispatch) => {
+//         axios.get(url + 'user/', { withCredentials: true }).then(res => {
+//             dispatch({ type: GET_ALL_USERS , payload: res.data})
+//         })
+//     }
+// }
 
 export const actionGetUserById = (idUser) => {
     return (dispatch) => {

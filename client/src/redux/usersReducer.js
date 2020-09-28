@@ -23,7 +23,7 @@ const initialState = {
     verified: false,
     loggedOut: false,
     resetStatus: [],
-    users: []
+    // allUsers: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -112,11 +112,11 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 email: action.payload.email
             }
-        case GET_ALL_USERS:
-            return {
-                ...state,
-                users: action.payload
-            }
+        // case GET_ALL_USERS:
+        //     return {
+        //         ...state,
+        //         allUsers: action.payload
+        //     }
         default:
             return state;
     }

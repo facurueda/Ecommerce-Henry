@@ -142,7 +142,7 @@ server.post('/cookie', async (req, res) => {
             userAux = user;
             return Order.findOne({
                 where: {
-                    idUser: user.idUser
+                    idUser: idUser
                 }
             })
         }).then(order => {

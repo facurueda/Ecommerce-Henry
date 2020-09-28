@@ -43,7 +43,7 @@ function App() {
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route path='/reviews' component={Reviews}/>
             <Route path='/forgot' component={ResetPassword} />
-            <Route path='/users' component={Users}/>
+            {/* <Route path='/users' component={Users}/> */}
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
           </Switch>
