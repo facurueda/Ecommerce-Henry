@@ -147,10 +147,10 @@ server.post('/cookie', async (req, res) => {
             })
         }).then(order => {
             res.send({
-                idUser: userAux.idUser,
-                name: userAux.name,
-                email: userAux.email,
-                level: userAux.level,
+                idUser: idUser,
+                name: name,
+                email: email,
+                level: level,
                 order
             })
         })
