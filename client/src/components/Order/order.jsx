@@ -1,27 +1,25 @@
 import React from 'react'
 import TotalByProduct from './orderComponents/totalByProduct';
 import './order.css'
-import { useEffect } from 'react';
-import { actionGetOrder } from '../../redux/ordersActions';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Order = (props) => {
-
     const propsOrder = props.order
     const storeOrder = useSelector(state => state.ordersReducer.order)
+
     const order = () => {
         if (props.order) {
-            console.log('entro al if')
             return propsOrder
         }else{
-return storeOrder
+            return storeOrder
         }
     }
     const or = order()
+    
     if (Object.keys(or).length < 1) {
         return (
             <div className='orderContainer'>
-                <h3 style={{ display: 'flex', justifyContent: 'center' }}>
+                <h3 className='orderVacia'>
                     <b>El carrito esta vacio</b>
                 </h3>
             </div>
@@ -40,12 +38,12 @@ return storeOrder
                     <div className="footerOrder">
                         <span className="textPrice"> Total: ${
                             or.products.reduce((acum, product) => {
-                                return acum +
-                                    (product.Inter_Prod_Order.price * product.Inter_Prod_Order.quantity)
-                            }, 0)}
+                                return acum + (product.Inter_Prod_Order.price * product.Inter_Prod_Order.quantity)
+                            }, 0).toFixed(2)}
                         </span>
+                        <div style={{ display: props.origin }}><button className="buttonEndOrden">Finalizar Orden</button></div>
                     </div>
-                    <div style={{ display: props.origin }}><button className="buttonEndOrden">Finalizar Orden</button></div>
+
                 </div>
             </div>
         )

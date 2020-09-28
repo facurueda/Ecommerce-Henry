@@ -13,27 +13,21 @@ const {
 function initialize(passport) {
 
   const authenticateUser = async (req, email, password, done) => {
-    const {
-      idUser
-    } = req.body
-
+    const { idUser } = req.body
     const user = await User.findOne({
       where: {
         email: email
       }
     })
-
     ///////////////////////////////// In case the user doesnt exist
     if (user == null) {
       return done(null, false, {
         message: 'No user with that email'
       })
     }
-
     ///////////////////////////////// In case the user exist and test the password
     try {
       if (await bcrypt.compare(password, user.password)) {
-
         const orderUserLogin = await User.findOne({
           where: {
             email: email
@@ -51,7 +45,6 @@ function initialize(passport) {
             idUser: idUser
           }
         })
-
         Order.findOne({
           where: {
             idUser: idUser
@@ -76,8 +69,6 @@ function initialize(passport) {
                 quantity: inter.quantity + interQuantity
               })
             }).catch(() => {
-              // console.log('interInCatch:\n',inter)
-              // console.log('interQuantityInCatch:\n',interQuantity);
               return Inter_Prod_Order.create({
                 idProduct: inter.idProduct,
                 price: inter.price,
@@ -99,8 +90,6 @@ function initialize(passport) {
             }
           })
         }).catch()
-
-
         return done(null, user)
       } else {
         return done(null, false, {
@@ -215,7 +204,6 @@ function initialize(passport) {
       done(null, user);
     }).catch(done)
   });
-
 }
 
 module.exports = initialize

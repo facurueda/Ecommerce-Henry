@@ -21,7 +21,6 @@ function isAdmin(req, res, next) {
         console.log('this user DOESNT ADMIN')
     }
     console.log('THIS USER NOT AUTHENTICATED')
-    // -- DIRIGIR A PAGINA QUE PREGUNTE SI ESTA PERDIDO -- //
     res.redirect('/')
 }
 
@@ -87,7 +86,8 @@ server.post('/logout', (req, res) => {
     })
 });
 
-server.post('/promote/:id', isAdmin, (req, res) => {
+// To set user to Admin
+server.put('/promote/:id', (req, res) => {
     User.findOne({
         where: {
             idUser: req.params.id,
@@ -95,7 +95,20 @@ server.post('/promote/:id', isAdmin, (req, res) => {
     }).then(user => {
         user.update({
             ...user,
-            level: 'Admin',
+            level: 'admin',
+        })
+    })
+})
+// To set user to Admin
+server.put('/degrade/:id', (req, res) => {
+    User.findOne({
+        where: {
+            idUser: req.params.id,
+        }
+    }).then(user => {
+        user.update({
+            ...user,
+            level: 'user',
         })
     })
 })
@@ -135,6 +148,7 @@ server.post('/cookie', async (req, res) => {
             })
         })
     } else {
+        console.log('idUserTHIS', idUser)
         User.findOne({
             where: {
                 idUser: idUser
@@ -185,44 +199,28 @@ server.post('/forgot', (req, res) => {
                     pass: 'ohqrgkrmeqhcamil'
                 }
             });
-
             const linkReset = 'http://localhost:3001/auth/reset/?token=' + token
             const mailOptions = {
                 from: 'noreplylacoseria@gmail.com',
                 to: req.body.email,
-                subject: 'Invoices due',
+                subject: 'Cambio de contraseña',
                 html: `El link para resetear tu constraseña es: <a href= ${linkReset}> LINK </a>`
             };
-            transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Email sent: ' + info.response);
-                }
-            });
+            transporter.sendMail(mailOptions);
         })
     })
 
 })
-
-
-
 server.post('/reset', (req, res) => {
-    console.log("token", req.query.token);
     User.findOne({
         where: {
             resetPasswordToken: req.query.token
         }
     }).then(async (user) => {
-        console.log('1')
         if (!user) {
             req.flash('error', 'Sorry, we can´t find you?');
             res.redirect('/auth/forgot');
         } else {
-            console.log(user);
-            console.log('resetExp: ', user.resetPasswordExpires);
-            console.log('Now: ', Date.now());
-            console.log(req.body);
             const hasshed = await bcrypt.hash(req.body.password, 10)
             if (user.resetPasswordExpires > Date.now()) {
                 user.update({
@@ -238,7 +236,6 @@ server.post('/reset', (req, res) => {
             }
         }
     }).catch((err) => {
-        console.log('3');
         req.flash('Password token reset has expired');
         res.status(404);
     })

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import UserReview from './EditReview'
 import { actionGetReviews, actionSetReview } from '../../redux/reviewsAction';
 import './Review.css'
 import stars from './StarsSwitch.jsx'
@@ -12,7 +11,6 @@ const Review = () => {
     const reviews = useSelector(state => state.reviewsReducer.reviews)
     const product = useSelector(state => state.productsReducer.product)
     const [modalReviews, setModalReviews] = useState(false)
-
     const modalReviewView = () => setModalReviews(!modalReviews);
     const getRandom = (max) => {
         return Math.floor(Math.random() * (max - 0) + 0);
@@ -20,7 +18,6 @@ const Review = () => {
     useEffect(() => {
         handleReview()
         dispatch(actionGetReviews(product.idProduct))
-        console.log(product)
         return dispatch(actionSetReview(reviews[getRandom(reviews.length)]))
     }, [])
     const toDate = (string) => {

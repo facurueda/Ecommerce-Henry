@@ -6,3 +6,17 @@
 .dropdown-toggle::after {
     display:none;
 }
+.dropdown-menu.show{
+    display: flex;
+    border: 0px;
+    flex-direction: column;
+    width: 25px;
+    background-color: rgba(47, 54, 64, 0.77);
+}
+.dropdown-item{
+    color:white;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+}

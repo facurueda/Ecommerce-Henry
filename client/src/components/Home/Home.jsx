@@ -1,9 +1,8 @@
 import SearchBar from '../SearchBar/SearchBar'
 import React from 'react'
 import './Home.css'
-const Home = (props) => {
+const Home = () => {
     return (
-
         <div className='Home'>
             <div className='Container'>
                 <h1 className='titulo'>La Cosería</h1>
@@ -12,18 +11,4 @@ const Home = (props) => {
         </div>
     )
 }
-// const mapStateToProps = (state) => {
-//     console.log('state', state)
-//     return {
-//       categories: state.categoriesReducer.categories,
-//     }
-//   }
-//   const mapDispatchToProps = (dispatch) => {
-//     return {
-//       fetchCategories: () => {
-//         dispatch(fetchCategories())
-//       }
-//     }
-//   }
-// export default connect(mapStateToProps,mapDispatchToProps)(Home);
 export default Home
