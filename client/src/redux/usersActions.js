@@ -87,6 +87,7 @@ export const actionUserCreate = (props) => {
 }
 
 export const actionLogin = (inputs) => {
+    console.log('GOOGLELOGIIINNN', inputs)
     return (dispatch) => {
         var data = qs.stringify(inputs);
         var config = {

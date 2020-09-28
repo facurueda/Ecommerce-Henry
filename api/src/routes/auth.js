@@ -231,7 +231,11 @@ server.post('/reset', (req, res) => {
                     password: hasshed,
                     resetPasswordExpires: null,
                     resetPasswordToken: null,
-                }).then(() => { res.send({ result: 'usuario actualizado' }) })
+                }).then(() => {
+                    res.send({
+                        result: 'usuario actualizado'
+                    })
+                })
             }
         }
     }).catch((err) => {
@@ -240,6 +244,25 @@ server.post('/reset', (req, res) => {
         res.status(404);
     })
 })
+
+
+// GOOGLE STRATEGY
+
+server.get('/google',
+    passport.authenticate('google', {
+        scope: ['profile', 'email']
+    }));
+
+server.get('/google/callback',
+    passport.authenticate('google', {
+        successRedirect: 'http://localhost:3001/',
+        failureRedirect: '/login'
+        // Ver como hacer para que el FRONT ejecute la un dipatch /me y modifique los datos de su cookie
+    }),
+);
+
+
+
 
 
 module.exports = server;
