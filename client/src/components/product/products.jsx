@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import './products.css';
 import { Modal } from 'reactstrap'
 import Review from '../Review/Review'
-import { actionGetReviews } from '../../redux/reviewsAction';
+import { actionDeleteReview, actionGetReviews } from '../../redux/reviewsAction';
 import EditReview from '../Review/EditReview'
 import PostReview from '../Review/PostReview'
 import ButtonAddToCart from '../ButtonAddToCart/ButtonAddToCart';
+import { actionGetProduct, actionSetProduct } from '../../redux/productsActions';
+import { useHistory } from 'react-router';
 
 function Products() {
     const dispatch = useDispatch()
+    const history = useHistory()
     useEffect(() => {
         dispatch(actionGetReviews(idProduct))
     }, [])
@@ -32,13 +35,36 @@ function Products() {
     const user = useSelector(state => state.usersReducer.idUser)
     const reviews = useSelector(state => state.reviewsReducer.reviews)
     const review = reviews.find(rev => rev.idUser === user)
+    const reload = () => {
+        setTimeout(() => {
+            return dispatch(actionGetProduct(idProduct))
+        }, 25);
+        setTimeout(() => {
+            dispatch(actionGetReviews(idProduct))
+        }, 100);
+        setTimeout(() => {
+            dispatch(actionSetProduct({ name, precio: precio, description, idProduct, images, stock }))
+        }, 150);
+        setTimeout(() => {
+            return history.push('/productDetail')
+        }, 250)
+    }
+    const deleteReview = () => {
+        const data = { idProduct: idProduct, idReview: review.idReview }
+        dispatch(actionDeleteReview(data))
+        reload()
+    }
 
     function test() {
         return { __html: description }
     }
     const reviewCreateorEdit = () => {
         if (review) {
-            return <button className='EditReview' onClick={e => modalEditReviewView()}>Editar Review</button>
+            return (
+                <div className='reviewButtonsContainer'>
+                    <button className='EditReview' onClick={e => modalEditReviewView()}>Editar Review</button>
+                    <button className='EditReview' onClick={deleteReview}>Eliminar Review</button>
+                </div>)
         }
         else {
             return <button className='CreateReview' onClick={e => modalPostReviewView()}> Crear Review</button>
@@ -64,10 +90,10 @@ function Products() {
                                 {reviewCreateorEdit()}
                             </div>
                             <Modal isOpen={modalEditReview}>
-                                <EditReview modalEditReviewClose={modalEditReviewClose} review={review} idProduct={idProduct} />
+                                <EditReview modalEditReviewClose={modalEditReviewClose} reload={reload} review={review} idProduct={idProduct} />
                             </Modal>
                             <Modal isOpen={modalPostReview}>
-                                <PostReview modalPostReviewClose={modalPostReviewClose} idProduct={idProduct} />
+                                <PostReview modalPostReviewClose={modalPostReviewClose} reload={reload} idProduct={idProduct} />
                             </Modal>
                         </div>
                         <div className='prodComp3'>
