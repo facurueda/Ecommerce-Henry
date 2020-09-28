@@ -46,7 +46,6 @@ function App() {
             <Route path='/users' component={Users}/>
             <Route exact path='/admin' component={AdminNavBar}/>
             <Route component={NotFound} />
-            {/* <Router history={BrowserHistory}></Router> */}
           </Switch>
         </Router>
       </div>
