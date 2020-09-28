@@ -39,7 +39,6 @@ function initialize(passport) {
             }
           })
         })
-
         const orderGuest = await Order.findOne({
           where: {
             idUser: idUser
@@ -100,7 +99,6 @@ function initialize(passport) {
       return done(e)
     }
   }
-
 
   // Google Strategy
 

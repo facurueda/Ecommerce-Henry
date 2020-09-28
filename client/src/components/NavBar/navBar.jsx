@@ -11,10 +11,14 @@ import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionLogOut, actionGetMe } from '../../redux/usersActions'
 =======
 import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore } from '../../redux/usersActions'
 >>>>>>> master
+=======
+import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionLogOut, actionGetMe } from '../../redux/usersActions'
+>>>>>>> 0bb19dfb3993d1edc29b64cded0486f09cae5dfb
 
 const NavBar = () => {
 
@@ -28,10 +32,15 @@ const NavBar = () => {
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
 <<<<<<< HEAD
+<<<<<<< HEAD
     const [google, setGoogle] = useState(true)
 =======
     
 >>>>>>> master
+=======
+    const [google, setGoogle] = useState(true)
+
+>>>>>>> 0bb19dfb3993d1edc29b64cded0486f09cae5dfb
     if (loggedOut) {
             removeCookie('idUser')
             removeCookie('level')
@@ -45,13 +54,19 @@ const NavBar = () => {
         dispatch(actionSetVerified(false))
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bb19dfb3993d1edc29b64cded0486f09cae5dfb
     if (google) {
         window.location.reload()
         return setGoogle(false)
     }
+<<<<<<< HEAD
 =======
 
 >>>>>>> master
+=======
+>>>>>>> 0bb19dfb3993d1edc29b64cded0486f09cae5dfb
     useEffect(() => {
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {

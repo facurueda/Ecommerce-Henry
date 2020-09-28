@@ -30,7 +30,6 @@ const Login = (props) => {
         props.setGoogle(true)
         window.open("http://localhost:3000/auth/google");
     }
-
     const responseGoogle = (response) => {
         console.log(response);
         console.log(response.profileObj)
