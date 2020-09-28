@@ -9,6 +9,9 @@
 .buttonRestar{
     display: none;
 }
+.orderContainer{
+    padding: 0px 0px;
+}
 .divContainerOrders{
     border: 1px solid white;
     padding: 10px;

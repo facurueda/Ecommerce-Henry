@@ -16,6 +16,13 @@ export const actionEditReview = (reviewData) => {
         })
     }
 }
+export const actionDeleteReview = (data) => {
+    return (dispatch) => {
+        axios.delete(url + 'products/' + data.idProduct + '/review/' + data.idReview,{ withCredentials: true }).then(() => {
+            actionGetReviews(data.idProduct)
+        })
+    }
+}
 
 export const actionGetReviews = (idProduct) => {
     return (dispatch) => {

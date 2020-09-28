@@ -13,7 +13,10 @@
 }
 
 
-
+.reviewButtonsContainer{
+    display: flex;
+    justify-content: space-between;
+}
 /* /////////////////////////////////////////////////////////////////// IMAGEN */
 
 .img-fluid{
