@@ -25,6 +25,15 @@ const NavBar = () => {
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
     const [google, setGoogle] = useState(true)
 
+    useEffect(() => {
+        dispatch(actionGetOrder(cookie.idUser));
+        setTimeout(() => {
+            return dispatch(actionGetOrdersByUser(cookie.idUser))
+        }, 200);
+        dispatch(actionSetCookieToStore(cookie))
+        dispatch(actionVerifyCookies(cookie))
+    }, [])
+
     if (loggedOut) {
             removeCookie('idUser')
             removeCookie('level')
@@ -38,18 +47,14 @@ const NavBar = () => {
         dispatch(actionSetVerified(false))
     }
     if (google) {
-        window.location.reload()
-        return setGoogle(false)
-    }
-    useEffect(() => {
-        dispatch(actionGetOrder(cookie.idUser));
-        setTimeout(() => {
-            return dispatch(actionGetOrdersByUser(cookie.idUser))
-        }, 200);
-        dispatch(actionSetCookieToStore(cookie))
-        dispatch(actionVerifyCookies(cookie))
+        setGoogle(false)
+        console.log(google)
         dispatch(actionGetMe())
-    }, [])
+    }
+    console.log('after', google)
+    // window.location.reload()
+
+    
 
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
