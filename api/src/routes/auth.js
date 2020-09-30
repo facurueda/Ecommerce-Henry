@@ -155,9 +155,10 @@ server.post('/cookie', async (req, res) => {
             }
         }).then((user) => {
             userAux = user;
+            console.log('este no reconoce', user)
             return Order.findOne({
                 where: {
-                    idUser: user.idUser
+                    idUser: idUser
                 }
             })
         }).then(order => {
@@ -168,6 +169,9 @@ server.post('/cookie', async (req, res) => {
                 level: userAux.level,
                 order
             })
+        }).catch(error => {
+            console.log('there was an error', error);
+            res.status(404);
         })
     }
 })

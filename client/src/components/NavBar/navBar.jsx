@@ -29,7 +29,7 @@ const NavBar = () => {
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {
             return dispatch(actionGetOrdersByUser(cookie.idUser))
-        }, 200);
+        }, 300);
         dispatch(actionSetCookieToStore(cookie))
         dispatch(actionVerifyCookies(cookie))
     }, [])
