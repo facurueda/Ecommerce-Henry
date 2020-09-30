@@ -41,7 +41,7 @@ const Categories = (props) => {
   return (
     <div className='componentsContainer'>
       <Container>
-        <button id="buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
+        <button id="buttonAdd" className='buttonLoginAndRegister' onClick={e => modalAddView()}> + </button>
         <br />
         <br />
         <CategoryTable 

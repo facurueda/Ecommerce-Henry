@@ -35,7 +35,6 @@ const MenuCrud = () => {
     await dispatch(actionPostProduct(product))
     await window.location.reload();
   }
-  
 
   const products = useSelector(state => state.productsReducer.products)
   const categories = useSelector(state => state.categoriesReducer.categories)
@@ -44,7 +43,7 @@ const MenuCrud = () => {
     <div>
       <Container>
         <br />
-        <button id="buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
+        <button id="buttonAdd" className='buttonLoginAndRegister' onClick={e => modalAddView()}> + </button>
         <br />
         <br />
         <ProductTable
