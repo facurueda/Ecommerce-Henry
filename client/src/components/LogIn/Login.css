@@ -153,3 +153,8 @@
     display: flex;
     flex-direction: row;
 }
+
+
+.buttonLoginGoogle{
+    height: 25px;
+}

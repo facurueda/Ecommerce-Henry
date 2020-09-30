@@ -44,7 +44,7 @@ function App() {
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route path='/reviews' component={Reviews}/>
             <Route path='/forgot' component={ResetPassword} />
-            <Route exact path='/admin' component={AdminNavBar}/>
+            {/* <Route exact path='/admin' component={AdminNavBar}/> */}
             <Route component={NotFound} />
           </Switch>
         </Router>
