@@ -46,7 +46,7 @@ const Review = () => {
     }
     return (
         <div>
-            {(reviews.length > 0) ? (<div>
+            {(reviews.length > 0 && review) ? (<div>
                 <div className='dateAndButtonContainer'>
                     <div>{toDate(review.updatedAt)} </div>
                     <button className='viewMoreButton' onClick={modalReviewView}>Ver mas reseñas</button>
