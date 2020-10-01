@@ -8,7 +8,8 @@ const bcrypt = require('bcrypt')
 const aleatoryNumber = () => {
     return Date.now() + Math.random()
 }
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const { session } = require('passport');
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 
@@ -79,11 +80,16 @@ server.post('/login', (req, res, next) => {
     })
 })
 
-server.post('/logout', (req, res) => {
-    req.logout()
-    res.send({
-        loggedOut: true
-    })
+server.get('/logout', (req, res) => {
+    // req.logout()
+    // req.session.destroy()
+    // res.send({
+    //     loggedOut: true
+    // })
+    req.logOut()
+    req.session.destroy(function() {
+        res.clearCookie('connect.sid');
+    });
 });
 
 // To set user to Admin

@@ -5,6 +5,7 @@ import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { useDispatch, useSelector } from "react-redux";
 import { actionLogin } from "../../redux/usersActions";
+import { actionGetOrder } from "../../redux/ordersActions";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Login = (props) => {
   const handleChancla = () => {
     dispatch(actionLogin({ ...inputs, idUser: idUser }));
     modalLoginClose();
+    dispatch(actionGetOrder(idUser))
     setTimeout(() => {
       window.location.reload();
     }, 200);

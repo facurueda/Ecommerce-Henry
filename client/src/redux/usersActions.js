@@ -230,7 +230,7 @@ export const actionGetMe = () => {
 export const actionLogOut = () => {
     return (
         (dispatch) => {
-            axios.post(url + 'auth/logout', {
+            axios.get(url + 'auth/logout', {
                 withCredentials: true
             }).then((res) => {
                 return dispatch({

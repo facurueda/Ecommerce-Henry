@@ -28,7 +28,7 @@ const NavBar = () => {
     useEffect(() => {
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {
-            return dispatch(actionGetOrdersByUser(cookie.idUser))
+            return dispatch(actionGetOrder(cookie.idUser))
         }, 300);
         dispatch(actionSetCookieToStore(cookie))
         dispatch(actionVerifyCookies(cookie))
@@ -37,6 +37,7 @@ const NavBar = () => {
     if (loggedOut) {
             removeCookie('idUser')
             removeCookie('level')
+            // removeCookie('connect.sid')
             setTimeout(() => {
                 window.location.reload()
             }, 200);
