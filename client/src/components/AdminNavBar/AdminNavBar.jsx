@@ -13,7 +13,7 @@ const AdminNavBar = () => {
             <form action="/Categories">
                 <button className='buttonLoginAndRegister'>Modificar categorias</button>
             </form>
-            <form action="/users">
+            <form action="/Usuarios">
                 <button className='buttonLoginAndRegister'>Usuarios</button>
             </form>
             <button className='buttonLoginAndRegister' onClick={() => {

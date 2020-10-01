@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
-
-
 .table thead th,
 .table th {
     border: 0px;
@@ -10,7 +8,6 @@
     display: flex;
     width: -webkit-fill-available;
 }
-
 #modalAdd {
     display: flex;
     flex-direction: column;
@@ -24,10 +21,3 @@
     font-weight:300;
 }
 
-#buttonAdd {
-    border-radius: 25px;
-}
-
-.buttonBlack {
-    
-}

@@ -31,8 +31,8 @@ const Categories = (props) => {
     modalEditView()
   }
   const addCategory = async (category) => {
-    await props.actionPostCategory(category);
-    await window.location.reload()
+    props.actionPostCategory(category);
+    window.location.reload()
   }
   const updateCategory = (updatedCategory) => {
     props.actionUpdateCategory(updatedCategory)
@@ -41,7 +41,7 @@ const Categories = (props) => {
   return (
     <div className='componentsContainer'>
       <Container>
-        <button id="buttonAdd" className='buttonStyle' onClick={e => modalAddView()}> + </button>
+        <button id="buttonAdd" className='buttonLoginAndRegister' onClick={e => modalAddView()}> + </button>
         <br />
         <br />
         <CategoryTable 

@@ -20,7 +20,7 @@ import {withCookies} from 'react-cookie';
 import MyAccount from './components/MyAccount/myAccount';
 import ResetPassword from './components/LogIn/ResetPassword'
 import NewPassword from './components/LogIn/NewPassword';
-import Users from './components/Users/Users'
+import Users from './components/Users/Users';
 
 function App() {
   return (
@@ -35,6 +35,7 @@ function App() {
             <Route path='/productDetail' component={Product} />
             <Route path="/catalogue" component={Catalogue} />
             <Route path='/categories' component={Categories} />
+            <Route path='/usuarios' component={Users}/>
             <Route path='/myAccount' component={MyAccount} />
             <Route path="/menuCrud" component={MenuCrud} />
             <Route path='/order' component={Order} />
@@ -43,8 +44,12 @@ function App() {
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route path='/reviews' component={Reviews}/>
             <Route path='/forgot' component={ResetPassword} />
+<<<<<<< HEAD
             {/* <Route path='/users' component={Users}/> */}
             <Route exact path='/admin' component={AdminNavBar}/>
+=======
+            {/* <Route exact path='/admin' component={AdminNavBar}/> */}
+>>>>>>> master
             <Route component={NotFound} />
           </Switch>
         </Router>

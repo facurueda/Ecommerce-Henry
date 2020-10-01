@@ -10,7 +10,7 @@ import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
-import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore } from '../../redux/usersActions'
+import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionLogOut, actionGetMe } from '../../redux/usersActions'
 
 const NavBar = () => {
 
@@ -23,10 +23,21 @@ const NavBar = () => {
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
-    
+    const [google, setGoogle] = useState(true)
+
+    useEffect(() => {
+        dispatch(actionGetOrder(cookie.idUser));
+        setTimeout(() => {
+            return dispatch(actionGetOrder(cookie.idUser))
+        }, 300);
+        dispatch(actionSetCookieToStore(cookie))
+        dispatch(actionVerifyCookies(cookie))
+    }, [])
+
     if (loggedOut) {
             removeCookie('idUser')
             removeCookie('level')
+            // removeCookie('connect.sid')
             setTimeout(() => {
                 window.location.reload()
             }, 200);
@@ -36,15 +47,15 @@ const NavBar = () => {
         setCookie('level', level, { path: '/' })
         dispatch(actionSetVerified(false))
     }
+    if (google) {
+        setGoogle(false)
+        console.log(google)
+        dispatch(actionGetMe())
+    }
+    console.log('after', google)
+    // window.location.reload()
 
-    useEffect(() => {
-        dispatch(actionGetOrder(cookie.idUser));
-        setTimeout(() => {
-            return dispatch(actionGetOrdersByUser(cookie.idUser))
-        }, 200);
-        dispatch(actionSetCookieToStore(cookie))
-        dispatch(actionVerifyCookies(cookie))
-    }, [])
+    
 
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
@@ -102,7 +113,7 @@ const NavBar = () => {
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>
-                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} />
+                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} />
                     </Modal>
                     <Modal isOpen={modalRegister}>
                         <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} />

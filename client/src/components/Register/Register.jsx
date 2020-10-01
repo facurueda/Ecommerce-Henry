@@ -37,6 +37,10 @@ const Register = (props) => {
             modalRegisterClose()
         } 
     }
+    const ClicktoSign = () => {
+        props.setGoogle(true);
+        window.open("http://localhost:3000/auth/google");
+      };
 
     return (
         <div className='loginContainer'>
@@ -77,7 +81,20 @@ const Register = (props) => {
                     </div></a>
                     <div className='LoginAccountAux'>
                         <p className='orLogin'>or login with</p>
-                        <GoogleLogin
+
+            <button onClick={ClicktoSign} >
+              <div class="google-btn">
+                <div class="google-icon-wrapper">
+                  <img
+                    class="buttonLoginGoogle"
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                  />
+                </div>
+                <div class="btn-text">
+                </div>
+              </div>
+            </button>
+                        {/* <GoogleLogin
                             clientId='201334037554-3dqbt2c7a5hij69djsfp0kc4mtgb1bgj.apps.googleusercontent.com'
                             buttonText='Google'
                             onSuccess={responseGoogle}
@@ -90,7 +107,7 @@ const Register = (props) => {
                             fields="name,email,picture"
                             onClick={componentClicked}
                             callback={responseFacebook}
-                            icon="fa-facebook" />
+                            icon="fa-facebook" /> */}
                     </div>
                 </div>
             </ModalFooter>

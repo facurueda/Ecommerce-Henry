@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 import TotalByProduct from './orderComponents/totalByProduct';
-import './order.css'
+import './order.css';
 import { useSelector } from 'react-redux'
+const axios = require('axios');
+const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+
+
 
 const Order = (props) => {
+
+
+    const handleClick = async (event) => {
+        const stripe = await stripePromise;
+        const response = await fetch("http://localhost:3000/order/create-session", {
+            credentials: 'include',
+            method: 'post',
+            headers: {'Content-Type': 'application/json'}
+        });
+        const session = await response.json();
+        // When the customer clicks on the button, redirect them to Checkout.
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id,
+        })
+    }
+
+
+
     const propsOrder = props.order
     const storeOrder = useSelector(state => state.ordersReducer.order)
 
@@ -41,7 +64,7 @@ const Order = (props) => {
                                 return acum + (product.Inter_Prod_Order.price * product.Inter_Prod_Order.quantity)
                             }, 0).toFixed(2)}
                         </span>
-                        <div style={{ display: props.origin }}><button className="buttonEndOrden">Finalizar Orden</button></div>
+                        <div style={{ display: props.origin }}><button className="buttonEndOrden" onClick={handleClick}>Finalizar Orden</button></div>
                     </div>
 
                 </div>

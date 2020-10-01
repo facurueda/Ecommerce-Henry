@@ -8,7 +8,8 @@ const bcrypt = require('bcrypt')
 const aleatoryNumber = () => {
     return Date.now() + Math.random()
 }
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const { session } = require('passport');
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 
@@ -79,14 +80,20 @@ server.post('/login', (req, res, next) => {
     })
 })
 
-server.post('/logout', (req, res) => {
-    req.logout()
-    res.send({
-        loggedOut: true
-    })
+server.get('/logout', (req, res) => {
+    // req.logout()
+    // req.session.destroy()
+    // res.send({
+    //     loggedOut: true
+    // })
+    req.logOut()
+    req.session.destroy(function() {
+        res.clearCookie('connect.sid');
+    });
 });
 
-server.post('/promote/:id', isAdmin, (req, res) => {
+// To set user to Admin
+server.put('/promote/:id', (req, res) => {
     User.findOne({
         where: {
             idUser: req.params.id,
@@ -94,7 +101,20 @@ server.post('/promote/:id', isAdmin, (req, res) => {
     }).then(user => {
         user.update({
             ...user,
-            level: 'Admin',
+            level: 'admin',
+        })
+    })
+})
+// To set user to Admin
+server.put('/degrade/:id', (req, res) => {
+    User.findOne({
+        where: {
+            idUser: req.params.id,
+        }
+    }).then(user => {
+        user.update({
+            ...user,
+            level: 'user',
         })
     })
 })
@@ -134,12 +154,14 @@ server.post('/cookie', async (req, res) => {
             })
         })
     } else {
+        console.log('idUserTHIS', idUser)
         User.findOne({
             where: {
                 idUser: idUser
             }
         }).then((user) => {
             userAux = user;
+            console.log('este no reconoce', user)
             return Order.findOne({
                 where: {
                     idUser: idUser
@@ -153,6 +175,9 @@ server.post('/cookie', async (req, res) => {
                 level: level,
                 order
             })
+        }).catch(error => {
+            console.log('there was an error', error);
+            res.status(404);
         })
     }
 })
@@ -225,6 +250,25 @@ server.post('/reset', (req, res) => {
         res.status(404);
     })
 })
+
+
+// GOOGLE STRATEGY
+
+server.get('/google',
+    passport.authenticate('google', {
+        scope: ['profile', 'email']
+    }));
+
+server.get('/google/callback',
+    passport.authenticate('google', {
+        successRedirect: 'http://localhost:3001/',
+        failureRedirect: '/login'
+        // Ver como hacer para que el FRONT ejecute la un dipatch /me y modifique los datos de su cookie
+    }),
+);
+
+
+
 
 
 module.exports = server;

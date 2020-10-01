@@ -133,7 +133,7 @@ server.post('/:idUser/cart', (req, res, next) => {
                 idProduct: req.body.idProduct
             }
         }).then((inter) => {
-            if (inter.quantity <= 1 && req.body.quantity === -1) {
+            if (inter.quantity + req.body.quantity <= 0) {
                 return Inter_Prod_Order.destroy({
                     where: {
                         idOrder: order.idOrder,
