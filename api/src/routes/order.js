@@ -130,6 +130,8 @@ server.post('/checkout', async (req, res,next) => {
         access_token: 'TEST-4039989208001293-100119-0edd096f6a0691afbce82062ef9e1a5b-653349945'
     });
 
+
+    
     // Crea un objeto de preferencia
     const preference = {
         items: allProdUser.map(relacion_product_order => {
