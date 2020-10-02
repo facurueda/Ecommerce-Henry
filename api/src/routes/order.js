@@ -1,13 +1,13 @@
 const server = require('express').Router();
 const passport = require('passport');
 const Sequelize = require("sequelize");
+const mercadopago = require('mercadopago');
 const {
     User,
     Order,
     Product,
     Inter_Prod_Order
 } = require('../db.js');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
@@ -108,83 +108,67 @@ server.post('/', (req, res, next) => {
 });
 ///////////////////////////////////////////////////////////////////////////PUT
 
-/////////////////////////////////DEV
+/////////////////////////////////////////////////////////////////////////// MERCADOPAGO
 
+server.post('/checkout', async (req, res) => {
 
-server.post('/create-session', async (req, res) => {
-    //Buscar Orden del usuario logeado por su idUser que viene en Req.user
+    const { precioTotal } = req.body;
 
-    const userOrder = await Order.findOne({
+    sumaTotal = parseInt(precioTotal)
+
+    const allProdUser = await Order.findOne({
         where: {
-            idUser: req.user.idUser
+            idUser: req.user.idUser,
+            status: 'CARRITO'
         }
+    }).then(order => {
+        return Inter_Prod_Order.findAll({
+            where: {
+                idOrder: order.idOrder
+            }
+        })
     })
 
-    const allProdInOrder = await Inter_Prod_Order.findAll({
-        where: {
-            idOrder: userOrder.idOrder
-        }
-    })
+    console.log('ALLLPRODUUUUCT', allProdUser)
 
-    const productsToMap = allProdInOrder[0]
+    mercadopago.configure({
+        access_token: 'TEST-4039989208001293-100119-0edd096f6a0691afbce82062ef9e1a5b-653349945'
+    });
 
-
-
-    console.log('IMPORTANTT', allProdInOrder)
-
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: 
-            allProdInOrder.map(n => {
-                return (
-                    [allProdInOrder[n]]
-
-                )
-            }),
-        
-        // [allProdInOrder[0]
-
-            // Mapear los productos de la orden
-                    
-                
+    // Crea un objeto de preferencia
+    let preference = {
+        items: [
             
+            {
+                title: 'ALLPRODUCTS',
+                description: 'SUMPRICEOFALLPRODUCTS',
+                unit_price: sumaTotal,
+                quantity: 1,
+            },
+        ],
+        back_urls: {
+            success: 'http://localhost:3001/home'
+        }
+    };
 
-        
+    mercadopago.preferences.create(preference)
+        .then(response => {
+            console.log('RESPONSE', response)
+            res.send(response.body.init_point)
+            // Este valor reemplazará el string "<%= global.id %>" en tu HTML
+            // global.id = response.body.id;
+            // console.log('thiiisiss', global.id)
+            // console.log('responsee', response)
+            // LA RESPONSE TIENE MUCHA INFO, ENTRE ELLA EL LINK DE PAGO 'INIT_POINT'
+            // res.send('TEST')
+        }).catch(function (error) {
+            console.log(error);
+        });
 
 
+})
 
-        // {
-        //     price_data: {
-        //         currency: 'ars',
-        //         product_data: {
-        //             name: 'Stubborn Attachments',
-        //             images: ['https://i.imgur.com/EHyR2nP.png'],
-        //         },
-        //         unit_amount: 2000000,
-        //     },
-        //     quantity: 1,
-        // },
-        // {
-        //     price_data: {
-        //         currency: 'ars',
-        //         product_data: {
-        //             name: 'Stubborn Attachments',
-        //             images: ['https://i.imgur.com/EHyR2nP.png'],
-        //         },
-        //         unit_amount: 2000000,
-        //     },
-        //     quantity: 1,
-        // },
-
-        mode: 'payment',
-        success_url: `http://localhost:3001/`,
-        cancel_url: `http://localhost:3001/`,
-    });
-    res.json({
-        id: session.id
-    });
-});
-
+/////////////////////////////////DEV
 
 
 

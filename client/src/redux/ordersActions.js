@@ -1,6 +1,29 @@
 import axios from "axios";
-import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from "./constants";
+import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT } from "./constants";
 const url = "http://localhost:3000/";
+var qs = require('qs');
+
+export const actionCheckOut = (precioTotal) => {
+    return async (dispatch) => {
+        var config = {
+            method: 'POST',
+            url: 'http://localhost:3000/order/checkout',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            withCredentials: true,
+            data: qs.stringify(precioTotal)
+            
+          };
+        axios(config).then( res => {
+            dispatch({type: END_CHECKOUT , payload: res.data})
+        //   window.location.href = res.data
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+}
 
 export const actionUpdateOrder = (idUser) => {
     return async (dispatch) => {
