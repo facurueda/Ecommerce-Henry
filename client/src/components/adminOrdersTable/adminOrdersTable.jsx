@@ -13,19 +13,19 @@ const AdminOrdersTable = (props) => {
         dispatch(actionGetAllOrders());
         dispatch(actionGetUsers())
     }, [])
-    const getUserName = () => {
-        if (users) {
+
+    const getUserName = (order) => {
+        if (users.length >= 1) {
             const hola = users.filter(e => {
-                console.log(e)
-                if (e.idUser === props.order.idUser) {
-                    return e.name
+                if (e.idUser == order.idUser) {
+                    return e
                 }
 
             })
-            console.log(Object.keys(hola[0]))
+            return hola[0]
+            console.log('hola')
         }
     }
-    getUserName()
     if (orders.length < 1) {
         return <div style={{ display: "flex", justifyContent: "center" }}>
             <h3><b>No se encontraron ordenes disponibles.</b></h3>
@@ -35,7 +35,7 @@ const AdminOrdersTable = (props) => {
         <div >
             {orders.map(order => {
                 return (<div className='divContainerOrders'>
-                    <Orders key={order.idOrder} userName={"hola"} order={order} /></div>)
+                    <Orders key={order.idOrder} userName={getUserName(order)} order={order} /></div>)
             })}
         </div>
     )

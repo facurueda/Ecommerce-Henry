@@ -1,10 +1,11 @@
-import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART } from './constants'
+import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT } from './constants'
 
 var initialState = {
     loading: false,
     order: [],
     orders: [],
-    quantity: 0
+    quantity: 0,
+    urlCheckout: ''
 };
 
 const ordersReducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ const ordersReducer = (state = initialState, action) => {
             }
         case ADD_TO_CART:
             return state
+        case END_CHECKOUT:
+            return {
+                ...state,
+                urlCheckout: action.payload
+            }
 
         default:
             return state;
