@@ -80,7 +80,7 @@ server.post('/login', (req, res, next) => {
 })
 
 server.post('/logout', (req, res) => {
-    req.logout()
+    req.logOut()
     res.send({
         loggedOut: true
     })

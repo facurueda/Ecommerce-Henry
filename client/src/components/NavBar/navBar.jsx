@@ -16,7 +16,6 @@ const NavBar = () => {
 
     const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
     const dispatch = useDispatch()
-
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const idUser = useSelector(state => state.usersReducer.idUser)
@@ -24,16 +23,19 @@ const NavBar = () => {
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
     const [google, setGoogle] = useState(true)
-
     useEffect(() => {
+        if(Object.keys(cookie).length <= 1) {
+            dispatch(actionVerifyCookies(cookie))
+        }
+        else {
+            dispatch(actionGetMe())
+        }
         dispatch(actionGetOrder(cookie.idUser));
         setTimeout(() => {
             return dispatch(actionGetOrdersByUser(cookie.idUser))
         }, 300);
         dispatch(actionSetCookieToStore(cookie))
-        dispatch(actionVerifyCookies(cookie))
     }, [])
-
     if (loggedOut) {
             removeCookie('idUser')
             removeCookie('level')
@@ -48,25 +50,16 @@ const NavBar = () => {
     }
     if (google) {
         setGoogle(false)
-        console.log(google)
         dispatch(actionGetMe())
     }
-    console.log('after', google)
-    // window.location.reload()
-
-    
-
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
-
     const modalLoginClose = () => setModalLogin(false);
     const modalRegisterClose = () => setModalRegister(false)
-
     const ChangeModal = () => {
         modalLoginView()
         modalRegisterView()
     }
-    
     return (
         <div >
             <div className='navContainer'>

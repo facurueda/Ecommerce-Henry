@@ -31,10 +31,7 @@ const Login = (props) => {
         window.open("http://localhost:3000/auth/google");
     }
     const responseGoogle = (response) => {
-        console.log(response);
-        console.log(response.profileObj)
         const email = response.profileObj.email;
-        
         dispatch(actionLogin({email: email , password: 'passwordGoogle', idUser: idUser}))
     }
     const responseFacebook = (response) => console.log(response);

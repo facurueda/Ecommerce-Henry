@@ -37,25 +37,13 @@ const usersReducer = (state = initialState, action) => {
                 users: action.payload
             }
         case USER_TO_ADMIN:
-            return {
-                ...state,
-                users: [...state.users]
-            }
+            return state;
         case ADMIN_TO_USER:
-            return {
-                ...state,
-                users: [...state.users]
-            }
+            return state;
         case DELETE_USER:
-            return {
-                ...state,
-                users: [...state.users]
-            }
+            return state;
         case RESET_STATUS_RESET:
-            return {
-                ...state,
-                resetStatus: []
-            }
+            return state;
         case RESET_OK:
             return {
                 ...state,

@@ -19,7 +19,7 @@ export const actionGetOrder = (idUser) => {
                 const acum = data.products.reduce((acum, product) => {
                     return acum + product.Inter_Prod_Order.quantity
                 }, 0)
-                setTimeout(() => { return dispatch({ type: SET_QUANTITY, payload: acum }) }, 200)
+                dispatch({ type: SET_QUANTITY, payload: acum })
             }
         })
     }
