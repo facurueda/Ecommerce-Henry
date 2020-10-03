@@ -24,6 +24,7 @@ const NavBar = () => {
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
     const [google, setGoogle] = useState(true)
+    const [github , setGithub] = useState(true)
 
     useEffect(() => {
         dispatch(actionGetOrder(cookie.idUser));
@@ -54,7 +55,17 @@ const NavBar = () => {
     }
     console.log('after', google)
     // window.location.reload()
+    if (google) {
+        setGoogle(false)
+        console.log(google)
+        dispatch(actionGetMe())
+    }
 
+    if (github) {
+        setGithub(false)
+
+        dispatch(actionGetMe())
+    }
     
 
     const modalLoginView = () => setModalLogin(!modalLogin);
@@ -113,7 +124,7 @@ const NavBar = () => {
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>
-                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} />
+                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}  />
                     </Modal>
                     <Modal isOpen={modalRegister}>
                         <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} />

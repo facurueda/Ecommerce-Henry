@@ -251,8 +251,7 @@ server.post('/reset', (req, res) => {
     })
 })
 
-
-// GOOGLE STRATEGY
+//SOCIALMEDIA LOGIN
 
 server.get('/google',
     passport.authenticate('google', {
@@ -263,12 +262,16 @@ server.get('/google/callback',
     passport.authenticate('google', {
         successRedirect: 'http://localhost:3001/',
         failureRedirect: '/login'
-        // Ver como hacer para que el FRONT ejecute la un dipatch /me y modifique los datos de su cookie
     }),
 );
 
+server.get('/github',
+  passport.authenticate('github', { scope: [ 'email' ] }));
 
-
-
+server.get('/github/callback',
+    passport.authenticate('github', { failureRedirect: '/login' }),
+    function(req, res) {
+    res.redirect('http://localhost:3001/');
+    })
 
 module.exports = server;

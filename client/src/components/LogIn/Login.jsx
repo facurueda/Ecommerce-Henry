@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./Login.css";
-import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
 import { useDispatch, useSelector } from "react-redux";
 import { actionLogin } from "../../redux/usersActions";
 import { actionGetOrder } from "../../redux/ordersActions";
@@ -32,17 +30,12 @@ const Login = (props) => {
     props.setGoogle(true);
     window.open("http://localhost:3000/auth/google");
   };
-  const responseGoogle = (response) => {
-    console.log(response);
-    console.log(response.profileObj);
-    const email = response.profileObj.email;
 
-    dispatch(
-      actionLogin({ email: email, password: "passwordGoogle", idUser: idUser })
-    );
+  const ClicktoSignGit = () => {
+    props.setGithub(true);
+    window.open("http://localhost:3000/auth/github");
   };
-  const responseFacebook = (response) => console.log(response);
-  const componentClicked = () => console.log("clicked");
+
   return (
     <div className="loginContainer">
       <button className="closeButton" onClick={modalLoginClose}>
@@ -105,8 +98,7 @@ const Login = (props) => {
           </a>
           <div className="LoginAccountAux">
             <p className="orLogin">or login with</p>
-
-            <button onClick={ClicktoSign} >
+            <button onClick={ClicktoSign} className='btnGoogle' >
               <div class="google-btn">
                 <div class="google-icon-wrapper">
                   <img
@@ -118,22 +110,12 @@ const Login = (props) => {
                 </div>
               </div>
             </button>
-            {/* <GoogleLogin className='GoogleLogin'
-                            clientId='201334037554-3dqbt2c7a5hij69djsfp0kc4mtgb1bgj.apps.googleusercontent.com'
-                            buttonText='Google'
-                            onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
-                            cookiePolicy={'single_host_origin'} /> */}
-            {/* <FacebookLogin
-              className="FacebookLogin"
-              appId="340361817317695"
-              autoLoad={false}
-              textButton="facebook"
-              fields="name,email,picture"
-              onClick={componentClicked}
-              callback={responseFacebook}
-              icon="fa-facebook"
-            /> */}
+            <button onClick={ClicktoSignGit} class="btn btn-block social-login github">
+              <span class="social-icons">
+                <i class="fab fa-github fa-lg">
+                </i>
+              </span>
+            </button>
           </div>
         </div>
       </ModalFooter>

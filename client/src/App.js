@@ -44,12 +44,7 @@ function App() {
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route path='/reviews' component={Reviews}/>
             <Route path='/forgot' component={ResetPassword} />
-<<<<<<< HEAD
-            {/* <Route path='/users' component={Users}/> */}
-            <Route exact path='/admin' component={AdminNavBar}/>
-=======
             {/* <Route exact path='/admin' component={AdminNavBar}/> */}
->>>>>>> master
             <Route component={NotFound} />
           </Switch>
         </Router>

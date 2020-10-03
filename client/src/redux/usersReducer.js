@@ -26,11 +26,7 @@ const initialState = {
     verified: false,
     loggedOut: false,
     resetStatus: [],
-<<<<<<< HEAD
-    // allUsers: []
-=======
     users: []
->>>>>>> master
 }
 
 const usersReducer = (state = initialState, action) => {
