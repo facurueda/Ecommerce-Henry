@@ -85,6 +85,7 @@
     display: flex;
     align-content: center;
     justify-content: center;
+    align-items: center;
 }
 
 .logAccount,
@@ -98,4 +99,12 @@
 
 .alreadylog {
     margin-right: 4px;
+}
+.github {
+    color: #fff;
+    height: 35px;
+    width: 25px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }

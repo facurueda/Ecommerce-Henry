@@ -117,7 +117,7 @@ const NavBar = () => {
                         <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}  />
                     </Modal>
                     <Modal isOpen={modalRegister}>
-                        <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} />
+                        <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}   />
                     </Modal>
                 </div>
             </div>
