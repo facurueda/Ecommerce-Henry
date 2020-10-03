@@ -80,16 +80,10 @@ server.post('/login', (req, res, next) => {
     })
 })
 
-server.get('/logout', (req, res) => {
-    // req.logout()
-    // req.session.destroy()
-    // res.send({
-    //     loggedOut: true
-    // })
+server.post('/logout', (req, res) => {
     req.logOut()
-    req.session.destroy(function() {
-        res.clearCookie('connect.sid');
-    });
+    res.clearCookie('connect.sid');
+    req.session.destroy()
 });
 
 // To set user to Admin

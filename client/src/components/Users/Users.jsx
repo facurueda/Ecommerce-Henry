@@ -1,26 +1,26 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Table } from "reactstrap";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import "./Users.css";
 import { actionGetUsers, actionSetAdminUser, actionSetUser, actionDeleteUser } from "../../redux/usersActions";
 
 const Users = (props) => {
-
+  const dispatch = useDispatch()
   useEffect(() => {
-    props.actionGetUsers();
+    dispatch(actionGetUsers());
   }, []);
 
   const setAdmin = user => {
-    props.actionSetAdminUser(user)
+    dispatch(actionSetAdminUser(user))
     window.location.reload()
   }
   const setUser = user => {
-    props.actionSetUser(user)
+    dispatch(actionSetUser(user))
     window.location.reload()
   }
   const deleteUser = user => {
-    props.actionDeleteUser(user)
+    dispatch(actionDeleteUser(user))
   }
 
   return (
