@@ -21,17 +21,17 @@ const CategoryTable = (props) => {
                             <th className='categoryInfo'>{category.description}</th>
                             <th className='buttonContainer'>
                                 <button type="button" className='buttonEdit'
-                                    onClick={() => editCategory(category)}>Edit
+                                    onClick={() => editCategory(category)}>Editar
                                     </button>{" "}
                                 <button type="button" className='buttonEdit'
-                                    onClick={() => deleteCategory(category)}>Delete
+                                    onClick={() => deleteCategory(category)}>Eliminar
                                     </button>
                             </th>
                         </tr>
                     ))
                 ) : (
                         <tr>
-                            <td>No Categories</td>
+                            <td>No existen categorias</td>
                         </tr>
                     )}
             </tbody>

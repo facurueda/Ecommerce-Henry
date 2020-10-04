@@ -24,9 +24,9 @@ const FormModalEdit = (props) => {
       </ModalHeader>
       <ModalBody>
         <FormGroup>
-          <label>Category Name:</label>
+          <label className="categoryDetail">Category Name:</label>
           <input
-            className="form-control"
+            className="inputName" 
             name="name"
             type="text"
             onChange={handleChange}
@@ -34,9 +34,9 @@ const FormModalEdit = (props) => {
           />
         </FormGroup>
         <FormGroup>
-          <label>Description:</label>
+          <label className="categoryDetail">Description:</label>
           <input
-            className="form-control"
+            className="inputName" 
             name="description"
             type="text"
             onChange={handleChange}
@@ -46,7 +46,7 @@ const FormModalEdit = (props) => {
       </ModalBody>
       <ModalFooter>
         <Button
-          className='submitButton'
+          className='buttonAdd'
           onClick={(event) => {
             event.preventDefault();
             if (!category.name || !category.description) return window.alert('Empty Inputs')

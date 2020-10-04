@@ -11,7 +11,9 @@
     border: 0.15px solid rgba(0, 0, 0, 0.15);
     font-weight: 300;
 }
-
+.table td {
+    border: 0px ;
+}
 .table thead th,
 .table th {
     border: 0px ;
