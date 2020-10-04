@@ -153,16 +153,15 @@ function initialize(passport) {
 
   const authenticateUserGitHub = async (accessToken, refreshToken, profile, done) => {
     const hashedPassword = await bcrypt.hash('passwordGitHubAccount', 10)
-    console.log(profile)
     User.findOne({
       where: {
-        email: profile.emails.value
+        email: profile._json.email
       }
     }).then(user => {
       if (!user) {
         User.create({
-          name: profile.displayName,
-          email: profile.emails.value,
+          name: profile._json.name,
+          email: profile._json.email,
           password: hashedPassword,
           level: 'user'
         }).then(user => {
