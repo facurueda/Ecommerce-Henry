@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react'
-import "bootstrap/dist/css/bootstrap.min.css"; 
-import {   Container,   Modal, } from "reactstrap";
+import React, { useState, useEffect } from 'react'
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Modal, } from "reactstrap";
 import ProductTable from './MenuCrudComponents/ProductTable';
 import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
-import { actionUpdateProduct,actionGetProducts,actionDeleteProduct,actionPostProduct } from "../../redux/productsActions";
+import { actionUpdateProduct, actionGetProducts, actionDeleteProduct, actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
 import { connect, useDispatch, useSelector } from 'react-redux';
 import './MenuCrud.css'
@@ -16,7 +16,7 @@ const MenuCrud = () => {
     dispatch(actionGetCategories())
   }, [])
 
-  
+
   //Estados
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -27,7 +27,7 @@ const MenuCrud = () => {
   const modalEditView = () => setModalEdit(!modalEdit);
   const modalCloseAdd = () => setModalAdd(false);
   const modalCloseEdit = () => setModalEdit(false);
-  const deleteProduct =async (id) => {
+  const deleteProduct = async (id) => {
     dispatch(actionDeleteProduct(id))
     await window.location.reload()
   }

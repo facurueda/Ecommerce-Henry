@@ -5,19 +5,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCheckOut } from "../../redux/ordersActions";
 import { Modal } from "reactstrap";
 import Loading from "../LoadingMiddleware/LoadingMiddleware";
+import ModalDireccion from './ModalDireccion'
 const axios = require("axios");
 
 const Order = (props) => {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false)
-  const changeLoading = () => setLoading(!loading);
 
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const changeLoading = () => setLoading(!loading);
+  
+  /////////////////////// ESTADOS PARA EL ENVIO ///////////////////////
+
+  const [modalDireccion, setModalDireccion] = useState(false)
+  const openModalDireccion = () => {setModalDireccion(!modalDireccion)}
+  const closeModalDireccion = () => {setModalDireccion(false)}
+
+  const [cancelarEnvio, setCancelarEnvio] = useState(false)
+  const mostrarBotonCancelar = () => setCancelarEnvio(true)
+
+  const [mostrarPrecioEnvio, setMostrarPrecioEnvio] = useState(false)
+
+  const [precioEnvio, setPrecioEnvio] = useState(0)
+  
   const clickButton = () => {
-    dispatch(actionCheckOut());
-    changeLoading()
+    dispatch(actionCheckOut(cancelarEnvio, idOrderUser));
+    changeLoading();
+
   };
+
+  /////////////////////////////////////////////////////////////////////
+
   const propsOrder = props.order;
   const storeOrder = useSelector((state) => state.ordersReducer.order);
+
   const order = () => {
     if (props.order) {
       return propsOrder;
@@ -26,7 +46,11 @@ const Order = (props) => {
     }
   };
 
+
   const or = order();
+
+  const idOrderUser = or.idOrder
+
   if (Object.keys(or).length < 1) {
     return (
       <div className="orderContainer">
@@ -47,33 +71,57 @@ const Order = (props) => {
             />
           );
         })}
-        <br />
         <div className="footerContent">
-          <div className="footerOrder">
+          <div className='containerButtonEnvio'>
+            <div style={{width:'60%'}}>
+            
+            {!cancelarEnvio ? (
+              <button onClick={e => {openModalDireccion()}} className='buttonEnvio'>ENVIO</button>
+            ) : (
+              <button onClick={e => {setCancelarEnvio(false); setPrecioEnvio(0); setMostrarPrecioEnvio(false)}} className='buttonEnvio'>CANCELAR ENVIO</button>
+            )
+            }
+
+            <Modal isOpen={modalDireccion}>
+                <ModalDireccion
+                  idOrderUser = {idOrderUser}
+                  closeModalDireccion={closeModalDireccion}
+                  setPrecioEnvio={setPrecioEnvio}
+                  setMostrarPrecioEnvio={setMostrarPrecioEnvio}
+                  mostrarBotonCancelar={mostrarBotonCancelar}
+                  />
+            </Modal>
+            
+            
+            </div>
+            <div style={{width:'40%', display:"flex", alignItems:'center', justifyContent:'flex-end'}}>
+              { mostrarPrecioEnvio ? (`$  ${precioEnvio}`) : ('')}
+            </div>
+          </div>
             <span className="textPrice">
               {" "}
               Total: $
-              {
-                or.products.reduce((acum, product) => {
+              {or.products
+                .reduce((acum, product) => {
                   return (
                     acum +
                     product.Inter_Prod_Order.price *
-                    product.Inter_Prod_Order.quantity
+                      product.Inter_Prod_Order.quantity
                   );
-                }, 0)
-                  .toFixed(2)
-              }
+                }, precioEnvio)
+                .toFixed(2)}
             </span>
-            <div style={{ display: props.origin }}>
+
+            <div style={{ display: props.origin }} className='containerButtonEndOrden'>
               <button className="buttonEndOrden" onClick={clickButton}>
                 Finalizar Orden
               </button>
-              <Modal isOpen={loading} toggle={loading} >
-              <Loading isPayLoading={true} loadingClose={changeLoading}/>
+              <Modal isOpen={loading} toggle={loading}>
+                <Loading isPayLoading={true} loadingClose={changeLoading} />
               </Modal>
             </div>
+
           </div>
-        </div>
       </div>
     );
   }
