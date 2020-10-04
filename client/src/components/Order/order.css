@@ -1,7 +1,7 @@
 .orderContainer{
     color: white;
     display: flex;
-    margin-top: 0px;
+    margin: 25px 300px;
     flex-direction: column;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
@@ -22,15 +22,18 @@
 }
 .footerContent{
     display: flex;
+    margin: 20px;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
-.footerOrder{
+/* .footerOrder{
     margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} */
 .textAmount{
     margin-left: 20px;
 }
@@ -39,16 +42,46 @@
 }
 .textPrice{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
     margin-right: 10px;
     font-size: 30px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
+.containerButtonEndOrden{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .buttonEndOrden {
     display: flex;
     justify-self: center;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    margin: 10px 0.2em 0.2em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+}
+.containerButtonEnvio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly ;
+    width: 100%;
+}
+.buttonEnvio{
+    display: flex;
+    width: 100px;
+    justify-self: flex-start;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
     margin: 10px 0.2em 0.2em 0;

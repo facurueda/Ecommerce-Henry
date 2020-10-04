@@ -1,11 +1,13 @@
-import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT } from './constants'
+import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION } from './constants'
 
 var initialState = {
     loading: false,
     order: [],
     orders: [],
     quantity: 0,
-    urlCheckout: ''
+    urlCheckout: '',
+    orderCerrada: [],
+    direccion: []
 };
 
 const ordersReducer = (state = initialState, action) => {
@@ -36,6 +38,21 @@ const ordersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 urlCheckout: action.payload
+            }
+        case SET_ORDER_CERRADA_TO_VIEW:
+            return {
+                ...state,
+                orderCerrada: action.payload
+            }
+        case SEND_DIRECCION_TO_DB:
+            return {
+                ...state,
+                direccion: action.payload
+            }
+        case GET_DIRECCION:
+            return {
+                ...state,
+                direccion: action.payload
             }
 
         default:
