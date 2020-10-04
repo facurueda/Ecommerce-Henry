@@ -15,17 +15,9 @@ const Orders = (props) => {
     const [display, setDisplay] = useState('none');
     return (
         <div className='AdminOrdersTableComponentsContainer'>
+            
             <h3><b>{props.userName}</b></h3>
             <h5>Order: <b>{props.order.idOrder}</b></h5>
-            <button onClick={() => {
-                console.log(props.order)
-                console.log(AllUsers)
-                if (display === "none") {
-                    setDisplay("flex");
-                } else {
-                    setDisplay('none');
-                }
-            }} className='buttonDetails'> Details</button>
             <div style={{ display: display }}>
                 <OrderByIdComponent order={props.order} />
             </div>

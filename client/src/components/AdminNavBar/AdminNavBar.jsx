@@ -16,17 +16,9 @@ const AdminNavBar = () => {
             <form action="/Usuarios">
                 <button className='buttonLoginAndRegister'>Usuarios</button>
             </form>
-            <button className='buttonLoginAndRegister' onClick={() => {
-                document.getElementById("orden").hidden =true
-                modalOrdersTableView()
-            }}>Todas las ordenes</button>
-            <Modal isOpen={ModalOrdersTable} toggle={ModalOrdersTable}>
-                <button className='buttonLoginAndRegister' onClick={() => {
-                    modalOrdersTableView()
-                    window.location.reload()
-                }}>Close</button>
-                <AdminOrdersTable />
-            </Modal>
+            <form action="/adminOrdersTable">
+                <button className='buttonLoginAndRegister'>Ordenes</button>
+            </form>
         </div>
     )
 }

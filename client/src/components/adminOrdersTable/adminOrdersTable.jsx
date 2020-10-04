@@ -1,11 +1,13 @@
 import './adminOrdersTable.css'
+import '../../components/Categories/CategoriesComponents/CategoryTable.css'
 import React, { useEffect } from 'react'
-import Orders from './ordersComponent'
+import { Table } from "reactstrap";
 import { useSelector, useDispatch } from 'react-redux'
 import { actionGetAllOrders } from '../../redux/ordersActions'
 import { actionGetUsers } from '../../redux/usersActions'
 
-const AdminOrdersTable = (props) => {
+const AdminOrdersTable = () => {
+    
     const dispatch = useDispatch()
     const orders = useSelector(state => state.ordersReducer.orders)
     const users = useSelector(state => state.usersReducer.users)
@@ -33,10 +35,35 @@ const AdminOrdersTable = (props) => {
     }
     return (
         <div >
-            {orders.map(order => {
-                return (<div className='divContainerOrders'>
-                    <Orders key={order.idOrder} userName={getUserName(order)} order={order} /></div>)
-            })}
+            <Table className='ordersCont'>
+                <thead>
+                    <tr className='NameAndDesc'>
+                        <th className='Name'>Id</th>
+                        <th className='Desc'>Cliente</th>
+                        <th className='Desc'>Dirección de entrega</th>
+                        <th className='Desc'>Estado</th>
+                        <th className='Desc'>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {orders > 0 ? (
+                        orders.map(order => (
+                            <tr className='categories' key={order.idCategory}>
+                                <th className='categoryInfo'>{order.idCategory}</th>
+                                <th className='categoryInfo'>{getUserName(order)}</th>
+                                <th className='categoryInfo'>{order.direccion}</th>
+                                <th className='categoryInfo'>{order.status}</th>
+                                <th className='categoryInfo'>{order.total}</th>
+                            </tr>
+                        ))
+                    ) : (
+                            <tr>
+                                <td>No hay ordenes</td>
+                            </tr>
+                        )}
+                </tbody>
+            </Table>
+
         </div>
     )
 }

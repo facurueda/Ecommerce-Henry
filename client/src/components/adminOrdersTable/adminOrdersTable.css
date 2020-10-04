@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    color: white;
 }
 .buttonRestar{
     display: none;
@@ -15,4 +14,12 @@
     border-radius: 5px;
     background-color: rgba(74, 74, 74, 0.25);
     backdrop-filter: blur(7px);
+}
+
+.ordersCont {
+    margin-top: 100px;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 13px;
+    color: black
 }
