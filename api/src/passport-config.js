@@ -1,7 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy
-
 const GoogleStrategy = require('passport-google-oauth20').Strategy
-
+const GithubStrategy = require("passport-github").Strategy;
 
 const bcrypt = require('bcrypt');
 const {
@@ -103,30 +102,13 @@ function initialize(passport) {
   // Google Strategy
 
   const authenticateUserGoogle = async (accessToken, refreshToken, profile, done) => {
-
-    // profile {
-    //   id: '115475068932257464817',
-    //   displayName: 'Facundo Rueda',
-    //   name: { familyName: 'Rueda', givenName: 'Facundo' },
-    //   emails: [ { value: 'facu9685@gmail.com', verified: true } ],
-    //   photos: [
-    //     {
-    //       value: 'https://lh3.googleusercontent.com/a-/AOh14Gg7EjythtUhJeb1D83WtsBDNhFygm9XLt6JnSMu'
-    //     }
-    //   ],
-
-
-    const hashedPassword = await bcrypt.hash('passwordGoogleAcount', 10)
-
-    // buscar si existe el usuario con el mail
+    const hashedPassword = await bcrypt.hash('passwordGoogleAccount', 10)
     User.findOne({
       where: {
         email: profile.emails[0].value
       }
     }).then(user => {
-      // NO existe
       if (!user) {
-        // Crear usuario, crear orden, logearse
         User.create({
           name: profile.displayName,
           email: profile.emails[0].value,
@@ -161,23 +143,62 @@ function initialize(passport) {
     })
   }
 
-
-
   passport.use(new GoogleStrategy({
-      clientID: process.env.googleClientID,
-      clientSecret: process.env.googleClientSecret,
-      callbackURL: "http://localhost:3000/auth/google/callback"
-    },
+    clientID: process.env.googleClientID,
+    clientSecret: process.env.googleClientSecret,
+    callbackURL: "http://localhost:3000/auth/google/callback"
+  },
     authenticateUserGoogle
-    // function (accessToken, refreshToken, profile, cb) {
-    //   User.findOrCreate({
-    //     googleId: profile.id
-    //   }, function (err, user) {
-    //     return cb(err, user);
-    //   });
-    // }
   ));
 
+  const authenticateUserGitHub = async (accessToken, refreshToken, profile, done) => {
+    const hashedPassword = await bcrypt.hash('passwordGitHubAccount', 10)
+    User.findOne({
+      where: {
+        email: profile._json.email
+      }
+    }).then(user => {
+      if (!user) {
+        User.create({
+          name: profile._json.name,
+          email: profile._json.email,
+          password: hashedPassword,
+          level: 'user'
+        }).then(user => {
+          console.log(user)
+          Order.create({
+            idUser: user.idUser,
+            status: 'CREADA'
+          }).then(order => {
+            console.log(order)
+            User.findOne({
+              where: {
+                idUser: order.idUser
+              }
+            }).then(user => {
+              return done(null, user)
+            })
+          })
+        })
+      } else {
+        User.findOne({
+          where: {
+            email: profile._json.email
+          }
+        }).then(user => {
+          return done(null, user)
+        })
+      }
+    })
+  }
+
+  passport.use(new GithubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/github/callback"
+  },
+    authenticateUserGitHub
+  ));
 
   passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -195,7 +216,6 @@ function initialize(passport) {
         idUser: id
       }
     }).then(user => {
-      // console.log('thisUser', user.dataValues)
       done(null, user);
     }).catch(done)
   });

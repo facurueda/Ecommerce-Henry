@@ -10,7 +10,7 @@ const Loading = (props) => {
         window.location.href = urlCheckout
     }
     return (
-        <Loader type="Rings" color="white" height={80} width={80} />
+        <Loader type="Rings" className = 'ringLoader'/>
     )
 }
 

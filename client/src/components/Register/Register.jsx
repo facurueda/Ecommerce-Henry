@@ -21,8 +21,6 @@ const Register = (props) => {
         console.log(response);
         console.log(response.profileObj)
     }
-    const responseFacebook = (response) => console.log(response);
-    const componentClicked = () => console.log('clicked')
     const handleChange = event => {
         const { name, value } = event.target
         if (name === 'secondPassword') {
@@ -35,13 +33,17 @@ const Register = (props) => {
         if (secondPassword === registerInputs.password) {
             dispatch(actionUserCreate({ ...registerInputs }))
             modalRegisterClose()
-        } 
+        }
     }
     const ClicktoSign = () => {
         props.setGoogle(true);
         window.open("http://localhost:3000/auth/google");
-      };
+    };
 
+    const ClicktoSignGit = () => {
+        props.setGithub(true);
+        window.open("http://localhost:3000/auth/github");
+    };
     return (
         <div className='loginContainer'>
             <button className='closeButton' onClick={modalRegisterClose}>x</button>
@@ -67,7 +69,7 @@ const Register = (props) => {
                     }} onChange={handleChange} />
                     <input className='inputRegister' id='secondPasswordRegister' name='secondPassword' type="password" placeholder='Repeat Password' onKeyPress={e => {
                         if (e.key === 'Enter') {
-                            VerificarYRegistrar() 
+                            VerificarYRegistrar()
                         }
                     }} onChange={handleChange} />
                     <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
@@ -81,33 +83,24 @@ const Register = (props) => {
                     </div></a>
                     <div className='LoginAccountAux'>
                         <p className='orLogin'>or login with</p>
-
-            <button onClick={ClicktoSign} >
-              <div class="google-btn">
-                <div class="google-icon-wrapper">
-                  <img
-                    class="buttonLoginGoogle"
-                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                  />
-                </div>
-                <div class="btn-text">
-                </div>
-              </div>
-            </button>
-                        {/* <GoogleLogin
-                            clientId='201334037554-3dqbt2c7a5hij69djsfp0kc4mtgb1bgj.apps.googleusercontent.com'
-                            buttonText='Google'
-                            onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
-                            cookiePolicy={'single_host_origin'} />
-                        <FacebookLogin
-                            appId="340361817317695"
-                            autoLoad={false}
-                            textButton='Facebook'
-                            fields="name,email,picture"
-                            onClick={componentClicked}
-                            callback={responseFacebook}
-                            icon="fa-facebook" /> */}
+                        <button onClick={ClicktoSign} className='btnGoogle'>
+                            <div class="google-btn">
+                                <div class="google-icon-wrapper">
+                                    <img
+                                        class="buttonLoginGoogle"
+                                        src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                                    />
+                                </div>
+                                <div class="btn-text">
+                                </div>
+                            </div>
+                        </button>
+                        <button onClick={ClicktoSignGit} class="btn btn-block social-login github">
+                            <span class="social-icons">
+                                <i class="fab fa-github fa-lg">
+                                </i>
+                            </span>
+                        </button>
                     </div>
                 </div>
             </ModalFooter>

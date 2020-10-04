@@ -123,6 +123,11 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 email: action.payload.email
             }
+        // case GET_ALL_USERS:
+        //     return {
+        //         ...state,
+        //         allUsers: action.payload
+        //     }
         default:
             return state;
     }

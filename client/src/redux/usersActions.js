@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
     RESET_STATUS_RESET,
+    GET_ALL_USERS,
     RESET_OK,
     RESET_FAILED,
     RESET_PASSWORD,
@@ -13,7 +14,6 @@ import {
     SET_VERIFIED,
     SET_COOKIE_TO_STORE,
     GET_ORDER_BY_ID,
-    GET_ALL_USERS,
     USER_TO_ADMIN,
     ADMIN_TO_USER,
     DELETE_USER

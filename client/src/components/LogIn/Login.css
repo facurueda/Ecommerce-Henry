@@ -135,6 +135,7 @@
     display: flex;
     align-content: center;
     justify-content: center;
+    align-items: center;
 }
 
 .createAccount,
@@ -154,7 +155,19 @@
     flex-direction: row;
 }
 
-
+.btnGoogle,
 .buttonLoginGoogle{
     height: 25px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.github {
+    color: #fff;
+    height: 35px;
+    width: 25px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
