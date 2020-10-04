@@ -178,7 +178,7 @@ server.post('/cookie', async (req, res) => {
 
 //////////////////////////////// password resset
 
-let token = Math.floor((Math.random() * 1000000) + 1);
+const token = Math.floor((Math.random() * 1000000) + 1);
 
 server.post('/forgot', (req, res) => {
     User.findOne({
@@ -203,12 +203,13 @@ server.post('/forgot', (req, res) => {
                     pass: 'ohqrgkrmeqhcamil'
                 }
             });
-            const linkReset = 'http://localhost:3001/auth/reset/?token=' + token
+            const linkReset = 'http://localhost:3001/auth/reset'
             const mailOptions = {
                 from: 'noreplylacoseria@gmail.com',
                 to: req.body.email,
                 subject: 'Cambio de contraseña',
-                html: `El link para resetear tu constraseña es: <a href= ${linkReset}> LINK </a>`
+                html: `Ingresa al siguiente link: <a href= ${linkReset}> LINK </a>
+                Ingresa el siguiente codigo: ${token}`
             };
             transporter.sendMail(mailOptions);
         })

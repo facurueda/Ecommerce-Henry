@@ -207,7 +207,6 @@ server.post("/setDireccion", (req, res) => {
 ///////////////////////////////////////////////////////////////////////////PUT
 
 /////////////////////////////////////////////////////////////////////////// MERCADOPAGO
-
 server.post("/checkout", async (req, res, next) => {
   // SI REQ.BODY TRAE 'cancelarEnvio' FALSE => NO HAY ENVIO ; TRUE => HAY ENVIO
   const { cancelarEnvio } = req.body;
