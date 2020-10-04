@@ -6,6 +6,12 @@
     flex-wrap: wrap;
     color: white;
 }
+.NoOrders {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
 .buttonRestar{
     display: none;
 }

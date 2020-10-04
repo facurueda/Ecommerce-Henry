@@ -85,6 +85,7 @@ server.get('/search', isAdmin, (req, res, next) => {
 
 server.get('/', (req, res, next) => {
     Order.findAll({
+        where: {status: 'CERRADA'},
         include: [{
             model: Product,
             as: 'products',
@@ -110,7 +111,7 @@ server.post('/', (req, res, next) => {
 
 /////////////////////////////////////////////////////////////////////////// MERCADOPAGO
 
-server.post('/checkout', async (req, res,next) => {
+server.post('/checkout', async (req, res, next) => {
     const allProdUser = await Order.findOne({
         where: {
             idUser: req.user.idUser,
