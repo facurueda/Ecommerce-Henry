@@ -131,7 +131,6 @@ server.post('/direccion', (req, res) => {
       })
 })
 
-<<<<<<< HEAD
 server.get('/', (req, res, next) => {
     Order.findAll({
         where: {status: 'CERRADA'},
@@ -143,8 +142,6 @@ server.get('/', (req, res, next) => {
         res.send(orders)
     }).catch(next)
 })
-=======
->>>>>>> 4f0cc76a18622c106b11b56dedd199e277501140
 /////////////////////////////////////////POST
 
 server.post("/cerrada", (req, res) => {
@@ -211,10 +208,6 @@ server.post("/setDireccion", (req, res) => {
 
 /////////////////////////////////////////////////////////////////////////// MERCADOPAGO
 
-<<<<<<< HEAD
-server.post('/checkout', async (req, res, next) => {
-    const allProdUser = await Order.findOne({
-=======
 server.post("/checkout", async (req, res, next) => {
   // SI REQ.BODY TRAE 'cancelarEnvio' FALSE => NO HAY ENVIO ; TRUE => HAY ENVIO
   const { cancelarEnvio } = req.body;
@@ -227,7 +220,6 @@ server.post("/checkout", async (req, res, next) => {
   })
     .then((order) => {
       return Inter_Prod_Order.findAll({
->>>>>>> 4f0cc76a18622c106b11b56dedd199e277501140
         where: {
           idOrder: order.idOrder,
         },
