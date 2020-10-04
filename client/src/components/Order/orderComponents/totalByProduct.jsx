@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionAddToCart, actionGetOrder } from '../../../redux/ordersActions';
 
 const TotalByProduct = (props) => {
+
     const user = useSelector(store => store.usersReducer.idUser)
     const dispatch = useDispatch()
 

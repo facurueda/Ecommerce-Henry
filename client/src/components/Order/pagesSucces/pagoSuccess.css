@@ -1,0 +1,15 @@
+.Container{
+    display: flex;
+}
+h3, h4{
+    color: white
+}
+.cardsContainer{
+    display:flex;
+
+}
+
+.imgCard{
+    height: 150px;
+    width: 150px;
+}
