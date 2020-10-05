@@ -13,7 +13,11 @@ div.productCard.card {
 .category {
     display: flex;
 }
-
+.PagePrevNext{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 .categories_menu {
     display: flex;
     font-size: 20px;
