@@ -9,10 +9,6 @@ const NewPassword = (props) => {
     const [secondPassword, setSecondPassword] = useState('')
     const [passwordInputs, setpasswordInputs] = useState({ password: 'null' })
     const resetStatus = useSelector(store => store.usersReducer.resetStatus)
-    const token = qs.parse(props.location.search, { ignoreQueryPrefix: true }).token
-    useEffect(() => {
-        handleChange({ target: { name: 'token', value: token } })
-    }, [])
     const handleChange = event => {
         const { name, value } = event.target
         if (name === 'secondPassword') {
@@ -41,15 +37,25 @@ const NewPassword = (props) => {
         dispatch(actionResetStatusReset())
         window.location.href = '/'
     }
+    const handleView = () => {
+        document.getElementById('tokenContainer').style.display = 'none'
+        document.getElementById('tokenContainer2').style.display = 'none'
+        document.getElementById('formContainerReset').style.display = "flex"
+    }
     return (
         <div className='generalContainerReset'>
+        <h3 id='tokenContainer2'>Ingresa el Codigo que recibiste por email.</h3>
+        <div id='tokenContainer' className='tokenContainer'>
+                    <input className='inputs1' name='token' placeholder='Ingresa tu codigo aqui' onChange={handleChange}></input>
+                    <button className='buttonLoginAndRegister' onClick={handleView}>Continuar</button>
+                </div>
+            <div id='formContainerReset' className='formContainerReset'>
             <h3>Escribí tu nueva contraseña aquí:</h3>
-            <div className='formContainerReset'>
-                <input className='inputs1' name='password' 
-                type="password" placeholder='Password' onChange={handleChange}></input>
-                <input className='inputs2' name='secondPassword' 
-                type="password" placeholder='Repeat your password' onChange={handleChange}></input>
-                <button className='buttonLoginAndRegister' onClick={Verificar}>Verificar</button>
+                    <input className='inputs1' name='password'
+                        type="password" placeholder='Password' onChange={handleChange}></input>
+                    <input className='inputs2' name='secondPassword'
+                        type="password" placeholder='Repeat your password' onChange={handleChange}></input>
+                    <button className='buttonLoginAndRegister' onClick={Verificar}>Verificar</button>
             </div>
         </div>
     )
