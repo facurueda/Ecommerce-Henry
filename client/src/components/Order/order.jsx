@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TotalByProduct from "./orderComponents/totalByProduct";
 import "./order.css";
 import { useDispatch, useSelector } from "react-redux";
-import { actionCheckOut } from "../../redux/ordersActions";
+import { actionCheckOut, actionDeleteDireccion } from "../../redux/ordersActions";
 import { Modal } from "reactstrap";
 import Loading from "../LoadingMiddleware/LoadingMiddleware";
 import ModalDireccion from './ModalDireccion'
@@ -50,6 +50,8 @@ const Order = (props) => {
   const or = order();
 
   const idOrderUser = or.idOrder
+  const idUser = or.idUser
+
 
   if (Object.keys(or).length < 1) {
     return (
@@ -76,9 +78,9 @@ const Order = (props) => {
             <div style={{width:'60%'}}>
             
             {!cancelarEnvio ? (
-              <button onClick={e => {openModalDireccion()}} className='buttonEnvio'>ENVIO</button>
+              <button onClick={e => {openModalDireccion()}} className='buttonEnvio'>¿Agregar Envio?</button>
             ) : (
-              <button onClick={e => {setCancelarEnvio(false); setPrecioEnvio(0); setMostrarPrecioEnvio(false)}} className='buttonEnvio'>CANCELAR ENVIO</button>
+              <button onClick={e => {setCancelarEnvio(false); setPrecioEnvio(0); setMostrarPrecioEnvio(false); dispatch(actionDeleteDireccion(idOrderUser))}} className='buttonEnvio'>Cancelar Envio</button>
             )
             }
 

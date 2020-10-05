@@ -112,36 +112,42 @@ server.get("/", (req, res, next) => {
     .catch(next);
 });
 
-server.post('/direccion', (req, res) => {
-    Order.findAll({
-        limit: 1,
+server.post("/direccion", (req, res) => {
+  Order.findAll({
+    limit: 1,
+    where: {
+      idUser: req.user.idUser,
+      status: "CERRADA",
+    },
+    order: [["createdAt", "DESC"]],
+  })
+    .then((order) => {
+      return Direccion.findOne({
         where: {
-          idUser: req.user.idUser,
-          status: "CERRADA",
+          idOrder: order[0].idOrder,
         },
-        order: [["createdAt", "DESC"]],
-      }).then(order => {
-          return Direccion.findOne({
-              where: {
-                  idOrder : order[0].idOrder
-              }
-          })
-      }).then(direccion => {
-          res.send(direccion)
-      })
-})
+      });
+    })
+    .then((direccion) => {
+      res.send(direccion);
+    });
+});
 
-server.get('/', (req, res, next) => {
-    Order.findAll({
-        where: {status: 'CERRADA'},
-        include: [{
-            model: Product,
-            as: 'products',
-        }]
-    }).then(orders => {
-        res.send(orders)
-    }).catch(next)
-})
+server.get("/", (req, res, next) => {
+  Order.findAll({
+    where: { status: "CERRADA" },
+    include: [
+      {
+        model: Product,
+        as: "products",
+      },
+    ],
+  })
+    .then((orders) => {
+      res.send(orders);
+    })
+    .catch(next);
+});
 /////////////////////////////////////////POST
 
 server.post("/cerrada", (req, res) => {
@@ -177,6 +183,7 @@ server.post("/", (req, res, next) => {
 
 server.post("/setDireccion", (req, res) => {
   const {
+    referencia,
     provincia,
     ciudad,
     calle,
@@ -186,7 +193,9 @@ server.post("/setDireccion", (req, res) => {
     depto,
     CP,
   } = req.body.direccion;
+
   Direccion.create({
+    referencia,
     provincia,
     ciudad,
     calle,
@@ -196,6 +205,7 @@ server.post("/setDireccion", (req, res) => {
     depto,
     CP,
     idOrder: req.body.idOrderUser,
+    idUser: req.user.idUser,
   })
     .then((direccion) => {
       res.send(direccion);
@@ -204,6 +214,20 @@ server.post("/setDireccion", (req, res) => {
       console.log(error);
     });
 });
+
+server.delete('/deleteDireccion', (req, res) => {
+
+      // req.body --> idOrderUser
+
+      Direccion.destroy({
+            where: {
+                  idOrder: req.body.idOrderUser
+            }
+      }).then( () => {
+            res.send('Direccion Eliminada')
+      } )
+
+})
 ///////////////////////////////////////////////////////////////////////////PUT
 
 /////////////////////////////////////////////////////////////////////////// MERCADOPAGO
