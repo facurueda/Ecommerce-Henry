@@ -5,6 +5,12 @@
     align-items: center;
     flex-wrap: wrap;
 }
+.NoOrders {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
 .buttonRestar{
     display: none;
 }

@@ -33,7 +33,7 @@ const MyAccount = () => {
                 <div id='orden' className='ordersContainer'>
                     <div>
                         {orders.map(order => {
-                            return <Orders key={order.idOrder} order={order} />
+                            return <Orders userName={name} key={order.idOrder} order={order} />
                         })}
                     </div>
                 </div>

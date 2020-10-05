@@ -10,7 +10,7 @@ import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
-import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionLogOut, actionGetMe } from '../../redux/usersActions'
+import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionGetMe } from '../../redux/usersActions'
 
 const NavBar = () => {
 

@@ -21,6 +21,7 @@ import MyAccount from './components/MyAccount/myAccount';
 import ResetPassword from './components/LogIn/ResetPassword'
 import NewPassword from './components/LogIn/NewPassword';
 import Users from './components/Users/Users';
+import PagoSuccess from './components/Order/pagesSucces/PagoSuccess';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path='/adminOrdersTable' component={adminOrdersTable}/>
             <Route path='/reviews' component={Reviews}/>
             <Route path='/forgot' component={ResetPassword} />
+            <Route path='/pagoSuccess' component={PagoSuccess}/>
             {/* <Route exact path='/admin' component={AdminNavBar}/> */}
             <Route component={NotFound} />
           </Switch>

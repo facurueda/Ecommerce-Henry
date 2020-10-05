@@ -1,11 +1,83 @@
 import axios from "axios";
-import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT } from "./constants";
+import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION } from "./constants";
 const url = "http://localhost:3000/";
 var qs = require('qs');
+axios.defaults.withCrendentails = true;
 
-export const actionCheckOut = () => {
+
+///////////////////////////// Acciones de Direcciones
+
+export const actionSendDirectionToDB = ({direccion, idOrderUser}) => {
     return (dispatch) => {
-        axios.post(url + 'order/checkout', {}, { withCredentials: true, }).then(res => {
+            var data = qs.stringify({direccion, idOrderUser});
+            var config = {
+                withCredentials: true,
+                method: 'POST',
+                url: 'http://localhost:3000/order/setDireccion',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: data
+            };
+            axios(config)
+                .then((res) => {
+                    console.log('RESPUESTAAAA', res.data)
+                    dispatch({
+                        type: SEND_DIRECCION_TO_DB,
+                        payload: res.data
+                    })
+                }).catch(error => {
+                    console.log('ERROOOOOR', error)
+                })
+    }
+}
+
+export const actionGetDirection = () => {
+    return (dispatch) => {
+        var config = {
+            withCredentials: true,
+            method: 'POST',
+            url: 'http://localhost:3000/order/direccion',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        };
+        axios(config)
+            .then((res) => {
+                console.log('RESPUESTAAAA', res.data)
+                dispatch({
+                    type: GET_DIRECCION,
+                    payload: res.data
+                })
+            }).catch(error => {
+                console.log('ERROOOOOR', error)
+            })
+}
+}
+
+export const actionSetOrderCerradaToView = () => {
+    return (dispatch) => {
+        var config = {
+            withCredentials: true,
+            method: 'POST',
+            url: 'http://localhost:3000/order/cerrada',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        };
+        axios(config)
+            .then((res) => {
+                dispatch({
+                    type: SET_ORDER_CERRADA_TO_VIEW,
+                    payload: res.data
+                })
+            })
+    }
+}
+
+export const actionCheckOut = (cancelarEnvio, idOrderUser) => {
+    return (dispatch) => {
+        axios.post(url + 'order/checkout', {cancelarEnvio, idOrderUser}, { withCredentials: true }).then(res => {
             dispatch({ type: END_CHECKOUT, payload: res.data })
             //   window.location.href = res.data
         }).catch(error => {

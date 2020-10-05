@@ -15,21 +15,22 @@ const AdminOrdersTable = () => {
         dispatch(actionGetAllOrders());
         dispatch(actionGetUsers())
     }, [])
-
+    console.log(users);
     const getUserName = (order) => {
         if (users.length >= 1) {
             const hola = users.filter(e => {
                 if (e.idUser == order.idUser) {
-                    return e
+                    return e.name
                 }
 
             })
-            return hola[0]
-            console.log('hola')
+            //return hola[0]
+            console.log(hola[0].name)
+            return hola[0].name
         }
     }
     if (orders.length < 1) {
-        return <div style={{ display: "flex", justifyContent: "center" }}>
+        return <div className='NoOrders'>
             <h3><b>No se encontraron ordenes disponibles.</b></h3>
         </div>
     }
