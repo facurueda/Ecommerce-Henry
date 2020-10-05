@@ -7,20 +7,20 @@ import { useHistory } from 'react-router'
 import './Register.css'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const Register = (props) => {
 
+    toast.configure()
+
     const { modalRegisterClose, ChangeModal } = props;
-    const [registerInputs, setRegisterInputs] = useState({ name: 'null', email: 'null', password: 'null', level: 'USER' })
+    const [registerInputs, setRegisterInputs] = useState({ name: '', email: '', password: '', level: 'USER' })
     const [secondPassword, setSecondPassword] = useState('')
 
     const dispatch = useDispatch();
 
-    const responseGoogle = (response) => {
-        console.log(response);
-        console.log(response.profileObj)
-    }
     const handleChange = event => {
         const { name, value } = event.target
         if (name === 'secondPassword') {
@@ -30,9 +30,41 @@ const Register = (props) => {
         }
     }
     const VerificarYRegistrar = () => {
-        if (secondPassword === registerInputs.password) {
+        if(!registerInputs.name){
+            toast.error("El nombre es obligatorio", {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        } 
+        else if(!registerInputs.email){
+            toast.error("El email es obligatorio", {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        }
+        else if (secondPassword === registerInputs.password) {
             dispatch(actionUserCreate({ ...registerInputs }))
             modalRegisterClose()
+        } else {
+            toast.error("Las contraseñas no coinciden", {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
         }
     }
     const ClicktoSign = () => {

@@ -4,8 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Button, Form, FormGroup, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { actionSendDirectionToDB } from "../../redux/ordersActions";
 import { actionGetAllDirections } from "../../redux/usersActions";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ModalDireccion = (props) => {
+
+      toast.configure()
 
       const { closeModalDireccion, setMostrarPrecioEnvio, setPrecioEnvio, mostrarBotonCancelar, idOrderUser } = props;
 
@@ -73,6 +77,15 @@ const ModalDireccion = (props) => {
       const [habilitarEdicion, setHabilitarEdicion] = useState(true)
 
       const functionHabilitarEdicion = () => {
+            toast("Puede modificar los datos", {
+                  position: "top-center",
+                  autoClose: 1500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
             setHabilitarEdicion(false)
       }
 
@@ -203,7 +216,25 @@ const ModalDireccion = (props) => {
                         <Button
                               onClick={e => {
                                     e.preventDefault();
-                                    if (!direccion.referencia || !direccion.provincia || !direccion.ciudad || !direccion.calle || !direccion.numeracion || !direccion.barrio || !direccion.CP) return window.alert('Datos Obligatorios Vacios')
+                                    if (!direccion.referencia || !direccion.provincia || !direccion.ciudad || !direccion.calle || !direccion.numeracion || !direccion.barrio || !direccion.CP) return toast.error("Datos obligatorios vacios", {
+                                          position: "top-center",
+                                          autoClose: 1500,
+                                          hideProgressBar: false,
+                                          closeOnClick: true,
+                                          pauseOnHover: true,
+                                          draggable: true,
+                                          progress: undefined,
+                                    });
+
+                                    toast("Envío confirmado", {
+                                          position: "top-center",
+                                          autoClose: 1500,
+                                          hideProgressBar: false,
+                                          closeOnClick: true,
+                                          pauseOnHover: true,
+                                          draggable: true,
+                                          progress: undefined,
+                                    });
                                     sendDireccionToDB({ direccion, idOrderUser });
                                     closeModalDireccion();
                                     setMostrarPrecioEnvio(true);
@@ -387,11 +418,21 @@ const ModalDireccion = (props) => {
                                     <Button
                                           onClick={e => {
                                                 e.preventDefault();
+                                                toast("Direccion cambiada y envio aceptado", {
+                                                      position: "top-center",
+                                                      autoClose: 2500,
+                                                      hideProgressBar: false,
+                                                      closeOnClick: true,
+                                                      pauseOnHover: true,
+                                                      draggable: true,
+                                                      progress: undefined,
+                                                    });
                                                 sendDireccionToDB({ direccion, idOrderUser });
                                                 closeModalDireccion();
                                                 setMostrarPrecioEnvio(true);
                                                 setPrecioEnvio(500);
                                                 mostrarBotonCancelar()
+
                                           }
                                           }>
                                           Aceptar cambios y confirmar envio</Button>
@@ -399,6 +440,15 @@ const ModalDireccion = (props) => {
                                           <Button
                                                 onClick={e => {
                                                       e.preventDefault();
+                                                      toast("Envío confirmado", {
+                                                            position: "top-center",
+                                                            autoClose: 2500,
+                                                            hideProgressBar: false,
+                                                            closeOnClick: true,
+                                                            pauseOnHover: true,
+                                                            draggable: true,
+                                                            progress: undefined,
+                                                          });
                                                       sendDireccionToDB({ direccion, idOrderUser });
                                                       closeModalDireccion();
                                                       setMostrarPrecioEnvio(true);

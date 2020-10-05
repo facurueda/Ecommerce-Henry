@@ -3,11 +3,25 @@ import './UserLogged.css'
 import { useDispatch } from 'react-redux'
 import { actionLogOut } from '../../redux/usersActions';
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const UserLogged = () => {
+
+    toast.configure()
+
     const dispatch = useDispatch()
     const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
     const handleChange = () => {
+        toast("Te deslogueaste", {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
         removeCookie('idUser')
         removeCookie('level')
         dispatch(actionLogOut());

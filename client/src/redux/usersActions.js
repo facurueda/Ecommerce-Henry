@@ -1,4 +1,6 @@
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   RESET_STATUS_RESET,
   GET_ALL_USERS,
@@ -167,14 +169,25 @@ export const actionPasswordUpdate = (obj) => {
       });
   };
 };
+
 export const actionUserCreate = (props) => {
   return (dispatch) => {
     axios
       .post(url + "user", props, {
         withCredentials: true,
       })
-      .then(() => {
-        dispatch({
+      .then((res) => {
+        console.log("CREATEEDD", res);
+        toast("¡Usuario Creado!", {
+          position: "top-center",
+          autoClose: 3500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        return dispatch({
           type: USER_CREATED,
         });
       });
@@ -182,7 +195,6 @@ export const actionUserCreate = (props) => {
 };
 export const actionLogin = (inputs) => {
   return (dispatch) => {
-    console.log("inputsInLogin", inputs);
     var data = qs.stringify(inputs);
     var config = {
       withCredentials: true,
@@ -193,18 +205,40 @@ export const actionLogin = (inputs) => {
       },
       data: data,
     };
-    axios(config).then(() => {
-      axios
-        .get(url + "auth/me", {
-          withCredentials: true,
-        })
-        .then((res) => {
-          return dispatch({
-            type: POST_LOGIN,
-            payload: res.data.dataValues,
+    axios(config)
+      .then(() => {
+        axios
+          .get(url + "auth/me", {
+            withCredentials: true,
+          })
+          .then((res) => {
+            toast("¡Bienvenido!", {
+              position: "top-center",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            return dispatch({
+              type: POST_LOGIN,
+              payload: res.data.dataValues,
+            });
           });
+      })
+      .catch((error) => {
+        console.log("errorr");
+        toast.error("Email o contraseña invalido", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
         });
-    });
+      });
   };
 };
 

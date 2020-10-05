@@ -6,19 +6,23 @@ import { actionCheckOut, actionDeleteDireccion } from "../../redux/ordersActions
 import { Modal } from "reactstrap";
 import Loading from "../LoadingMiddleware/LoadingMiddleware";
 import ModalDireccion from './ModalDireccion'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const axios = require("axios");
 
 const Order = (props) => {
 
+  toast.configure()
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const changeLoading = () => setLoading(!loading);
-  
+
   /////////////////////// ESTADOS PARA EL ENVIO ///////////////////////
 
   const [modalDireccion, setModalDireccion] = useState(false)
-  const openModalDireccion = () => {setModalDireccion(!modalDireccion)}
-  const closeModalDireccion = () => {setModalDireccion(false)}
+  const openModalDireccion = () => { setModalDireccion(!modalDireccion) }
+  const closeModalDireccion = () => { setModalDireccion(false) }
 
   const [cancelarEnvio, setCancelarEnvio] = useState(false)
   const mostrarBotonCancelar = () => setCancelarEnvio(true)
@@ -26,7 +30,7 @@ const Order = (props) => {
   const [mostrarPrecioEnvio, setMostrarPrecioEnvio] = useState(false)
 
   const [precioEnvio, setPrecioEnvio] = useState(0)
-  
+
   const clickButton = () => {
     dispatch(actionCheckOut(cancelarEnvio, idOrderUser));
     changeLoading();
@@ -75,55 +79,65 @@ const Order = (props) => {
         })}
         <div className="footerContent">
           <div className='containerButtonEnvio'>
-            <div style={{width:'60%'}}>
-            
-            {!cancelarEnvio ? (
-              <button onClick={e => {openModalDireccion()}} className='buttonEnvio'>¿Agregar Envio?</button>
-            ) : (
-              <button onClick={e => {setCancelarEnvio(false); setPrecioEnvio(0); setMostrarPrecioEnvio(false); dispatch(actionDeleteDireccion(idOrderUser))}} className='buttonEnvio'>Cancelar Envio</button>
-            )
-            }
+            <div style={{ width: '60%' }}>
 
-            <Modal isOpen={modalDireccion}>
+              {!cancelarEnvio ? (
+                <button onClick={e => { openModalDireccion() }} className='buttonEnvio'>¿Agregar Envio?</button>
+              ) : (
+                  <button onClick={e => {
+                    setCancelarEnvio(false); setPrecioEnvio(0); setMostrarPrecioEnvio(false); toast.error("Envío cancelado", {
+                      position: "top-center",
+                      autoClose: 1500,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                    }); dispatch(actionDeleteDireccion(idOrderUser))
+                  }} className='buttonEnvio'>Cancelar Envio</button>
+                )
+              }
+
+              <Modal isOpen={modalDireccion}>
                 <ModalDireccion
-                  idOrderUser = {idOrderUser}
+                  idOrderUser={idOrderUser}
                   closeModalDireccion={closeModalDireccion}
                   setPrecioEnvio={setPrecioEnvio}
                   setMostrarPrecioEnvio={setMostrarPrecioEnvio}
                   mostrarBotonCancelar={mostrarBotonCancelar}
-                  />
-            </Modal>
-            
-            
+                />
+              </Modal>
+
+
             </div>
-            <div style={{width:'40%', display:"flex", alignItems:'center', justifyContent:'flex-end'}}>
-              { mostrarPrecioEnvio ? (`$  ${precioEnvio}`) : ('')}
+            <div style={{ width: '40%', display: "flex", alignItems: 'center', justifyContent: 'flex-end' }}>
+              {mostrarPrecioEnvio ? (`$  ${precioEnvio}`) : ('')}
             </div>
           </div>
-            <span className="textPrice">
-              {" "}
+          <span className="textPrice">
+            {" "}
               Total: $
               {or.products
-                .reduce((acum, product) => {
-                  return (
-                    acum +
-                    product.Inter_Prod_Order.price *
-                      product.Inter_Prod_Order.quantity
-                  );
-                }, precioEnvio)
-                .toFixed(2)}
-            </span>
+              .reduce((acum, product) => {
+                return (
+                  acum +
+                  product.Inter_Prod_Order.price *
+                  product.Inter_Prod_Order.quantity
+                );
+              }, precioEnvio)
+              .toFixed(2)}
+          </span>
 
-            <div style={{ display: props.origin }} className='containerButtonEndOrden'>
-              <button className="buttonEndOrden" onClick={clickButton}>
-                Finalizar Orden
+          <div style={{ display: props.origin }} className='containerButtonEndOrden'>
+            <button className="buttonEndOrden" onClick={clickButton}>
+              Finalizar Orden
               </button>
-              <Modal isOpen={loading} toggle={loading}>
-                <Loading isPayLoading={true} loadingClose={changeLoading} />
-              </Modal>
-            </div>
-
+            <Modal isOpen={loading} toggle={loading}>
+              <Loading isPayLoading={true} loadingClose={changeLoading} />
+            </Modal>
           </div>
+
+        </div>
       </div>
     );
   }

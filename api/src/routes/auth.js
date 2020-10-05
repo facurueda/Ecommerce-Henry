@@ -66,19 +66,19 @@ server.post('/login', passport.authenticate('local', {
     failureFlash: true,
 }))
 
-server.post('/login', (req, res, next) => {
-    User.findOne({
-        where: {
-            email: req.body.email
-        }
-    }).then(user => {
-        const userValues = {
-            ...user.dataValues,
-            verified: true
-        }
-        res.send(userValues)
-    })
-})
+// server.post('/login', (req, res, next) => {
+//     User.findOne({
+//         where: {
+//             email: req.body.email
+//         }
+//     }).then(user => {
+//         const userValues = {
+//             ...user.dataValues,
+//             verified: true
+//         }
+//         res.send(userValues)
+//     })
+// })
 
 server.post('/logout', (req, res) => {
     req.logOut()
