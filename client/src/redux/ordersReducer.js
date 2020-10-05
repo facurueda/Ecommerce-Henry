@@ -1,4 +1,4 @@
-import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION } from './constants'
+import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION, DELETE_DIRECCION } from './constants'
 
 var initialState = {
     loading: false,
@@ -54,6 +54,8 @@ const ordersReducer = (state = initialState, action) => {
                 ...state,
                 direccion: action.payload
             }
+        case DELETE_DIRECCION:
+            return state
 
         default:
             return state;

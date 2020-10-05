@@ -15,7 +15,8 @@ import {
     SET_COOKIE_TO_STORE,
     USER_TO_ADMIN,
     ADMIN_TO_USER,
-    DELETE_USER
+    DELETE_USER,
+    GET_ALL_DIRECTIONS
 } from './constants'
 
 const initialState = {
@@ -26,7 +27,8 @@ const initialState = {
     verified: false,
     loggedOut: false,
     resetStatus: [],
-    users: []
+    users: [],
+    direcciones: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -123,11 +125,12 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 email: action.payload.email
             }
-        // case GET_ALL_USERS:
-        //     return {
-        //         ...state,
-        //         allUsers: action.payload
-        //     }
+        case GET_ALL_DIRECTIONS:
+            return {
+                ...state,
+                direcciones: action.payload
+            }
+
         default:
             return state;
     }

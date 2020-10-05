@@ -3,7 +3,8 @@ const {
     User,
     Order,
     Inter_Prod_Order,
-    Product
+    Product,
+    Direccion
 } = require('../db.js');
 const Sequelize = require("sequelize");
 const bcrypt = require('bcrypt')
@@ -274,5 +275,23 @@ server.delete('/:idUser', (req, res, next) => {
         })
     }).catch(next);
 });
+
+////////////////////////////////////////////////////////////////// ROUTES FOR DIRECTIONS 
+
+server.post('/directions', (req, res) => {
+    Direccion.findAll({
+        where: {
+            idUser : req.user.idUser
+        }
+    }).then( direcciones => {
+        res.send(direcciones)
+    })
+})
+
+
+
+
+
+
 
 module.exports = server;
