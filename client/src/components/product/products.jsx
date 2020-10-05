@@ -9,8 +9,13 @@ import PostReview from '../Review/PostReview'
 import ButtonAddToCart from '../ButtonAddToCart/ButtonAddToCart';
 import { actionGetProduct, actionSetProduct } from '../../redux/productsActions';
 import { useHistory } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function Products() {
+
+    toast.configure()
+
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect(() => {
@@ -25,6 +30,15 @@ function Products() {
     const modalPostReviewView = () => setModalPostReview(!modalPostReview);
 
     const modalEditReviewClose = () => {
+        toast("Review Modificada", {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         setModalEditReview(false)
         dispatch(actionGetReviews(idProduct))
     };
@@ -51,6 +65,15 @@ function Products() {
     }
     const deleteReview = () => {
         const data = { idProduct: idProduct, idReview: review.idReview }
+        toast.error("Review Eliminada", {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         dispatch(actionDeleteReview(data))
         reload()
     }

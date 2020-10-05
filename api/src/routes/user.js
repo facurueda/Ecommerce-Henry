@@ -192,7 +192,7 @@ server.post('/', async (req, res, next) => {
             })
         }
     }).then(() => {
-        res.redirect('http://localhost:3000/auth/login')
+        res.send('User Created')
     })
 
 });

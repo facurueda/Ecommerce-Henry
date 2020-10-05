@@ -4,19 +4,37 @@ import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { actionLogin } from "../../redux/usersActions";
 import { actionGetOrder } from "../../redux/ordersActions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const Login = (props) => {
   const dispatch = useDispatch();
   const { modalLoginClose, ChangeModal } = props;
   const [inputs, setInputs] = useState({});
   const idUser = useSelector((store) => store.usersReducer.idUser);
+
+  toast.configure()
+
   const handleChancla = () => {
-    dispatch(actionLogin({ ...inputs, idUser: idUser }));
-    modalLoginClose();
-    dispatch(actionGetOrder(idUser))
-    setTimeout(() => {
-      window.location.reload();
-    }, 200);
+    console.log('dqwjdqkwldjkqwlwkdqw',inputs)
+    if( !inputs.email || !inputs.password ){
+      toast.error("Debe completar todos los datos", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    } else {
+      dispatch(actionLogin({ ...inputs, idUser: idUser }));
+      modalLoginClose();
+      dispatch(actionGetOrder(idUser))
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 200);
+    }
   };
   const handleInput = (e) => {
     const { type, value } = e.target;

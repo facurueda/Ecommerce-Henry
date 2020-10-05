@@ -42,9 +42,9 @@ const NavBar = () => {
             removeCookie('idUser')
             removeCookie('level')
             // removeCookie('connect.sid')
-            setTimeout(() => {
-                window.location.reload()
-            }, 200);
+            // setTimeout(() => {
+            //     window.location.reload()
+            // }, 200);
     }
     if (verified) {
         setCookie('idUser', idUser, { path: '/' })

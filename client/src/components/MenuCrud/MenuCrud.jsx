@@ -8,8 +8,13 @@ import { actionUpdateProduct, actionGetProducts, actionDeleteProduct, actionPost
 import { actionGetCategories } from "../../redux/categoriesActions";
 import { connect, useDispatch, useSelector } from 'react-redux';
 import './MenuCrud.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const MenuCrud = () => {
+
+  toast.configure()
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actionGetProducts())
@@ -25,15 +30,24 @@ const MenuCrud = () => {
   //Funciones
   const modalAddView = () => setModalAdd(!modalAdd);
   const modalEditView = () => setModalEdit(!modalEdit);
-  const modalCloseAdd = () => setModalAdd(false);
+  const modalCloseAdd = () => { setModalAdd(false); }
   const modalCloseEdit = () => setModalEdit(false);
   const deleteProduct = async (id) => {
     dispatch(actionDeleteProduct(id))
-    await window.location.reload()
+    window.location.reload()  
   }
-  const addProduct = async (product) => {
-    await dispatch(actionPostProduct(product))
-    await window.location.reload();
+  const addProduct = (product) => {
+    dispatch(actionPostProduct(product))
+    window.location.reload();
+    toast("Producto Agregado", {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   const products = useSelector(state => state.productsReducer.products)

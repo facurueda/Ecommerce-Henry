@@ -14,8 +14,13 @@ import {
 } from "reactstrap";
 import './ModalAddProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const ModalAddProduct = (props) => {
+
+    toast.configure()
+
     const { products, addProduct, modalCloseAdd, categories } = props
     const initialState = {
         name: '',
@@ -40,7 +45,15 @@ const ModalAddProduct = (props) => {
     const [content, setContent] = useState('');
     const handleChangeDescription = (content, editor) => {
         if (content.length > 255) {
-            window.alert('Maximo 255 caracteres. Si lo bueno es breve, es doblemente bueno.')
+            toast.error("Maximo 255 caracteres", {
+                position: "top-center",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
         content = content.replace('<p>', "")
         content = content.replace('</p>', '')
@@ -145,8 +158,25 @@ const ModalAddProduct = (props) => {
                 <Button className='buttonAdd'
                     onClick={e => {
                         e.preventDefault();
-                        if (!product.name || !product.description || !product.precio || !product.stock) return window.alert('Empty input')
-                        if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return window.alert('This name already been used')
+                        if (!product.name || !product.description || !product.precio || !product.stock) return toast.error("Todos los campos son obligatorios", {
+                            position: "top-center",
+                            autoClose: 2500,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        if (products.find(element => element.name.toUpperCase() === product.name.toUpperCase())) return toast.error("Este producto ya fue creado", {
+                            position: "top-center",
+                            autoClose: 2500,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        
                         addProduct(product);
                         setProduct(initialState)
                         modalCloseAdd();
