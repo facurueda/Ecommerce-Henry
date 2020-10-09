@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
-import { actionLogin } from "../../redux/usersActions";
+import { actionLogin, actionSetModalLogin } from "../../redux/usersActions";
 import { actionGetOrder } from "../../redux/ordersActions";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 const Login = (props) => {
   const dispatch = useDispatch();
-  const { modalLoginClose, ChangeModal } = props;
+  const modalLogin = useSelector(store => store.usersReducer.modalLogin)
+  const { ChangeModal } = props;
   const [inputs, setInputs] = useState({});
   const idUser = useSelector((store) => store.usersReducer.idUser);
 
@@ -36,6 +37,9 @@ const Login = (props) => {
       // }, 200);
     }
   };
+  const modalLoginClose = () => {
+    dispatch(actionSetModalLogin(!modalLogin))
+  }
   const handleInput = (e) => {
     const { type, value } = e.target;
     setInputs({

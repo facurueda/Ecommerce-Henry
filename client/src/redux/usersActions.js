@@ -1,7 +1,8 @@
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  SET_MODAL_LOGIN,
   RESET_STATUS_RESET,
   GET_ALL_USERS,
   RESET_OK,
@@ -39,7 +40,11 @@ export const actionGetUsers = () => {
       });
   };
 };
-
+export const actionSetModalLogin = (bool) => {
+  return (dispatch) => {
+    dispatch({ type: SET_MODAL_LOGIN, payload: bool })
+  }
+}
 export const actionSetAdminUser = (user) => {
   return (dispatch) => {
     axios

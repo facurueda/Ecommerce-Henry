@@ -34,11 +34,11 @@ const MenuCrud = () => {
   const modalCloseEdit = () => setModalEdit(false);
   const deleteProduct = async (id) => {
     dispatch(actionDeleteProduct(id))
-    window.location.reload()  
+    // window.location.reload()  
   }
   const addProduct = (product) => {
     dispatch(actionPostProduct(product))
-    window.location.reload();
+    // window.location.reload();
     toast("Producto Agregado", {
       position: "top-center",
       autoClose: 2500,

@@ -10,6 +10,9 @@ div.productCard.card {
     background-color: #F5F3BB;
     border-radius: 10px;
 }
+.productName{
+    white-space: pre-wrap;
+}
 .category {
     display: flex;
 }

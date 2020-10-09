@@ -1,4 +1,5 @@
 import {
+    SET_MODAL_LOGIN,
     RESET_STATUS_RESET,
     RESET_OK,
     RESET_FAILED,
@@ -28,11 +29,17 @@ const initialState = {
     loggedOut: false,
     resetStatus: [],
     users: [],
-    direcciones: []
+    direcciones: [],
+    modalLogin: false
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_MODAL_LOGIN:
+            return {
+                ...state,
+                modalLogin: action.payload
+            }
         case GET_ALL_USERS:
             return {
                 ...state,

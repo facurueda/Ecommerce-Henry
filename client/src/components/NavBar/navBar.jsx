@@ -10,13 +10,13 @@ import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
-import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionGetMe } from '../../redux/usersActions'
+import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionGetMe, actionSetModalLogin } from '../../redux/usersActions'
 
 const NavBar = () => {
 
     const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
     const dispatch = useDispatch()
-    const [modalLogin, setModalLogin] = useState(false)
+    const modalLogin = useSelector(store => store.usersReducer.modalLogin)
     const [modalRegister, setModalRegister] = useState(false)
     const idUser = useSelector(state => state.usersReducer.idUser)
     const level = useSelector(state => state.usersReducer.level)
@@ -59,11 +59,9 @@ const NavBar = () => {
         setGithub(false)
         dispatch(actionGetMe())
     }
-    
 
-    const modalLoginView = () => setModalLogin(!modalLogin);
+    const modalLoginView = () => dispatch(actionSetModalLogin(!modalLogin));
     const modalRegisterView = () => setModalRegister(!modalRegister);
-    const modalLoginClose = () => setModalLogin(false);
     const modalRegisterClose = () => setModalRegister(false)
     const ChangeModal = () => {
         modalLoginView()
@@ -114,7 +112,7 @@ const NavBar = () => {
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>
-                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}  />
+                        <Login ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}  />
                     </Modal>
                     <Modal isOpen={modalRegister}>
                         <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}   />
