@@ -1,11 +1,36 @@
 import axios from "axios";
-import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION } from "./constants";
+import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION, DELETE_DIRECCION } from "./constants";
 const url = "http://localhost:3000/";
 var qs = require('qs');
 axios.defaults.withCrendentails = true;
 
 
 ///////////////////////////// Acciones de Direcciones
+
+export const actionDeleteDireccion = (idOrderUser) => {
+    console.log('IDORDEER', idOrderUser)
+    return (dispatch) => {
+            var data = qs.stringify({idOrderUser});
+            console.log('DATAORDER', data)
+            var config = {
+                withCredentials: true,
+                method: 'DELETE',
+                url: 'http://localhost:3000/order/deleteDireccion',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: data
+            };
+            axios(config)
+                .then((res) => {
+                    dispatch({
+                        type: DELETE_DIRECCION,
+                    })
+                }).catch(error => {
+                    console.log('ERROOOOOR', error)
+                })
+    }
+}
 
 export const actionSendDirectionToDB = ({direccion, idOrderUser}) => {
     return (dispatch) => {

@@ -11,16 +11,18 @@ import './ModalEditProduct.css'
 import SelectImage from '../../SelectImage/SelectImage'
 import { useDispatch, useSelector } from "react-redux";
 import { actionUpdateProduct, actionUpdateProductLocalStore } from "../../../redux/productsActions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const ModalEditProduct = (props) => {
+
+    toast.configure()
+
     const dispatch = useDispatch()
     const { modalCloseEdit } = props
     const categories = useSelector(state => state.categoriesReducer.categories)
     const currentProduct = useSelector(store => store.productsReducer.product)
-    const updateProduct = (product) => {
-        dispatch(actionUpdateProduct(product))
-        window.location.reload();
-    }
+    
     const [loading, setLoading] = useState(false)
     const [imagesUpload, setImagesUpload] = useState('')
     const uploadImage = async e => {
@@ -125,7 +127,15 @@ const ModalEditProduct = (props) => {
                 <button className='buttonAdd'
                     onClick={e => {
                         e.preventDefault();
-                        if (!currentProduct.name || !currentProduct.description || !currentProduct.precio || !currentProduct.stock) return window.alert('Empty input')
+                        if (!currentProduct.name || !currentProduct.description || !currentProduct.precio || !currentProduct.stock) return toast.error("Todos los campos son obligatorios", {
+                            position: "top-center",
+                            autoClose: 2500,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         dispatch(actionUpdateProduct(currentProduct));
                         modalCloseEdit();
                         window.location.reload()

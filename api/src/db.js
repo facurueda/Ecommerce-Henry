@@ -62,6 +62,9 @@ User.hasMany(Review, {
 Product.hasMany(Review, {
   foreignKey: 'idProduct'
 });
+User.hasMany(Direccion, {
+  foreignKey: 'idUser'
+})
 Order.hasMany(Direccion, {
   foreignKey: 'idOrder'
 })

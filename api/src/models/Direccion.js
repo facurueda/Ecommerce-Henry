@@ -9,9 +9,10 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    // idOrder: {
-    //     type: DataTypes.INTEGER,
-    // },
+    referencia: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     provincia: {
       type: DataTypes.STRING,
       allowNull: false,

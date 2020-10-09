@@ -10,14 +10,22 @@ const Orders = (props) => {
     useEffect(() => {
         dispatch(actionGetUsers())
     }, [])
-    const user = useSelector(state => state.usersReducer.name)
-    const AllUsers = useSelector(store => store.usersReducer.users)
     const [display, setDisplay] = useState('none');
     return (
         <div className='AdminOrdersTableComponentsContainer'>
             
             <h3><b>{props.userName}</b></h3>
             <h5>Order: <b>{props.order.idOrder}</b></h5>
+<<<<<<< HEAD
+=======
+            <button onClick={() => {
+                if (display === "none") {
+                    setDisplay("flex");
+                } else {
+                    setDisplay('none');
+                }
+            }} className='buttonDetails'> Details</button>
+>>>>>>> master
             <div style={{ display: display }}>
                 <OrderByIdComponent order={props.order} />
             </div>

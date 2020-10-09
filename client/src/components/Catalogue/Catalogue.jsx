@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import './Catalogue.css'
 import Category from './Category'
@@ -12,6 +12,7 @@ const Catalogue = () => {
         dispatch(actionGetCategories())
         dispatch(actionGetProducts())
     }, [])
+    const [pageLimits, setPageLimits] = useState({ min: 0, max: 5 });
     const categories = useSelector(state => state.categoriesReducer.categories)
     const products = useSelector(store => store.productsReducer.products)
     const productsFilter = (e) => {
@@ -44,8 +45,8 @@ const Catalogue = () => {
                     name={"All categories"} productsFilter={productsFilter} />
             </div>
             <div className='products' > {
-                products.map(product => {
-                    if (product.stock > 0) {
+                products.map((product, index) => {
+                    if (product.stock > 0 && index >= pageLimits.min && index <= pageLimits.max) {
                         return <ProductCard className='productCard'
                             name={product.name}
                             description={product.description}
@@ -56,6 +57,18 @@ const Catalogue = () => {
                     }
                 })
             }
+            </div>
+            <div className='PagePrevNext'>
+                <button className='categoryButton' onClick={() => {
+                    if (pageLimits.min > 1) {
+                        setPageLimits({ min: pageLimits.min - 5, max: pageLimits.max - 5 })
+                    }
+                }}> {'<'} </button>
+                <button className='categoryButton' onClick={() => {
+                    if (pageLimits.max < products.length) {
+                        setPageLimits({ min: pageLimits.min + 5, max: pageLimits.max + 5 })
+                    }
+                }}> {'>'} </button>
             </div>
         </div>
     )

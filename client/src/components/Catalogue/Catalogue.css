@@ -8,11 +8,25 @@
 .ProductCard_Container {
     display: flex;
 }
+<<<<<<< HEAD
 
+=======
+div.productCard.card {
+    background-color: #F5F3BB;
+    border-radius: 10px;
+}
+.productName{
+    white-space: pre-wrap;
+}
+>>>>>>> master
 .category {
     display: flex;
 }
-
+.PagePrevNext{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 .categories_menu {
     display: flex;
     font-size: 20px;
