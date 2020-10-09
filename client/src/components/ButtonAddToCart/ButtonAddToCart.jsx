@@ -10,9 +10,9 @@ const ButtonAddToCart = (props) => {
     }
     return (
         <div>
-            <button class="cart noselect" onClick={handleChancla}>
-                <span>
-                Add to Cart
+            <button class="buttonAddProd" onClick={handleChancla}>
+                <span className = 'spanCart'>
+                AÑADIR 
                 </span>
                 <i class="fa fa-shopping-cart fa_custom fa-1x"></i>
             </button>

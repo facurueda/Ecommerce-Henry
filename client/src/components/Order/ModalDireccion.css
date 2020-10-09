@@ -1,0 +1,145 @@
+.shipData{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.shipDataNum{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+h3{
+  margin: 0;
+}
+.labelAddress{
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 9px;
+  padding: 0;
+  justify-content: center;
+  display: flex;
+}
+.labelInput{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.directionContainer {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    background-color: rgba(74, 74, 74, 0.61);
+    backdrop-filter: blur(7px);
+    padding: 25px;
+    width: 500px;
+    height: 400px;
+    justify-content: center;
+}
+
+.addressinputNum {
+  margin-top: 5px;
+  display: flex;
+  padding: 5px 20px;
+  text-align: center;
+  border: 0px;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  background-color: rgb(255, 255, 255);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  color: black;
+  width: 40%;
+  align-content: center;
+  place-self: center;
+  display: flex;
+  margin: 5px 20px;
+  text-align: center;
+  padding: 3px;
+}
+.labelInputNum{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.addressinput {
+  margin-top: 5px;
+  display: flex;
+  padding: 5px 20px;
+  text-align: center;
+  border: 0px;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  background-color: rgb(255, 255, 255);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  color: black;
+  width: 90%;
+  align-content: center;
+  place-self: center;
+}
+
+
+.closeButton {
+    align-self: flex-end;
+    justify-self: flex-end;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    background-color: darkred;
+    width: 25px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    color: white
+}
+.addressdetail {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+
+    font-size: 13px;
+    margin-bottom: 0px;
+}
+
+.buttonAdress{
+  display: flex;
+  font-size: 13px;
+  align-items: center;
+  width: 50%;
+  justify-self: flex-start;
+  padding: 0.46em 1.6em;
+  border: 0.1em solid #ffffff;
+  margin: 15px 0.2em 0.2em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: rgba(47, 54, 64, 0.57);
+  text-align: center;
+  transition: all 0.15s;
+  justify-content: center;
+  display: flex;
+  align-self: center;
+}
+.buttonAdress:hover {
+  text-shadow: rgb(74, 74, 74);
+  color:white;
+  border-color: rgb(74, 74, 74);
+  background-color: rgba(0, 0, 0, 0.815);
+  backdrop-filter: blur(7px);
+}
+@media all and (max-width:30em) {
+  .buttonAdress {
+      display: block;
+      margin: 0.4em auto;
+  }
+}
+.buttonContainerA{
+  justify-content: center;
+    display: flex;
+    margin-top: 25px;
+}

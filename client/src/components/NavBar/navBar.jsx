@@ -6,7 +6,7 @@ import { Modal } from 'reactstrap'
 import Login from '../LogIn/Login'
 import Register from '../Register/Register'
 import { useDispatch, useSelector } from 'react-redux'
-import { actionGetOrder, actionGetOrdersByUser } from '../../redux/ordersActions'
+import { actionGetOrder } from '../../redux/ordersActions'
 import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
@@ -23,10 +23,10 @@ const NavBar = () => {
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
     const [google, setGoogle] = useState(true)
-    const [github , setGithub] = useState(true)
+    const [github, setGithub] = useState(true)
 
     useEffect(() => {
-        if(Object.keys(cookie).length <= 1) {
+        if (Object.keys(cookie).length <= 1) {
             dispatch(actionVerifyCookies(cookie))
         }
         else {
@@ -39,12 +39,12 @@ const NavBar = () => {
         dispatch(actionSetCookieToStore(cookie))
     }, [])
     if (loggedOut) {
-            removeCookie('idUser')
-            removeCookie('level')
-            // removeCookie('connect.sid')
-            setTimeout(() => {
-                window.location.reload()
-            }, 200);
+        removeCookie('idUser')
+        removeCookie('level')
+        // removeCookie('connect.sid')
+        setTimeout(() => {
+            window.location.reload()
+        }, 200);
     }
     if (verified) {
         setCookie('idUser', idUser, { path: '/' })
@@ -59,7 +59,15 @@ const NavBar = () => {
         setGithub(false)
         dispatch(actionGetMe())
     }
-    
+    const categories = useSelector(state => state.categoriesReducer.categories)
+
+    // const productsFilter = (e) => {
+    //     if (e !== 'All categories') {
+    //         dispatch(actionGetProductsByCategory(e))
+    //     } else {
+    //         dispatch(actionGetProducts())
+    //     }
+    // }
 
     const modalLoginView = () => setModalLogin(!modalLogin);
     const modalRegisterView = () => setModalRegister(!modalRegister);
@@ -74,20 +82,33 @@ const NavBar = () => {
             <div className='navContainer'>
                 <div className='logoContainer'>
                     <a href="/">
-                        <img className='imageLogo' src={Logo} alt='Logo'/>
+                        <img className='imageLogo' src={Logo} alt='Logo' />
                     </a>
                 </div>
                 <div className='routerContainer'>
-                    <div className='buttonsContainer'>
-                        <img className='casa'></img>
-                        <form action="/">
+                    {/* <div className='buttonsContainer'> */}
+                    <ul className="menu">
+                        <li><a className = 'buttonProducts' href="/">HOME</a></li>
+                        <li className="dropdownCategories">
+                            <a className = 'buttonProducts' href="/catalogue">PRODUCTOS</a>
+                            <ul className="dropdownSubCat">
+                                {categories.map(category => {
+                                    return <li><a className='categoryDrop' href="/">{category.name}</a></li>
+                                    
+                                })
+                                }
+                            </ul>
+                        </li>
+                        </ul>
+                        {/* <form action="/">
+
                             <div>
-                                <button className='buttonProducts'>Home</button>
+                                <button className='buttonProducts'>HOME</button>
                             </div>
                         </form>
                         <form action="/catalogue">
-                            <button className='buttonProducts'>Products</button>
-                        </form>
+                            <button className='buttonProducts'>PRODUCTOS</button>
+                        </form> */}
                     </div>
                     <div className='searchBar'>
                         <SearchBar />
@@ -114,14 +135,14 @@ const NavBar = () => {
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>
-                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}  />
+                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub} />
                     </Modal>
                     <Modal isOpen={modalRegister}>
-                        <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}   />
+                        <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub} />
                     </Modal>
                 </div>
             </div>
-        </div>
+
     )
 }
 export default NavBar;

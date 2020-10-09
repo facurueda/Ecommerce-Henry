@@ -22,14 +22,35 @@
         sans-serif;
     font-weight: 300;
 }
+.input-icons i{ 
+    position: absolute; 
+} 
+  
+.input-icons { 
+    margin-bottom: 10px; 
+} 
+  
+.fa.fa-user.icon,
+.fa.fa-lock,
+.fa.fa-envelope { 
+    padding: 10px; 
+    min-width: 40px; 
+    color: gray;
+    
+} 
 
+.input-field { 
+    width: 100%; 
+    padding: 10px; 
+    text-align: center; 
+} 
 .FormRegisterContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.inputRegister {
+.input-field {
     margin-top: 5px;
     border-radius: 11px;
     width: 100%;

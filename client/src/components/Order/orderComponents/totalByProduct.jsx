@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import "./totalByProduct.css"
-import renderHTML from 'react-render-html';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionAddToCart, actionGetOrder } from '../../../redux/ordersActions';
 
@@ -11,7 +10,7 @@ const TotalByProduct = (props) => {
 
     const [product, setProduct] = useState(props.product)
     const [quantity, setQuantity] = useState(product.Inter_Prod_Order.quantity)
-    const [price, setPrice] = useState(product.Inter_Prod_Order.price * product.Inter_Prod_Order.quantity)
+    const [price, setPrice] = useState(product.Inter_Prod_Order.price)
 
     const btnRestar = (number) => {
         if (quantity >= 1) {
@@ -22,25 +21,50 @@ const TotalByProduct = (props) => {
         }
     }
     return (
-        <div className="productContainer">
-            <div className='cardContainer' >
-                <div className='buttonContainer'>
-                    <button className='deleteButton' onClick={e => btnRestar(product.Inter_Prod_Order.quantity)} >x</button>
-                </div>
-                <div className='imgContainer'>
-                    <img className='productImage' src={product.images} />
-                </div>
-                <div className='descriptionContainer'>
-                    <h3 className='productInfoName'>{product.name}</h3>
-                    <h3 className='productInfo'>{renderHTML(product.description)} </h3>
-                    <h3 className='productInfo'>{product.price} </h3>
-                </div>
-            </div>
-            <div className="textContent">
-                <span className="textQuantity">Cantidad: {quantity}<span><button className='buttonRestar' onClick={e => btnRestar(-1)}>-</button></span> </span>
-                <span className="textAmount">Total: ${price}</span>
-            </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead className='headProd'>
+                    <tr>
+                        <th className='prodImgCol' scope="col">PRODUCTO</th>
+                        <th scope="col">PRECIO</th>
+                        <th scope="col">CANTIDAD</th>
+                        <th scope="col">TOTAL</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td className = 'imgProdContainer'><img className='productImage' src={product.images}/>{product.name}</td>
+
+                        <td className='textContent'>$  {product.Inter_Prod_Order.price }</td>
+                        <td className='quantityButton'><button className='deleteButton' onClick={e => btnRestar(+1)}>-</button><p className='quantity'>{quantity}</p><button className='deleteButton' onClick={e => btnRestar(-1)}>+</button></td>
+                        <td className='textContent'>$  {product.Inter_Prod_Order.price * quantity}</td>
+                        <td className='buttonContainer'>
+                            <button className='buttonTrash' onClick={e => btnRestar(product.Inter_Prod_Order.quantity)} ><i class="far fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        // <div className="productContainer">
+        //     <div className='cardContainer' >
+        //         <div className='buttonContainer'>
+        //             <button className='deleteButton' onClick={e => btnRestar(product.Inter_Prod_Order.quantity)} >x</button>
+        //         </div>
+        //         <div className='imgContainer'>
+        //             <img className='productImage' src={product.images} />
+        //         </div>
+        //         <div className='descriptionContainer'>
+        //             <h3 className='productInfoName'>{product.name}</h3>
+        //             <h3 className='productInfo'>{renderHTML(product.description)} </h3>
+        //             <h3 className='productInfo'>{product.price} </h3>
+        //         </div>
+        //     </div>
+        //     <div className="textContent">
+        //         <span className="textQuantity">Cantidad: {quantity}<span><button className='buttonRestar' onClick={e => btnRestar(-1)}>-</button></span> </span>
+        //         <span className="textAmount">Total: ${price}</span>
+        //     </div>
+        // </div>
     )
 }
 export default TotalByProduct;

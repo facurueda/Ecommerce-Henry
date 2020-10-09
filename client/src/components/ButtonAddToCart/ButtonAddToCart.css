@@ -16,7 +16,10 @@
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
     background-color: rgba(47, 54, 64, 0.57);
     text-align: center;
-    transition: all 0.15s;
+
+}
+.spanCart{
+    margin-right: 5px ;
 }
 .fa {  
     display: flex;

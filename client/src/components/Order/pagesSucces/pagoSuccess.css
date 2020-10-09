@@ -1,15 +1,74 @@
-.Container{
+.succesContainer{
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background-color: #fff;
+    height: 75%;
 }
+.textThanks{
+    font-size: 30px;
+    letter-spacing: -2px;
+    text-align: center;
+    width: 100%;
+}
+.textEnjoy {
+    text-align: center;
+    width: 100%;
+}
+
 h3, h4{
-    color: white
+    color: rgba(47, 54, 64, 0.67);
 }
 .cardsContainer{
     display:flex;
-
+    justify-content: flex-start;
 }
-
+.infoCont{
+    display:flex;
+}
+.headerCont{
+    padding: 10px;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.shipmentContainer {
+    position: absolute;
+    bottom: 14%;
+    left: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.direccionUsuario{ 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding-left: 7px;
+}
+.card-text{
+    text-transform: uppercase;
+    font-size: 15px;
+}
+.textCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .imgCard{
     height: 150px;
     width: 150px;
+}
+
+.shipmentInfo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    text-transform: uppercase;
 }
