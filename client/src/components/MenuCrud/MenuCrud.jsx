@@ -57,7 +57,7 @@ const MenuCrud = () => {
     <div>
       <Container>
         <br />
-        <button id="buttonAdd" className='buttonLoginAndRegister' onClick={e => modalAddView()}> + </button>
+        <button id="buttonAdd" className='buttonAdd' onClick={e => modalAddView()}> AGREGAR PRODUCTO </button>
         <br />
         <br />
         <ProductTable

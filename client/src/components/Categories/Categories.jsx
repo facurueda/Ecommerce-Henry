@@ -5,13 +5,13 @@ import FormModalEdit from './CategoriesComponents/FormModalEdit'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Container, Modal, } from "reactstrap";
 import './Categories.css'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { actionGetCategories, actionPostCategory, actionUpdateCategory, actionDeleteCategory } from "../../redux/categoriesActions";
 
 const Categories = (props) => {
-
+  const dispatch = useDispatch()
   useEffect(() => {
-    props.actionGetCategories()
+    dispatch(actionGetCategories())
   }, [])
 
   const [categories, setCategories] = useState(props.categories)
@@ -24,18 +24,18 @@ const Categories = (props) => {
   const modalEditViewFalse = () => modalInsertEdit(false);
 
   const deleteCategory = category => {
-    props.actionDeleteCategory(category)
+    dispatch(actionDeleteCategory(category))
   }
   const editCategory = category => {
     setCurrentCategory(category)
     modalEditView()
   }
-  const addCategory = async (category) => {
-    props.actionPostCategory(category);
+  const addCategory = (category) => {
+    dispatch(actionPostCategory(category))
     window.location.reload()
   }
   const updateCategory = (updatedCategory) => {
-    props.actionUpdateCategory(updatedCategory)
+    dispatch(actionUpdateCategory(updatedCategory))
   }
   
   return (

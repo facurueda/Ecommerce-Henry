@@ -47,7 +47,6 @@
 } 
   
 .input-icons { 
-    width: 80%; 
     margin-bottom: 10px; 
 } 
   
@@ -98,7 +97,6 @@
 
 .input-field {
     margin-top: 5px;
-    border-radius: 11px;
     padding: 5px 65px;
     text-align: center;
     border: 0px;

@@ -39,7 +39,7 @@ label {
     background-color: rgba(222, 245, 209, 0.25);
     backdrop-filter: blur(7px);
     border-radius: 15px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     border: 0px;
 }
@@ -52,8 +52,9 @@ label {
     border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
+    font-size: 13px;
     color: #ffffff;
     text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
     background-color: rgba(47, 54, 64, 0.57);
@@ -73,46 +74,63 @@ label {
         margin: 0.4em auto;
     }
 }
-.productDetail {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
+.productDetailMenuCrud {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 12px;
     margin-bottom: 0px;
 }
-.inputName {
-    border-radius: 11px;
-    width: 60%;
+.productDetailName {
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    justify-content: center;
+    height: -moz-fit-content;
+    height: fit-content;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+.inputMenuCrud {
     padding: 5px 65px;
     text-align: center;
     border: 0px;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
     background-color: rgba(255, 255, 255, 0.85);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     font-size: 13px;
     color: black;
 }
 .form-control,
 .dropdownCat {
-    border-radius: 11px;
     text-align: center;
     border: 0px;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
     background-color: rgba(255, 255, 255, 0.85);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     font-size: 13px;
     color: black;
     margin: 0;
+    border-radius: 0;
 }
 .productName {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    /* flex-direction: column; */
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    justify-content: center;
+    height: -moz-fit-content;
     height: fit-content;
 }
 .uploadImage {
     height: 150px;
+    display: flex;
+    justify-content: center;
 }
 .tox-statusbar__branding{
     display:none

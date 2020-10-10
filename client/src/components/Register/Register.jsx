@@ -116,8 +116,8 @@ const Register = (props) => {
                         }
                     }} onChange={handleChange} />
                     </div>
-                    <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >Crear</button>
                 </div>
+                <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >Crear</button>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
                 <div className='LoginAccount'>

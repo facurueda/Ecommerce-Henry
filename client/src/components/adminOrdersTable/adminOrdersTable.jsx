@@ -23,16 +23,10 @@ const AdminOrdersTable = () => {
                 }
 
             })
-            //return hola[0]
-            console.log(hola[0].name)
             return hola[0].name
         }
     }
-    if (orders.length < 1) {
-        return <div className='NoOrders'>
-            <h3><b>No se encontraron ordenes disponibles.</b></h3>
-        </div>
-    }
+
     return (
         <div >
             <Table className='ordersCont'>
@@ -46,19 +40,19 @@ const AdminOrdersTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {orders > 0 ? (
-                        orders.map(order => (
-                            <tr className='categories' key={order.idCategory}>
-                                <th className='categoryInfo'>{order.idCategory}</th>
+                    {(orders.length > 0) ? (
+                        orders.map(order => { if(order.status === 'CERRADA'){
+                            return ( <tr className='categories' key={order.idCategory}>
+                                <th className='categoryInfo'>{order.idOrder}</th>
                                 <th className='categoryInfo'>{getUserName(order)}</th>
                                 <th className='categoryInfo'>{order.direccion}</th>
                                 <th className='categoryInfo'>{order.status}</th>
                                 <th className='categoryInfo'>{order.total}</th>
-                            </tr>
-                        ))
-                    ) : (
-                            <tr>
-                                <td>No hay ordenes</td>
+                            </tr> ) 
+                        } 
+                       } )
+                    ) : ( <tr>
+                                <th>No hay ordenes</th>
                             </tr>
                         )}
                 </tbody>

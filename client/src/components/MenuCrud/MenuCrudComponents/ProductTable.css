@@ -7,8 +7,12 @@
     height: 150px;
     padding: 15px;
     background-color: #ffffff;
-    border-radius: 15px;
-    margin-bottom: 15px;
+    display: flex;
+    margin: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    align-self: center;
+    justify-self: center;
 }
 
 /* ---------------- Image ---------------- */
