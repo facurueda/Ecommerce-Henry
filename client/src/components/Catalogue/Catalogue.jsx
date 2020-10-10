@@ -6,23 +6,35 @@ import { actionGetProducts, actionGetProductsByCategory } from '../../redux/prod
 import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import qs from 'query-string'
 const Catalogue = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(actionGetCategories())
-        dispatch(actionGetProducts())
+        if(qs.parse(window.location.search).filter){
+            console.log(qs.parse(window.location.search).filter)
+            if (filter !== 'All categories'){
+                console.log("accion :D")
+                dispatch(actionGetProductsByCategory(filter))
+            }else{
+                console.log("Else accion :D");
+                dispatch(actionGetProducts())}
+        }
+        // dispatch(actionGetCategories())
+        // dispatch(actionGetProducts())
     }, [])
+    const filter = qs.parse(window.location.search).filter
     const [pageLimits, setPageLimits] = useState({ min: 0, max: 5 });
     const categories = useSelector(state => state.categoriesReducer.categories)
     const products = useSelector(store => store.productsReducer.products)
-    const productsFilter = (e) => {
-        if (e !== 'All categories') {
-            dispatch(actionGetProductsByCategory(e))
-        } else {
-            dispatch(actionGetProducts())
-        }
-    }
-    if (categories.length === 0) {
+
+    // const productsFilter = (e) => {
+    //     if (e !== 'All categories') {
+    //         dispatch(actionGetProductsByCategory(e))
+    //     } else {
+    //         dispatch(actionGetProducts())
+    //     }
+    // }
+    if (products.length === 0) {
         return (
             <div>
                 <div className='categories'>
@@ -33,7 +45,7 @@ const Catalogue = () => {
     }
     return (
         <div>
-            <div className='categories_menu'>
+            {/*<div className='categories_menu'>
                 {categories.map(category => {
                     return <Category
                         className='categoryImage'
@@ -43,7 +55,7 @@ const Catalogue = () => {
                 }
                 <Category className='categoryImage'
                     name={"All categories"} productsFilter={productsFilter} />
-            </div>
+            </div>*/}
             <div className='products' > {
                 products.map((product, index) => {
                     if (product.stock > 0 && index >= pageLimits.min && index <= pageLimits.max) {

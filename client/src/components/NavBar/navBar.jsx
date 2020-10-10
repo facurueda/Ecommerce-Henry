@@ -11,6 +11,7 @@ import UserLogged from '../UserLogged/UserLogged'
 import { useCookies } from 'react-cookie';
 import Cart from '../UserLogged/Cart'
 import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionGetMe, actionSetModalLogin } from '../../redux/usersActions'
+import actionGetCategories from '../../redux/categoriesActions'
 
 const NavBar = () => {
 
@@ -37,6 +38,7 @@ const NavBar = () => {
             return dispatch(actionGetOrder(cookie.idUser))
         }, 300);
         dispatch(actionSetCookieToStore(cookie))
+        dispatch(actionGetCategories())
     }, [])
     if (loggedOut) {
             removeCookie('idUser')
@@ -89,11 +91,10 @@ const NavBar = () => {
                     <ul className="menu">
                         <li><a className = 'buttonProducts' href="/">HOME</a></li>
                         <li className="dropdownCategories">
-                            <a className = 'buttonProducts' href="/catalogue">PRODUCTOS</a>
+                            <a className = 'buttonProducts' href="/catalogue?filter=All categories">PRODUCTOS</a>
                             <ul className="dropdownSubCat">
                                 {categories.map(category => {
-                                    return <li><a className='categoryDrop' href="/">{category.name}</a></li>
-                                    
+                                    return <li><a className='categoryDrop' href={"/catalogue?filter="+category.name}>{category.name}</a></li>
                                 })
                                 }
                             </ul>
