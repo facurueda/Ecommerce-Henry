@@ -24,11 +24,11 @@ const ProductCard = (props) => {
     return (
         <div className='ProductCard_Container'>
             <div className='imgProdContainer'>
-            <img className='imageCard' src={images} alt="Card image cap" onClick={handleChancla} />
+            <img className='imageCard' src={images} alt="Card image cap" />
             
                 {((window.location.pathname) !== '/order' && (window.location.pathname) !== '/adminOrdersTable') ?
                     (<div className= 'containerAddToCart'>
-                    <button className='buttonAddProd'>VER MÁS</button>
+                    <button className='buttonAddProd' onClick={handleChancla}>VER MÁS</button>
                     <ButtonAddToCart className='buttonAddProd' datos={{ idProduct: idProduct, quantity: 1, price: price }} />
                     </div>)
                     : (<div></div>)
