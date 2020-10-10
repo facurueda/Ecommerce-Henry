@@ -15,15 +15,6 @@ const Login = (props) => {
   const [inputs, setInputs] = useState({});
   const idUser = useSelector((store) => store.usersReducer.idUser);
 
-<<<<<<< HEAD
-  const handleChancla = () => {
-    dispatch(actionLogin({ ...inputs, idUser: idUser }));
-    modalLoginClose();
-    dispatch(actionGetOrder(idUser))
-    //setTimeout(() => {
-    //  window.location.reload();
-    //}, 200);
-=======
   toast.configure()
 
   const handleChancla = () => {
@@ -46,7 +37,6 @@ const Login = (props) => {
       //   window.location.reload();
       // }, 200);
     }
->>>>>>> master
   };
   const modalLoginClose = () => {
     dispatch(actionSetModalLogin(!modalLogin))

@@ -1,12 +1,7 @@
 import './adminOrdersTable.css'
-<<<<<<< HEAD
 import '../../components/Categories/CategoriesComponents/CategoryTable.css'
 import React, { useEffect } from 'react'
 import { Table } from "reactstrap";
-=======
-import React, { useEffect, useState } from 'react'
-import Orders from './ordersComponent'
->>>>>>> master
 import { useSelector, useDispatch } from 'react-redux'
 import { actionGetAllOrders } from '../../redux/ordersActions'
 import { actionGetUsers } from '../../redux/usersActions'
@@ -16,7 +11,6 @@ const AdminOrdersTable = () => {
     const dispatch = useDispatch()
     const orders = useSelector(state => state.ordersReducer.orders)
     const users = useSelector(state => state.usersReducer.users)
-    const [pageLimits, setPageLimits] = useState({ min: 0, max: 4 });
     useEffect(() => {
         dispatch(actionGetAllOrders());
         dispatch(actionGetUsers())
@@ -41,7 +35,6 @@ const AdminOrdersTable = () => {
     }
     return (
         <div >
-<<<<<<< HEAD
             <Table className='ordersCont'>
                 <thead>
                     <tr className='NameAndDesc'>
@@ -71,26 +64,6 @@ const AdminOrdersTable = () => {
                 </tbody>
             </Table>
 
-=======
-            {orders.map((order, index) => {
-                if (index <= pageLimits.max && index >= pageLimits.min) {
-                    return (<div className='divContainerOrders'>
-                        <Orders key={order.idOrder} userName={getUserName(order)} order={order} /></div>)
-                }
-            })}
-            <div className='PagePrevNext'>
-                <button className='categoryButton' onClick={() => {
-                    if (pageLimits.min > 1) {
-                        setPageLimits({ min: pageLimits.min - 5, max: pageLimits.max - 5 })
-                    }
-                }}> {'<'} </button>
-                <button className='categoryButton' onClick={() => {
-                    if (pageLimits.max < orders.length) {
-                        setPageLimits({ min: pageLimits.min + 5, max: pageLimits.max + 5 })
-                    }
-                }}> {'>'} </button>
-            </div>
->>>>>>> master
         </div>
     )
 }

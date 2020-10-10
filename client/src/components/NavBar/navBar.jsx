@@ -39,21 +39,12 @@ const NavBar = () => {
         dispatch(actionSetCookieToStore(cookie))
     }, [])
     if (loggedOut) {
-<<<<<<< HEAD
-        removeCookie('idUser')
-        removeCookie('level')
-        // removeCookie('connect.sid')
-        setTimeout(() => {
-            window.location.reload()
-        }, 200);
-=======
             removeCookie('idUser')
             removeCookie('level')
             // removeCookie('connect.sid')
             // setTimeout(() => {
             //     window.location.reload()
             // }, 200);
->>>>>>> master
     }
     if (verified) {
         setCookie('idUser', idUser, { path: '/' })
@@ -68,7 +59,6 @@ const NavBar = () => {
         setGithub(false)
         dispatch(actionGetMe())
     }
-<<<<<<< HEAD
     const categories = useSelector(state => state.categoriesReducer.categories)
 
     // const productsFilter = (e) => {
@@ -78,8 +68,6 @@ const NavBar = () => {
     //         dispatch(actionGetProducts())
     //     }
     // }
-=======
->>>>>>> master
 
     const modalLoginView = () => dispatch(actionSetModalLogin(!modalLogin));
     const modalRegisterView = () => setModalRegister(!modalRegister);
@@ -146,11 +134,7 @@ const NavBar = () => {
                             </div>
                         )}
                     <Modal isOpen={modalLogin}>
-<<<<<<< HEAD
-                        <Login modalLoginClose={modalLoginClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub} />
-=======
                         <Login ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub}  />
->>>>>>> master
                     </Modal>
                     <Modal isOpen={modalRegister}>
                         <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub} />

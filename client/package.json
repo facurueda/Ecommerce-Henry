@@ -35,10 +35,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-simple-chatbot": "^0.6.1",
-<<<<<<< HEAD
-=======
-    "react-toastify": "^6.0.8",
->>>>>>> master
+    "react-toastify": "^6.0.9",
     "reactstrap": "^8.5.1",
     "redux": "^4.0.5",
     "redux-cookies-middleware": "^0.2.1",
@@ -49,7 +46,7 @@
     "webpack": "4.42.0"
   },
   "scripts": {
-    "start": "set PORT=80 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

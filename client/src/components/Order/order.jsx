@@ -79,14 +79,6 @@ const Order = (props) => {
         })}
         <div className="footerContent">
           <div className='containerButtonEnvio'>
-<<<<<<< HEAD
-            <div className='shippingContainer'>
-
-              {!cancelarEnvio ? (
-                <button onClick={e => { openModalDireccion() }} className='buttonEnvio'><h5 className='shipbutton'>INCLUIR </h5>  <i class="fas fa-shipping-fast"></i></button>
-              ) : (
-                  <button onClick={e => { setCancelarEnvio(false); setPrecioEnvio(0); setMostrarPrecioEnvio(false) }} className='buttonEnvio'>CANCELAR ENVIO</button>
-=======
             <div style={{ width: '60%' }}>
 
               {!cancelarEnvio ? (
@@ -103,7 +95,6 @@ const Order = (props) => {
                       progress: undefined,
                     }); dispatch(actionDeleteDireccion(idOrderUser))
                   }} className='buttonEnvio'>Cancelar Envio</button>
->>>>>>> master
                 )
               }
 
@@ -118,7 +109,6 @@ const Order = (props) => {
               </Modal>
 
 
-<<<<<<< HEAD
             </div>
             <div className='totalPrice'>
               <div className='shipPrice' >
@@ -150,35 +140,6 @@ const Order = (props) => {
               <Loading isPayLoading={true} loadingClose={changeLoading} />
             </Modal>
           </div>
-=======
-            </div>
-            <div style={{ width: '40%', display: "flex", alignItems: 'center', justifyContent: 'flex-end' }}>
-              {mostrarPrecioEnvio ? (`$  ${precioEnvio}`) : ('')}
-            </div>
-          </div>
-          <span className="textPrice">
-            {" "}
-              Total: $
-              {or.products
-              .reduce((acum, product) => {
-                return (
-                  acum +
-                  product.Inter_Prod_Order.price *
-                  product.Inter_Prod_Order.quantity
-                );
-              }, precioEnvio)
-              .toFixed(2)}
-          </span>
-
-          <div style={{ display: props.origin }} className='containerButtonEndOrden'>
-            <button className="buttonEndOrden" onClick={clickButton}>
-              Finalizar Orden
-              </button>
-            <Modal isOpen={loading} toggle={loading}>
-              <Loading isPayLoading={true} loadingClose={changeLoading} />
-            </Modal>
-          </div>
->>>>>>> master
 
         </div>
       </div>
