@@ -38,24 +38,29 @@ const PagoSuccess = (props) => {
 
                 {direcciones.ciudad ? (
                     <div className='shipmentContainer'>
-                        <h4 className='shipmentInfo'>Dirección de entrega:</h4>
-
-
-                        <h4 className='direccionUsuario'>{direcciones.calle + direcciones.numeracion + ',' + direcciones.ciudad + ', ' + direcciones.provincia}</h4>
+                        <div className='shipmentCont'>
+                            <h4 className='shipmentInfo'>Dirección de entrega:</h4>
+                            <h4 className='direccionUsuario'>{direcciones.calle + direcciones.numeracion + ',' + direcciones.ciudad + ', ' + direcciones.provincia}</h4>
+                        </div>
+                        <button className="buttonContinueBuying">
+                            SEGUIR COMPRANDO
+                        </button>
                     </div>
+
+
                 ) : (
                         <div className='infoShip'>
                             <div className='noshipmentContainer'>
-                            <h4 className='shipmentInfo'>Tu compra esta lista para retirar</h4>
-                            <h4 className='shipmentInfo'>¡Te esperamos!</h4>
+                                <h4 className='shipmentInfo'>Tu compra esta lista para retirar</h4>
+                                <h4 className='shipmentInfo'>¡Te esperamos!</h4>
                             </div>
-                            <div className='mapContainer'> 
+                            <div className='mapContainer'>
                                 <Iframe className='mapClass'
                                     src="https://www.openstreetmap.org/export/embed.html?bbox=-64.1969668865204%2C-31.424048980081505%2C-64.17904973030092%2C-31.415552514393653&amp;layer=mapnik&amp;marker=-31.41980084344705%2C-64.18800830841064"
                                 />
                             </div>
                             <button className="buttonContinueBuying">
-              SEGUIR COMPRANDO
+                                SEGUIR COMPRANDO
               </button>
                         </div>
                     )}
@@ -63,23 +68,23 @@ const PagoSuccess = (props) => {
             </div>
 
             <div className='bodyCont'>
-               
-                    {productosComprados.map(product => {
-                        return (
-                            <div className='infoCont'>
-                                <div>
+
+                {productosComprados.map(product => {
+                    return (
+                        <div className='infoCont'>
+                            <div>
                                 <img top width="20%" src={product.images} alt="Card image cap" className='imgCard' />
-                                </div>
-                                <div className='noshipmentInfo'>
-                                   
-                                        <h3 className='noshipmentInfo'>{product.name}</h3>
-                                   
-                                   </div>
-                                </div>
-                            
-                        )
-                    })}
-                
+                            </div>
+                            <div className='noshipmentInfo'>
+
+                                <h3 className='noshipmentInfo'>{product.name}</h3>
+
+                            </div>
+                        </div>
+
+                    )
+                })}
+
 
 
             </div>

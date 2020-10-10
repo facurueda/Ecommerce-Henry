@@ -5,9 +5,7 @@ import MenuCrud from './components/MenuCrud/MenuCrud';
 import Home from './components/Home/Home';
 import Product from './components/product/products';
 import Categories from './components/Categories/Categories';
-import AdminNavBar from './components/AdminNavBar/AdminNavBar';
 import NotFound from './components/NotFound/NotFound';
-
 import './App.css'
 import Order from './components/Order/order';
 import NavBar from './components/NavBar/navBar';

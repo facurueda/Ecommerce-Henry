@@ -53,13 +53,13 @@ h3, h4{
     flex-direction: column;
     justify-content: center;
 }
-.shipmentContainer {
-    position: absolute;
-    bottom: 14%;
-    left: 2%;
+.shipmentCont{
     display: flex;
-    justify-content: center;
-    align-items: center; 
+}
+.shipmentContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 7px;
 }
 .noshipmentContainer{
     display: flex;
@@ -128,7 +128,6 @@ iframe.mapContainer{
     justify-self: flex-start;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
-    margin: 10px 0.2em 0.2em 0;
     border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
@@ -143,7 +142,6 @@ iframe.mapContainer{
     bottom: 2%;
     width: auto;
     left: 2%;
-    position: absolute;
 }
 .buttonContinueBuying:hover {
     text-shadow: rgb(74, 74, 74);

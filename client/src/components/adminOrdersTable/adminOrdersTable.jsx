@@ -40,7 +40,7 @@ const AdminOrdersTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.length > 0 ? (
+                    {(orders.length > 0) ? (
                         orders.map(order => { if(order.status === 'CERRADA'){
                             return ( <tr className='categories' key={order.idCategory}>
                                 <th className='categoryInfo'>{order.idOrder}</th>
@@ -49,11 +49,10 @@ const AdminOrdersTable = () => {
                                 <th className='categoryInfo'>{order.status}</th>
                                 <th className='categoryInfo'>{order.total}</th>
                             </tr> ) 
-                        }
+                        } 
                        } )
-                    ) : (
-                            <tr>
-                                <td>No hay ordenes</td>
+                    ) : ( <tr>
+                                <th>No hay ordenes</th>
                             </tr>
                         )}
                 </tbody>

@@ -92,141 +92,152 @@ const ModalDireccion = (props) => {
             setHabilitarEdicion(false)
       }
 
-
       return (
 
             directionsUser.length === 0 ? (
-              <div className='directionContainer'>
-              <button className='closeButton' onClick={closeModalDireccion}>x</button>
-              <div className='shipData'>
-                <div className='labelInput'>
-                  <h3 for="exampleProvincia" className='labelAddress'>PROVINCIA *</h3>
-                  <input
-                    className='addressinput'
-                    type="text"
-                    name="provincia"
-                    id="exampleProvincia"
-                    placeholder="Provincia"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className='labelInput'>
-                  <h3 for="exampleCiudad" className='labelAddress'>CIUDAD *</h3>
-                  <input
-                    className='addressinput'
-                    type="text"
-                    name="ciudad"
-                    id="exampleCiudad"
-                    placeholder="Ciudad"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-        
-              <div className='shipData'>
-                <div className='labelInput'>
-                  <h3 for="exampleCalle" className='labelAddress'>CALLE *</h3>
-                  <input
-                    className='addressinput'
-                    type="text"
-                    name="calle"
-                    id="exampleCalle"
-                    placeholder="Calle"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className='labelInput'>
-                  <h3 for="exampleBarrio" className='labelAddress'>BARRIO *</h3>
-                  <input
-                    className='addressinput'
-                    type="text"
-                    name="barrio"
-                    id="exampleBarrio"
-                    placeholder="Barrio"
-                    onChange={handleChange}
-                  />
-                </div>      </div>
-        
-              <div className='shipDataNum'>
-                
-              <div className='labelInputNum'>
-                  <h3 for="exampleNumeracion" className='labelAddress'>NÚMERO*</h3>
-                  <input
-                    className='addressinputNum'
-                    type="text"
-                    name="numeracion"
-                    id="exampleNumeracion"
-                    placeholder="Nº"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className='labelInputNum'>
-                  <h3 for="examplePiso" className='labelAddress'>PISO</h3>
-                  <input
-                    className='addressinputNum'
-                    type="text"
-                    name="piso"
-                    id="examplePiso"
-                    placeholder="Piso"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className='labelInputNum'>
-                  <h3 for="exampleDepto" className='labelAddress'>DEPARTAMENTO</h3>
-                  <input
-                    className='addressinputNum'
-                    type="text"
-                    name="depto"
-                    id="exampleDepto"
-                    placeholder="DPTO"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className='labelInputNum'>
-                  <h3 for="exampleCP" className='labelAddress'>CP *</h3>
-                  <input
-                    className='addressinputNum'
-                    type="text"
-                    name="CP"
-                    id="exampleCP"
-                    placeholder="CP"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className='buttonContainerA'>
-                        <Button  className='buttonAdress'
-                              onClick={e => {
-                                    e.preventDefault();
-                                    if (!direccion.referencia || !direccion.provincia || !direccion.ciudad || !direccion.calle || !direccion.numeracion || !direccion.barrio || !direccion.CP) return toast.error("Datos obligatorios vacios", {
-                                          position: "top-center",
-                                          autoClose: 1500,
-                                          hideProgressBar: false,
-                                          closeOnClick: true,
-                                          pauseOnHover: true,
-                                          draggable: true,
-                                          progress: undefined,
-                                    });
+                  <div className='directionContainer'>
+                  <button className='closeButton' onClick={closeModalDireccion}>x</button>
+                  <div className='labelInput'>
 
-                                    toast("Envío confirmado", {
-                                          position: "top-center",
-                                          autoClose: 1500,
-                                          hideProgressBar: false,
-                                          closeOnClick: true,
-                                          pauseOnHover: true,
-                                          draggable: true,
-                                          progress: undefined,
-                                    });
-                                    sendDireccionToDB({ direccion, idOrderUser });
-                                    closeModalDireccion();
-                                    setMostrarPrecioEnvio(true);
-                                    setPrecioEnvio(500);
-                                    mostrarBotonCancelar()
-                              }
-                              }>
-                              Confirmar Envío</Button>
-                      </div>
+                        <label className='labelAddress' for="exampleReferencia">NOMBRE REFERENCIA*</label>
+                                          <input className='addressinput'
+                                                type="text"
+                                                name="referencia"
+                                                id="exampleReferencia"
+                                                placeholder="CASA / TRABAJO"
+                                                onChange={handleChange}
+                                          />
                   </div>
+                  
+                  <div className='shipData'>
+                    <div className='labelInput'>
+                      <h3 for="exampleProvincia" className='labelAddress'>PROVINCIA *</h3>
+                      <input
+                        className='addressinput'
+                        type="text"
+                        name="provincia"
+                        id="exampleProvincia"
+                        placeholder="Provincia"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className='labelInput'>
+                      <h3 for="exampleCiudad" className='labelAddress'>CIUDAD *</h3>
+                      <input
+                        className='addressinput'
+                        type="text"
+                        name="ciudad"
+                        id="exampleCiudad"
+                        placeholder="Ciudad"
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+            
+                  <div className='shipData'>
+                    <div className='labelInput'>
+                      <h3 for="exampleCalle" className='labelAddress'>CALLE *</h3>
+                      <input
+                        className='addressinput'
+                        type="text"
+                        name="calle"
+                        id="exampleCalle"
+                        placeholder="Calle"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className='labelInput'>
+                      <h3 for="exampleBarrio" className='labelAddress'>BARRIO *</h3>
+                      <input
+                        className='addressinput'
+                        type="text"
+                        name="barrio"
+                        id="exampleBarrio"
+                        placeholder="Barrio"
+                        onChange={handleChange}
+                      />
+                    </div>      </div>
+            
+                  <div className='shipDataNum'>
+                    
+                  <div className='labelInputNum'>
+                      <h3 for="exampleNumeracion" className='labelAddress'>NÚMERO*</h3>
+                      <input
+                        className='addressinputNum'
+                        type="text"
+                        name="numeracion"
+                        id="exampleNumeracion"
+                        placeholder="Nº"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className='labelInputNum'>
+                      <h3 for="examplePiso" className='labelAddress'>PISO</h3>
+                      <input
+                        className='addressinputNum'
+                        type="text"
+                        name="piso"
+                        id="examplePiso"
+                        placeholder="Piso"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className='labelInputNum'>
+                      <h3 for="exampleDepto" className='labelAddress'>DEPARTAMENTO</h3>
+                      <input
+                        className='addressinputNum'
+                        type="text"
+                        name="depto"
+                        id="exampleDepto"
+                        placeholder="DPTO"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className='labelInputNum'>
+                      <h3 for="exampleCP" className='labelAddress'>CP *</h3>
+                      <input
+                        className='addressinputNum'
+                        type="text"
+                        name="CP"
+                        id="exampleCP"
+                        placeholder="CP"
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className='buttonContainerA'>
+                            <Button  className='buttonAdress'
+                                  onClick={e => {
+                                        e.preventDefault();
+                                        if (!direccion.referencia || !direccion.provincia || !direccion.ciudad || !direccion.calle || !direccion.numeracion || !direccion.barrio || !direccion.CP) return toast.error("Datos obligatorios vacios", {
+                                              position: "top-center",
+                                              autoClose: 1500,
+                                              hideProgressBar: false,
+                                              closeOnClick: true,
+                                              pauseOnHover: true,
+                                              draggable: true,
+                                              progress: undefined,
+                                        });
+    
+                                        toast("Envío confirmado", {
+                                              position: "top-center",
+                                              autoClose: 1500,
+                                              hideProgressBar: false,
+                                              closeOnClick: true,
+                                              pauseOnHover: true,
+                                              draggable: true,
+                                              progress: undefined,
+                                        });
+                                        sendDireccionToDB({ direccion, idOrderUser });
+                                        closeModalDireccion();
+                                        setMostrarPrecioEnvio(true);
+                                        setPrecioEnvio(500);
+                                        mostrarBotonCancelar()
+                                  }
+                                  }>
+                                  Confirmar Envío</Button>
+                          </div>
+                      </div>
             ) : (
                         <Form>
                               <FormGroup className="categoriesContainer">

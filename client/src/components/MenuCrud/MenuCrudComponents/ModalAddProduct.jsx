@@ -28,7 +28,7 @@ const ModalAddProduct = (props) => {
         precio: '',
         stock: '',
         images: '',
-        categories: 'Choose Category',
+        categories: 'seleccionar',
         rating: 1
     };
     const [product, setProduct] = useState(initialState);
@@ -86,7 +86,7 @@ const ModalAddProduct = (props) => {
     return (
         <div className='addProdContainer'>
             <ModalHeader>
-                <div>Add product</div>
+                <div>AGREGAR PRODUCTO</div>
             </ModalHeader>
             <ModalBody>
                 <FormGroup className='uploadImage' style={{ display: "flex", justifyContent: 'center' }}>
@@ -95,15 +95,16 @@ const ModalAddProduct = (props) => {
                     </ListGroup>
                 </FormGroup>
                 <FormGroup className='productName'>
-                    <label className='productDetail'>Product name: </label>
-                    <input className='inputName'
+                    <label className='productDetailName'>Nombre </label>
+                    <input className='inputMenuCrud'
                         name='name'
+                        placeholder='NOMBRE'
                         type='text'
                         onChange={handleChange}
                     />
                 </FormGroup>
                 <FormGroup>
-                    <label className='productDetail'>Description: </label>
+                    <label className='productDetailMenuCrud'>Descripcion </label>
                     <form>
                         <Editor id='productEditor'
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
@@ -118,26 +119,28 @@ const ModalAddProduct = (props) => {
                 </FormGroup>
                 <ListGroup horizontal className="propertyContainer">
                     <FormGroup className="priceContainer">
-                        <label className='productDetail'>Price: </label>
+                        <label className='productDetailMenuCrud'>Precio </label>
                         <input
                             className='form-control'
                             name='precio'
+                            placeholder= '$00.00'
                             type='number'
                             onChange={handleChange}
                         />
                     </FormGroup>
                     <FormGroup className="stockContainer">
-                        <label className='productDetail' >Stock: </label>
+                        <label className='productDetailMenuCrud' >Stock </label>
                         <input
                             className='form-control'
                             name='stock'
+                            placeholder= '0'
                             type='number'
                             onChange={handleChange}
                             value={product.stock}
                         />
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
-                        <label className='productDetail'>Categories: </label>
+                        <label className='productDetailMenuCrud'>Categoria </label>
                         <Dropdown className='dropdownCat' isOpen={dropdownOpen} toggle={toggle}>
                             <DropdownToggle className='dropdownCat' caret>
                                 {product.categories}
@@ -181,8 +184,8 @@ const ModalAddProduct = (props) => {
                         setProduct(initialState)
                         modalCloseAdd();
                     }}
-                > Submit</Button>
-                <Button className='buttonExit' onClick={e => modalCloseAdd()}>Exit</Button>
+                > AGREGAR </Button>
+                <Button className='buttonExit' onClick={e => modalCloseAdd()}> SALIR </Button>
             </ModalFooter>
         </div>
     )

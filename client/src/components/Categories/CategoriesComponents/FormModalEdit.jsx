@@ -16,15 +16,15 @@ const FormModalEdit = (props) => {
     setCategory({ ...category, [name]: value });
   };
   return (
-    <div className='editCategory'>
+    <div className='addCategory'>
       <ModalHeader>
         <div>
-          <h3>Edit Category</h3>
+          <h3>Editar Categoria</h3>
         </div>
       </ModalHeader>
-      <ModalBody>
-        <FormGroup>
-          <label className="categoryDetail">Category Name:</label>
+      <ModalBody className='addCatBody'>
+                <FormGroup className='categoryName'>
+          <label className="categoryDetail">Nombre:</label>
           <input
             className="inputName" 
             name="name"
@@ -33,8 +33,8 @@ const FormModalEdit = (props) => {
             value={category.name}
           />
         </FormGroup>
-        <FormGroup>
-          <label className="categoryDetail">Description:</label>
+        <FormGroup className='categoryDescription'>
+          <label className="categoryDetail">DESCRIPCION:</label>
           <input
             className="inputName" 
             name="description"
@@ -44,9 +44,8 @@ const FormModalEdit = (props) => {
           />
         </FormGroup>
       </ModalBody>
-      <ModalFooter>
-        <Button
-          className='buttonAdd'
+      <ModalFooter className='footerButtons'>
+                <Button className='buttonCat'
           onClick={(event) => {
             event.preventDefault();
             if (!category.name || !category.description) return window.alert('Empty Inputs')
@@ -56,10 +55,10 @@ const FormModalEdit = (props) => {
             updateCategory(category);
             modalEditViewFalse();
           }}
-        > Submit{" "}
+        > AGREGAR
         </Button>
-        <Button className='exitButton' onClick={(e) => modalEditViewFalse()}>
-          Exit
+        <Button className='buttonCat' onClick={(e) => modalEditViewFalse()}>
+          SALIR
         </Button>
       </ModalFooter>
     </div>
