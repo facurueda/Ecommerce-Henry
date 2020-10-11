@@ -23,20 +23,25 @@ const ProductCard = (props) => {
 
     return (
         <div className='ProductCard_Container'>
-            <img className='imageCard' src={images} alt="Card image cap" onClick={handleChancla} />
-            <div className='ProductDescription'>{renderHTML(description.slice(0, 15) + "...")}</div>
-            <div className='contentCard'>
-                <h3 className='productName'>{name}</h3>
-                <div className='ProductDataContainer'>
-                    <div className='productDiv'>
-                        <b className='productPrice'>${price}</b>
-                        <p className='productStock'>U: {stock}</p>
-                    </div>
-                </div>
+            <div className='imgProdContainer'>
+            <img className='imageCard' src={images} alt="Card image cap" />
+            
                 {((window.location.pathname) !== '/order' && (window.location.pathname) !== '/adminOrdersTable') ?
-                    (<ButtonAddToCart className='buttonAddToCart' datos={{ idProduct: idProduct, quantity: 1, price: price }} />)
+                    (<div className= 'containerAddToCart'>
+                    <button className='buttonAddProd' onClick={handleChancla}>VER MÁS</button>
+                    <ButtonAddToCart className='buttonAddProd' datos={{ idProduct: idProduct, quantity: 1, price: price }} />
+                    </div>)
                     : (<div></div>)
                 }
+            </div>
+            <div className='contentCard'>
+                <h3 className='productInfoName'>{name}</h3>
+                 <div className='ProductDataContainer'>
+                    <div className='productDiv'>
+                        <b className='productInfoPrice'>${price}</b>
+                    </div>
+                </div>
+                
             </div>
         </div>
     )

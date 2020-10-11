@@ -1,66 +1,72 @@
-/* .addCategory {
-    background-color: #def5d1;
-}
-
-.submitButton,
-.exitButton {
-    cursor: pointer;
-    box-shadow: -1px 3px 3px 0 rgba(80, 80, 80, .2);
-    border: none;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-    font-size: 10px;
-}
-
-.exitButton {
-    background: rgb(179, 104, 104);
-}
-
-.submitButton {
-    background-color: #DFA06E;
-}
-
-.submitButton:hover {
-    background-color: #df9457;
-    box-shadow: -1px 6px 10px 0 rgba(120, 60, 20, .2);
-}
-
-.exitButton:hover {
-    background: rgb(148, 37, 37);
-    box-shadow: -1px 6px 10px 0 rgba(120, 60, 20, .2);
-} */
 
 .addCategory {
-        display: flex;
-        flex-direction: column;
-        color: #ffffff;
-        width: 500px;
-        background-color: rgba(222, 245, 209, 0.25);
-        backdrop-filter: blur(7px);
-        border-radius: 15px;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    color: #ffffff;
+    background-color: rgba(74, 74, 74, 0.25);
+    backdrop-filter: blur(7px);
+    border-radius: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 
 .inputName {
     margin-top: 5px;
     border-radius: 7px;
-    text-align: center;
-    width: 100%;
+    width: 90%;
+    font-family: 'Roboto', sans-serif;
+    place-self: center;
 }
 .categoryDetail {
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    margin: 5px 0
+    font-weight: 300;
+    font-size: 13px;
+    margin: 5px 25px;
 }
 .categoryName,
 .categoryDescription {
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+
 }
 .categoryName {
     padding-top: 25px;
+}
+
+.buttonCat {
+    
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border: 0.1em solid #ffffff;
+    margin: 10px 5px;
+    border-radius: 0.14em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: #ffffff;
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.buttonCat:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: white;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+@media all and (max-width:30em) {
+    .buttonCat {
+        display: block;
+        margin: 0.4em auto;
+    }
 }

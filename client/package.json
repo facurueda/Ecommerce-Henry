@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material/textfield": "^7.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -12,6 +13,7 @@
     "google-map-react": "^2.1.7",
     "google-maps-react": "^2.0.6",
     "leaflet": "^1.7.1",
+    "material-components-web": "^7.0.0",
     "mercadopago": "^1.3.2",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
@@ -33,7 +35,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-simple-chatbot": "^0.6.1",
-    "react-toastify": "^6.0.8",
+    "react-toastify": "^6.0.9",
     "reactstrap": "^8.5.1",
     "redux": "^4.0.5",
     "redux-cookies-middleware": "^0.2.1",
@@ -44,7 +46,7 @@
     "webpack": "4.42.0"
   },
   "scripts": {
-    "start": "set PORT=80 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

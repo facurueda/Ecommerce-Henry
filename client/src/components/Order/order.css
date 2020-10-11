@@ -1,14 +1,13 @@
 .orderContainer{
-    color: white;
+    background-color: white;
     display: flex;
-    margin: 25px 300px;
+    margin: 25px;
     flex-direction: column;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     align-self: center;
     justify-self: center;
-    background-color: rgba(47, 54, 64, 0.57);
 }
 .orderVacia{
     text-align: center;
@@ -27,36 +26,49 @@
     flex-direction: column;
     align-items: center;
 }
-/* .footerOrder{
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
+
 .textAmount{
     margin-left: 20px;
 }
 .textQuantity {
     margin-left: 20px;
 }
+.shipPrice{
+    font-size: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+.totalPrice{
+    display: flex;
+    flex-direction: column;
+}
+.fa-shipping-fast{
+    padding-left: 5px;
+}
+.shipbutton{
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    margin: 0%;
+}
 .textPrice{
     display: flex;
     width: 100%;
-    justify-content: flex-end;
     align-items: flex-end;
     margin-right: 10px;
-    font-size: 30px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
 }
 .containerButtonEndOrden{
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 .buttonEndOrden {
     display: flex;
+    font-size: 13px;
     justify-self: center;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
@@ -64,23 +76,33 @@
     border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     color: #ffffff;
-    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
     background-color: rgba(47, 54, 64, 0.57);
     text-align: center;
     transition: all 0.15s;
 }
+
+
+
+
+.shippingContainer{
+    padding-right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .containerButtonEnvio{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly ;
+    justify-content: flex-end;
     width: 100%;
 }
 .buttonEnvio{
     display: flex;
-    width: 100px;
+    font-size: 13px;
+    align-items: center;
     justify-self: flex-start;
     padding: 0.46em 1.6em;
     border: 0.1em solid #ffffff;
@@ -88,31 +110,27 @@
     border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     color: #ffffff;
-    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
     background-color: rgba(47, 54, 64, 0.57);
     text-align: center;
     transition: all 0.15s;
 }
-.buttonEndOrden:hover {
+.buttonEndOrden:hover,
+.buttonEnvio:hover {
     text-shadow: rgb(74, 74, 74);
     color:white;
     border-color: rgb(74, 74, 74);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.815);
     backdrop-filter: blur(7px);
 }
 @media all and (max-width:30em) {
-    .buttonEndOrden {
+    .buttonEndOrden,
+    .buttonEnvio {
         display: block;
         margin: 0.4em auto;
     }
 }
-@media all and (max-width:30em) {
-    .buttonEndOrden {
-        display: block;
-        margin: 0.4em auto;
-    }
-}
+
 

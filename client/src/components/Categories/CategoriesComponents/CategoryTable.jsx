@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Table } from "reactstrap";
 import './CategoryTable.css'
 
 const CategoryTable = (props) => {
-    const { categories, editCategory, deleteCategory } = props;
+    const { editCategory, deleteCategory } = props;
+    const categories = useSelector(state => state.categoriesReducer.categories)
     return (
         <Table className='categoryTable'>
             <thead>
@@ -20,18 +22,18 @@ const CategoryTable = (props) => {
                             <th className='categoryInfo'>{category.name}</th>
                             <th className='categoryInfo'>{category.description}</th>
                             <th className='buttonContainer'>
-                                <button type="button" className='buttonEdit'
-                                    onClick={() => editCategory(category)}>Edit
+                                <button type="button" className='buttonEditCat'
+                                    onClick={() => editCategory(category)}>Editar
                                     </button>{" "}
-                                <button type="button" className='buttonEdit'
-                                    onClick={() => deleteCategory(category)}>Delete
+                                <button type="button" className='buttonEditCat'
+                                    onClick={() => deleteCategory(category)}>Eliminar
                                     </button>
                             </th>
                         </tr>
                     ))
                 ) : (
                         <tr>
-                            <td>No Categories</td>
+                            <td>No existen categorias</td>
                         </tr>
                     )}
             </tbody>

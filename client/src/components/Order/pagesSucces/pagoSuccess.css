@@ -1,15 +1,159 @@
-.Container{
+.succesContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background-color: #fff;
+
+}
+.textThanks{
+    font-size: 30px;
+    letter-spacing: -2px;
+    text-align: center;
+    width: 100%;
+}
+.textEnjoy {
+    text-align: center;
+    width: 100%;
+}
+
+h3, h4{
+    color: rgba(47, 54, 64, 0.67);
+}
+/* .cardsContainer{
+    width: 100%;
+    display:flex;
+    justify-content: flex-start;
+} */
+.infoCont{
+    width: 50%;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    border: 1px solid rgba(47, 54, 64, 0.177);
+}
+.bodyCont{
+    padding: 10px;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.headerCont{
+    padding: 10px;
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.shipmentCont{
     display: flex;
 }
-h3, h4{
-    color: white
+.shipmentContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 7px;
 }
-.cardsContainer{
-    display:flex;
+.noshipmentContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.noshipmentInfo{
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.direccionUsuario{ 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding-left: 7px;
+}
+.card-text{
+    text-transform: uppercase;
+    font-size: 15px;
+}
+iframe.mapContainer{
+    border: 1px solid black;
 
+    width:350px;
+    height:350px
 }
 
+.mapContainer{
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+
+.textCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .imgCard{
     height: 150px;
     width: 150px;
 }
+.leaflet-container{
+    display: flex;
+}
+
+.shipmentInfo{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.infoShip{
+    display: flex;
+    flex-direction: column;
+
+}
+.buttonContinueBuying{
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    justify-self: flex-start;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+    display: flex;
+    /* justify-self: center; */
+    bottom: 2%;
+    width: auto;
+    left: 2%;
+}
+.buttonContinueBuying:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(0, 0, 0, 0.815);
+    backdrop-filter: blur(7px);
+}
+@media all and (max-width:30em) {
+    .buttonContinueBuying{
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+

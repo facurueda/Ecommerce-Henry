@@ -55,9 +55,9 @@ const ModalEditProduct = (props) => {
         }))
     }
     return (
-        <div className='editProdContainer'>
+        <div className='addProdContainer'>
             <ModalHeader>
-                <div><h3>Edit product</h3></div>
+                <div><h3>Editar producto</h3></div>
             </ModalHeader>
             <ModalBody>
                 <FormGroup className='uploadImage' style={{ display: "flex", justifyContent: 'center' }}>
@@ -66,9 +66,9 @@ const ModalEditProduct = (props) => {
                     </ListGroup>
                 </FormGroup>
                 <FormGroup className='productName'>
-                    <label className='productDetail'>Product name: </label>
+                    <label className='productDetailName'>Nombre </label>
                     <input
-                        className='inputName'
+                        className='inputMenuCrud'
                         name='name'
                         type='text'
                         onChange={handleChange}
@@ -76,7 +76,7 @@ const ModalEditProduct = (props) => {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <label className='productDetail'>Description: </label>
+                    <label className='productDetailMenuCrud'>Descripcion </label>
                     <form>
                         <Editor id='productEditor'
                             apiKey='efxwg61t4p8hkjnu4a5t9y0ah1jo0kf445jywqtnqljny3fy'
@@ -91,7 +91,7 @@ const ModalEditProduct = (props) => {
                 </FormGroup>
                 <ListGroup horizontal className="propertyContainer" style={{ alignItems: 'center', justifyContent: 'space-around' }}>
                     <FormGroup className="priceContainer">
-                        <label className="productDetail">Price: </label>
+                        <label className="productDetailMenuCrud">Precio </label>
                         <input
                             className='form-control'
                             name='precio'
@@ -101,7 +101,7 @@ const ModalEditProduct = (props) => {
                         />
                     </FormGroup>
                     <FormGroup className="stockContainer">
-                        <label className="productDetail">Stock: </label>
+                        <label className="productDetailMenuCrud">Stock </label>
                         <input
                             className='form-control'
                             name='stock'
@@ -111,7 +111,7 @@ const ModalEditProduct = (props) => {
                         />
                     </FormGroup>
                     <FormGroup className="categoriesContainer">
-                        <label className='productDetail'>Categories: </label>
+                        <label className='productDetailMenuCrud'>Categoria </label>
                         <select className='form-control' name='categories' onChange={handleChange} >
                             {categories.map(c => {
                                 return (
@@ -140,11 +140,11 @@ const ModalEditProduct = (props) => {
                         modalCloseEdit();
                         window.location.reload()
                     }}
-                >Submit
+                >EDITAR
                 </button>
                 <button className='buttonExit'
                     onClick={e => modalCloseEdit()}
-                >Exit
+                >SALIR
                 </button>
             </ModalFooter>
         </div>

@@ -7,16 +7,23 @@
     border: 0px;
     font-size: 13px
 }
-
+.table tr {
+    border: 0.15px solid rgba(0, 0, 0, 0.15);
+    font-weight: 300;
+}
+.table td {
+    border: 0px ;
+}
 .table thead th,
 .table th {
-    border: 0px;
+    border: 0px ;
     display: flex;
     flex-direction: row;
     align-items: center;
     width: -webkit-fill-available;
     font-weight: 400;
     height: 40px;
+    line-height: 0;
 }
 
 .NameAndDesc,
@@ -38,35 +45,36 @@
     display: flex;
     justify-content: flex-end;
 }
-
-.buttonEdit {
-    display: inline-block;
-    padding: 0.2em 1.4em;
+.buttonEditCat{
+    
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    justify-self: flex-start;
+    padding: 10px 15px;
     border: 0.1em solid #ffffff;
-    border-radius: 0.30em;
+    margin: 0 0.2em 0 0;
+    border-radius: 0.12em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
+    text-transform: uppercase;
     font-weight: 300;
     color: #ffffff;
-    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    background-color: #212529;
+    background-color: rgba(47, 54, 64, 0.57);
     text-align: center;
     transition: all 0.15s;
 }
-
-.buttonEdit:hover {
+.buttonEditCat:hover {
     text-shadow: rgb(74, 74, 74);
-    color: #212529;
+    color:white;
     border-color: rgb(74, 74, 74);
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.815);
     backdrop-filter: blur(7px);
 }
-
 @media all and (max-width:30em) {
-    .buttonEdit {
+    .buttonEditCat {
         display: block;
         margin: 0.4em auto;
     }
 }
+

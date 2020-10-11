@@ -42,7 +42,26 @@
         margin: 0.4em auto;
     }
 }
+.input-icons i{ 
+    position: absolute; 
+} 
+  
+.input-icons { 
+    margin-bottom: 10px; 
+} 
+  
+.fa.fa-user.icon,
+.fa.fa-lock { 
+    padding: 10px; 
+    min-width: 40px; 
+    color: gray;
+} 
 
+.input-field { 
+    width: 100%; 
+    padding: 10px; 
+    text-align: center; 
+} 
 
 #loginHeaderContainer {
     font-family: 'Roboto', sans-serif;
@@ -76,10 +95,8 @@
     justify-content: space-around;
 }
 
-.standardInput {
+.input-field {
     margin-top: 5px;
-    border-radius: 11px;
-    width: 75%;
     padding: 5px 65px;
     text-align: center;
     border: 0px;

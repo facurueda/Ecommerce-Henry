@@ -1,8 +1,6 @@
 .productContainer{
     color: white;
     display: flex;
-    border-radius: 5px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.15), rgba(47, 54, 64, 0.27));
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     display: flex;
@@ -10,22 +8,33 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 5px;
-    border-radius: 10px;
     margin: 20px;
     margin-bottom: 5px;
 }
-.imgContainer {
+.table.table {
+    border-radius: 0;
+}
+/* .imgContainer {
      flex: wrap;
     display: flex;
     align-items: center;
-}
+} */
 .textQuantity {
-     flex: wrap;
+    flex: wrap;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
     padding: 0px 10px;
+}
+
+th,
+td {
+    display: flex;
+    justify-content: space-evenly;
+}
+.headProd{
+    font-family: 'Poppins', sans-serif;
 }
 .card{
     width: 100%;
@@ -33,14 +42,18 @@
     align-items: center;
     backdrop-filter: blur(7px);
 }
-.textContent{
-    flex: wrap;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align-last: right;
-    padding: 0px 15px;
-    text-shadow: rgb(74, 74, 74);
+th.prodImgCol{
+    padding-left: 30px;
+    justify-content: right;
+}
+.table td {
+    align-items: center;
+    width: -webkit-fill-available;
+}
+.textContent,
+.buttonTrash{
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
 }
 .textQuantity,
 .textAmount {
@@ -52,11 +65,22 @@
     justify-content: flex-end;
     padding: 0px 10px;
 }
+td.imgProdCont {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+}
 .productImage {
-    height: 100px;
+    margin-right: 15px;
+    height: 85px;
+    width: 85px;
     display:flex;
     justify-content: center;
     align-content:center;
+    border-radius: 0;
 }
 .cardContainer {
     width: 50%;
@@ -70,12 +94,18 @@
     flex-direction: column;
     justify-content: center;
 }
-.productInfoName {
-    font-family: 'Roboto', sans-serif;
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    color: #212529;
+}
+.productInfo,
+.quantity {
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     margin-bottom: 0;
-    font-size: 18px;
-    font-weight: 300;
+    font-size: 15px;
+    padding: 0 5px;
 }
 .buttonContainer{
     display: flex;
@@ -84,36 +114,26 @@
     align-items: center;
 }
 .deleteButton {
-    margin-top: 5px;
-    margin-right: 5px;
-    margin-bottom: 0px;
-    margin-left: 0px; 
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
+    border: 1px solid rgb(74, 74, 74);
+    font-size: 20px;
     font-weight: 300;
-    color: #ffffff;
-    width: 25px;
-    border-radius: 20px;
+    color:rgb(74, 74, 74);
+    width: 30px;
     text-align: center;
     justify-content: center;
     align-self: center;
-    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    background-color: rgba(47, 54, 64, 0.57);
+    background-color: white;
     text-align: center;
     transition: all 0.15s;
 }
 .deleteButton:hover {
     text-shadow: rgb(74, 74, 74);
-    color:white;
-    background-color: rgba(255, 255, 255, 0.1);
-    flex: wrap;
-}
-@media all and (max-width:30em) {
-    .deleteButton {
-        display: block;
-        margin: 0.4em auto;
-    }
+    color: black;
+    background-color: white;
+    border: 1px solid black;
 }
 @media all and (max-width:30em) {
     .deleteButton {
@@ -122,4 +142,9 @@
     }
 }
 
+.quantityButton{
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(74, 74, 74);
 
+}

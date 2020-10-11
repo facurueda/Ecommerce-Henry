@@ -1,11 +1,16 @@
 .products {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    background-color: #ffffff;
 }
 .ProductCard_Container {
     display: flex;
 }
+<<<<<<< HEAD
+
+=======
 div.productCard.card {
     background-color: #F5F3BB;
     border-radius: 10px;
@@ -13,6 +18,7 @@ div.productCard.card {
 .productName{
     white-space: pre-wrap;
 }
+>>>>>>> master
 .category {
     display: flex;
 }
@@ -27,7 +33,6 @@ div.productCard.card {
     flex-direction: row;
     margin-top: 50px;
     margin-bottom: 50px;
-    padding-bottom: 10px;
     border: 0;
     justify-content: center;
 }

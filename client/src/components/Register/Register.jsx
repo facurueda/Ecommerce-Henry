@@ -80,41 +80,53 @@ const Register = (props) => {
         <div className='loginContainer'>
             <button className='closeButton' onClick={modalRegisterClose}>x</button>
             <ModalHeader id='loginHeaderContainer'>
-                <div className="registerTitle">Register</div>
+                <div className="registerTitle">Creá tu cuenta</div>
             </ModalHeader>
             <ModalBody id='loginBodyContainer'>
                 <div className='FormRegisterContainer'>
-                    <input className='inputRegister' id='nameRegister' name='name' type='text' placeholder='Name' onKeyPress={(e) => {
+                <div className='input-icons'>
+                    <i class="fa fa-user icon"></i>
+                    <input className="input-field " id='nameRegister' name='name' type='text' placeholder='Nombre' onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                             document.getElementById('emailRegister').focus()
                         }
                     }} onChange={handleChange} />
-                    <input className='inputRegister' id='emailRegister' name='email' type='email' placeholder='Email' onKeyPress={(e) => {
+                </div>
+                <div className='input-icons'>
+                <i class="fa fa-envelope"></i>
+                    <input className="input-field " id='emailRegister' name='email' type='email' placeholder='Email' onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                             document.getElementById('passwordRegister').focus()
                         }
                     }} onChange={handleChange} />
-                    <input className='inputRegister' id='passwordRegister' name='password' type="password" placeholder='Password' onKeyPress={(e) => {
+                    </div>
+                    <div className='input-icons'>
+                    <i class="fa fa-lock"></i>
+                    <input className="input-field " id='passwordRegister' name='password' type="password" placeholder='Contraseña' onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                             document.getElementById('secondPasswordRegister').focus()
                         }
                     }} onChange={handleChange} />
-                    <input className='inputRegister' id='secondPasswordRegister' name='secondPassword' type="password" placeholder='Repeat Password' onKeyPress={e => {
+                    </div>
+                    <div className='input-icons'>
+                    <i class="fa fa-lock"></i>
+                    <input className="input-field " id='secondPasswordRegister' name='secondPassword' type="password" placeholder='Repeti la contraseña' onKeyPress={e => {
                         if (e.key === 'Enter') {
                             VerificarYRegistrar()
                         }
                     }} onChange={handleChange} />
-                    <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >CREATE ACCOUNT</button>
+                    </div>
                 </div>
+                <button className='buttonLoginAndRegister' onClick={e => VerificarYRegistrar()} >Crear</button>
             </ModalBody>
             <ModalFooter id='loginFooterContainer'>
                 <div className='LoginAccount'>
                     <a><div className='logComponent'>
-                        <p className='alreadylog' >Already have an account? </p>
-                        <a className='logAccount' href='#' onClick={ChangeModal}>Login</a>
+                        <p className='alreadylog' > </p>
+                        <a className='logAccount' href='#' onClick={ChangeModal}>Ya tenes una cuenta?</a>
                     </div></a>
                     <div className='LoginAccountAux'>
-                        <p className='orLogin'>or login with</p>
+                        <p className='orLogin'>O inicia sesión con</p>
                         <button onClick={ClicktoSign} className='btnGoogle'>
                             <div class="google-btn">
                                 <div class="google-icon-wrapper">
