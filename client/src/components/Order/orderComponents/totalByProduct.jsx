@@ -40,7 +40,7 @@ const TotalByProduct = (props) => {
                         <td className='quantityButton'><button className='deleteButton' onClick={e => btnRestar(+1)}>-</button><p className='quantity'>{quantity}</p><button className='deleteButton' onClick={e => btnRestar(-1)}>+</button></td>
                         <td className='textContent'>$  {product.Inter_Prod_Order.price * quantity}</td>
                         <td className='buttonContainer'>
-                            <button className='buttonTrash' onClick={e => btnRestar(product.Inter_Prod_Order.quantity)} ><i class="far fa-trash-alt"></i></button>
+                            <button className='buttonTrash' onClick={e => {btnRestar(quantity)}} ><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>

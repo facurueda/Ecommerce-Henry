@@ -114,7 +114,9 @@ const Order = (props) => {
             </div>
           </div>
           <div style={{ display: props.origin }} className='containerButtonEndOrden'>
-          <button className="buttonEndOrden" onClick={clickButton}>
+          <button className="buttonEndOrden" onClick={()=>{
+            window.location.href = '/catalogue?filter=All categories'
+          }}>
               CONTINUAR COMPRANDO
               </button>
             <button className="buttonEndOrden" onClick={clickButton}>

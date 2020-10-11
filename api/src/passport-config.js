@@ -3,6 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 const GithubStrategy = require("passport-github").Strategy;
 
 const bcrypt = require('bcrypt');
+const Sequelize = require("sequelize");
 const {
   User,
   Order,
@@ -17,6 +18,8 @@ function initialize(passport) {
       where: {
         email: email
       }
+    }).catch(() => {
+      return null
     })
     ///////////////////////////////// In case the user doesnt exist
     if (user == null) {
@@ -27,35 +30,28 @@ function initialize(passport) {
     ///////////////////////////////// In case the user exist and test the password
     try {
       if (await bcrypt.compare(password, user.password)) {
-        const orderUserLogin = await User.findOne({
+        const orderUserLogin = await Order.findOne({
           where: {
-            email: email
+            idUser: user.idUser,
+            [Sequelize.Op.or]: [{
+              status: 'CREADA'
+          }, {
+              status: 'CARRITO'
+          }]
           }
-        }).then(user => {
-          return Order.findOne({
-            where: {
-              idUser: user.idUser
-            }
-          })
         })
         const orderGuest = await Order.findOne({
           where: {
             idUser: idUser
           }
         })
-        Order.findOne({
+        Inter_Prod_Order.findAll({
           where: {
-            idUser: idUser
+            idOrder: orderGuest.idOrder
           }
-        }).then(order => {
-          return Inter_Prod_Order.findAll({
-            where: {
-              idOrder: order.idOrder
-            }
-          })
         }).then(inters => {
           inters.map(inter => {
-            const interQuantity = inter.quantity
+            const interQuantityGuest = inter.quantity
             Inter_Prod_Order.findOne({
               where: {
                 idProduct: inter.idProduct,
@@ -64,7 +60,8 @@ function initialize(passport) {
             }).then(inter => {
               return inter.update({
                 ...inter,
-                quantity: inter.quantity + interQuantity
+                quantity: inter.quantity + interQuantityGuest,
+                idOrder: orderUserLogin.idOrder
               })
             }).catch(() => {
               return Inter_Prod_Order.create({

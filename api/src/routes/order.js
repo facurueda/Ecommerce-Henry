@@ -294,6 +294,7 @@ server.post("/checkout", async (req, res, next) => {
     auto_return: "approved",
     back_urls: {
       success: "http://localhost:3001/pagoSuccess",
+      failure: 'http://localhost:3001/pagoFailure'
     },
     shipments: {},
   };
