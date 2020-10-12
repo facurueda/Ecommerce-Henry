@@ -4,7 +4,7 @@ import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { actionLogin, actionSetModalLogin } from "../../redux/usersActions";
 import { actionGetOrder } from "../../redux/ordersActions";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 

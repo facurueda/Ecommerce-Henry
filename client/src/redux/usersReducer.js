@@ -17,7 +17,8 @@ import {
     USER_TO_ADMIN,
     ADMIN_TO_USER,
     DELETE_USER,
-    GET_ALL_DIRECTIONS
+    GET_ALL_DIRECTIONS,
+    UPDATE_USER
 } from './constants'
 
 const initialState = {
@@ -35,6 +36,12 @@ const initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case UPDATE_USER:
+            return {
+                ...state,
+                name: action.payload.name,
+                email: action.payload.email
+            }
         case SET_MODAL_LOGIN:
             return {
                 ...state,
