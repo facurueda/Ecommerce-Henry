@@ -225,7 +225,8 @@ server.put('/:idUser/cart', (req, res, next) => {
     }).catch(next);
 })
 
-server.put('/:idUser', (req, res, next) => {
+server.put('/:idUser', isUserOrAdmin, (req, res, next) => {
+    console.log(req.body);
     User.findOne({
         where: {
             idUser: req.body.idUser
@@ -235,7 +236,6 @@ server.put('/:idUser', (req, res, next) => {
             ...user,
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password
         })
     }).then((userActualizado) => {
         res.send(userActualizado)

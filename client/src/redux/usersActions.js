@@ -21,11 +21,19 @@ import {
   ADMIN_TO_USER,
   DELETE_USER,
   GET_ALL_DIRECTIONS,
+  UPDATE_USER,
 } from "./constants";
 const url = "http://localhost:3000/";
 var qs = require("qs");
 axios.defaults.withCrendentails = true;
 
+export const actionUpdateUser = (inputs) => {
+  return (dispatch) => {
+    axios.put(url + 'user/' + inputs.idUser, inputs, { withCredentials: true }).then((res) => {
+      dispatch({ type: UPDATE_USER, payload: res.data })
+    })
+  }
+}
 export const actionGetUsers = () => {
   return (dispatch) => {
     axios

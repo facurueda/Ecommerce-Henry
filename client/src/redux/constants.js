@@ -28,6 +28,7 @@ export const UPDATE_ORDER = 'UPDATE_ORDER'
 export const SET_QUANTITY = 'SET_QUANTITY'
 
 export const DELETE_USER = 'DELETE_USER'
+export const UPDATE_USER = 'UPDATE_USER'
 export const ADMIN_TO_USER = 'ADMIN_TO_USER'
 export const USER_TO_ADMIN = 'USER_TO_ADMIN'
 export const GET_ALL_USERS = 'GET_ALL_USERS'

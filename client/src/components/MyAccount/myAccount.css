@@ -5,6 +5,15 @@
     justify-content: center;
     color: white;
 }
+.buttonNone{
+    display: none;
+    color: white;
+}
+.buttonFlex{
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
 .userDataContainer {
     display: flex;
     color: white;
@@ -48,11 +57,20 @@
     color: black;
     text-align: center;
 }
-.valueData{
+.valueDataFlex{
     font-size: 20px;
     color: black;
 
     text-align: center;
+}
+.valueDataNone{
+    display: none;
+}
+.inputValueDataFlex{
+    display: flex;
+}
+.inputValueDataNone{
+    display: none;
 }
 .DeleteProd{
     display: none;
