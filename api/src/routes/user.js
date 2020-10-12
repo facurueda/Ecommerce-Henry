@@ -283,34 +283,21 @@ server.delete('/:idUser', (req, res, next) => {
 });
 
 
-server.post('/:upload', (req, res, next) =>{    
-    const file = req.files.file;
-    
-    if(req.files === 'null'){
-        return res.status(400).json({msg: 'No se ha encontrado imagen para subir'});
-    } else {
-    
-    file.mv(`${_dirname}/client/public/uploads/${file.name}`), err => {
-        if(err){
-            console.log(err);
-            return res.status(500).send(err)
-        }
+server.post('/upload', (req, res) =>{    
 
-        res.json({fileName : file.name , filePath: `/uploads/${file.name}`}) // envio al font?
-        
-    } 
+    const {linkImg} = req.body;
 
     User.findOne({
-        where: {
-            email: email
+        where:{
+            idUser: req.user.idUser
         }
-    }).then( user => {
+    }).then(user => {
         return user.update({
-             ...user,
-            img: file,            
+            ...user,
+            img: linkImg
         })
-    } )    
- }
+    })
+
 })
 
 module.exports = server;

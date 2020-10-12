@@ -1,9 +1,10 @@
 import React, { useState, useRef} from "react";
 import { Button, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { actionDataUpdate } from "../../redux/usersActions";
+import SelectImage from '../SelectImage/SelectImage'
 
 
 
@@ -13,9 +14,9 @@ const ModalEditData = (props) => {
   const dispatch = useDispatch();
     
   const {modalEditViewFalse,user,name,email} = props;  
-  const {/* watch, */ register/* , handleSubmit,errors */ } = useForm({
-     nativeValidation: true
-  });  
+  // const {/* watch, */ register/* , handleSubmit,errors */ } = useForm({
+  //    nativeValidation: true
+  // });  
 
 
     const [datos, setDatos] = useState({    
