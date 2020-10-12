@@ -45,6 +45,7 @@ export const RESET_OK = 'RESET_OK'
 export const RESET_FAILED = 'RESET_FAILED'
 export const RESET_STATUS_RESET = 'RESET_STATUS_RESET'
 
+export const EMPTY_CART = 'EMPTY_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'
 
 export const REVIEW_POST = 'REVIEW_POST'

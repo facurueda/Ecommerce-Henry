@@ -10,6 +10,7 @@ const AdminOrdersTable = () => {
     
     const dispatch = useDispatch()
     const orders = useSelector(state => state.ordersReducer.orders)
+    const direccion = useSelector(state => state.ordersReducer.direccion)
     const users = useSelector(state => state.usersReducer.users)
     useEffect(() => {
         dispatch(actionGetAllOrders());
@@ -27,6 +28,7 @@ const AdminOrdersTable = () => {
         }
     }
 
+
     return (
         <div >
             <Table className='ordersCont'>
@@ -41,15 +43,15 @@ const AdminOrdersTable = () => {
                 </thead>
                 <tbody>
                     {(orders.length > 0) ? (
-                        orders.map(order => { if(order.status === 'CERRADA'){
+                        orders.filter(order => order.status === 'CERRADA').map(order => {
                             return ( <tr className='categories' key={order.idCategory}>
                                 <th className='categoryInfo'>{order.idOrder}</th>
                                 <th className='categoryInfo'>{getUserName(order)}</th>
-                                <th className='categoryInfo'>{order.direccion}</th>
+                                <th className='categoryInfo'>{direccion}</th>
                                 <th className='categoryInfo'>{order.status}</th>
                                 <th className='categoryInfo'>{order.total}</th>
                             </tr> ) 
-                        } 
+                        
                        } )
                     ) : ( <tr>
                                 <th>No hay ordenes</th>

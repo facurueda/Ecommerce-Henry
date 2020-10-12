@@ -45,7 +45,7 @@
   .dropdownCategories > a {
     display: flex;
     align-items: center;
-    margin: 10px 30px;
+    margin: 10px 45px;
   }
   .categoryDrop:hover{
     color: grey;

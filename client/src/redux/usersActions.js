@@ -26,17 +26,11 @@ const url = "http://localhost:3000/";
 var qs = require("qs");
 axios.defaults.withCrendentails = true;
 
+
 export const actionGetUsers = () => {
-  return (dispatch) => {
-    axios
-      .get(url + "user/", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        dispatch({
-          type: GET_ALL_USERS,
-          payload: res.data,
-        });
+  return (dispatch) => { 
+    axios.get(url + "user/", { withCredentials: true }).then((res) => {
+        dispatch({ type: GET_ALL_USERS, payload: res.data });
       });
   };
 };
@@ -148,41 +142,21 @@ export const actionResetStatusReset = () => {
 };
 export const actionPasswordUpdate = (obj) => {
   return (dispatch) => {
-    axios
-      .post(
-        url + "auth/reset?token=" + obj.token,
-        {
-          password: obj.password,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+    axios.post(url + "auth/reset?token=" + obj.token, { password: obj.password }, { withCredentials: true })
       .then(() => {
-        dispatch({
-          type: RESET_OK,
-          payload: ["Contraseña aplicada con éxito"],
-        });
-      })
-      .catch(() => {
-        dispatch({
-          type: RESET_FAILED,
-          payload: [
+        dispatch({ type: RESET_OK, payload: ["Contraseña aplicada con éxito"] });
+      }).catch(() => {
+        dispatch({ type: RESET_FAILED, payload: [
             "Algo falló al intentar cambiar la contraseña, intentelo denuevo.",
-          ],
-        });
+          ]});
       });
   };
 };
 
 export const actionUserCreate = (props) => {
   return (dispatch) => {
-    axios
-      .post(url + "user", props, {
-        withCredentials: true,
-      })
+    axios .post(url + "user", props, { withCredentials: true })
       .then((res) => {
-        console.log("CREATEEDD", res);
         toast("¡Usuario Creado!", {
           position: "top-center",
           autoClose: 3500,

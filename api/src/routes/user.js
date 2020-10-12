@@ -249,18 +249,14 @@ server.delete('/:idUser/cart', (req, res, next) => {
             status: 'CARRITO'
         }
     }).then(order => {
-        return order.update({
-            ...order,
-            status: 'CANCELADA'
-        })
-    }).then(() => {
-        return Order.create({
-            idUser: req.params.idUser
-        })
-    }).then(() => {
-        res.send({
-            result: 'Carrito vaciado'
-        })
+        Inter_Prod_Order.destroy({
+            where: {
+                idOrder: order.idOrder
+            }
+        }) 
+        return order
+    }).then((order) => {
+        res.send(order)
     }).catch(next);
 })
 
