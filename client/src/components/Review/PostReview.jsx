@@ -41,7 +41,9 @@ const PostReview = (props) => {
     }
     return (
         <div className='createOrEditContainer'>
-            <button className='closeButton' onClick={modalPostReviewClose}>x</button>
+            <button className='closeButton' onClick={modalPostReviewClose}>
+            <i class="fas fa-times"></i>
+            </button>
             <ModalHeader id='ModalHeaderContainer'>
                 <div className="addProductTitle">Add your Review</div>
             </ModalHeader>

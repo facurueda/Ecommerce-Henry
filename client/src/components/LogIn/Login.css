@@ -119,16 +119,12 @@
 .closeButton {
     align-self: flex-end;
     justify-self: flex-end;
-    margin-top: 5px;
-    margin-right: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
     margin-bottom: 0px;
     margin-left: 0px;
-    background-color: darkred;
-    width: 25px;
-    border-radius: 10px;
-    text-align: center;
     justify-content: center;
-    color: white
+    color: white;
 }
 
 .LoginAccount {

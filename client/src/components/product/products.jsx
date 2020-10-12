@@ -11,6 +11,7 @@ import { actionGetProduct, actionSetProduct } from '../../redux/productsActions'
 import { useHistory } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import itemBack from './Bottomback';
 
 function Products() {
 
@@ -99,6 +100,7 @@ function Products() {
         <div>
             <body>
                 <div className='prodCard'>
+                <itemBack/>
                     <div id='hover-img'>
                         <img className="img-fluid" src={images} alt="..." />
                     </div>
@@ -126,9 +128,6 @@ function Products() {
                             </div>
                             <div className='buttons'>
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />
-                                <button className='buyProd'>Comprar</button>
-                                <div className='conteiner-star'>
-                                </div>
                             </div>
                         </div>
                     </div>

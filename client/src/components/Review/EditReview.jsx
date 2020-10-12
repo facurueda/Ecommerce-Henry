@@ -32,7 +32,9 @@ const EditReview = (props) => {
     }
     return (
         <div className='createOrEditContainer'>
-            <button className='closeButton' onClick={modalEditReviewClose}>x</button>
+            <button className='closeButton' onClick={modalEditReviewClose}>
+            <i class="fas fa-times"></i>
+            </button>
             <ModalHeader id='ModalHeaderContainer'>
                 <div className="addProductTitle">Edit Review </div>
             </ModalHeader>

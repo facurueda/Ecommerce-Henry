@@ -29,3 +29,10 @@
     font-size: 13px;
     color: black
 }
+.userDataContainer{
+
+}
+.userAccountContainer{
+    display: flex;
+    align-content: center;
+}

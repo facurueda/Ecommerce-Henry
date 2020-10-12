@@ -1,77 +1,36 @@
-.ComponentContainer{
+.userAccountContainer{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
 }
-.buttonNone{
-    display: none;
-    color: white;
-}
-.buttonFlex{
-    display: flex;
-    flex-direction: row;
-    color: white;
-}
-.userDataContainer {
-    display: flex;
-    color: white;
-    position: absolute;
-    flex-direction: column;
-    align-self: flex-start;
-    margin-left: 0px;
-}
-.ordersContainer{
-    color: white;
-}
-.buttonDetails{
-    color: black;
-    background-color: white;
-    padding: 3px 5px 3px 5px;
-    border-radius: 3px;
-}
-.dataContainer{
-    flex-direction: column;
-     align-items: center;
-}
-.nameeContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    border-radius: 0px 20px 20px 0px;
-    margin-top: 5px;
-    padding: 5px 20px 5px 10px;
-    background-color: white;
-}
-.emaillContainer {
-    display: flex;
-    border-radius: 0px 20px 20px 0px;
-    margin-top: 5px;
-    padding: 5px 20px 5px 10px;
-    background-color: white;
-}
-.typeData{
-    font-size: 15px;
-    color: black;
-    text-align: center;
-}
-.valueDataFlex{
-    font-size: 20px;
-    color: black;
 
-    text-align: center;
-}
-.valueDataNone{
-    display: none;
-}
-.inputValueDataFlex{
+.buttonMenuUser {
     display: flex;
+    font-size: 13px;
+    width: 100%;
+    align-items: center;
+    justify-self: flex-start;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+    text-transform: uppercase;
 }
-.inputValueDataNone{
-    display: none;
+.buttonMenuUser:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(0, 0, 0, 0.815);
+    backdrop-filter: blur(7px);
 }
-.DeleteProd{
-    display: none;
+@media all and (max-width:30em) {
+    .buttonMenuUser {
+        display: block;
+        margin: 0.4em auto;
+    }
 }

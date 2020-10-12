@@ -24,58 +24,42 @@ const Users = (props) => {
   }
 
   return (
-    <Table className="categoryTable">
-      <thead>
-        <tr className="NameAndDesc">
-          <th className="Name">Nombre</th>
-          <th className="Desc">Email</th>
-          <th className="Desc">Level</th>
-          <th className="buttons" />
-        </tr>
-      </thead>
-      <tbody>
-        {props.users.length > 0 ? (
-          props.users.map((user) =>
-            user.level != "GUEST" ? (
-              <tr className="categories" key={user.idUser}>
-                <th className="categoryInfo">{user.name}</th>
-                <th className="categoryInfo">{user.email}</th>
-                <th className="categoryInfo">{user.level}</th>
-                <th className="buttonContainer">
-                        <button
-                        type="button"
-                        className="buttonEdit"
-                        onClick={() => setAdmin(user)}
-                      >
-                        ToAdmin
-                      </button>{" "}
-                      <button
-                        type="button"
-                        className="buttonEdit"
-                        onClick={() => setUser(user)}
-                      >
-                        ToUser
-                      </button>
-                      <button
-                        type="button"
-                        className="buttonEdit"
-                        onClick={() => deleteUser(user)}
-                      >
-                        Delete
-                      </button>
-                </th>
-              </tr>
-            ) : (
-              null
-            )
-          )
-        ) : (
+    <div class="table-responsive" className='tableUsers'>
+      <table class="table">
+        <thead className='headProd'>
           <tr>
-            <td>No Users</td>
+            <th scope="col" className='textUsers'>Nombre</th>
+            <th  scope="col" className='textUsers'>Email</th>
+            <th scope="col" className='textUsers'>Level</th>
+            <th  scope="col" />
           </tr>
-        )}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {props.users.length > 0 ? (
+            props.users.map((user) =>
+              user.level != "GUEST" ? (
+                <tr key={user.idUser}>
+                  <th className='textUsersContent'>{user.name}</th>
+                  <th className='textUsersContent'>{user.email}</th>
+                  <th className='textUsersContent'>{user.level}</th>
+                  <th className="buttonContUsers">
+                    <button type="button" className='buttonEditCat' onClick={() => setAdmin(user)}>Admin</button>{" "}
+                    <button type="button" className='buttonEditCat' onClick={() => setUser(user)} >User</button>
+                    <button type="button" className='buttonEditCat' onClick={() => deleteUser(user)}>Eliminar</button>
+                  </th>
+                </tr>
+              ) : (
+                  null
+                )
+            )
+          ) : (
+              <tr>
+                <td>No Users</td>
+              </tr>
+            )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 const mapStateToProps = (state) => {

@@ -1,10 +1,11 @@
 import './adminOrdersTable.css'
 import '../../components/Categories/CategoriesComponents/CategoryTable.css'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from "reactstrap";
 import { useSelector, useDispatch } from 'react-redux'
 import { actionGetAllOrders } from '../../redux/ordersActions'
 import { actionGetUsers } from '../../redux/usersActions'
+
 
 const AdminOrdersTable = () => {
     
@@ -12,6 +13,7 @@ const AdminOrdersTable = () => {
     const orders = useSelector(state => state.ordersReducer.orders)
     const direccion = useSelector(state => state.ordersReducer.direccion)
     const users = useSelector(state => state.usersReducer.users)
+    const [pageLimits, setPageLimits] = useState({ min: 0, max: 4 });
     useEffect(() => {
         dispatch(actionGetAllOrders());
         dispatch(actionGetUsers())
@@ -59,7 +61,18 @@ const AdminOrdersTable = () => {
                         )}
                 </tbody>
             </Table>
-
+            {orders ? (<div className='PagePrevNext'>
+                    <button className='buttonEndOrden' onClick={() => {
+                        if (pageLimits.min > 1) {
+                            setPageLimits({ min: pageLimits.min - 5, max: pageLimits.max - 5 })
+                        }
+                    }}> {'<'} </button>
+                    <button className='buttonEndOrden' onClick={() => {
+                        if (pageLimits.max < orders.length) {
+                            setPageLimits({ min: pageLimits.min + 5, max: pageLimits.max + 5 })
+                        }
+                    }}> {'>'} </button>
+                </div>) : (<div></div>)}
         </div>
     )
 }
