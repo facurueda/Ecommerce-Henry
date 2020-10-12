@@ -18,7 +18,9 @@ import {
     ADMIN_TO_USER,
     DELETE_USER,
     GET_ALL_DIRECTIONS,
-    UPDATE_USER
+    UPDATE_USER,
+    FILE_UPLOAD,
+    PUT_DATA
 } from './constants'
 
 const initialState = {
@@ -31,7 +33,8 @@ const initialState = {
     resetStatus: [],
     users: [],
     direcciones: [],
-    modalLogin: false
+    modalLogin: false,
+    img: ''
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -144,7 +147,17 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 direcciones: action.payload
             }
-
+            case PUT_DATA:
+                return {
+                  ...state,
+                  email: action.payload.email,
+                  name: action.payload.name,
+                };
+          
+              case FILE_UPLOAD:
+                return {
+                  ...state,
+                };
         default:
             return state;
     }

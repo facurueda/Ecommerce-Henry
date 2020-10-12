@@ -4,36 +4,67 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionGetOrdersByUser } from '../../redux/ordersActions';
 import Orders from '../adminOrdersTable/ordersComponent';
 import AdminNavBar from '../AdminNavBar/AdminNavBar'
+
 import { actionUpdateUser } from '../../redux/usersActions';
 import { toast } from 'react-toastify';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import ModalEditData from './ModalEditData';
+import SelectImage from '../selectImageAvatar/SelectImage'
+import { actionGetMe, actionSetAvatar } from '../../redux/usersActions';
 
-const MyAccount = () => {
+
+const MyAccount = (props) => {
     toast.configure()
-    const orders = useSelector(store => store.ordersReducer.orders)
-    const name = useSelector(store => store.usersReducer.name)
-    const email = useSelector(store => store.usersReducer.email)
-    const user = useSelector(store => store.usersReducer.idUser)
-    const level = useSelector(store => store.usersReducer.level)
-    const dispatch = useDispatch()
-    const [style, setStyle] = useState("buttonNone")
-    const [valueData, setValueData] = useState('valueDataFlex')
-    const [inputValueData, setInputValueData] = useState('inputValueDataNone')
-    const [buttonUpdate, setButtonUpdate] = useState('buttonNone')
-    const [buttonText, setButtonText] = useState('EDITAR PERFIL')
+    useEffect(() => {
+        dispatch(actionGetMe())
+      }, [])
+
+    const dispatch = useDispatch();
+    const [usuario, setUsuario] = useState(props.user)
+
+    const name = useSelector(state => state.usersReducer.name)
+    const email = useSelector(state => state.usersReducer.email)
+    const user = useSelector(state => state.usersReducer.idUser)
+    const level = useSelector(state => state.usersReducer.level)
+
     const [inputs, setInputs] = useState({ name: name, email: email, idUser: user })
-    const changeValueDataDisplay = () => {
-        if (valueData === 'valueDataFlex') {
-            setValueData('valueDataNone')
-            setInputValueData('inputValueDataFlex')
-            setButtonUpdate('buttonLoginAndRegister')
-            setButtonText('CANCELAR')
-        } else {
-            setValueData('valueDataFlex')
-            setInputValueData('inputValueDataNone')
-            setButtonUpdate('buttonNone')
-            setButtonText('EDITAR PERFIL')
-        }
+    const img = useSelector(store => store.usersReducer.img)
+
+
+
+    const [modalEdit, modalInsertEdit] = useState(false);
+    const modalEditView = () => modalInsertEdit(!modalEdit);
+    const modalEditViewFalse = () => modalInsertEdit(false);
+
+    const modalAvatarView = () => modalInsertAvatar(!modalAvatar);
+    const modalAvatarViewFalse = () => modalInsertAvatar(false);
+    const [modalAvatar, modalInsertAvatar] = useState(false);
+
+    const updateData = (updatedData) => {
+        props.actionDataUpdate(updatedData)
     }
+
+    const [loading, setLoading] = useState(false)
+    const [imagesUpload, setImagesUpload] = useState('')
+
+    const uploadImage = async e => {
+        const files = e
+        const data = new FormData()
+        data.append('file', files)
+        data.append('upload_preset', 'ecommerceHenry')
+        setLoading(true)
+        const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
+            {
+                method: 'POST',
+                body: data
+            })
+        const file = await res.json()
+        dispatch(actionSetAvatar(file.secure_url))
+        console.log('this file', file.secure_url)
+        setImagesUpload(file.secure_url)
+        setLoading(false)
+    }
+
     const handleChange = (e) => {
         const { type, value } = e.target;
         console.log("type: ", type);
@@ -68,41 +99,57 @@ const MyAccount = () => {
 
                     )}
 
+                    </div>
+        <div className='conteiner-maximo'>
+            <div className='conteiner-tittle'>
+                <div className='conteiner-fluid'>
+                    <h1 className='textoa'>Mi Cuenta</h1>
+                    <h3 className='textob'>Datos Personales</h3>
+                </div>
             </div>
-            <div className='userDataContainer'>
-                    <div className='nameeContainer'>
-                        <span className={valueData}>{name}</span>
-                        <input id='name' type='name' className={inputValueData} placeholder={name} onChange={handleChange} />
-                    </div>
 
-                    <div className='emaillContainer'>
-                        <span className={valueData}>{email}</span>
-                        <input id='email' type='email' className={inputValueData} placeholder={email} onChange={handleChange} />
-                    </div>
-                    <button id='buttonEdit' className={style} onClick={() => {
-                        changeValueDataDisplay()
-                    }} >{buttonText}</button>
-                    <div className={buttonUpdate}>
-                        <button onClick={() => {
-                            if (!document.getElementById('name').value || !document.getElementById('email').value) {
-                                toast.error("Debe completar todos los datos", {
-                                    position: "top-center",
-                                    autoClose: 2500,
-                                    hideProgressBar: false,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                    progress: undefined,
-                                })
-                            }
-                            else {
-                                dispatch(actionUpdateUser(inputs))
-                                changeValueDataDisplay()
-                            }
-                        }}>APLICAR CAMBIOS</button>
-                    </div>
+            <div className='img'>
+                <img className='img-user' src={img} style={{borderRadius:'50%'}}></img>
+
+
+                <button
+                    className="btn btn-dark"
+                    onClick={() => modalAvatarView()}> Add Image</button>
+
+                <Modal isOpen={modalAvatar}>
+                    <SelectImage uploadImage={uploadImage} modalAvatarViewFalse={modalAvatarViewFalse}/>
+
+                </Modal>
+
+
+            </div>
+            <div className='cajauser'>
+                <div className='nameContainer'>
+                    <span className='valueData'><h2>{name}</h2></span>
+                </div>
+                <div className='emaillContainer'>
+                    <span className='valueData'>{email}</span>
+                </div>
+                <div className='edit'>
+                    <button  
+                        data-toggle="modal"
+                        data-target="#editModal"
+                        onClick={() => modalEditView()}  
+                        className="btn btn-dark" >
+                        Editar mis datos </button>
+                    <Modal isOpen={modalEdit}>
+                        <ModalEditData
+                            modalEditViewFalse={modalEditViewFalse}
+                            user={user}
+                            updateData={updateData}
+                        />
+                    </Modal>
+
+                </div>
             </div>
         </div>
+        </div>
     )
-}
-export default MyAccount;
+   }
+
+export default MyAccount

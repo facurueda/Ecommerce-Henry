@@ -127,7 +127,8 @@ server.post('/cookie', async (req, res) => {
             name: 'guest',
             email: aleatoryEmail + '@gmail.com',
             password: hashedPassword,
-            level: 'GUEST'
+            level: 'GUEST',
+            img: 'https://res.cloudinary.com/facu9685/image/upload/v1602536866/henry/zersguujnkufynerj633.png'
         }).then((newUser) => {
             return Order.create({
                 idUser: newUser.idUser,
@@ -143,6 +144,7 @@ server.post('/cookie', async (req, res) => {
                 name: newUser.name,
                 email: newUser.email,
                 level: newUser.level,
+                img: newUser.img,
                 verified: true,
                 order: carrito
             })

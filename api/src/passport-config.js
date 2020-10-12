@@ -200,6 +200,9 @@ function initialize(passport) {
     authenticateUserGitHub
   ));
 
+
+
+
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passReqToCallback: true
