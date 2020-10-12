@@ -16,7 +16,9 @@ import {
     GET_ALL_USERS,
     USER_TO_ADMIN,
     ADMIN_TO_USER,
-    DELETE_USER
+    DELETE_USER,
+    PUT_DATA,
+    FILE_UPLOAD
 
 } from "./constants";
 const url = "http://localhost:3000/";
@@ -265,3 +267,27 @@ export const actionResetPassword = (email) => {
         }
     )
 }
+export const actionDataUpdate = (user) => {
+    return (dispatch) => {
+      axios.put(url + 'user/', user, {withCredentials: true}).then((res) => {
+        dispatch({ type: PUT_DATA , payload: res.data })        
+      })
+    }
+  }
+  export const actionFileUpload = (fileName) => {
+    return (
+        (dispatch) => {
+            axios.post(url + 'user/upload', fileName, {
+                withCredentials: true
+            }, { headers: {
+                'Content-Type': 'multipart/form-data'
+            }}).then((res) => {
+                return dispatch({
+                    type: FILE_UPLOAD,
+                    payload: res.data
+                })
+            })
+        }
+    )
+}
+ 

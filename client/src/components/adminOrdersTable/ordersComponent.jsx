@@ -17,7 +17,7 @@ const Orders = (props) => {
                 }else {
                     setDisplay('none');
                 }
-            }} className='buttonDetails'> Details</button>
+            }} /* className='buttonDetails'  */ type="button" className="btn btn-dark" > Details</button>
             <div style={{display: display }}>
             <OrderByIdComponent order={props.order }/>
             </div>

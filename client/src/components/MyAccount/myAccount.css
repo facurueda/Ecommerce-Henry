@@ -1,59 +1,66 @@
-.ComponentContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-.userDataContainer {
-    display: flex;
-    color: white;
-    position: absolute;
-    flex-direction: column;
-    align-self: flex-start;
-    margin-left: 0px;
-}
-.ordersContainer{
-    color: white;
-}
-.buttonDetails{
-    color: black;
-    background-color: white;
-    padding: 3px 5px 3px 5px;
-    border-radius: 3px;
-}
-.dataContainer{
-    flex-direction: column;
-     align-items: center;
-}
-.nameeContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    border-radius: 0px 20px 20px 0px;
-    margin-top: 5px;
-    padding: 5px 20px 5px 10px;
-    background-color: white;
-}
-.emaillContainer {
-    display: flex;
-    border-radius: 0px 20px 20px 0px;
-    margin-top: 5px;
-    padding: 5px 20px 5px 10px;
-    background-color: white;
-}
-.typeData{
-    font-size: 15px;
-    color: black;
-    text-align: center;
-}
-.valueData{
-    font-size: 20px;
-    color: black;
 
-    text-align: center;
+ .conteiner-tittle{
+/*      background-color: teal;   */ 
+  margin-left: 70px; 
+  display: flex;
+  margin-top: 20px;
+} 
+
+.textoa{
+    font-family: 'Roboto', 'sans-serif';
+    color:  #ffffff;
+    font-size: 40px;
 }
-.DeleteProd{
-    display: none;
+
+.textob{
+    font-family: 'Roboto', 'sans-serif';
+    font-size: 20px;
+    color:  gray;
 }
+
+
+.img-user{
+    width: 170px;
+    height: 170px;
+    margin-left: 700px;
+}
+
+.cajauser{
+    padding-bottom: 50px;
+    margin-bottom: 90px;
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    color: #ffffff;
+    margin-top: 20px;
+    margin-left: 535px;
+    width: 500px;
+    background-color: rgba(222, 245, 209, 0.25);
+    backdrop-filter: blur(7px);
+    border-radius: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+/* .editButton{
+    cursor: pointer;
+    box-shadow: -1px 3px 3px 0 rgba(58, 119, 134, 0.2);
+    border: none;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    font-size: 10px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+

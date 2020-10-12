@@ -6,7 +6,7 @@ const {
     Product
 } = require('../db.js');
 const Sequelize = require("sequelize");
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 const passport = require('passport');
 const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
@@ -224,18 +224,25 @@ server.put('/:idUser/cart', (req, res, next) => {
     }).catch(next);
 })
 
-server.put('/:idUser', (req, res, next) => {
+server.put('/', (req, res, next) => {
+    console.log("aca contra", req.body.contraseña)
+    const cont = req.body.constraseña;
     User.findOne({
         where: {
-            idUser: req.body.idUser
+            idUser: req.user.idUser
         }
-    }).then(user => {
-        return user.update({
-            ...user,
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
-        })
+    }).then(async (user) => {
+        if (await bcrypt.compare(req.body.contraseña, user.password)) {
+            const contraseñanueva = await  bcrypt.hash(req.body.contraseña,10)
+            console.log(contraseñanueva)
+            return user.update({
+                ...user,
+                name: req.body.name,
+                email: req.body.email,
+                password: contraseñanueva
+            })
+        } else {
+       res.status(404).send('Contraseña erronea')} 
     }).then((userActualizado) => {
         res.send(userActualizado)
     }).catch(next);
@@ -274,5 +281,36 @@ server.delete('/:idUser', (req, res, next) => {
         })
     }).catch(next);
 });
+
+
+server.post('/:upload', (req, res, next) =>{    
+    const file = req.files.file;
+    
+    if(req.files === 'null'){
+        return res.status(400).json({msg: 'No se ha encontrado imagen para subir'});
+    } else {
+    
+    file.mv(`${_dirname}/client/public/uploads/${file.name}`), err => {
+        if(err){
+            console.log(err);
+            return res.status(500).send(err)
+        }
+
+        res.json({fileName : file.name , filePath: `/uploads/${file.name}`}) // envio al font?
+        
+    } 
+
+    User.findOne({
+        where: {
+            email: email
+        }
+    }).then( user => {
+        return user.update({
+             ...user,
+            img: file,            
+        })
+    } )    
+ }
+})
 
 module.exports = server;

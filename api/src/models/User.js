@@ -34,6 +34,10 @@ module.exports = (sequelize) => {
     level: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    img: {
+      type: DataTypes.STRING,  
+
     }
   });
 };

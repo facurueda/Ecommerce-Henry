@@ -15,7 +15,9 @@ import {
     SET_COOKIE_TO_STORE,
     USER_TO_ADMIN,
     ADMIN_TO_USER,
-    DELETE_USER
+    DELETE_USER,
+    PUT_DATA,
+    FILE_UPLOAD
 } from './constants'
 
 const initialState = {
@@ -128,13 +130,27 @@ const usersReducer = (state = initialState, action) => {
         case RESET_PASSWORD:
             return {
                 ...state,
-                email: action.payload.email
+                email: action.payload.email 
             }
         case SEND_EMAIL:
             return {
                 ...state,
                 email: action.payload.email
             }
+
+
+         case PUT_DATA:
+                    return {
+                      ...state,                      
+                      email: action.payload.email,
+                      name: action.payload.name           
+                    }
+
+        case FILE_UPLOAD:
+                        return {
+                          ...state,                      
+                          img: action.payload.img,                            
+                        }
         default:
             return state;
     }
