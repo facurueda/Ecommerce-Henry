@@ -325,7 +325,7 @@ export const actionSetAvatar = (linkImg) => {
       };
       axios(config).then((res) => {
         return dispatch({
-          type: FILE_UPLOAD,
+          type: FILE_UPLOAD
         });
       });
     };

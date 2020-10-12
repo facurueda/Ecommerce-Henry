@@ -118,7 +118,8 @@ const usersReducer = (state = initialState, action) => {
                 name: action.payload.name,
                 email: action.payload.email,
                 level: action.payload.level,
-                verified: action.payload.verified
+                verified: action.payload.verified,
+                img: action.payload.img
             };
 
         case SET_VERIFIED:

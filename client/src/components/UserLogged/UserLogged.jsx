@@ -12,8 +12,8 @@ const UserLogged = () => {
     toast.configure()
     useEffect(() => {
         dispatch(actionGetMe())
-      }, [])
-      const img = useSelector(state => state.usersReducer.img)
+    }, [])
+    const img = useSelector(state => state.usersReducer.img)
     const dispatch = useDispatch()
     const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
     const handleChange = () => {
@@ -31,10 +31,9 @@ const UserLogged = () => {
         dispatch(actionLogOut());
     }
 
-
     return (
         <div class="dropdown">
-            <button id="dropdownMenuButton" data-toggle="dropdown"><img src={img} style={{height:'40px', width:'40px', borderRadius:'50%'}}/></button>
+            <button id="dropdownMenuButton" data-toggle="dropdown"><img src={img} style={{ height: '40px', width: '40px', borderRadius: '50%' }} /></button>
             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/MyAccount">My Account</a>
                 <a class="dropdown-item" href="/" onClick={e => handleChange()}>Log out</a>
