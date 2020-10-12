@@ -44,7 +44,7 @@ const NewPassword = (props) => {
     }
     return (
         <div className='generalContainerReset'>
-        <h3 id='tokenContainer2'>Ingresa el Codigo que recibiste por email.</h3>
+        <h3 id='tokenContainer2'>Ingresa el Codigo que recibiste por email</h3>
         <div id='tokenContainer' className='tokenContainer'>
                     <input className='inputs1' name='token' placeholder='Ingresa tu codigo aqui' onChange={handleChange}></input>
                     <button className='buttonLoginAndRegister' onClick={handleView}>Continuar</button>

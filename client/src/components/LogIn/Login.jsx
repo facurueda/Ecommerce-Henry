@@ -118,7 +118,7 @@ const Login = (props) => {
           <a className="createComponent ">
             <div className="accountComponent">
               <a className="createAccount" href="#" onClick={ChangeModal}>
-                Crear una tu cuenta
+                Crear cuenta
               </a>
       
             </div>

@@ -103,12 +103,12 @@ const MyAccount = () => {
                     </div>
                 </div>
                 {orders ? (<div className='PagePrevNext'>
-                    <button className='categoryButton' onClick={() => {
+                    <button  className='buttonEndOrden' onClick={() => {
                         if (pageLimits.min > 1) {
                             setPageLimits({ min: pageLimits.min - 5, max: pageLimits.max - 5 })
                         }
                     }}> {'<'} </button>
-                    <button className='categoryButton' onClick={() => {
+                    <button  className='buttonEndOrden' onClick={() => {
                         if (pageLimits.max < orders.length) {
                             setPageLimits({ min: pageLimits.min + 5, max: pageLimits.max + 5 })
                         }

@@ -87,7 +87,6 @@ const NavBar = () => {
                     </a>
                 </div>
                 <div className='routerContainer'>
-                    {/* <div className='buttonsContainer'> */}
                     <ul className="menu">
                         <li><a className = 'buttonProducts' href="/">HOME</a></li>
                         <li className="dropdownCategories">
@@ -100,15 +99,7 @@ const NavBar = () => {
                             </ul>
                         </li>
                         </ul>
-                        {/* <form action="/">
-
-                            <div>
-                                <button className='buttonProducts'>HOME</button>
-                            </div>
-                        </form>
-                        <form action="/catalogue">
-                            <button className='buttonProducts'>PRODUCTOS</button>
-                        </form> */}
+                       
                     </div>
                     <div className='searchBar'>
                         <SearchBar />
