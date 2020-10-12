@@ -24,7 +24,10 @@
     padding: 12px 16px;
     z-index: 1;
     right: 10%;
-
+}
+.productsHoverCont{
+    height: 100px;
+    overflow: auto;
 }
 
 .dropdown-wrapper:hover .cart-dropdown {

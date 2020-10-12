@@ -36,7 +36,8 @@ const Cart = () => {
                 </a>
                 <div class="cart-dropdown">
                     {products ? (
-                        <div>
+                        <div className = 'productsCartContainer'>
+                            <div className = 'productsHoverCont'>
                             {products.map(product => {
                                 return (
                                     <div className='cartHoverProd'>
@@ -58,6 +59,7 @@ const Cart = () => {
                                         </div> 
                                     </div>)
                             })}
+                              </div>
                             <div className='subtotalCont'>
                                 <p className='textCartHover'>SUBTOTAL:</p>
                                 {order.products ? (
@@ -74,10 +76,11 @@ const Cart = () => {
                                     )}
 
                             </div>
+                            
                             <button className='buttonVaciar' onClick= {e => emptyCart()}>VACIAR CARRITO</button>
                             <button className='buttonVaciar' onClick={e => checkOut()}>CHECKOUT</button>
+                      
                         </div>
-
 
                     ) : (
                             <div className='cartHoverProd' >
