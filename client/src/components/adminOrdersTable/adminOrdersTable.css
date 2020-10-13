@@ -23,9 +23,19 @@
 }
 
 .ordersCont {
-    margin-top: 100px;
-    border-radius: 15px;
-    border: 0px;
-    font-size: 13px;
-    color: black
+    margin-right: 15px;
+    padding-top: 10px;
+    width: 100%;
+    /* display: flex; */
+    align-self: center;
+}
+.ordersAccountCont{
+    margin-right: 15px;
+    padding-top: 10px;
+    width: 100%;
+    align-self: center;
+}
+.userAccountContainer{
+    display: flex;
+    align-content: center;
 }

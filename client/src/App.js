@@ -20,7 +20,7 @@ import ResetPassword from './components/LogIn/ResetPassword'
 import NewPassword from './components/LogIn/NewPassword';
 import Users from './components/Users/Users';
 import PagoSuccess from './components/Order/pagesSucces/PagoSuccess';
-
+import UserOrders from './components/MyAccount/userOrders'
 function App() {
   return (
     <React.Fragment>
@@ -44,7 +44,7 @@ function App() {
             <Route path='/reviews' component={Reviews}/>
             <Route path='/forgot' component={ResetPassword} />
             <Route path='/pagoSuccess' component={PagoSuccess}/>
-            {/* <Route exact path='/admin' component={AdminNavBar}/> */}
+            <Route path='/myOrders' component={UserOrders}/>
             <Route component={NotFound} />
           </Switch>
         </Router>

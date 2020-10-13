@@ -1,46 +1,32 @@
-import './adminOrdersTable.css'
-import '../../components/Categories/CategoriesComponents/CategoryTable.css'
 import React, { useEffect, useState } from 'react'
+import '../../components/Categories/CategoriesComponents/CategoryTable.css'
 import { Table } from "reactstrap";
 import { useSelector, useDispatch } from 'react-redux'
-import { actionGetAllOrders } from '../../redux/ordersActions'
+import { actionGetOrdersByUser } from '../../redux/ordersActions'
 import { actionGetUsers } from '../../redux/usersActions'
-import MenuUser from '../MyAccount/MenuUser';
+import MenuUser from './MenuUser';
 
 
-const AdminOrdersTable = () => {
+const UserOrders = () => {
     
     const dispatch = useDispatch()
     const orders = useSelector(state => state.ordersReducer.orders)
     const direccion = useSelector(state => state.ordersReducer.direccion)
-    const users = useSelector(state => state.usersReducer.users)
+    const user = useSelector(state => state.usersReducer.user)
     const [pageLimits, setPageLimits] = useState({ min: 0, max: 4 });
     useEffect(() => {
-        dispatch(actionGetAllOrders());
+        dispatch(actionGetOrdersByUser());
         dispatch(actionGetUsers())
     }, [])
-    const getUserName = (order) => {
-        if (users.length >= 1) {
-            const hola = users.filter(e => {
-                if (e.idUser == order.idUser) {
-                    return e.name
-                }
-
-            })
-            return hola[0].name
-        }
-    }
-
 
     return (
         <div className='myAccountContainer' >
-        <MenuUser/>
-        <div className='ordersAccountCont'>
+            <MenuUser/>
+            <div>
             <Table className='ordersCont'>
                 <thead>
                     <tr className='NameAndDesc'>
                         <th className='Name'>Id</th>
-                        <th className='Desc'>Cliente</th>
                         <th className='Desc'>Estado</th>
                         <th className='Desc'>Total</th>
                     </tr>
@@ -50,7 +36,6 @@ const AdminOrdersTable = () => {
                         orders.map(order => {
                             return ( <tr className='categories' key={order.idCategory}>
                                 <th className='categoryInfo'>{order.idOrder}</th>
-                                <th className='categoryInfo'>{getUserName(order)}</th>
                                 <th className='categoryInfo'>{order.status}</th>
                                 <th className='categoryInfo'>{order.total}</th>
                             </tr> ) 
@@ -78,4 +63,4 @@ const AdminOrdersTable = () => {
         </div>
     )
 }
-export default AdminOrdersTable;
+export default UserOrders;

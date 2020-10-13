@@ -96,7 +96,9 @@ const ModalDireccion = (props) => {
 
             directionsUser.length === 0 ? (
                   <div className='directionContainer'>
-                  <button className='closeButton' onClick={closeModalDireccion}>x</button>
+                  <button className='closeButton' onClick={closeModalDireccion}>
+                  <i class="fas fa-times"></i>
+                  </button>
                   <div className='labelInput'>
 
                         <label className='labelAddress' for="exampleReferencia">NOMBRE REFERENCIA*</label>

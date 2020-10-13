@@ -7,6 +7,7 @@ import { Button, Container, Modal, } from "reactstrap";
 import './Categories.css'
 import { connect, useDispatch } from 'react-redux'
 import { actionGetCategories, actionPostCategory, actionUpdateCategory, actionDeleteCategory } from "../../redux/categoriesActions";
+import MenuUser from "../MyAccount/MenuUser";
 
 const Categories = (props) => {
   const dispatch = useDispatch()
@@ -39,9 +40,11 @@ const Categories = (props) => {
   }
   
   return (
+    <div className='myAccountContainer' >
+    <MenuUser/>
     <div className='componentsContainer'>
       <Container>
-        <button id="buttonAdd" className='buttonLoginAndRegister' onClick={e => modalAddView()}> + </button>
+        <button id="buttonAdd" className='buttonAdd' onClick={e => modalAddView()}> AGREGAR CATEGORIA </button>
         <br />
         <br />
         <CategoryTable 
@@ -62,6 +65,7 @@ const Categories = (props) => {
         updateCategory={updateCategory} 
         categories={categories} />
       </Modal>
+    </div>
     </div>
   )
 }

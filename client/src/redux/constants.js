@@ -45,6 +45,8 @@ export const SEND_EMAIL = 'SEND_EMAIL'
 export const RESET_OK = 'RESET_OK'
 export const RESET_FAILED = 'RESET_FAILED'
 export const RESET_STATUS_RESET = 'RESET_STATUS_RESET'
+export const PUT_DATA = 'PUT_DATA'
+export const FILE_UPLOAD   = 'FILE_UPLOAD'
 
 export const EMPTY_CART = 'EMPTY_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'

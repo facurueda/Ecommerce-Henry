@@ -29,8 +29,6 @@ const Cart = () => {
 
         <div class="Cart">
             <div class="dropdown-wrapper">
-
-
                 <a href='/order'>
                     <i class="fa fa-shopping-cart fa_custom fa-1x"></i>
                 </a>
@@ -52,8 +50,8 @@ const Cart = () => {
                                             </div>
                                         </div>
                                         <div className='buttonHoverCont'>
-                                            <button className='buttonCartHover' 
-                                                    onClick = {e => btnRestar(product.Inter_Prod_Order.quantity)}>
+                                            <button className='closeButton' 
+                                                    onClick = {e => btnRestar(quantity)}>
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </div> 

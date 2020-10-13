@@ -78,7 +78,9 @@ const Register = (props) => {
     };
     return (
         <div className='loginContainer'>
-            <button className='closeButton' onClick={modalRegisterClose}>x</button>
+            <button className='closeButton' onClick={modalRegisterClose}>
+            <i class="fas fa-times"></i>
+            </button>
             <ModalHeader id='loginHeaderContainer'>
                 <div className="registerTitle">Creá tu cuenta</div>
             </ModalHeader>
