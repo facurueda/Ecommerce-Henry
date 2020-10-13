@@ -8,6 +8,9 @@
     display: flex;
     width: -webkit-fill-available;
 }
+.menuCrudCont{
+    width: -webkit-fill-available;
+}
 #modalAdd {
     display: flex;
     flex-direction: column;

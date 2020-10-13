@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MenuCrud.css'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import MenuUser from '../MyAccount/MenuUser';
 
 const MenuCrud = () => {
 
@@ -51,7 +52,9 @@ const MenuCrud = () => {
   const categories = useSelector(state => state.categoriesReducer.categories)
 
   return (
-    <div>
+    <div className='myAccountContainer' >
+    <MenuUser/>
+    <div className='menuCrudCont'>
       <Container>
         <br />
         <button id="buttonAdd" className='buttonAdd' onClick={e => modalAddView()}> AGREGAR PRODUCTO </button>
@@ -76,6 +79,7 @@ const MenuCrud = () => {
           modalCloseEdit={modalCloseEdit}
         />
       </Modal>
+    </div>
     </div>
   )
 }

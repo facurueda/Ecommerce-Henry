@@ -2,22 +2,20 @@ import React, { useEffect, useState } from 'react'
 import './myAccount.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { actionGetOrdersByUser } from '../../redux/ordersActions';
-import Orders from '../adminOrdersTable/ordersComponent';
-import AdminNavBar from '../AdminNavBar/AdminNavBar'
 
 import { actionUpdateUser } from '../../redux/usersActions';
 import { toast } from 'react-toastify';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal } from 'reactstrap';
 import ModalEditData from './ModalEditData';
 import SelectImage from '../selectImageAvatar/SelectImage'
 import { actionGetMe, actionSetAvatar } from '../../redux/usersActions';
+import MenuUser from './MenuUser';
 
 
 const MyAccount = (props) => {
     toast.configure()
     useEffect(() => {
         dispatch(actionGetMe())
-        dispatch(actionGetOrdersByUser(user))
     }, [])
 
     const dispatch = useDispatch();
@@ -39,7 +37,6 @@ const MyAccount = (props) => {
     const modalEditViewFalse = () => modalInsertEdit(false);
 
     const modalAvatarView = () => modalInsertAvatar(!modalAvatar);
-    const modalAvatarViewFalse = () => modalInsertAvatar(false);
     const [modalAvatar, modalInsertAvatar] = useState(false);
 
     const updateData = (updatedData) => {
@@ -78,74 +75,54 @@ const MyAccount = (props) => {
 
     const span = 'span'
     return (
-        <div className='userAccountContainer'>
-            <div class="btn-group-vertical">
-                {level === 'user' ? (
-                    <div>
-                        <button type="button" class="btn btn-secondary" className='buttonMenuUser'>Editar perfil</button>
-                        <button type="button" class="btn btn-secondary" className='buttonMenuUser'>Mis Ordenes</button>
-                    </div>
-
-                ) : (
-                        <div>
-                            <button type="button" class="btn btn-secondary" className='buttonMenuUser'>Usuarios</button>
-                            <button type="button" class="btn btn-secondary" className='buttonMenuUser'>Ordenes</button>
-                            <button type="button" class="btn btn-secondary" className='buttonMenuUser'>Editar productos</button>
-                            <button type="button" class="btn btn-secondary" className='buttonMenuUser'>Editar categorias</button>
-                            <button type="button" class="btn btn-secondary" className='buttonMenuUser'>Editar perfil</button>
-                        </div>
-
-                    )}
-
-            </div>
-            <div className='conteiner-maximo'>
-                <div className='conteiner-tittle'>
-                    <div className='conteiner-fluid'>
-                        <h1 className='textoa'>Mi Cuenta</h1>
-                        <h3 className='textob'>Datos Personales</h3>
-                    </div>
+        <div className='myAccountContainer'>
+            <MenuUser/>
+            <div className='userData'>
+                <div className='userDataTitle'>
+                    <h1 className='textUser'>Datos de usuario</h1>
                 </div>
+                <div className='userDataContainer'>
+                    <div className='imagenUserLoggedContainer'>
+                        <img className='imagenUserLogged' src={img} style={{ borderRadius: '50%' }}></img>
 
-                <div className='img'>
-                    <img className='img-user' src={img} style={{ borderRadius: '50%' }}></img>
-
-
-                    <button
-                        className="btn btn-dark"
-                        onClick={() => modalAvatarView()}> Add Image</button>
-
-                    <Modal isOpen={modalAvatar}>
-                        <SelectImage uploadImage={uploadImage} modalAvatarViewFalse={modalAvatarViewFalse} />
-
-                    </Modal>
-
-
-                </div>
-                <div className='cajauser'>
-                    <div className='nameContainer'>
-                        <span className='valueData'><h2>{name}</h2></span>
-                    </div>
-                    <div className='emaillContainer'>
-                        <span className='valueData'>{email}</span>
-                    </div>
-                    <div className='edit'>
-                        <button
-                            data-toggle="modal"
-                            data-target="#editModal"
-                            onClick={() => modalEditView()}
-                            className="btn btn-dark" >
-                            Editar mis datos </button>
-                        <Modal isOpen={modalEdit}>
-                            <ModalEditData
-                                modalEditViewFalse={modalEditViewFalse}
-                                user={user}
-                                updateData={updateData}
-                            />
+                        <Modal isOpen={modalAvatar} className='userModalContainer'>
+                            <button className="closeButton" onClick={modalAvatarView}>
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <div className='modalUserImg'>
+                                <SelectImage uploadImage={uploadImage} modalAvatarViewFalse={modalAvatarView} />
+                            </div>
                         </Modal>
-
+                    </div>
+                    <div className='userBoxContainer'>
+                        <div className='nameDataCont'>
+                            <span><p className='valueDataName'>{name}</p></span>
+                        </div>
+                        <div className='nameDataCont'>
+                            <span className='valueDataEmail'>{email}</span>
+                        </div>
                     </div>
                 </div>
+                <div className='buttonUserContainer'>
+                    <button
+                        className="buttonAddImgUser"
+                        onClick={() => modalAvatarView()}>Agregar imagen</button>
+                    <button
+                        data-toggle="modal"
+                        data-target="#editModal"
+                        onClick={() => modalEditView()}
+                        className="buttonAddImgUser">
+                        Editar mis datos </button>
+                    <Modal isOpen={modalEdit}>
+                        <ModalEditData
+                            modalEditViewFalse={modalEditViewFalse}
+                            user={user}
+                            updateData={updateData}
+                        />
+                    </Modal>
+                </div>
             </div>
+
         </div>
     )
 }

@@ -18,7 +18,6 @@ initializePassport(passport, email => {
         }
     })
 })
-
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
     if (req.isAuthenticated()) {
@@ -159,7 +158,7 @@ server.post('/:idUser/cart', (req, res, next) => {
         res.send(respuesta)
     }).catch(next)
 })
-//////// register 
+//////// register
 server.post('/', async (req, res, next) => {
     const {
         name,
@@ -195,7 +194,6 @@ server.post('/', async (req, res, next) => {
     }).then(() => {
         res.send('User Created')
     })
-
 });
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
@@ -280,7 +278,7 @@ server.delete('/:idUser', (req, res, next) => {
 });
 
 
-////////////////////////////////////////////////////////////////// ROUTES FOR DIRECTIONS 
+////////////////////////////////////////////////////////////////// ROUTES FOR DIRECTIONS
 
 server.post('/directions', (req, res) => {
     Direccion.findAll({
@@ -293,7 +291,7 @@ server.post('/directions', (req, res) => {
 })
 
 
-server.post('/upload', (req, res) =>{    
+server.post('/upload', (req, res) =>{
 
     const {linkImg} = req.body;
 
