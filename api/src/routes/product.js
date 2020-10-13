@@ -159,20 +159,28 @@ server.delete('/:idProduct/category/:idCategory', isAdmin, (req, res, next) => {
 		res.send(req.body)
 	}).catch(next)
 })
-server.delete('/:idProducto', isAdmin, (req, res, next) => {
+server.delete('/:idProducto', isAdmin, (req, res) => {
 	Product.destroy({
 		where: {
 			idProduct: req.params.idProducto
 
 		}
-	}).then((product) => {
-		if (product) {
-			res.status(200).send()
-		} else {
-			res.status(400).send()
-		}
-	}).catch(() => {
-		res.status(400)
+	}).then(() => {
+		Product.findAll()
+		.then((products) => {
+			res.send(products);	
+		})
+	
+	
+	
+	// .then((product) => {
+	// 	if (product) {
+	// 		res.status(200).send()
+	// 	} else {
+	// 		res.status(400).send()
+	// 	}
+	// }).catch(() => {
+	// 	res.status(400)
 	})
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// PUT

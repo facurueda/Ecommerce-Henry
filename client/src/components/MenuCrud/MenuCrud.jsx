@@ -4,11 +4,11 @@ import { Container, Modal, } from "reactstrap";
 import ProductTable from './MenuCrudComponents/ProductTable';
 import ModalAddProduct from './MenuCrudComponents/ModalAddProduct';
 import ModalEditProduct from './MenuCrudComponents/ModalEditProduct';
-import { actionUpdateProduct, actionGetProducts, actionDeleteProduct, actionPostProduct } from "../../redux/productsActions";
+import { actionGetProducts, actionPostProduct } from "../../redux/productsActions";
 import { actionGetCategories } from "../../redux/categoriesActions";
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './MenuCrud.css'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 const MenuCrud = () => {
@@ -27,15 +27,12 @@ const MenuCrud = () => {
   const [modalEdit, setModalEdit] = useState(false);
   const currentProduct = useSelector(store => store.productsReducer.product)
 
+
   //Funciones
   const modalAddView = () => setModalAdd(!modalAdd);
   const modalEditView = () => setModalEdit(!modalEdit);
   const modalCloseAdd = () => { setModalAdd(false); }
   const modalCloseEdit = () => setModalEdit(false);
-  const deleteProduct = async (id) => {
-    dispatch(actionDeleteProduct(id))
-    // window.location.reload()  
-  }
   const addProduct = (product) => {
     dispatch(actionPostProduct(product))
     // window.location.reload();
@@ -62,7 +59,6 @@ const MenuCrud = () => {
         <br />
         <ProductTable
           products={products}
-          deleteProduct={deleteProduct}
           editProduct={modalEditView}
           categories={categories}
         />

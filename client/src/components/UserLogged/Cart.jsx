@@ -16,6 +16,7 @@ const Cart = () => {
 
     const emptyCart = () => {
         dispatch(actionEmptyCart(user))
+        dispatch(actionGetOrder(user))
     }
     const checkOut = () => {
         window.location.href= '/order'

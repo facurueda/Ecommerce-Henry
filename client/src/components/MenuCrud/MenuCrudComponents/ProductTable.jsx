@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { actionGetProduct } from '../../../redux/productsActions';
+import { actionDeleteProduct, actionGetProduct } from '../../../redux/productsActions';
 import './ProductTable.css'
 
 const ProductTable = (props) => {
-    const { products, editProduct, deleteProduct } = props;
+    const { products, editProduct} = props;
     const dispatch = useDispatch()
     return (
         products.map(product => {
@@ -32,7 +32,7 @@ const ProductTable = (props) => {
                             dispatch(actionGetProduct(product.idProduct))
                             editProduct()
                         }}>Edit</button> {'  '}
-                        <button  type="button"  className='buttonEditCat' onClick={e => deleteProduct(product.idProduct)}>Delete</button>
+                        <button  type="button"  className='buttonEditCat' onClick={e => {dispatch(actionDeleteProduct(product.idProduct))}}>Delete</button>
                     </div>
                         </td>
                     </tr>

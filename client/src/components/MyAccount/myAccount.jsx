@@ -17,7 +17,8 @@ const MyAccount = (props) => {
     toast.configure()
     useEffect(() => {
         dispatch(actionGetMe())
-      }, [])
+        dispatch(actionGetOrdersByUser(user))
+    }, [])
 
     const dispatch = useDispatch();
     const [usuario, setUsuario] = useState(props.user)
@@ -26,9 +27,10 @@ const MyAccount = (props) => {
     const email = useSelector(state => state.usersReducer.email)
     const user = useSelector(state => state.usersReducer.idUser)
     const level = useSelector(state => state.usersReducer.level)
+    const img = useSelector(store => store.usersReducer.img)
+    
 
     const [inputs, setInputs] = useState({ name: name, email: email, idUser: user })
-    const img = useSelector(store => store.usersReducer.img)
 
 
 
@@ -45,14 +47,13 @@ const MyAccount = (props) => {
     }
 
     const [loading, setLoading] = useState(false)
-    const [imagesUpload, setImagesUpload] = useState('')
 
     const uploadImage = async e => {
+        setLoading(true)
         const files = e
         const data = new FormData()
         data.append('file', files)
         data.append('upload_preset', 'ecommerceHenry')
-        setLoading(true)
         const res = await fetch('https://api.cloudinary.com/v1_1/facu9685/image/upload',
             {
                 method: 'POST',
@@ -60,9 +61,8 @@ const MyAccount = (props) => {
             })
         const file = await res.json()
         dispatch(actionSetAvatar(file.secure_url))
-        console.log('this file', file.secure_url)
-        setImagesUpload(file.secure_url)
         setLoading(false)
+        window.location.reload()
     }
 
     const handleChange = (e) => {
@@ -75,12 +75,10 @@ const MyAccount = (props) => {
         }
     }
 
-    useEffect(() => {
-        dispatch(actionGetOrdersByUser(user))
-    }, [])
+
     const span = 'span'
     return (
-        <div className = 'userAccountContainer'>
+        <div className='userAccountContainer'>
             <div class="btn-group-vertical">
                 {level === 'user' ? (
                     <div>
@@ -99,57 +97,57 @@ const MyAccount = (props) => {
 
                     )}
 
+            </div>
+            <div className='conteiner-maximo'>
+                <div className='conteiner-tittle'>
+                    <div className='conteiner-fluid'>
+                        <h1 className='textoa'>Mi Cuenta</h1>
+                        <h3 className='textob'>Datos Personales</h3>
                     </div>
-        <div className='conteiner-maximo'>
-            <div className='conteiner-tittle'>
-                <div className='conteiner-fluid'>
-                    <h1 className='textoa'>Mi Cuenta</h1>
-                    <h3 className='textob'>Datos Personales</h3>
                 </div>
-            </div>
 
-            <div className='img'>
-                <img className='img-user' src={img} style={{borderRadius:'50%'}}></img>
-
-
-                <button
-                    className="btn btn-dark"
-                    onClick={() => modalAvatarView()}> Add Image</button>
-
-                <Modal isOpen={modalAvatar}>
-                    <SelectImage uploadImage={uploadImage} modalAvatarViewFalse={modalAvatarViewFalse}/>
-
-                </Modal>
+                <div className='img'>
+                    <img className='img-user' src={img} style={{ borderRadius: '50%' }}></img>
 
 
-            </div>
-            <div className='cajauser'>
-                <div className='nameContainer'>
-                    <span className='valueData'><h2>{name}</h2></span>
-                </div>
-                <div className='emaillContainer'>
-                    <span className='valueData'>{email}</span>
-                </div>
-                <div className='edit'>
-                    <button  
-                        data-toggle="modal"
-                        data-target="#editModal"
-                        onClick={() => modalEditView()}  
-                        className="btn btn-dark" >
-                        Editar mis datos </button>
-                    <Modal isOpen={modalEdit}>
-                        <ModalEditData
-                            modalEditViewFalse={modalEditViewFalse}
-                            user={user}
-                            updateData={updateData}
-                        />
+                    <button
+                        className="btn btn-dark"
+                        onClick={() => modalAvatarView()}> Add Image</button>
+
+                    <Modal isOpen={modalAvatar}>
+                        <SelectImage uploadImage={uploadImage} modalAvatarViewFalse={modalAvatarViewFalse} />
+
                     </Modal>
 
+
+                </div>
+                <div className='cajauser'>
+                    <div className='nameContainer'>
+                        <span className='valueData'><h2>{name}</h2></span>
+                    </div>
+                    <div className='emaillContainer'>
+                        <span className='valueData'>{email}</span>
+                    </div>
+                    <div className='edit'>
+                        <button
+                            data-toggle="modal"
+                            data-target="#editModal"
+                            onClick={() => modalEditView()}
+                            className="btn btn-dark" >
+                            Editar mis datos </button>
+                        <Modal isOpen={modalEdit}>
+                            <ModalEditData
+                                modalEditViewFalse={modalEditViewFalse}
+                                user={user}
+                                updateData={updateData}
+                            />
+                        </Modal>
+
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
     )
-   }
+}
 
 export default MyAccount
