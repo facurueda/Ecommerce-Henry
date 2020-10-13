@@ -7,3 +7,115 @@
 .fa {
     color: white;
 }
+.dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.imgProdHover{
+    display: flex;
+    align-items: center;
+}
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    right: 10%;
+}
+.productsHoverCont{
+    max-height: 120px;
+    overflow: auto;
+}
+
+.dropdown-wrapper:hover .cart-dropdown {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.textCartHover{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    margin-bottom: 0;
+    font-size: 12px;
+    padding: 0 5px;
+}
+.imgContCart{
+    display: flex;
+}
+.textHoverCont{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+.cartHoverProd {
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    padding: 5px;
+    justify-content: space-between;
+}
+.buttonHoverCont{
+    display: flex;
+    justify-self: flex-end;
+}
+
+.prodImgHover{
+    height: 50px;
+    width: 50px;
+}
+.buttonCartHover{
+    display: flex;
+    align-self: center;
+}
+.totalHoverCont{
+    display: flex;
+}
+.totalCartHover{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 8px;
+    padding: 0 5px;
+}
+.subtotalCont{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 1px solid rgba(74, 74, 74, 0.55);
+    margin-top: 5px;
+}
+.buttonVaciar{
+    display: flex;
+    font-size: 10px;
+    align-items: center;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+    width: 100%;
+}
+.buttonVaciar:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(0, 0, 0, 0.815);
+    backdrop-filter: blur(7px);
+}
+@media all and (max-width:30em) {
+    .buttonVaciar {
+        display: block;
+        margin: 0.4em auto;
+    }
+}

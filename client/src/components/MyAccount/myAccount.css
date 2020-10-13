@@ -1,59 +1,166 @@
-.ComponentContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-.userDataContainer {
-    display: flex;
-    color: white;
-    position: absolute;
-    flex-direction: column;
-    align-self: flex-start;
-    margin-left: 0px;
-}
-.ordersContainer{
-    color: white;
-}
-.buttonDetails{
-    color: black;
-    background-color: white;
-    padding: 3px 5px 3px 5px;
-    border-radius: 3px;
-}
-.dataContainer{
-    flex-direction: column;
-     align-items: center;
-}
-.nameeContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    border-radius: 0px 20px 20px 0px;
-    margin-top: 5px;
-    padding: 5px 20px 5px 10px;
-    background-color: white;
-}
-.emaillContainer {
-    display: flex;
-    border-radius: 0px 20px 20px 0px;
-    margin-top: 5px;
-    padding: 5px 20px 5px 10px;
-    background-color: white;
-}
-.typeData{
-    font-size: 15px;
-    color: black;
-    text-align: center;
-}
-.valueData{
-    font-size: 20px;
-    color: black;
 
-    text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&family=Staatliches&display=swap');
+.userDataContainer{
+    display: flex;
+    background-color: white;
+    width: 30%;
+    flex-direction: column;
 }
-.DeleteProd{
-    display: none;
+.userAccountContainer{
+    display: flex;
+}
+.userBoxContainer{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100%;
+    padding: 30px;
+    padding-top: 0;
+
+}
+
+.buttonMenuUser {
+    margin-right: 10px;
+    display: flex;
+    font-size: 13px;
+    width: -webkit-fill-available;
+    /* width: max-content; */
+    align-items: center;
+    justify-self: flex-start;
+    padding: 0.46em 1.6em;
+    /* border: 0.1em solid #ffffff; */
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+    text-transform: uppercase;
+}
+
+.buttonMenuUser:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(0, 0, 0, 0.815);
+    backdrop-filter: blur(7px);
+}
+@media all and (max-width:30em) {
+    .buttonMenuUser {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+.textUser{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    margin-bottom: 0;
+    font-size: 15px;
+    color:  #ffffff;
+    margin: 25px;
+    text-transform: uppercase;
+}
+.userDataTitle{
+    display: flex;
+    justify-content: center;
+}
+
+.userData{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.myAccountContainer {
+    display: flex;
+}
+.modalUserImg{
+    padding-bottom: 15px;
+}
+.userModalContainer {
+    display: flex;
+    color: #ffffff;
+    background-color: rgb(74, 74, 74, 0.25);
+    backdrop-filter: blur(7px);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+.imagenUserLoggedContainer{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    margin: 25px;
+}
+.imagenUserLogged{
+    border: 5px solid white;
+    height: 170px;
+    margin: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.25);
+}
+.buttonAddImgUser{
+    margin-top: 20px;
+    display: flex;
+    text-transform: uppercase;
+    font-size: 13px;
+    align-items: center;
+    padding: 0.46em 1.6em;
+    border: 0.1em solid #ffffff;
+    margin: 10px 0.2em 0.2em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    background-color: rgba(47, 54, 64, 0.57);
+    text-align: center;
+    transition: all 0.15s;
+    width: fit-content
+}
+.buttonAddImgUser:hover {
+    text-shadow: rgb(74, 74, 74);
+    color:white;
+    border-color: rgb(74, 74, 74);
+    background-color: rgba(0, 0, 0, 0.815);
+    backdrop-filter: blur(7px);
+}
+@media all and (max-width:30em) {
+    .buttonAddImgUser{
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+.buttonUserContainer{
+    display: flex;
+    align-items: center;
+}
+
+.nameDataCont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin: -5px;
+}
+.valueDataName{
+    font-size: 25px;
+    font-family: 'Staatliches', cursive;
+    margin: 0;
+    color: rgb(114, 114, 114);
+    font-weight: 400;
+}
+
+.valueDataEmail{
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color:  rgb(114, 114, 114);
 }

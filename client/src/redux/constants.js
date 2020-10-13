@@ -28,6 +28,7 @@ export const UPDATE_ORDER = 'UPDATE_ORDER'
 export const SET_QUANTITY = 'SET_QUANTITY'
 
 export const DELETE_USER = 'DELETE_USER'
+export const UPDATE_USER = 'UPDATE_USER'
 export const ADMIN_TO_USER = 'ADMIN_TO_USER'
 export const USER_TO_ADMIN = 'USER_TO_ADMIN'
 export const GET_ALL_USERS = 'GET_ALL_USERS'
@@ -44,7 +45,10 @@ export const SEND_EMAIL = 'SEND_EMAIL'
 export const RESET_OK = 'RESET_OK'
 export const RESET_FAILED = 'RESET_FAILED'
 export const RESET_STATUS_RESET = 'RESET_STATUS_RESET'
+export const PUT_DATA = 'PUT_DATA'
+export const FILE_UPLOAD   = 'FILE_UPLOAD'
 
+export const EMPTY_CART = 'EMPTY_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'
 
 export const REVIEW_POST = 'REVIEW_POST'

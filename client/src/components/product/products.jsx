@@ -126,14 +126,14 @@ function Products() {
                             </div>
                             <div className='buttons'>
                                 <ButtonAddToCart datos={{ idProduct: idProduct, quantity: 1, price: precio }} />
-                                <button className='buyProd'>Comprar</button>
-                                <div className='conteiner-star'>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </body>
+            <div >
+
+            </div>
         </div>
     )
 }

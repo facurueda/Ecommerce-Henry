@@ -110,7 +110,8 @@ function initialize(passport) {
           name: profile.displayName,
           email: profile.emails[0].value,
           password: hashedPassword,
-          level: 'user'
+          level: 'user',
+          img: profile.photos[0].value
         }).then(user => {
           console.log(user)
           Order.create({
@@ -149,6 +150,7 @@ function initialize(passport) {
   ));
 
   const authenticateUserGitHub = async (accessToken, refreshToken, profile, done) => {
+    console.log('github', profile)
     const hashedPassword = await bcrypt.hash('passwordGitHubAccount', 10)
     User.findOne({
       where: {
@@ -156,12 +158,24 @@ function initialize(passport) {
       }
     }).then(user => {
       if (!user) {
-        User.create({
-          name: profile._json.name,
-          email: profile._json.email,
-          password: hashedPassword,
-          level: 'user'
-        }).then(user => {
+        profile._json.email ? (
+          User.create({
+            name: profile._json.name,
+            email: profile._json.email,
+            password: hashedPassword,
+            level: 'user',
+            img:  profile._json.avatar_url
+          })
+        ) : (
+          User.create({
+            name: profile._json.name,
+            email: 'Vincule_su_email_en_GitHub@laCoseria.com',
+            password: hashedPassword,
+            level: 'user',
+            img:  profile._json.avatar_url
+          })
+        )
+        .then(user => {
           console.log(user)
           Order.create({
             idUser: user.idUser,
@@ -196,6 +210,9 @@ function initialize(passport) {
   },
     authenticateUserGitHub
   ));
+
+
+
 
   passport.use(new LocalStrategy({
     usernameField: 'email',

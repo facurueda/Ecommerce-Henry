@@ -90,3 +90,10 @@ p {
     }
 }
 
+.Toastify__toast-container {
+  font-family: 'Poppins', sans-serif;
+}
+
+.Toastify__progress-bar {
+  background-color: #ffff;
+}

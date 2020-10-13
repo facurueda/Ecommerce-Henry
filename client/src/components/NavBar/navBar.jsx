@@ -13,6 +13,7 @@ import Cart from '../UserLogged/Cart'
 import { actionSetVerified, actionVerifyCookies, actionSetCookieToStore, actionGetMe, actionSetModalLogin } from '../../redux/usersActions'
 import actionGetCategories from '../../redux/categoriesActions'
 
+
 const NavBar = () => {
 
     const [cookie, setCookie, removeCookie] = useCookies(['ttkk']);
@@ -23,6 +24,9 @@ const NavBar = () => {
     const level = useSelector(state => state.usersReducer.level)
     const verified = useSelector(state => state.usersReducer.verified)
     const loggedOut = useSelector(state => state.usersReducer.loggedOut)
+
+    
+
     const [google, setGoogle] = useState(true)
     const [github, setGithub] = useState(true)
 
@@ -63,14 +67,6 @@ const NavBar = () => {
     }
     const categories = useSelector(state => state.categoriesReducer.categories)
 
-    // const productsFilter = (e) => {
-    //     if (e !== 'All categories') {
-    //         dispatch(actionGetProductsByCategory(e))
-    //     } else {
-    //         dispatch(actionGetProducts())
-    //     }
-    // }
-
     const modalLoginView = () => dispatch(actionSetModalLogin(!modalLogin));
     const modalRegisterView = () => setModalRegister(!modalRegister);
     const modalRegisterClose = () => setModalRegister(false)
@@ -87,7 +83,6 @@ const NavBar = () => {
                     </a>
                 </div>
                 <div className='routerContainer'>
-                    {/* <div className='buttonsContainer'> */}
                     <ul className="menu">
                         <li><a className = 'buttonProducts' href="/">HOME</a></li>
                         <li className="dropdownCategories">
@@ -100,15 +95,7 @@ const NavBar = () => {
                             </ul>
                         </li>
                         </ul>
-                        {/* <form action="/">
-
-                            <div>
-                                <button className='buttonProducts'>HOME</button>
-                            </div>
-                        </form>
-                        <form action="/catalogue">
-                            <button className='buttonProducts'>PRODUCTOS</button>
-                        </form> */}
+                       
                     </div>
                     <div className='searchBar'>
                         <SearchBar />

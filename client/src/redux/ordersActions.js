@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION, DELETE_DIRECCION } from "./constants";
+import { EMPTY_CART, SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION, DELETE_DIRECCION } from "./constants";
 const url = "http://localhost:3000/";
 var qs = require('qs');
 axios.defaults.withCrendentails = true;
@@ -27,7 +27,7 @@ export const actionDeleteDireccion = (idOrderUser) => {
                         type: DELETE_DIRECCION,
                     })
                 }).catch(error => {
-                    console.log('ERROOOOOR', error)
+                    console.log('ERROR', error)
                 })
     }
 }
@@ -69,13 +69,12 @@ export const actionGetDirection = () => {
         };
         axios(config)
             .then((res) => {
-                console.log('RESPUESTAAAA', res.data)
                 dispatch({
                     type: GET_DIRECCION,
                     payload: res.data
                 })
             }).catch(error => {
-                console.log('ERROOOOOR', error)
+                console.log('ERROR', error)
             })
 }
 }
@@ -104,7 +103,6 @@ export const actionCheckOut = (cancelarEnvio, idOrderUser) => {
     return (dispatch) => {
         axios.post(url + 'order/checkout', {cancelarEnvio, idOrderUser}, { withCredentials: true }).then(res => {
             dispatch({ type: END_CHECKOUT, payload: res.data })
-            //   window.location.href = res.data
         }).catch(error => {
                 console.log(error);
             });
@@ -160,5 +158,15 @@ export const actionAddToCart = (props) => {
         }).then(() => {
             return dispatch(actionGetOrder(props.idUser))
         })
+    }
+}
+
+export const actionEmptyCart = (idUser) => {
+    return (dispatch) => {
+      axios.delete( url + 'user/' + idUser + '/cart', { withCredentials: true }).then((res)=> {
+        actionGetOrder(idUser)
+      }).catch(error => {
+        console.log('error', error)
+    })
     }
 }

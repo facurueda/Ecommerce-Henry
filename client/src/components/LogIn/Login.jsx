@@ -4,7 +4,7 @@ import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { actionLogin, actionSetModalLogin } from "../../redux/usersActions";
 import { actionGetOrder } from "../../redux/ordersActions";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 
@@ -62,7 +62,7 @@ const Login = (props) => {
   return (
     <div className="loginContainer">
       <button className="closeButton" onClick={modalLoginClose}>
-        x
+      <i class="fas fa-times"></i>
       </button>
       <ModalHeader id="loginHeaderContainer">
         <div className="addProductTitle">Login </div>
@@ -76,9 +76,7 @@ const Login = (props) => {
             type="email"
             placeholder="Email"
             onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                document.getElementById("password").focus();
-              }
+              if (e.key === "Enter") { document.getElementById("password").focus() }
             }}
             onChange={handleInput}
           />
@@ -90,37 +88,22 @@ const Login = (props) => {
             id="password"
             type="password"
             placeholder="Password"
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                handleChancla(e);
-              }
-            }}
+            onKeyPress={(e) => { if (e.key === "Enter") { handleChancla(e) } }}
             onChange={handleInput}
           />
         </div>
-
-        <button
-          className="buttonLoginAndRegister"
-          onClick={(e) => {
-            handleChancla(e);
-          }}
-        >
+        <button className="buttonLoginAndRegister" onClick={(e) => { handleChancla(e) }}>
          Iniciar sesión
         </button>
         <div>
-          <a className="createAccount" href="/forgot">
-            ¿olvidaste tu contraseña?
-          </a>
+          <a className="createAccount" href="/forgot"> ¿olvidaste tu contraseña? </a>
         </div>
       </ModalBody>
       <ModalFooter id="loginFooterContainer">
         <div className="LoginAccount">
           <a className="createComponent ">
             <div className="accountComponent">
-              <a className="createAccount" href="#" onClick={ChangeModal}>
-                Crear una tu cuenta
-              </a>
-      
+              <a className="createAccount" href="#" onClick={ChangeModal}> Crear cuenta </a>
             </div>
           </a>
           <div className="LoginAccountAux">

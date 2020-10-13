@@ -11,7 +11,6 @@
 }
 
   
-  
   .buttonProducts {
     padding:0;
     margin: 30px;
@@ -45,7 +44,7 @@
   .dropdownCategories > a {
     display: flex;
     align-items: center;
-    margin: 10px 30px;
+    margin: 10px 70px;
   }
   .categoryDrop:hover{
     color: grey;

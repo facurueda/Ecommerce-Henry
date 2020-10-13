@@ -7,7 +7,7 @@ const {
     Direccion
 } = require('../db.js');
 const Sequelize = require("sequelize");
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 const passport = require('passport');
 const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
@@ -18,7 +18,6 @@ initializePassport(passport, email => {
         }
     })
 })
-
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
     if (req.isAuthenticated()) {
@@ -159,7 +158,7 @@ server.post('/:idUser/cart', (req, res, next) => {
         res.send(respuesta)
     }).catch(next)
 })
-//////// register 
+//////// register
 server.post('/', async (req, res, next) => {
     const {
         name,
@@ -178,7 +177,8 @@ server.post('/', async (req, res, next) => {
                 name: name,
                 email: email,
                 password: hashedPassword,
-                level: 'user'
+                level: 'user', 
+                img: 'https://res.cloudinary.com/facu9685/image/upload/v1602536866/henry/zersguujnkufynerj633.png'
             }).then(user => {
 
                 return Order.create({
@@ -194,7 +194,6 @@ server.post('/', async (req, res, next) => {
     }).then(() => {
         res.send('User Created')
     })
-
 });
 ///////////////////////////////////////////////////////////////PUT
 server.put('/:idUser/cart', (req, res, next) => {
@@ -225,18 +224,24 @@ server.put('/:idUser/cart', (req, res, next) => {
     }).catch(next);
 })
 
-server.put('/:idUser', (req, res, next) => {
+server.put('/', (req, res, next) => {
+    const cont = req.body.constraseña;
     User.findOne({
         where: {
-            idUser: req.body.idUser
+            idUser: req.user.idUser
         }
-    }).then(user => {
-        return user.update({
-            ...user,
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
-        })
+    }).then(async (user) => {
+        if (await bcrypt.compare(req.body.contraseña, user.password)) {
+            const contraseñanueva = await  bcrypt.hash(req.body.contraseña,10)
+            console.log(contraseñanueva)
+            return user.update({
+                ...user,
+                name: req.body.name,
+                email: req.body.email,
+                password: contraseñanueva
+            })
+        } else {
+       res.status(404).send('Contraseña erronea')} 
     }).then((userActualizado) => {
         res.send(userActualizado)
     }).catch(next);
@@ -249,18 +254,14 @@ server.delete('/:idUser/cart', (req, res, next) => {
             status: 'CARRITO'
         }
     }).then(order => {
-        return order.update({
-            ...order,
-            status: 'CANCELADA'
-        })
-    }).then(() => {
-        return Order.create({
-            idUser: req.params.idUser
-        })
-    }).then(() => {
-        res.send({
-            result: 'Carrito vaciado'
-        })
+        Inter_Prod_Order.destroy({
+            where: {
+                idOrder: order.idOrder
+            }
+        }) 
+        return order
+    }).then((order) => {
+        res.send(order)
     }).catch(next);
 })
 
@@ -276,7 +277,8 @@ server.delete('/:idUser', (req, res, next) => {
     }).catch(next);
 });
 
-////////////////////////////////////////////////////////////////// ROUTES FOR DIRECTIONS 
+
+////////////////////////////////////////////////////////////////// ROUTES FOR DIRECTIONS
 
 server.post('/directions', (req, res) => {
     Direccion.findAll({
@@ -289,9 +291,22 @@ server.post('/directions', (req, res) => {
 })
 
 
+server.post('/upload', (req, res) =>{
 
+    const {linkImg} = req.body;
 
+    User.findOne({
+        where:{
+            idUser: req.user.idUser
+        }
+    }).then(user => {
+        return user.update({
+            ...user,
+            img: linkImg
+        })
+    })
 
+})
 
 
 module.exports = server;
