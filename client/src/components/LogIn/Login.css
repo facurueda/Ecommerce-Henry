@@ -6,7 +6,6 @@
     height: 500px;
     background-color: rgba(74, 74, 74, 0.25);
     backdrop-filter: blur(7px);
-    border-radius: 15px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }

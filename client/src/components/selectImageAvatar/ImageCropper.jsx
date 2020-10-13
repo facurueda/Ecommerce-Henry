@@ -100,12 +100,12 @@ const Cropper = (props) => {
       />
       {image && (
         <Fragment>
-          <button className='buttonImage' onClick={e => {
+          <button  className="buttonEndOrden" onClick={e => {
             onSaveClick();
             modalAvatarViewFalse()
             dispatch(actionGetMe())
           }} >
-            Use this Image
+            USAR ESTA IMAGEN
           </button>
         </Fragment>
       )}

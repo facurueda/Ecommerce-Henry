@@ -1,0 +1,79 @@
+.inputContEditUser{
+    display: flex;
+    flex-direction: column;
+}
+.editDataUser {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+.editDataUserCont {
+    width: 500px;
+    height: 500px;
+    background-color: rgba(222, 245, 209, 0.25);
+    backdrop-filter: blur(7px);
+    display: flex;
+    flex-direction: column;
+}
+.titleEditData{
+    display: flex;
+    text-align: center;
+}
+.editHeaderCont{ 
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    display: flex;
+    padding: 0;
+    padding-bottom: 15px;
+    justify-content: center;
+}
+.editBodyCont{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.inputDataUser{
+    margin-top: 5px;
+    padding: 5px 65px;
+    text-align: center;
+    border: 0px;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.836);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: black;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    padding: 5px;
+}
+
+.editDataUserName{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: -moz-fit-content;
+    height: fit-content;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    font-weight: 300;
+    font-size: 13px;
+    margin: 5px;
+    align-items: center;
+    color: white;
+}
+.titleEditData{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}
+.buttonContEditUser {
+    display: flex;
+    justify-content: center;
+}
