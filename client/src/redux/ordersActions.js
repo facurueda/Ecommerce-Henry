@@ -163,8 +163,8 @@ export const actionAddToCart = (props) => {
 
 export const actionEmptyCart = (idUser) => {
     return (dispatch) => {
-      axios.delete( url + 'user/' + idUser + '/cart', { withCredentials: true }).then((res)=> {
-        actionGetOrder(idUser)
+      axios.delete( url + 'user/' + idUser + '/cart', { withCredentials: true }).then(()=> {
+        dispatch(actionGetOrder(idUser))
       }).catch(error => {
         console.log('error', error)
     })
