@@ -339,6 +339,21 @@ server.post("/checkout", async (req, res, next) => {
   }
 );
 
+
+server.put('/cancelOrder', (req, res) => {
+  Order.findOne({
+    where:{
+      idOrder: req.body.idOrder
+    }
+  }).then( order => {
+    order.update({
+      ...order,
+      status: 'CANCELADA'
+    })
+  })
+})
+
+
 /////////////////////////////////DEV
 
 module.exports = server;
