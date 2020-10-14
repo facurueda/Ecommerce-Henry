@@ -33,16 +33,17 @@ const Review = () => {
         }
     }
     const handleReview = () => {
-        setTimeout(() => {
-            const rand = reviews[getRandom(reviews.length)]
-            if (rand === review) {
-                return dispatch(actionSetReview(changeRand(rand)))
-            }
-            return dispatch(actionSetReview(rand))
-        }, 5000)
-        setTimeout(() => {
-            return handleReview()
-        }, 5000)
+
+    //     setTimeout(() => {
+        //     const rand = reviews[getRandom(reviews.length)]
+        //     if (rand === review) {
+        //         return dispatch(actionSetReview(changeRand(rand)))
+        //     }
+        //     return dispatch(actionSetReview(rand))
+        // }, 5000)
+        // setTimeout(() => {
+        //     return handleReview()
+        // }, 5000)
     }
     return (
         <div>
@@ -63,13 +64,16 @@ const Review = () => {
                     </Modal>
                 </div>
                 <div className='reviewContainer'>
-                    <div>Reseñas de nuestros clientes</div>
-                    <div>{stars(review.rating)}</div>
-                    <div>"{review.description}"</div>
+                    <div>Promedio de reseñas</div>
+                    <div>{stars(Math.floor(reviews.reduce((anterior,siguiente) => {
+                        return anterior + siguiente.rating
+                    },0))/reviews.length)
+                }</div>
+                    {/*<div>"{review.description}"</div>*/}
                 </div>
-            </div>) : (<div onLoadStart={handleReview} className='reviewContainer'>No hay reseñas todavia.</div>)}
+            </div>) : (<div className='reviewContainer'>No hay reseñas todavia.</div>)}
         </div>
     )
 }
-
+//{<div onLoadStart={handleReview} className='reviewContainer'>No hay reseñas todavia.</div>}
 export default Review

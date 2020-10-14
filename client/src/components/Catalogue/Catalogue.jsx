@@ -10,14 +10,15 @@ import qs from 'query-string'
 const Catalogue = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        if(qs.parse(window.location.search).filter){
+        if (qs.parse(window.location.search).filter) {
             console.log(qs.parse(window.location.search).filter)
-            if (filter !== 'All categories'){
+            if (filter !== 'All categories') {
                 console.log("accion :D")
                 dispatch(actionGetProductsByCategory(filter))
-            }else{
+            } else {
                 console.log("Else accion :D");
-                dispatch(actionGetProducts())}
+                dispatch(actionGetProducts())
+            }
         }
         // dispatch(actionGetCategories())
         // dispatch(actionGetProducts())
@@ -71,16 +72,13 @@ const Catalogue = () => {
             }
             </div>
             <div className='PagePrevNext'>
-                <button className='buttonEndOrden' onClick={() => {
-                    if (pageLimits.min > 1) {
+            {(pageLimits.min > 1) ? (<button id='menorque' className='buttonEndOrden' onClick={() => {
                         setPageLimits({ min: pageLimits.min - 5, max: pageLimits.max - 5 })
-                    }
-                }}> {'<'} </button>
-                <button className='buttonEndOrden' onClick={() => {
-                    if (pageLimits.max < products.length) {
-                        setPageLimits({ min: pageLimits.min + 5, max: pageLimits.max + 5 })
-                    }
-                }}> {'>'} </button>
+                }}> {'<'} </button>) : (<div></div>)}
+                {    (pageLimits.max < products.length) ? (<button id='mayorque' className='buttonEndOrden' onClick={() => {
+                            setPageLimits({ min: pageLimits.min + 5, max: pageLimits.max + 5 })
+                    }}> {'>'} </button>) : (<div></div>)
+                }
             </div>
         </div>
     )
