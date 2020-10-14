@@ -155,7 +155,7 @@ server.post("/cerrada", (req, res) => {
     limit: 1,
     where: {
       idUser: req.user.idUser,
-      status: "CERRADA",
+      status: 'CON ENVIO' || 'CON RETIRO',
     },
     order: [["createdAt", "DESC"]],
     include: [
