@@ -257,10 +257,17 @@ server.post("/checkout", async (req, res, next) => {
       idOrder: req.body.idOrderUser,
     },
   }).then((order) => {
-    return order.update({
-      ...order,
-      status: "CERRADA",
-    });
+    if(cancelarEnvio){
+      return order.update({
+        ...order,
+        status: "CON ENVIO",
+      });
+    } else {
+      return order.update({
+        ...order,
+        status: "CON RETIRO",
+      });
+    }
   });
 
   //////// -- CREARLE NUEVA ORDEN CREADA

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TotalByProduct from "./orderComponents/totalByProduct";
 import "./order.css";
 import { useDispatch, useSelector } from "react-redux";
-import { actionCheckOut } from "../../redux/ordersActions";
+import { actionCheckOut, actionSetOrderCerradaToView } from "../../redux/ordersActions";
 import { Modal } from "reactstrap";
 import Loading from "../LoadingMiddleware/LoadingMiddleware";
 import ModalDireccion from './ModalDireccion'
@@ -29,8 +29,8 @@ const Order = (props) => {
 
   const clickButton = () => {
     dispatch(actionCheckOut(cancelarEnvio, idOrderUser));
+    dispatch(actionSetOrderCerradaToView(precioEnvio))
     changeLoading();
-
   };
 
   /////////////////////////////////////////////////////////////////////
