@@ -22,7 +22,7 @@ const UserOrders = () => {
     return (
         <div className='myAccountContainer' >
             <MenuUser />
-            <div>
+            <div className='ordersAccountCont'>
                 <Table className='ordersCont'>
                     <thead>
                         <tr className='NameAndDesc'>
