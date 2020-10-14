@@ -1,8 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import StylesNotFound from './StylesNotFound.css'; 
-import video from './video.gif';
-
 
 const NotFound = () => (
 <div class = 'contenedorNotFound'>
@@ -21,8 +17,6 @@ const NotFound = () => (
   <div class="title">404</div>
   <div class="subtitle">Hmmm...</div>
   <div class="decription">It looks one of the coseria developers fell asleep</div>
-  {/* <button class="button button--active">LOGIN</button> */}
-  {/* <button class="button">CONTACT</button> */}
 </div>
 
 <div class="astronaut">
