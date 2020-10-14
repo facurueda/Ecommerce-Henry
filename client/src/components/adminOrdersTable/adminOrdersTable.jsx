@@ -77,6 +77,7 @@ const AdminOrdersTable = () => {
                                 <th className='Desc'>Estado</th>
                                 <th className='Desc'>Total</th>
                                 <th className='Desc'>Ver Info</th>
+                                <th className='Desc'>Cancelar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,7 +90,7 @@ const AdminOrdersTable = () => {
                                                     <tr className='categories' key={order.idCategory}>
                                                         <td className='categoryInfo'>{order.idOrder}</td>
                                                         <td className='categoryInfo'>{getUserName(order)}</td>
-                                                        <td className='categoryInfo'>{order.status} <button onClick={e => cancelarOrden(order.idOrder)}>Cancelar Orden</button></td>
+                                                        <td className='categoryInfo'>{order.status}</td>
                                                         <td className='categoryInfo'> $
                                                         {order.products.reduce((acum, product) => {
                                                             return (
@@ -107,6 +108,7 @@ const AdminOrdersTable = () => {
                                                                 />
                                                             </Modal>
                                                         </td>
+                                                        <td className='categoryInfo'><button onClick={e => cancelarOrden(order.idOrder)}>Cancelar Orden</button></td>
                                                     </tr>
                                                 )
 
@@ -122,7 +124,7 @@ const AdminOrdersTable = () => {
                                                     <tr className='categories' key={order.idCategory}>
                                                         <td className='categoryInfo'>{order.idOrder}</td>
                                                         <td className='categoryInfo'>{getUserName(order)}</td>
-                                                        <td className='categoryInfo'>{order.status} <button onClick={e => cancelarOrden(order.idOrder)}>Cancelar Orden</button></td>
+                                                        <td className='categoryInfo'>{order.status}</td>
                                                         <td className='categoryInfo'> $
                                                         {order.products.reduce((acum, product) => {
                                                             return (
@@ -140,6 +142,7 @@ const AdminOrdersTable = () => {
                                                                 />
                                                             </Modal>
                                                         </td>
+                                                        <td className='categoryInfo'><button onClick={e => cancelarOrden(order.idOrder)}>Cancelar Orden</button></td>
 
                                                     </tr>)
 
