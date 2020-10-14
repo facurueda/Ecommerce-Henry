@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import './Catalogue.css'
-import Category from './Category'
 import { actionGetProducts, actionGetProductsByCategory } from '../../redux/productsActions'
-import { actionGetCategories } from '../../redux/categoriesActions'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import qs from 'query-string'
@@ -19,43 +17,22 @@ const Catalogue = () => {
                 console.log("Else accion :D");
                 dispatch(actionGetProducts())}
         }
-        // dispatch(actionGetCategories())
-        // dispatch(actionGetProducts())
     }, [])
     const filter = qs.parse(window.location.search).filter
     const [pageLimits, setPageLimits] = useState({ min: 0, max: 5 });
-    const categories = useSelector(state => state.categoriesReducer.categories)
     const products = useSelector(store => store.productsReducer.products)
 
-    // const productsFilter = (e) => {
-    //     if (e !== 'All categories') {
-    //         dispatch(actionGetProductsByCategory(e))
-    //     } else {
-    //         dispatch(actionGetProducts())
-    //     }
-    // }
     if (products.length === 0) {
         return (
             <div>
-                <div className='categories'>
-                    <h3><b>Products not found</b></h3>
+                <div className='NotFoundProd'>
+                    <h3><b>No existen productos aun</b></h3>
                 </div>
             </div>
         )
     }
     return (
         <div>
-            {/*<div className='categories_menu'>
-                {categories.map(category => {
-                    return <Category
-                        className='categoryImage'
-                        name={category.name}
-                        productsFilter={productsFilter} />
-                })
-                }
-                <Category className='categoryImage'
-                    name={"All categories"} productsFilter={productsFilter} />
-            </div>*/}
             <div className='products' > {
                 products.map((product, index) => {
                     if (product.stock > 0 && index >= pageLimits.min && index <= pageLimits.max) {

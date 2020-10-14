@@ -223,3 +223,13 @@ img {
     border-radius: 0px;
     box-shadow: 0px 0px 0px 0px ;
 }
+.footerContainer{
+  position: fixed;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  color: white;
+  background-color: #212529;
+  width: 100%;
+  bottom: 0%;
+}
