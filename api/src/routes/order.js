@@ -156,7 +156,7 @@ server.post("/cerrada", (req, res) => {
     limit: 1,
     where: {
       idUser: req.user.idUser,
-      status: "CERRADA",
+      status: 'CON ENVIO' || 'CON RETIRO',
     },
     order: [["createdAt", "DESC"]],
     include: [
@@ -334,6 +334,21 @@ server.post("/checkout", async (req, res, next) => {
     });
   }
 );
+
+
+server.put('/cancelOrder', (req, res) => {
+  Order.findOne({
+    where:{
+      idOrder: req.body.idOrder
+    }
+  }).then( order => {
+    order.update({
+      ...order,
+      status: 'CANCELADA'
+    })
+  })
+})
+
 
 /////////////////////////////////DEV
 

@@ -1,0 +1,30 @@
+.modalInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: wheat;
+}
+.modalBodyInfoOrder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vw;
+    width: 25vw;
+}
+.numberOrderContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.infoOrderContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.imageInfo{
+    width: 7vw;
+    height: 7vw;
+}

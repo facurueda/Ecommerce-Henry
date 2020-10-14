@@ -25,6 +25,7 @@ export const END_CHECKOUT = 'END_CHECKOUT'
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
+export const CANCELAR_ORDER = 'CANCELAR_ORDER'
 export const SET_QUANTITY = 'SET_QUANTITY'
 
 export const DELETE_USER = 'DELETE_USER'

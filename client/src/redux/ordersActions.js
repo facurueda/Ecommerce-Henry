@@ -1,5 +1,5 @@
 import axios from "axios";
-import { EMPTY_CART, SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION, DELETE_DIRECCION } from "./constants";
+import { EMPTY_CART, SET_QUANTITY, UPDATE_ORDER, GET_ORDER_BY_ID, GET_ALL_ORDERS, ADD_TO_CART, END_CHECKOUT, SET_ORDER_CERRADA_TO_VIEW, SEND_DIRECCION_TO_DB, GET_DIRECCION, DELETE_DIRECCION, CANCELAR_ORDER } from "./constants";
 const url = "http://localhost:3000/";
 var qs = require('qs');
 axios.defaults.withCrendentails = true;
@@ -168,5 +168,30 @@ export const actionEmptyCart = (idUser) => {
         }).catch(error => {
             console.log('error', error)
         })
+    }
+}
+
+export const actionCancelarOrden = (idOrder) => {
+    console.log('idOrder', idOrder)
+    return (dispatch) => {
+        var data = qs.stringify({idOrder});
+        console.log('data', data)
+        var config = {
+            withCredentials: true,
+            method: 'PUT',
+            url: 'http://localhost:3000/order/cancelOrder',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        };
+        axios(config)
+            .then((res) => {
+                dispatch({
+                    type: CANCELAR_ORDER,
+                })
+            }).catch(error => {
+                console.log('ERROOOOOR', error)
+            })
     }
 }
