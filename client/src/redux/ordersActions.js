@@ -10,50 +10,50 @@ axios.defaults.withCrendentails = true;
 export const actionDeleteDireccion = (idOrderUser) => {
     console.log('IDORDEER', idOrderUser)
     return (dispatch) => {
-            var data = qs.stringify({idOrderUser});
-            console.log('DATAORDER', data)
-            var config = {
-                withCredentials: true,
-                method: 'DELETE',
-                url: 'http://localhost:3000/order/deleteDireccion',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                data: data
-            };
-            axios(config)
-                .then((res) => {
-                    dispatch({
-                        type: DELETE_DIRECCION,
-                    })
-                }).catch(error => {
-                    console.log('ERROR', error)
+        var data = qs.stringify({ idOrderUser });
+        console.log('DATAORDER', data)
+        var config = {
+            withCredentials: true,
+            method: 'DELETE',
+            url: 'http://localhost:3000/order/deleteDireccion',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        };
+        axios(config)
+            .then((res) => {
+                dispatch({
+                    type: DELETE_DIRECCION,
                 })
+            }).catch(error => {
+                console.log('ERROR', error)
+            })
     }
 }
 
-export const actionSendDirectionToDB = ({direccion, idOrderUser}) => {
+export const actionSendDirectionToDB = ({ direccion, idOrderUser }) => {
     return (dispatch) => {
-            var data = qs.stringify({direccion, idOrderUser});
-            var config = {
-                withCredentials: true,
-                method: 'POST',
-                url: 'http://localhost:3000/order/setDireccion',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                data: data
-            };
-            axios(config)
-                .then((res) => {
-                    console.log('RESPUESTAAAA', res.data)
-                    dispatch({
-                        type: SEND_DIRECCION_TO_DB,
-                        payload: res.data
-                    })
-                }).catch(error => {
-                    console.log('ERROOOOOR', error)
+        var data = qs.stringify({ direccion, idOrderUser });
+        var config = {
+            withCredentials: true,
+            method: 'POST',
+            url: 'http://localhost:3000/order/setDireccion',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        };
+        axios(config)
+            .then((res) => {
+                console.log('RESPUESTAAAA', res.data)
+                dispatch({
+                    type: SEND_DIRECCION_TO_DB,
+                    payload: res.data
                 })
+            }).catch(error => {
+                console.log('ERROOOOOR', error)
+            })
     }
 }
 
@@ -76,7 +76,7 @@ export const actionGetDirection = () => {
             }).catch(error => {
                 console.log('ERROR', error)
             })
-}
+    }
 }
 
 export const actionSetOrderCerradaToView = () => {
@@ -99,13 +99,13 @@ export const actionSetOrderCerradaToView = () => {
     }
 }
 
-export const actionCheckOut = (cancelarEnvio, idOrderUser,user) => {
+export const actionCheckOut = (cancelarEnvio, idOrderUser, user) => {
     return (dispatch) => {
-        axios.post(url + 'order/checkout', {cancelarEnvio, idOrderUser,user}, { withCredentials: true }).then(res => {
+        axios.post(url + 'order/checkout', { cancelarEnvio, idOrderUser, user }, { withCredentials: true }).then(res => {
             dispatch({ type: END_CHECKOUT, payload: res.data })
         }).catch(error => {
-                console.log(error);
-            });
+            console.log(error);
+        });
     }
 }
 
@@ -117,15 +117,15 @@ export const actionUpdateOrder = (idUser) => {
     }
 }
 export const actionGetOrder = (idUser) => {
-    return async (dispatch) => {
-        await axios.get(url + 'order/' + idUser, { withCredentials: true }).then(res => {
+    return (dispatch) => {
+        axios.get(url + 'order/' + idUser, { withCredentials: true }).then(res => {
             dispatch({ type: GET_ORDER_BY_ID, payload: res.data })
-            return res.data
-        }).then((data) => {
-            if (data.products) {
-                const acum = data.products.reduce((acum, product) => {
+            if (res.data.products) {
+                console.log('res.data.products');
+                const acum = res.data.products.reduce((acum, product) => {
                     return acum + product.Inter_Prod_Order.quantity
                 }, 0)
+                console.log('acum:',acum);
                 dispatch({ type: SET_QUANTITY, payload: acum })
             }
         })
@@ -163,10 +163,10 @@ export const actionAddToCart = (props) => {
 
 export const actionEmptyCart = (idUser) => {
     return (dispatch) => {
-      axios.delete( url + 'user/' + idUser + '/cart', { withCredentials: true }).then(()=> {
-        dispatch(actionGetOrder(idUser))
-      }).catch(error => {
-        console.log('error', error)
-    })
+        axios.delete(url + 'user/' + idUser + '/cart', { withCredentials: true }).then(() => {
+            dispatch(actionGetOrder(idUser))
+        }).catch(error => {
+            console.log('error', error)
+        })
     }
 }

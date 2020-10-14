@@ -18,8 +18,8 @@ const Login = (props) => {
   toast.configure()
 
   const handleChancla = () => {
-    console.log('dqwjdqkwldjkqwlwkdqw',inputs)
-    if( !inputs.email || !inputs.password ){
+    console.log('dqwjdqkwldjkqwlwkdqw', inputs)
+    if (!inputs.email || !inputs.password) {
       toast.error("Debe completar todos los datos", {
         position: "top-center",
         autoClose: 2500,
@@ -28,14 +28,10 @@ const Login = (props) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-    });
+      });
     } else {
       dispatch(actionLogin({ ...inputs, idUser: idUser }));
       modalLoginClose();
-      dispatch(actionGetOrder(idUser))
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 200);
     }
   };
   const modalLoginClose = () => {
@@ -62,7 +58,7 @@ const Login = (props) => {
   return (
     <div className="loginContainer">
       <button className="closeButton" onClick={modalLoginClose}>
-      <i class="fas fa-times"></i>
+        <i class="fas fa-times"></i>
       </button>
       <ModalHeader id="loginHeaderContainer">
         <div className="addProductTitle">Login </div>
@@ -81,7 +77,7 @@ const Login = (props) => {
             onChange={handleInput}
           />
         </div>
-        <div  className='input-icons'>
+        <div className='input-icons'>
           <i class="fa fa-lock"></i>
           <input
             className="input-field "
@@ -93,7 +89,7 @@ const Login = (props) => {
           />
         </div>
         <button className="buttonLoginAndRegister" onClick={(e) => { handleChancla(e) }}>
-         Iniciar sesión
+          Iniciar sesión
         </button>
         <div>
           <a className="createAccount" href="/forgot"> ¿olvidaste tu contraseña? </a>
