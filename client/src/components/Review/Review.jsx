@@ -16,7 +16,6 @@ const Review = () => {
         return Math.floor(Math.random() * (max - 0) + 0);
     }
     useEffect(() => {
-        handleReview()
         dispatch(actionGetReviews(product.idProduct))
         return dispatch(actionSetReview(reviews[getRandom(reviews.length)]))
     }, [])
@@ -31,19 +30,6 @@ const Review = () => {
         } else {
             return reviews[getRandom(reviews.length)]
         }
-    }
-    const handleReview = () => {
-
-    //     setTimeout(() => {
-        //     const rand = reviews[getRandom(reviews.length)]
-        //     if (rand === review) {
-        //         return dispatch(actionSetReview(changeRand(rand)))
-        //     }
-        //     return dispatch(actionSetReview(rand))
-        // }, 5000)
-        // setTimeout(() => {
-        //     return handleReview()
-        // }, 5000)
     }
     return (
         <div>
@@ -69,11 +55,9 @@ const Review = () => {
                         return anterior + siguiente.rating
                     },0))/reviews.length)
                 }</div>
-                    {/*<div>"{review.description}"</div>*/}
                 </div>
             </div>) : (<div className='reviewContainer'>No hay reseñas todavia.</div>)}
         </div>
     )
 }
-//{<div onLoadStart={handleReview} className='reviewContainer'>No hay reseñas todavia.</div>}
 export default Review

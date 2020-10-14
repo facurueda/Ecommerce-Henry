@@ -38,7 +38,7 @@ function Products() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+        });
         setModalEditReview(false)
         dispatch(actionGetReviews(idProduct))
     };
@@ -47,6 +47,7 @@ function Products() {
         dispatch(actionGetReviews(idProduct))
     };
     const user = useSelector(state => state.usersReducer.idUser)
+    const level = useSelector(store => store.usersReducer.level)
     const reviews = useSelector(state => state.reviewsReducer.reviews)
     const review = reviews.find(rev => rev.idUser === user)
     const reload = () => {
@@ -73,7 +74,7 @@ function Products() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+        });
         dispatch(actionDeleteReview(data))
         reload()
     }
@@ -82,15 +83,17 @@ function Products() {
         return { __html: description }
     }
     const reviewCreateorEdit = () => {
-        if (review) {
-            return (
-                <div className='reviewButtonsContainer'>
-                    <button className='EditReview' onClick={e => modalEditReviewView()}>Editar Review</button>
-                    <button className='EditReview' onClick={deleteReview}>Eliminar Review</button>
-                </div>)
-        }
-        else {
-            return <button className='CreateReview' onClick={e => modalPostReviewView()}> Crear Review</button>
+        if (level !== 'GUEST') {
+            if (review) {
+                return (
+                    <div className='reviewButtonsContainer'>
+                        <button className='EditReview' onClick={e => modalEditReviewView()}>Editar Review</button>
+                        <button className='EditReview' onClick={deleteReview}>Eliminar Review</button>
+                    </div>)
+            }
+            else {
+                return <button className='CreateReview' onClick={e => modalPostReviewView()}> Crear Review</button>
+            }
         }
 
     }
