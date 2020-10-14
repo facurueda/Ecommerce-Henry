@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import TotalByProduct from "./orderComponents/totalByProduct";
 import "./order.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,9 @@ import { actionCheckOut } from "../../redux/ordersActions";
 import { Modal } from "reactstrap";
 import Loading from "../LoadingMiddleware/LoadingMiddleware";
 import ModalDireccion from './ModalDireccion'
+
+import { actionSetModalLogin } from "../../redux/usersActions";
+
 const axios = require("axios");
 
 const Order = (props) => {
@@ -27,16 +30,29 @@ const Order = (props) => {
 
   const [precioEnvio, setPrecioEnvio] = useState(0)
 
-  const clickButton = () => {
-    dispatch(actionCheckOut(cancelarEnvio, idOrderUser));
-    changeLoading();
+  const modalLogin =  useSelector(state => state.usersReducer.modalLogin);
+  const user =  useSelector(state => state.usersReducer.idUser);
 
+  const clickButton = () => {
+
+
+    if(level == 'GUEST'){               
+    dispatch(actionSetModalLogin(!modalLogin))
+     } else {
+    
+    dispatch(actionCheckOut(cancelarEnvio, idOrderUser,user));
+    changeLoading();
+     }
   };
 
   /////////////////////////////////////////////////////////////////////
 
   const propsOrder = props.order;
   const storeOrder = useSelector((state) => state.ordersReducer.order);
+  const level = useSelector(state => state.usersReducer.level)
+  
+
+  
 
   const order = () => {
     if (props.order) {
@@ -46,9 +62,11 @@ const Order = (props) => {
     }
   };
 
-
+ 
+ 
   const or = order();
-
+  
+  
   const idOrderUser = or.idOrder
 
   if (Object.keys(or).length < 1) {

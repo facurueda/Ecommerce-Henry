@@ -99,9 +99,9 @@ export const actionSetOrderCerradaToView = () => {
     }
 }
 
-export const actionCheckOut = (cancelarEnvio, idOrderUser) => {
+export const actionCheckOut = (cancelarEnvio, idOrderUser,user) => {
     return (dispatch) => {
-        axios.post(url + 'order/checkout', {cancelarEnvio, idOrderUser}, { withCredentials: true }).then(res => {
+        axios.post(url + 'order/checkout', {cancelarEnvio, idOrderUser,user}, { withCredentials: true }).then(res => {
             dispatch({ type: END_CHECKOUT, payload: res.data })
         }).catch(error => {
                 console.log(error);

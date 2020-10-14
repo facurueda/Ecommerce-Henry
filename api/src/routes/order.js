@@ -235,6 +235,8 @@ server.post("/checkout", async (req, res, next) => {
   // SI REQ.BODY TRAE 'cancelarEnvio' FALSE => NO HAY ENVIO ; TRUE => HAY ENVIO
   const { cancelarEnvio } = req.body;
 
+ 
+  
   const allProdUser = await Order.findOne({
     where: {
       idUser: req.user.idUser,
@@ -249,7 +251,7 @@ server.post("/checkout", async (req, res, next) => {
       });
     })
     .catch(next);
-
+  
   //////// -- PASAR ORDEN A CERRADA
 
   Order.findOne({
@@ -262,7 +264,7 @@ server.post("/checkout", async (req, res, next) => {
       status: "CERRADA",
     });
   });
-
+    
   //////// -- CREARLE NUEVA ORDEN CREADA
 
   User.findOne({
@@ -280,7 +282,7 @@ server.post("/checkout", async (req, res, next) => {
     access_token:
       "TEST-3269061119976940-092823-2fdadf82afd73900c02041d6888f47be-166321688",
   });
-
+    
   // Crea un objeto de preferencia
   const preference = {
     items: allProdUser.map((relacion_product_order) => {
@@ -314,7 +316,8 @@ server.post("/checkout", async (req, res, next) => {
     .catch(function (error) {
       console.log(error);
     });
-});
+  }
+);
 
 /////////////////////////////////DEV
 
