@@ -38,7 +38,7 @@ export const actionUpdateUser = (inputs) => {
   }
 }
 export const actionGetUsers = () => {
-  return (dispatch) => { 
+  return (dispatch) => {
     axios.get(url + "user/", { withCredentials: true }).then((res) => {
         dispatch({ type: GET_ALL_USERS, payload: res.data });
       });
