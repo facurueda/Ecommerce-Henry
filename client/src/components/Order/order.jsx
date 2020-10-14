@@ -29,7 +29,6 @@ const Order = (props) => {
 
   const clickButton = () => {
     dispatch(actionCheckOut(cancelarEnvio, idOrderUser));
-    dispatch(actionSetOrderCerradaToView(precioEnvio))
     changeLoading();
   };
 

@@ -215,19 +215,17 @@ server.post("/setDireccion", (req, res) => {
     });
 });
 
-server.delete('/deleteDireccion', (req, res) => {
+server.delete("/deleteDireccion", (req, res) => {
+  // req.body --> idOrderUser
 
-      // req.body --> idOrderUser
-
-      Direccion.destroy({
-            where: {
-                  idOrder: req.body.idOrderUser
-            }
-      }).then( () => {
-            res.send('Direccion Eliminada')
-      } )
-
-})
+  Direccion.destroy({
+    where: {
+      idOrder: req.body.idOrderUser,
+    },
+  }).then(() => {
+    res.send("Direccion Eliminada");
+  });
+});
 ///////////////////////////////////////////////////////////////////////////PUT
 
 /////////////////////////////////////////////////////////////////////////// MERCADOPAGO
@@ -250,6 +248,21 @@ server.post("/checkout", async (req, res, next) => {
     })
     .catch(next);
 
+  //////// -- RESTAR STOCK COMPRA DE STOCK TOTAL
+
+  allProdUser.map(prod => {
+    Product.findOne({
+      where:{
+        idProduct: prod.idProduct
+      }
+    }).then(product => {
+      return product.update({
+        ...product,
+        stock: product.stock - prod.quantity
+      })
+    })
+  })
+
   //////// -- PASAR ORDEN A CERRADA
 
   Order.findOne({
@@ -257,7 +270,7 @@ server.post("/checkout", async (req, res, next) => {
       idOrder: req.body.idOrderUser,
     },
   }).then((order) => {
-    if(cancelarEnvio){
+    if (cancelarEnvio) {
       return order.update({
         ...order,
         status: "CON ENVIO",
@@ -301,7 +314,7 @@ server.post("/checkout", async (req, res, next) => {
     auto_return: "approved",
     back_urls: {
       success: "http://localhost:3001/pagoSuccess",
-      failure: 'http://localhost:3001/pagoFailure'
+      failure: "http://localhost:3001/pagoFailure",
     },
     shipments: {},
   };
