@@ -13,24 +13,29 @@ const ModalInfoOrder = (props) => {
 
     return (
 
-        <div className='modalInfoContainer'>
+        <div className='modalInfoContainer'>                   
+         <button className="closeButtonOrder" onClick={e => closeViewInfo()}>
+                        <i class="fas fa-times"></i>
+                    </button>
             <ModalBody className='modalBodyInfoOrder'>
-                <FormGroup >
-                    <button onClick={e => closeViewInfo()}>X</button>
-                </FormGroup>
                 <FormGroup className='numberOrderContainer'>
-                    <div className='orderNumber'>ORDEN: {order.idOrder}</div>
+                    <div className='orderNumber'>ORDEN {order.idOrder}</div>
                 </FormGroup>
+                <div className='ordersImgInfo'>
                 {order.products.map(e => {
                     return (
                         <FormGroup className='infoOrderContainer'>
-                            <p>{e.name}</p>
+                            
                             <img src={e.images} alt="Image Product" className='imageInfo' />
-                            <p> {e.Inter_Prod_Order.price} </p>
-                            <p> {e.Inter_Prod_Order.quantity} </p>
+                            <p className='imageTxtOrder'>{e.name}</p>
+                            <div className='imgtxtCont'>
+                            <p className='imageTxtOrderPrice'>{e.Inter_Prod_Order.quantity} u</p>
+                            <p className='imageTxtOrderPrice'>$ {e.Inter_Prod_Order.price} </p>
+                            </div>
                         </FormGroup>
                     )
                 })}
+                </div>
             </ModalBody>
         </div>
 

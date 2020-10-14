@@ -3,28 +3,59 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: wheat;
+    background-color: white;
+}
+.closeButtonOrder{
+    color: rgba(47, 54, 64, 0.57);
+    align-self: flex-end;
+    justify-self: flex-end;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    justify-content: center;
 }
 .modalBodyInfoOrder{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-    height: 30vw;
-    width: 25vw;
+    /* height: 30vw; */
+    width: 90%;
+    height: -webkit-fill-available;
+    flex-direction: column;
 }
 .numberOrderContainer{
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: flex-start;
+    align-self: self-start;
 }
 .infoOrderContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 5px;
 }
 .imageInfo{
     width: 7vw;
     height: 7vw;
+}
+.ordersImgInfo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.imageTxtOrder{
+    display: flex;
+    margin: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+.orderNumber{
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    display: flex;
 }

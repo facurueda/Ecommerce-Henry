@@ -51,7 +51,7 @@ const Cart = () => {
                                             </div>
                                         </div>
                                         <div className='buttonHoverCont'>
-                                            <button className='closeButton' 
+                                            <button className='closeButtonOrder' 
                                                     onClick = {e => btnRestar(quantity)}>
                                                 <i class="fas fa-times"></i>
                                             </button>
