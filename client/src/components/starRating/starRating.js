@@ -23,7 +23,7 @@ const StarRating = (props) => {
             setRating(ratingValue)
           }}
         />
-        <FaStar className="Star" size={30} color={ratingValue < (hover || rating) || ratingValue === (hover || rating) /* ratingValue < reting || ratingValue === reting  */ ? "#5ca180" : "F5F3BB"}
+        <FaStar className="Star" size={25} color={ratingValue < (hover || rating) || ratingValue === (hover || rating) /* ratingValue < reting || ratingValue === reting  */ ? "#FFFFFF" : "dimgrey"}
           onMouseEnter={() => setHover(ratingValue)}
           onMouseLeave={() => setHover(null)} />
       </label>

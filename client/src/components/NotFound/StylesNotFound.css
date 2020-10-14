@@ -96,15 +96,17 @@
    color: #343e49;
  }
  .title {
-   color: teal;
+   color: white;
    font-family: 'Roboto', sans-serif;;
    font-size: 10em;
  }
  .subtitle {
+  color: white;
    font-family: 'Roboto', sans-serif;;
    font-size: 2rem;
  }
  .description {
+  color: white;
    font-family: 'Roboto', sans-serif;;
    opacity: 0.5s;
   }

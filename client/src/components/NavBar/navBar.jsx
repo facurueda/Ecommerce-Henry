@@ -94,6 +94,7 @@ const NavBar = () => {
                                 }
                             </ul>
                         </li>
+                        <li><a className = 'buttonProducts' href="/aboutUs">ACERCA DE NOSOTROS</a></li>
                         </ul>
                        
                     </div>
@@ -127,6 +128,9 @@ const NavBar = () => {
                     <Modal isOpen={modalRegister}>
                         <Register modalRegisterClose={modalRegisterClose} ChangeModal={ChangeModal} setGoogle={setGoogle} setGithub={setGithub} />
                     </Modal>
+                </div>
+                <div className='footerContainer'>
+                © La Cosería, Grupo 3 webpart 02 - Henry
                 </div>
             </div>
 

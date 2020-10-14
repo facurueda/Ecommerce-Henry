@@ -21,6 +21,8 @@ import NewPassword from './components/LogIn/NewPassword';
 import Users from './components/Users/Users';
 import PagoSuccess from './components/Order/pagesSucces/PagoSuccess';
 import UserOrders from './components/MyAccount/userOrders'
+import AboutUs from './components/AboutUs/AboutUs'
+
 function App() {
   return (
     <React.Fragment>
@@ -45,6 +47,7 @@ function App() {
             <Route path='/forgot' component={ResetPassword} />
             <Route path='/pagoSuccess' component={PagoSuccess}/>
             <Route path='/myOrders' component={UserOrders}/>
+            <Route path='/aboutUs' component={AboutUs}/>
             <Route component={NotFound} />
           </Switch>
         </Router>

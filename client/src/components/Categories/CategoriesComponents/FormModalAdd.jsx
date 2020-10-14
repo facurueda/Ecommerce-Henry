@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     Button,
     ModalHeader,
@@ -11,12 +11,17 @@ import { actionPostCategory } from "../../../redux/categoriesActions";
 import './FormModalAdd.css'
 
 const FormModalAdd = (props) => {
-    const { addCategory, modalAddViewFalse, categories } = props;
+    const { modalAddViewFalse } = props;
+    const categories = useSelector(store => store.categoriesReducer.categories)
     const dispatch = useDispatch()
     const [category, setCategory] = useState()
     const handleChange = event => {
         const { name, value } = event.target
         setCategory({ ...category, [name]: value })
+    }
+    const addCategory = (category) => {
+        dispatch(actionPostCategory(category))
+        modalAddViewFalse()
     }
     return (
         <div className='addCategory'>
@@ -41,9 +46,7 @@ const FormModalAdd = (props) => {
                         if (categories.find(
                             categories => categories.name.toUpperCase() === category.name.toUpperCase()
                         )) return window.alert('This name already been used')
-                        dispatch(actionPostCategory(category))
-                        window.location.reload()
-                        modalAddViewFalse()
+                        addCategory(category)
                     }}
                 > AGREGAR </Button>
                 <Button className='buttonCat' onClick={e => modalAddViewFalse()}>SALIR</Button>
