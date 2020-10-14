@@ -36,7 +36,7 @@ const ChatCustomer = () => {
                     {
                         id: '2',
                         options: [
-                            { value: 1, label: 'Donde puedo ver mi order?', trigger: '3' },
+                            { value: 1, label: 'No puedo ver mi orden', trigger: '3' },
                             { value: 2, label: 'No recuerdo mi contraseña', trigger: '4' },
                             { value: 3, label: 'Quiero realizar un reclamo', trigger: '5' },
                             { value: 4, label: 'Mi consulta no esta aca', trigger: '6' }
@@ -49,17 +49,17 @@ const ChatCustomer = () => {
                     },
                     {
                         id: '4',
-                        message: 'Ingresá al botón Login y hace click en RESET PASSWORD',
+                        message: 'Ingresá al botón Login y hace click en OLVIDE MI CONTRASEÑA',
                         trigger: '2'
                     },
                     {
                         id: '5',
-                        message: 'Podes contactarte con nosotros mandandonos un mail lacoseria@gmail.com',
+                        message: 'Podes contactarte con nosotros mandandonos un mail a lacoseria@gmail.com',
                         trigger: '2'
                     },
                     {
                         id: '6',
-                        message: 'No puedo ayudarte, pero contactanos mediante un mail lacoseria@gmail.com',
+                        message: 'No puedo ayudarte, pero contactanos mediante un mail a lacoseria@gmail.com',
                         trigger: '2'
                     },
                 ]}

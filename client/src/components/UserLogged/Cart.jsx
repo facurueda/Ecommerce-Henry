@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actionEmptyCart, actionGetOrder, actionUpdateOrder } from '../../redux/ordersActions'
+import { actionAddToCart, actionEmptyCart, actionGetOrder, actionUpdateOrder } from '../../redux/ordersActions'
 import './Cart.css'
 
 const Cart = () => {
@@ -12,17 +12,16 @@ const Cart = () => {
     const order = useSelector(state => state.ordersReducer.order)
     const products = order.products;
     const user = useSelector(state => state.usersReducer.idUser)
-    const [cantidad, setCantidad] = useState(quantity)
 
     const emptyCart = () => {
         dispatch(actionEmptyCart(user))
         dispatch(actionGetOrder(user))
     }
     const checkOut = () => {
-        window.location.href= '/order'
+        window.location.href = '/order'
     }
-    const btnRestar = (number) => {
-        setCantidad(quantity - number)
+    const btnRestar = (product) => {
+        dispatch(actionAddToCart({ idUser: user, idProduct: product.idProduct, quantity: -product.Inter_Prod_Order.quantity, price: product.price }))
         dispatch(actionGetOrder(user))
     }
 
@@ -35,30 +34,30 @@ const Cart = () => {
                 </a>
                 <div class="cart-dropdown">
                     {products ? (
-                        <div className = 'productsCartContainer'>
-                            <div className = 'productsHoverCont'>
-                            {products.map(product => {
-                                return (
-                                    <div className='cartHoverProd'>
-                                        <div className='imgContCart'>
-                                            <td className='imgProdHover'><img className='prodImgHover' src={product.images} /></td>
-                                            <div className='textHoverCont'>
-                                                <td className='textCartHover'>{product.name}</td>
-                                                <div className='totalHoverCont'>
-                                                    <td><p className='totalCartHover'>{product.Inter_Prod_Order.quantity} x </p></td>
-                                                    <td className='totalCartHover'>$ {product.precio}</td>
+                        <div className='productsCartContainer'>
+                            <div className='productsHoverCont'>
+                                {products.map(product => {
+                                    return (
+                                        <div className='cartHoverProd'>
+                                            <div className='imgContCart'>
+                                                <td className='imgProdHover'><img className='prodImgHover' src={product.images} /></td>
+                                                <div className='textHoverCont'>
+                                                    <td className='textCartHover'>{product.name}</td>
+                                                    <div className='totalHoverCont'>
+                                                        <td><p className='totalCartHover'>{product.Inter_Prod_Order.quantity} x </p></td>
+                                                        <td className='totalCartHover'>$ {product.precio}</td>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className='buttonHoverCont'>
-                                            <button className='closeButtonOrder' 
-                                                    onClick = {e => btnRestar(quantity)}>
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div> 
-                                    </div>)
-                            })}
-                              </div>
+                                            <div className='buttonHoverCont'>
+                                                <button className='closeButtonOrder'
+                                                    onClick={e => btnRestar(product,product.Inter_Prod_Order.quantity)}>
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>)
+                                })}
+                            </div>
                             <div className='subtotalCont'>
                                 <p className='textCartHover'>SUBTOTAL:</p>
                                 {order.products ? (
@@ -75,10 +74,10 @@ const Cart = () => {
                                     )}
 
                             </div>
-                            
-                            <button className='buttonVaciar' onClick= {e => emptyCart()}>VACIAR CARRITO</button>
+
+                            <button className='buttonVaciar' onClick={e => emptyCart()}>VACIAR CARRITO</button>
                             <button className='buttonVaciar' onClick={e => checkOut()}>CHECKOUT</button>
-                      
+
                         </div>
 
                     ) : (

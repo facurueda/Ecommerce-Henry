@@ -22,7 +22,7 @@ const UserOrders = () => {
     return (
         <div className='myAccountContainer' >
             <MenuUser />
-            <div>
+            <div className='ordersAccountCont'>
                 <Table className='ordersCont'>
                     <thead>
                         <tr className='NameAndDesc'>
@@ -38,7 +38,13 @@ const UserOrders = () => {
                                     <tr className='categories' key={order.idCategory}>
                                         <th className='categoryInfo'>{order.idOrder}</th>
                                         <th className='categoryInfo'>{order.status}</th>
-                                        <th className='categoryInfo'>{order.total}</th>
+                                        <th className='categoryInfo'>{order.products.reduce((acum, product) => {
+                                                            return (
+                                                                acum +
+                                                                product.Inter_Prod_Order.price *
+                                                                product.Inter_Prod_Order.quantity
+                                                            );
+                                                        }, 0)}</th>
                                     </tr>)
                             })
                         ) : (<tr>

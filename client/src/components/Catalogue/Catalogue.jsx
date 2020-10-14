@@ -27,7 +27,7 @@ const Catalogue = () => {
         return (
             <div>
                 <div className='NotFoundProd'>
-                    <h3><b>No existen productos aun</b></h3>
+                    <h3 className='NotFoundProd'><b>No existen productos aun</b></h3>
                 </div>
             </div>
         )
