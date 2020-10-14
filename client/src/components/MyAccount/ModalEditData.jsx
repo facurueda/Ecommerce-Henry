@@ -16,7 +16,8 @@ const ModalEditData = (props) => {
   const [datos, setDatos] = useState({
     name,
     email,
-    contraseña: ""
+    contraseña: "",
+    nuevaContraseña: "",
   })
 
   const handleInputChange = (event) => {
@@ -24,6 +25,8 @@ const ModalEditData = (props) => {
       ...datos,
       [event.target.name]: event.target.value,
       [event.target.email]: event.target.value,
+      [event.target.nuevaContraseña]: event.target.value,
+      [event.target.nuevaContraseña1]: event.target.value,
       [event.target.contraseña]: event.target.value
     })
   }
@@ -41,8 +44,8 @@ const ModalEditData = (props) => {
           <div className='inputContEditUser'>
             <label className='editDataUserName'>
               Nombre
-          <input className='inputDataUser'
-          placeholder='nombre'
+               <input className='inputDataUser'
+                placeholder='nombre'
                 type="text"
                 name='name'
                 value={name}
@@ -51,14 +54,34 @@ const ModalEditData = (props) => {
             <label className='editDataUserName'>
               Email
           <input className='inputDataUser'
-          placeholder='email'
+                placeholder='email'
                 type="text"
                 name="email"
                 value={email}
                 onChange={handleInputChange} />
             </label>
+
             <label className='editDataUserName'>
-              Contraseña
+              Cambiar Contraseña
+               <input className='inputDataUser'
+                placeholder='Ingrese nueva contraseña'
+                type="password"
+                name='nuevaContraseña'
+                value={name}
+                onChange={handleInputChange} />
+            </label>
+            <label className='editDataUserName'>
+               <input className='inputDataUser'
+                placeholder='Repita nueva contraseña'
+                type="password"
+                name='nuevaContraseña1'
+                value={name}
+                onChange={handleInputChange} />
+            </label>
+
+
+            <label className='editDataUserName'>
+              Ingrese su contraseña actual para confirmar
           <input className='inputDataUser'
                 type="password"
                 placeholder='contraseña'
@@ -66,17 +89,20 @@ const ModalEditData = (props) => {
                 onChange={handleInputChange}
               />
             </label>
-            </div>
-            <div className='buttonContEditUser'>
-              <button className='buttonAdd'
-                onClick={event => {
-                  event.preventDefault();
-                  if (!datos.name || !datos.email) return window.alert(" Campos Vacios")
-                  dispatch(actionDataUpdate(datos));
-                  modalEditViewFalse()
-                }}
-              >Confirmar</button>
-            </div>
+          </div>
+          <div className='buttonContEditUser'>
+            <button className='buttonAdd'
+              onClick={event => {
+                event.preventDefault();
+                if(!datos.contraseña) return window.alert("Debe colocar su contraseña actual para confirmar los cambios")
+                if(datos.nuevaContraseña){
+                  if (datos.nuevaContraseña !== datos.nuevaContraseña1) return window.alert("Las contraseñas nuevas no coinciden")
+                }
+                dispatch(actionDataUpdate(datos));
+                modalEditViewFalse()
+              }}
+            >Confirmar</button>
+          </div>
         </FormGroup>
       </ModalBody>
 

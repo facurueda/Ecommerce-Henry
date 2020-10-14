@@ -12,11 +12,11 @@ const passport = require('passport');
 const initializePassport = require('../passport-config');
 initializePassport(passport, email => {
     passport,
-    email => User.findOne({
-        where: {
-            email: email
-        }
-    })
+        email => User.findOne({
+            where: {
+                email: email
+            }
+        })
 })
 /////////////////////////////////////////////////////////////////////////////////////////////// FUNCTIONS TO SECURITY ROUTES
 function isAdmin(req, res, next) {
@@ -177,7 +177,7 @@ server.post('/', async (req, res, next) => {
                 name: name,
                 email: email,
                 password: hashedPassword,
-                level: 'user', 
+                level: 'user',
                 img: 'https://res.cloudinary.com/facu9685/image/upload/v1602536866/henry/zersguujnkufynerj633.png'
             }).then(user => {
 
@@ -225,23 +225,40 @@ server.put('/:idUser/cart', (req, res, next) => {
 })
 
 server.put('/', (req, res, next) => {
-    const cont = req.body.constraseña;
+
+    const { name, email, nuevaContraseña, contraseña } = req.body
+
     User.findOne({
         where: {
             idUser: req.user.idUser
         }
     }).then(async (user) => {
-        if (await bcrypt.compare(req.body.contraseña, user.password)) {
-            const contraseñanueva = await  bcrypt.hash(req.body.contraseña,10)
-            console.log(contraseñanueva)
-            return user.update({
-                ...user,
-                name: req.body.name,
-                email: req.body.email,
-                password: contraseñanueva
-            })
+        if (await bcrypt.compare(contraseña, user.password)) {
+            if (name) {
+                return user.update({
+                    ...user,
+                    name: req.body.name,
+                })
+            }
+            if (email) {
+                return user.update({
+                    ...user,
+                    email: req.body.email,
+                })
+            }
+            if (nuevaContraseña) {
+                const hasshed = await bcrypt.hash(req.body.nuevaContraseña, 10)
+                console.log(nuevaContraseña)
+                console.log('CAMBIANDO CONTRASEÑA')
+                console.log('newContr', hasshed)
+                return user.update({
+                    ...user,
+                    password: hasshed,
+                }).catch(error => console.log(error))
+            }
         } else {
-       res.status(404).send('Contraseña erronea')} 
+            res.status(404).send('Contraseña erronea')
+        }
     }).then((userActualizado) => {
         res.send(userActualizado)
     }).catch(next);
@@ -258,7 +275,7 @@ server.delete('/:idUser/cart', (req, res, next) => {
             where: {
                 idOrder: order.idOrder
             }
-        }) 
+        })
         return order
     }).then((order) => {
         res.send(order)
@@ -283,20 +300,20 @@ server.delete('/:idUser', (req, res, next) => {
 server.post('/directions', (req, res) => {
     Direccion.findAll({
         where: {
-            idUser : req.user.idUser
+            idUser: req.user.idUser
         }
-    }).then( direcciones => {
+    }).then(direcciones => {
         res.send(direcciones)
     })
 })
 
 
-server.post('/upload', (req, res) =>{
+server.post('/upload', (req, res) => {
 
-    const {linkImg} = req.body;
+    const { linkImg } = req.body;
 
     User.findOne({
-        where:{
+        where: {
             idUser: req.user.idUser
         }
     }).then(user => {
