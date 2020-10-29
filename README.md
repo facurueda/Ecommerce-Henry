@@ -6,7 +6,7 @@
 
 <img height="700" src='https://res.cloudinary.com/facu9685/image/upload/v1603998142/henry/rbxkpreea0ib66d8hyfk.png'/> <img height="700" src='https://res.cloudinary.com/facu9685/image/upload/v1603998136/henry/bqbhkin8kcqbsxnk3xlb.png'/>
 
-## Tecnologías utilizadas:
+# Tecnologías utilizadas:
     - JavaScript,
     - React,
     - React-Redux,
@@ -22,7 +22,7 @@
     - Git,
     - NPM 
 
-## Permisos de usuarios
+# Permisos de usuarios
 
 ### Un Visitante anónimo debería poder navegar tu e-commerce, ver y buscar productos.
 
@@ -47,9 +47,7 @@
     + ...poder crear una cuenta, asi puede hacer otras cosas como dejar un review.
     + ...poder logearme usando Google o Github, para no tener que acordarme de un password nuevo.
 
-### Los usuarios que hayan creado su cuenta, podrán hacer todo lo que puede hacer un usuario guest y además:
-
-###### Como un Usuario
+### Como un Usuario
 
 - GESTION DE CUENTA:
     + ...poder desloguearme, asi nadie más pueda usar mi sesión.
@@ -77,7 +75,7 @@
     + ...borrar a un usuario, asi no puedan logearse más.
     + ...forzar una password reset para un usuario.
     
-## Compañeros de proyecto
+# Compañeros de proyecto
 
 https://github.com/clarisandev
 
